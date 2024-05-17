@@ -1,6 +1,7 @@
 #include "gba/gba.h"
 #include "global.h"
 #include "main.h"
+#include "arena.h"
 
 void sub_08007154(void)
 {
@@ -10,7 +11,7 @@ void sub_08007154(void)
 
 void sub_08007170(void)
 {
-    sub_08034898(2);
+    arena_restore_head(2);
     sub_0802BA94();
     sub_0802BC98();
     sub_0802D1D0();
@@ -215,12 +216,12 @@ void sub_08007544(void)
         if (gUnknown_03000BBC > 1)
         {
             asm(""::"r"(gUnknown_03000B54));  // Why is this variable read? Is it volatile?
-            sub_08014A58(-1);
+            add_lives(-1);
             sub_080070E8(14, 0);
         }
         else
         {
-            sub_08014A58(-1);
+            add_lives(-1);
             sub_080070E8(20, 1);
         }
     }

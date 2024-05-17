@@ -15,32 +15,32 @@ void AgbMain(void)
     main_loop();
 }
 
-void sub_08006E28(void)
+void sub_08006E28(void)  // unreferenced?
 {
     u32 arr[4];
 
-    if ((gUnknown_030012E0 & 1) && gUnknown_030009B0.unk8 != 0)
+    if ((gHeldKeys & 1) && gUnknown_030009B0.unk8 != 0)
         gUnknown_030009B0.unk10 = 0xFD80;
 
     gUnknown_030009B0.unk10 = 0;  // wat?
     gUnknown_030009B0.unk12 = 0;
 
-    if (gUnknown_030012E0 & 0x10)
+    if (gHeldKeys & DPAD_RIGHT)
         gUnknown_030009B0.unk12 = 0x100;
-    else if (gUnknown_030012E0 & 0x20)
+    else if (gHeldKeys & DPAD_LEFT)
         gUnknown_030009B0.unk12 = 0xFF00;
 
-    if (gUnknown_030012E0 & 0x40)
+    if (gHeldKeys & DPAD_UP)
         gUnknown_030009B0.unk10 = 0xFF00;
-    else if (gUnknown_030012E0 & 0x80)
+    else if (gHeldKeys & DPAD_DOWN)
         gUnknown_030009B0.unk10 = 0x100;
 
-    if (gUnknown_030012E0 & 0x200)
+    if (gHeldKeys & L_BUTTON)
     {
         gUnknown_030009B0.unk12 = 0xFF00;
         gUnknown_030009B0.unk10 = 0xFF00;
     }
-    else if (gUnknown_030012E0 & 0x100)
+    else if (gHeldKeys & R_BUTTON)
     {
         gUnknown_030009B0.unk12 = 0x100;
         gUnknown_030009B0.unk10 = 0x100;
@@ -87,7 +87,7 @@ void sub_08006F5C(u32 a, u32 b)
 
 void sub_08006F90(void)
 {
-    struct OamData *oam = &gOamData[0];
+    struct OamData *oam = &gOamBuffer[0];
     s32 x;
     s32 y;
 
@@ -109,8 +109,8 @@ static void main_loop(void)
     {
         gUnknown_03000020 = gMainState;
 
-        if (gMainStateInitCallbacks[gUnknown_03000020] != NULL)
-            gMainStateInitCallbacks[gUnknown_03000020]();
+        if (gInitCallbacks[gUnknown_03000020] != NULL)
+            gInitCallbacks[gUnknown_03000020]();
 
         if (gMainState == MAIN_STATE_UNKNOWN_19 || gMainState == MAIN_STATE_UNKNOWN_15)
         {
@@ -126,12 +126,12 @@ static void main_loop(void)
         }
 
         sub_0801500C(gUnknown_0807846C[gUnknown_03000020]);
-        sub_08033EA0(gUnknown_08078354[gUnknown_03000020]);
+        sub_08033EA0(gDisplayCallbacks[gUnknown_03000020]);
 
         while (gNextMainState == gUnknown_03000020 && gUnknown_03000024 == 0)
         {
-            if (gMainStateMainCallbacks[gUnknown_03000020] != NULL)
-                gMainStateMainCallbacks[gUnknown_03000020]();
+            if (gMainCallbacks[gUnknown_03000020] != NULL)
+                gMainCallbacks[gUnknown_03000020]();
             sub_08033EE0();
         }
 

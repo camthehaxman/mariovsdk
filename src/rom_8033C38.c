@@ -1,6 +1,7 @@
 #include "gba/gba.h"
 #include "global.h"
 #include "main.h"
+#include "arena.h"
 
 #define EWRAM 0x02000000
 #define IWRAM 0x03000000
@@ -15,10 +16,10 @@ void init_timer_regs(void)
     REG_IME = 1;
 }
 
-void sub_08033C74(void)
+void seed_rng_with_timer(void)
 {
     REG_IME = 0;
-    gUnknown_03001718 = (REG_TM3CNT_L << 16) | REG_TM2CNT_L;
+    gRNGSeed = (REG_TM3CNT_L << 16) | REG_TM2CNT_L;
     REG_IME = 1;
 }
 
@@ -34,7 +35,7 @@ void sub_08033CA0(void)
 void sub_08033CD0(void)
 {
     clear_ram();
-    sub_08033D1C();
+    clear_graphics_memory();
 }
 
 // 0x08033CE0
@@ -44,31 +45,31 @@ void clear_ram(void)
     DmaFill32(3, 0, (void *)IWRAM, 0x7E00);
 }
 
-void sub_08033D1C(void)
+void clear_graphics_memory(void)
 {
-    sub_08033D30();
-    load_some_oam();
-    sub_08033D58();
+    clear_vram();
+    clear_oam_and_buffer();
+    clear_palette_memory();
 }
 
-void sub_08033D30(void)
+void clear_vram(void)
 {
     int i;
     u16 var = 252;
-    u16 *ptr = &var;  // Why would you do this?
+    u16 *ptr = &var;
 
     for (i = 0; i < 0xC000; i++)
         *((u16 *)VRAM + i) = *ptr;
 }
 
-void sub_08033D58(void)
+void clear_palette_memory(void)
 {
     DmaFill16(3, 0, (void *)PLTT, 0x400);
 }
 
-// Maybe inline functions that got placed here?
+// Fixed point math functions? They appear to be unused
 
-s16 sub_08033D80(s16 a, s16 b)
+s16 fixed_multiply(s16 a, s16 b)
 {
     s32 var;
 
@@ -77,19 +78,19 @@ s16 sub_08033D80(s16 a, s16 b)
     return var;
 }
 
-s16 sub_08033D9C(s16 a, s16 b)
+s16 fixed_divide(s16 a, s16 b)
 {
     return 256 * a / b;
 }
 
-s16 sub_08033DB4(s16 a)
+s16 fixed_reciprocal(s16 a)
 {
     s32 var = 0x10000;
 
     return var / a;
 }
 
-void sub_08033DCC(void)
+void vblank_interrupt_handler(void)
 {
     sub_0802BEEC(&gUnknown_030012D0);
     sub_0802BFA4();
@@ -123,7 +124,7 @@ void sub_08033DCC(void)
 void sub_08033E60(void)
 {
     sub_08033EBC();
-    gUnknown_030012C0 = sub_08034138;
+    gUnknown_030012C0 = dummy_interrupt_handler;
     DmaCopy16(3, interrupt_main, gIntrMainBuffer, 0x400);
     gUnknown_03007FFC = gIntrMainBuffer;
 }
@@ -132,7 +133,7 @@ void sub_08033EA0(void (*func)(void))
 {
     gUnknown_030012C0 = func;
     if (gUnknown_030012C0 == NULL)
-        gUnknown_030012C0 = sub_08034138;
+        gUnknown_030012C0 = dummy_interrupt_handler;
 }
 
 void sub_08033EBC(void)
@@ -157,7 +158,7 @@ void sub_08033EF8(void (*func)(void))
 {
     gUnknown_030012FC = func;
     if (gUnknown_030012FC == NULL)
-        gUnknown_030012FC = sub_08034138;
+        gUnknown_030012FC = dummy_interrupt_handler;
 }
 
 void sub_08033F14(void)
@@ -175,7 +176,7 @@ void sub_08033F3C(void (*func)(void))
 {
     gUnknown_030012A8 = func;
     if (gUnknown_030012A8 == NULL)
-        gUnknown_030012A8 = sub_08034138;
+        gUnknown_030012A8 = dummy_interrupt_handler;
 }
 
 void sub_08033F58(void)
@@ -207,7 +208,7 @@ void sub_08033FC8(void)
 {
     s32 i;
 
-    gUnknown_030012E0 = 0xFFFF;
+    gHeldKeys = 0xFFFF;
     gUnknown_030012E8 = 0;
     gUnknown_03001708 = 0;
     for (i = 0; i < 16; i++)
@@ -299,11 +300,11 @@ void sub_0803411C(void)
     sub_08033F6C();
 }
 
-void sub_08034138(void)
+void dummy_interrupt_handler(void)
 {
 }
 
-void sub_0803413C(void)
+void tm3over_interrupt_handler(void)
 {
     REG_IF = INTR_FLAG_TIMER2;
     gUnknown_03001714++;
@@ -321,7 +322,7 @@ u16 sub_08034154(void)
 // probably an inline function
 bool32 sub_08034178(void)
 {
-    if ((gUnknown_030012E0 & START_BUTTON) &&  (gUnknown_030012E0 & SELECT_BUTTON) && (gUnknown_030012E0 & A_BUTTON) && (gUnknown_030012E0 & B_BUTTON)
+    if ((gHeldKeys & START_BUTTON) &&  (gHeldKeys & SELECT_BUTTON) && (gHeldKeys & A_BUTTON) && (gHeldKeys & B_BUTTON)
      && gMainState != MAIN_STATE_TITLE_SCREEN && gMainState != MAIN_STATE_INIT)
     {
         sub_080070E8(7, 1);
@@ -935,11 +936,11 @@ void *sub_08034790(struct UnknownStruct2 *a, u16 *b, int c)
     return b;
 }
 
-void sub_080347DC(void)
+void credits_init_callback(void)
 {
     u8 arr[16];  // Needed to match. Probably some unused variable
     
-    sub_08034898(0);
+    arena_restore_head(0);
     if (gUnknown_03000B80 == 1)
         sub_0802D468(3, 61, 8, 3);
     else
@@ -947,71 +948,16 @@ void sub_080347DC(void)
     sub_080070E8(30, 1);
 }
 
-void sub_08034820(void)
+void credits_main_callback(void)
 {
 }
 
-void sub_08034824(void)
+void credits_display_callback(void)
 {
 }
 
 void sub_08034828(void)
 {
-}
-
-void sub_0803482C(void *a, void *b)
-{
-    s32 i;
-    
-    gUnknown_03001750.unk0 = a;
-    gUnknown_03001750.unk8 = b;
-    gUnknown_03001750.unkC = (u32)b - (u32)a;
-    gUnknown_03001750.unk4 = a;
-    for (i = 0; i < 4; i++)
-        gUnknown_03001750.unk10[i] = gUnknown_03001750.unk0;
-}
-
-void *sub_08034854(u32 a)
-{
-    void *r4 = gUnknown_03001750.unk4;
-    
-    gUnknown_03001750.unk4 += (a + 3) & ~3;
-    if (gUnknown_03001750.unk4 > gUnknown_03001750.unk8)
-        sub_08037A04(gUnknown_08076D94);
-    return r4;
-}
-
-void sub_08034884(u32 a)
-{
-    gUnknown_03001750.unk10[a] = gUnknown_03001750.unk4;
-}
-
-void sub_08034898(s32 a)
-{
-    if (a == -1)
-        gUnknown_03001750.unk4 = gUnknown_03001750.unk0;
-    else
-        gUnknown_03001750.unk4 = gUnknown_03001750.unk10[a];
-}
-
-void sub_080348C8(const struct UnknownStruct10 *a, u32 b, u32 c, u32 d)
-{
-    gUnknown_03001770.unk0 = a;
-    gUnknown_03001770.unk4 = b;
-    gUnknown_03001770.unk8 = c;
-    gUnknown_03001770.unkC = d;
-    gUnknown_03001770.unk10 = &a->unk0[a->unk4];
-    if (a->unkA == 4)
-        gUnknown_03001770.unk14 = 2;
-    else
-        gUnknown_03001770.unk14 = 3;
-    gUnknown_03001770.unk16 = (1 << gUnknown_03001770.unk14) - 1;
-    gUnknown_03001770.unk15 = 0x40 >> (3 - gUnknown_03001770.unk14);
-    gUnknown_03001770.unk18 = gUnknown_03001770.unk8;
-    gUnknown_03001770.unk1C = sub_08034854(440);
-    gUnknown_03001770.unk24 = 0;
-    gUnknown_03001770.unk20 = 0;
-    gUnknown_03001770.unk28 = 0x8000;
 }
 
 asm(".align 2, 0");

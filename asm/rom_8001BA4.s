@@ -2999,7 +2999,7 @@ _080030F2:
 	b _08003228
 _08003100:
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 	b _08003228
 _08003108:
 	.4byte gUnknown_03001A1C
@@ -3277,7 +3277,7 @@ _080032CE:
 	b _0800340A
 _0800330C:
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 	b _0800340A
 _08003314:
 	.4byte gUnknown_030009EC
@@ -5268,7 +5268,7 @@ _0800417E:
 	cmp r4, #8
 	ble _0800414E
 	mov r0, #244
-	bl sub_08034854
+	bl arena_allocate
 	mov r1, r8
 	str r0, [r1]
 	add r0, r0, #240

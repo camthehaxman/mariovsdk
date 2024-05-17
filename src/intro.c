@@ -31,7 +31,7 @@ void sub_0801BA6C(void)
     gUnknown_030000AC = 1;
 }
 
-void intro_main(void)
+void intro_main_callback(void)
 {
     sub_08029C20();
     gUnknown_03000BE0++;
@@ -44,7 +44,7 @@ void intro_main(void)
     gUnknown_03000BE0 &= 0xFFFF;
 }
 
-void sub_0801BAC4(void)
+void intro_display_callback(void)
 {
     gUnknown_03000B54++;
 }

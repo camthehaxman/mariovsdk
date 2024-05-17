@@ -1,5 +1,6 @@
 #include "gba/gba.h"
 #include "global.h"
+#include "arena.h"
 
 struct Foo
 {
@@ -37,31 +38,31 @@ extern const struct UnknownStruct10 gUnknown_08B2AD88;
 extern struct UnknownStruct12 *gUnknown_080788FC;
 extern struct UnknownStruct13 gUnknown_0807DD1C[];
 extern void *const gUnknown_0807CA94;
-extern const u16 gUnknown_08081D98[];
+extern const u8 gPalettes[];
 
-void sub_08032408(void)
+void init_init_callback(void)
 {
     gUnknown_03000B50 = 0;
     gUnknown_03001704 = 0;
     gUnknown_03000B80 = 0;
     sub_08032F68();
-    sub_0803482C(gUnknown_03001F50, gUnknown_03007AB0);
+    arena_init(gUnknown_03001F50, gUnknown_03007AB0);
     sub_0802F060();
-    sub_0807166C(sub_08034854(0x15A4), 0x15A4, 3, 3, 8);
-    sub_08034884(0);
+    sub_0807166C(arena_allocate(0x15A4), 0x15A4, 3, 3, 8);
+    arena_save_head(0);
     CpuFill16(0, (void *)PLTT, 0x200);
     CpuCopy16(gUnknown_0807DD14, (void *)(PLTT + 0x200), 6);
     sub_080348C8(&gUnknown_08B2AD88, 0, 0, 0);
-    gUnknown_0300029C = sub_08034854(0x100C);
-    CpuFill16(0, gUnknown_0300029C, 0x100C);
+    gUnknown_0300029C = arena_allocate(sizeof(*gUnknown_0300029C));
+    CpuFill16(0, gUnknown_0300029C, sizeof(*gUnknown_0300029C));
     gUnknown_0300029C->unk1000 = 0;
     REG_DISPCNT = 0x1140;
-    sub_080331FC();
+    process_input();
 }
 
-void sub_080324DC(void)
+void init_main_callback(void)
 {
-    sub_080331FC();
+    process_input();
     switch (gUnknown_0300029C->unk1000)
     {
       case 0:
@@ -153,42 +154,38 @@ void sub_080324DC(void)
     }
 }
 
-void sub_08032708(void)
+void init_display_callback(void)
 {
     u16 val = 0;
 
-    DmaFill32(3, 0xA0, gOamData, 0x400);
+    DmaFill32(3, 0xA0, gOamBuffer, 0x400);
     sub_080351E0();
     if (gUnknown_0300029C->unk1008 != NULL)
         sub_08034CCC(gUnknown_0300029C->unk1008->unk0, -32767, -32767, -1, 16);
     sub_08035108(&val);
-    DmaCopy32(3, gOamData, (void *)OAM, 0x400);
+    DmaCopy32(3, gOamBuffer, (void *)OAM, 0x400);
 }
 
 void sub_08032784(void)
 {
 }
 
-void sub_08032788(u32 a, u32 b)
+void copy_palettes_to_vram(u32 paletteNum, u32 flags)
 {
     // I have to do this stupid cast for it to match.
     bool32 r4 = ((*(u8 *)gUnknown_080788FC & 24) != 0);
 
-    if (b & 1)
+    if (flags & 1)
     {
-        u32 offset1 = a * 0x400;
-        u32 offset2 = r4 * 0x200;
-        const u16 *src = gUnknown_08081D98 + offset1 + offset2;
+        const void *src = gPalettes + paletteNum * 0x800 + r4 * 0x400;
 
         DmaCopy16(3, src, (void *)PLTT, 0x200);
         sub_0802C104(0, 0);
     }
 
-    if (b & 2)
+    if (flags & 2)
     {
-        u32 offset1 = a * 0x400;
-        u32 offset2 = r4 * 0x200;
-        const u16 *src = gUnknown_08081D98 + offset1 + offset2 + 0x100;
+        const void *src = gPalettes + paletteNum * 0x800 + r4 * 0x400 + 0x200;
 
         // Why is this one DmaCopy32 while the other one is DmaCopy16?
         DmaCopy32(3, src, (void *)(PLTT + 0x200), 0x200);

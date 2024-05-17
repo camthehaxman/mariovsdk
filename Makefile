@@ -24,9 +24,10 @@ CFILES   := \
 	src/rom1.c \
 	src/title.c \
 	src/intro.c \
-	src/rom_8032408.c \
+	src/init.c \
 	src/rom_8032FB0.c \
 	src/rom_8033C38.c \
+	src/arena.c \
 	src/agb_flash.c \
 	src/agb_flash_1m.c \
 	src/agb_flash_mx.c \
@@ -43,7 +44,8 @@ SFILES   := \
 	asm/rom_8033D80.s \
 	asm/syscall.s \
 	asm/rom_80747B8.s \
-	data/data.s
+	data/data.s \
+	data/data2.s
 OFILES   := $(SFILES:.s=.o) $(CFILES:.c=.o)
 
 src/agb_flash.o: CC1FLAGS := -O1 -mthumb-interwork

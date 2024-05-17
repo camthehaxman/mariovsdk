@@ -544,14 +544,14 @@ _08032C24:
 	mov r0, #62
 _08032C2A:
 	mov r1, #1
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	b _08032C3E
 _08032C32:
 	cmp r0, #5
 	bne _08032C3E
 	mov r0, #63
 	mov r1, #1
-	bl sub_08032788
+	bl copy_palettes_to_vram
 _08032C3E:
 	pop {r4}
 	pop {r0}
@@ -999,7 +999,7 @@ _08032F40:
 	THUMB_FUNC_START sub_08032F68
 sub_08032F68: @ 0x08032F68
 	push {r4,r5,lr}
-	bl sub_08033D1C
+	bl clear_graphics_memory
 	mov r0, #0
 	mov r1, #0
 	bl sub_0802BCA4

@@ -15,7 +15,7 @@ void title_init_callback(void)
     const void *arr[4];
     struct UnknownStruct15 *var;
 
-    sub_08034898(0);
+    arena_restore_head(0);
     sub_08071CD4();
     gUnknown_03001740 = 0;
     gUnknown_03000BE0 = 0;
@@ -35,21 +35,21 @@ void title_init_callback(void)
     gUnknown_03000B54 = 0;
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 128, 1);
-    sub_08033C74();
+    seed_rng_with_timer();
     sub_08029CDC(gUnknown_08867560.bldCnt, gUnknown_08867560.bldAlpha, gUnknown_08867560.bldY);
-    sub_08032788(0, 3);
+    copy_palettes_to_vram(0, 3);
     gPressStartFadeDir = FADE_UP;
     gTitleScreenFrameCounter = 3;
     gPressStartOpacity = 0;
 }
 
-void title_main(void)
+void title_main_callback(void)
 {
     u32 arr[2];  // could possibly be a struct?
     u32 r0;
     u32 r6;
 
-    sub_080331FC();
+    process_input();
     sub_08029C20();
     if (gUnknown_030000AC == 0 && gUnknown_03000C28 == 0 && gUnknown_030000B0 == -1)
         gUnknown_030000B0 = sub_08071990(229, 8, 16, 64, 0, 128, 0);
@@ -93,7 +93,7 @@ void title_main(void)
     }
     if (gUnknown_03000C28 == 0 && sub_080721A8(gUnknown_030000B0) != 0)
     {
-        if (sub_08034004() != 0 && !(gUnknown_030012E8 & 2) && !(gUnknown_030012E0 & 2))
+        if (sub_08034004() != 0 && !(gUnknown_030012E8 & 2) && !(gHeldKeys & 2))
         {
             sub_08071990(35, 8, 16, 64, 0, 128, 0);
             sub_080070E8(3, 1);
@@ -145,22 +145,22 @@ void sub_0801B88C(void)
     }
 }
 
-void sub_0801B908(void)
+void title_display_callback(void)
 {
     gUnknown_03000B54++;
-    DmaFill32(3, 0xA0, gOamData, 0x400);
+    DmaFill32(3, 0xA0, gOamBuffer, 0x400);
     if (gUnknown_03000C28 == 0 && sub_080721A8(gUnknown_030000B0) != 0)
     {
         u8 var;
 
-        DmaCopy32(3, gUnknown_085F49D0, gOamData, 8);
+        DmaCopy32(3, gUnknown_085F49D0, gOamBuffer, 8);
         DmaCopy32(3, gUnknown_085F49D8, (void *)(VRAM + 0x10000), 0x200);
-        gOamData[0].tileNum = 0;
-        gOamData[0].x = 204;
-        gOamData[0].y = 124;
-        gOamData[0].paletteNum = 0;
-        gOamData[0].objMode = 1;
-        gOamData[0].priority = 1;
+        gOamBuffer[0].tileNum = 0;
+        gOamBuffer[0].x = 204;
+        gOamBuffer[0].y = 124;
+        gOamBuffer[0].paletteNum = 0;
+        gOamBuffer[0].objMode = 1;
+        gOamBuffer[0].priority = 1;
     }
-    DmaCopy32(3, gOamData, (void *)OAM, 0x400);
+    DmaCopy32(3, gOamBuffer, (void *)OAM, 0x400);
 }

@@ -189,7 +189,7 @@ _0801BC20:
 	bl sub_08071990
 	mov r0, #1
 	neg r0, r0
-	bl sub_08014A58
+	bl add_lives
 	ldr r0, _0801BC5C  @ =gUnknown_03000BBC
 	ldrb r0, [r0]
 	lsl r0, r0, #24
@@ -350,7 +350,7 @@ _0801BD5E:
 	bl sub_08071990
 	mov r0, #1
 	neg r0, r0
-	bl sub_08014A58
+	bl add_lives
 	ldr r0, _0801BD9C  @ =gUnknown_03000BBC
 	ldrb r0, [r0]
 	lsl r0, r0, #24
@@ -412,7 +412,7 @@ _0801BDE8:
 	and r0, r0, r1
 	cmp r0, #0
 	beq _0801BE1C
-	ldr r0, _0801BE2C  @ =gUnknown_030012E0
+	ldr r0, _0801BE2C  @ =gHeldKeys
 	ldrh r0, [r0]
 	add r1, r2, #0
 	and r1, r1, r0
@@ -442,7 +442,7 @@ _0801BE1C:
 	pop {r1}
 	bx r1
 _0801BE2C:
-	.4byte gUnknown_030012E0
+	.4byte gHeldKeys
 _0801BE30:
 	.4byte 0x030000B4
 	THUMB_FUNC_END sub_0801BAD8
@@ -490,7 +490,7 @@ _0801BE78:
 	THUMB_FUNC_START sub_0801BE7C
 sub_0801BE7C: @ 0x0801BE7C
 	push {lr}
-	bl sub_080331FC
+	bl process_input
 	bl sub_0801BAD8
 	lsl r0, r0, #24
 	asr r0, r0, #24
@@ -522,13 +522,13 @@ _0801BEB4:
 	bx r0
 	THUMB_FUNC_END sub_0801BE7C
 
-	THUMB_FUNC_START sub_0801BEBC
-sub_0801BEBC: @ 0x0801BEBC
+	THUMB_FUNC_START pause_display_callback
+pause_display_callback: @ 0x0801BEBC
 	push {lr}
-	bl sub_080088F0
+	bl demo_display_callback
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_0801BEBC
+	THUMB_FUNC_END pause_display_callback
 
 	.byte 0x00
 	.byte 0x00
@@ -579,12 +579,12 @@ _0801BF10:
 	.4byte 0x030000B6
 	THUMB_FUNC_END sub_0801BED4
 
-	THUMB_FUNC_START sub_0801BF14
-sub_0801BF14: @ 0x0801BF14
+	THUMB_FUNC_START clear_gameover_init_callback
+clear_gameover_init_callback: @ 0x0801BF14
 	push {r4-r6,lr}
 	sub sp, sp, #36
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r0, _0801BFAC  @ =gUnknown_030012A0
 	mov r5, #0
 	strh r5, [r0]
@@ -599,7 +599,7 @@ sub_0801BF14: @ 0x0801BF14
 	strb r5, [r0]
 	strb r5, [r6]
 	ldr r4, _0801BFC4  @ =gUnknown_03000BBC
-	bl sub_08014A34
+	bl get_lives
 	strb r0, [r4]
 	lsl r0, r0, #24
 	cmp r0, #0
@@ -638,7 +638,7 @@ _0801BF64:
 	bl sub_08032F24
 	mov r0, #6
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #194
@@ -880,7 +880,7 @@ _0801C140:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	b _0801C19C
 _0801C170:
 	.4byte gUnknown_08823B74
@@ -903,7 +903,7 @@ _0801C184:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl sub_08032788
+	bl copy_palettes_to_vram
 _0801C19C:
 	mov r1, #128
 	lsl r1, r1, #19
@@ -947,7 +947,7 @@ _0801C1E8:
 	.4byte 0x81000100
 _0801C1EC:
 	.4byte 0x030000C1
-	THUMB_FUNC_END sub_0801BF14
+	THUMB_FUNC_END clear_gameover_init_callback
 
 	THUMB_FUNC_START sub_0801C1F0
 sub_0801C1F0: @ 0x0801C1F0
@@ -956,7 +956,7 @@ sub_0801C1F0: @ 0x0801C1F0
 	mov r0, #5
 	strb r0, [r1]
 	mov r0, #5
-	bl sub_080149F8
+	bl set_lives
 	ldr r5, _0801C268  @ =gUnknown_03000B80
 	mov r0, #0
 	ldrsb r0, [r5, r0]
@@ -1019,12 +1019,12 @@ _0801C274:
 	.4byte gUnknown_03000B74
 	THUMB_FUNC_END sub_0801C1F0
 
-	THUMB_FUNC_START sub_0801C278
-sub_0801C278: @ 0x0801C278
+	THUMB_FUNC_START clear_gameover_main_callback
+clear_gameover_main_callback: @ 0x0801C278
 	push {r4,r5,lr}
 	sub sp, sp, #12
 	bl sub_08029C20
-	bl sub_080331FC
+	bl process_input
 	ldr r0, _0801C328  @ =0x030000C6
 	ldrb r1, [r0]
 	add r1, r1, #1
@@ -1240,7 +1240,7 @@ _0801C424:
 	.4byte gUnknown_0807976C
 _0801C428:
 	.4byte gUnknown_03000B90
-	THUMB_FUNC_END sub_0801C278
+	THUMB_FUNC_END clear_gameover_main_callback
 
 	THUMB_FUNC_START sub_0801C42C
 sub_0801C42C: @ 0x0801C42C
@@ -1384,7 +1384,7 @@ sub_0801C51C: @ 0x0801C51C
 	ldr r6, _0801C5C4  @ =0x030000BE
 	ldrh r1, [r6]
 	lsl r1, r1, #3
-	ldr r3, _0801C5C8  @ =gOamData
+	ldr r3, _0801C5C8  @ =gOamBuffer
 	mov r8, r3
 	add r1, r1, r8
 	str r1, [r2, #4]
@@ -1456,7 +1456,7 @@ _0801C5C0:
 _0801C5C4:
 	.4byte 0x030000BE
 _0801C5C8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801C5CC:
 	.4byte 0x84000002
 _0801C5D0:
@@ -1522,7 +1522,7 @@ sub_0801C5E0: @ 0x0801C5E0
 	mov r3, r8
 	ldrh r2, [r3]
 	lsl r2, r2, #3
-	ldr r6, _0801C6F0  @ =gOamData
+	ldr r6, _0801C6F0  @ =gOamBuffer
 	add r2, r2, r6
 	str r2, [r4, #4]
 	ldr r2, _0801C6F4  @ =0x84000002
@@ -1609,7 +1609,7 @@ _0801C6E8:
 _0801C6EC:
 	.4byte 0x030000BE
 _0801C6F0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801C6F4:
 	.4byte 0x84000002
 _0801C6F8:
@@ -1712,7 +1712,7 @@ sub_0801C758: @ 0x0801C758
 	ldr r6, _0801C834  @ =0x030000BE
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801C838  @ =gOamData
+	ldr r5, _0801C838  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r3, #4]
 	ldr r0, _0801C83C  @ =0x84000002
@@ -1779,7 +1779,7 @@ _0801C830:
 _0801C834:
 	.4byte 0x030000BE
 _0801C838:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801C83C:
 	.4byte 0x84000002
 _0801C840:
@@ -1980,8 +1980,8 @@ _0801C9A2:
 
 	.byte 0x00
 	.byte 0x00
-	THUMB_FUNC_START sub_0801C9AC
-sub_0801C9AC: @ 0x0801C9AC
+	THUMB_FUNC_START clear_gameover_display_callback
+clear_gameover_display_callback: @ 0x0801C9AC
 	push {r4-r6,lr}
 	sub sp, sp, #20
 	ldr r0, _0801CAC0  @ =0x030000C4
@@ -2006,7 +2006,7 @@ _0801C9BA:
 	str r0, [sp, #16]
 	add r0, sp, #16
 	str r0, [r1]
-	ldr r0, _0801CACC  @ =gOamData
+	ldr r0, _0801CACC  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _0801CAD0  @ =0x85000100
 	str r0, [r1, #8]
@@ -2131,7 +2131,7 @@ _0801CAC4:
 _0801CAC8:
 	.4byte 0x81000100
 _0801CACC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801CAD0:
 	.4byte 0x85000100
 _0801CAD4:
@@ -2173,7 +2173,7 @@ _0801CB00:
 	str r0, [sp, #16]
 	add r0, sp, #16
 	str r0, [r1]
-	ldr r0, _0801CB7C  @ =gOamData
+	ldr r0, _0801CB7C  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _0801CB80  @ =0x85000100
 	str r0, [r1, #8]
@@ -2203,7 +2203,7 @@ _0801CB56:
 	bl sub_0801C8B8
 _0801CB5A:
 	ldr r1, _0801CB74  @ =0x040000D4
-	ldr r0, _0801CB7C  @ =gOamData
+	ldr r0, _0801CB7C  @ =gOamBuffer
 	str r0, [r1]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -2220,7 +2220,7 @@ _0801CB74:
 _0801CB78:
 	.4byte 0x81000100
 _0801CB7C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801CB80:
 	.4byte 0x85000100
 _0801CB84:
@@ -2233,7 +2233,7 @@ _0801CB90:
 	.4byte 0x030000BE
 _0801CB94:
 	.4byte 0x84000100
-	THUMB_FUNC_END sub_0801C9AC
+	THUMB_FUNC_END clear_gameover_display_callback
 
 	THUMB_FUNC_START sub_0801CB98
 sub_0801CB98: @ 0x0801CB98
@@ -2319,7 +2319,7 @@ sub_0801CBD8: @ 0x0801CBD8
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801CEC8  @ =gOamData
+	ldr r5, _0801CEC8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801CECC  @ =0x84000002
@@ -2433,7 +2433,7 @@ _0801CCCE:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801CEC8  @ =gOamData
+	ldr r5, _0801CEC8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801CECC  @ =0x84000002
@@ -2547,7 +2547,7 @@ _0801CDB0:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801CEC8  @ =gOamData
+	ldr r5, _0801CEC8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801CECC  @ =0x84000002
@@ -2659,7 +2659,7 @@ _0801CEC0:
 _0801CEC4:
 	.4byte gUnknown_082AEF74
 _0801CEC8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801CECC:
 	.4byte 0x84000002
 _0801CED0:
@@ -2716,7 +2716,7 @@ sub_0801CEE4: @ 0x0801CEE4
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801D1D4  @ =gOamData
+	ldr r5, _0801D1D4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D1D8  @ =0x84000002
@@ -2830,7 +2830,7 @@ _0801CFDA:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801D1D4  @ =gOamData
+	ldr r5, _0801D1D4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D1D8  @ =0x84000002
@@ -2944,7 +2944,7 @@ _0801D0BC:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801D1D4  @ =gOamData
+	ldr r5, _0801D1D4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D1D8  @ =0x84000002
@@ -3056,7 +3056,7 @@ _0801D1CC:
 _0801D1D0:
 	.4byte gUnknown_082AEF74
 _0801D1D4:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D1D8:
 	.4byte 0x84000002
 _0801D1DC:
@@ -3112,7 +3112,7 @@ sub_0801D1F0: @ 0x0801D1F0
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D270  @ =gOamData
+	ldr r5, _0801D270  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D274  @ =0x84000002
@@ -3139,7 +3139,7 @@ _0801D268:
 _0801D26C:
 	.4byte gUnknown_0811BCB0
 _0801D270:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D274:
 	.4byte 0x84000002
 _0801D278:
@@ -3235,7 +3235,7 @@ _0801D322:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D3F8  @ =gOamData
+	ldr r5, _0801D3F8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D3FC  @ =0x84000002
@@ -3342,7 +3342,7 @@ _0801D3F0:
 _0801D3F4:
 	.4byte gUnknown_08125928
 _0801D3F8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D3FC:
 	.4byte 0x84000002
 _0801D400:
@@ -3454,7 +3454,7 @@ _0801D4CA:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D5A0  @ =gOamData
+	ldr r5, _0801D5A0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D5A4  @ =0x84000002
@@ -3560,7 +3560,7 @@ _0801D598:
 _0801D59C:
 	.4byte gUnknown_08125928
 _0801D5A0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D5A4:
 	.4byte 0x84000002
 _0801D5A8:
@@ -3672,7 +3672,7 @@ _0801D672:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D72C  @ =gOamData
+	ldr r5, _0801D72C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D730  @ =0x84000002
@@ -3765,7 +3765,7 @@ _0801D724:
 _0801D728:
 	.4byte gUnknown_08125928
 _0801D72C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D730:
 	.4byte 0x84000002
 _0801D734:
@@ -3831,7 +3831,7 @@ _0801D776:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D860  @ =gOamData
+	ldr r5, _0801D860  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D864  @ =0x84000002
@@ -3924,7 +3924,7 @@ _0801D858:
 _0801D85C:
 	.4byte gUnknown_0811C1C0
 _0801D860:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D864:
 	.4byte 0x84000002
 _0801D868:
@@ -3963,7 +3963,7 @@ _0801D878:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D8E0  @ =gOamData
+	ldr r5, _0801D8E0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D8E4  @ =0x84000002
@@ -3990,7 +3990,7 @@ _0801D8D8:
 _0801D8DC:
 	.4byte gUnknown_0811C1C0
 _0801D8E0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D8E4:
 	.4byte 0x84000002
 _0801D8E8:
@@ -4021,7 +4021,7 @@ _0801D8E8:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801D9BC  @ =gOamData
+	ldr r5, _0801D9BC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801D9C0  @ =0x84000002
@@ -4101,7 +4101,7 @@ _0801D9B4:
 _0801D9B8:
 	.4byte gUnknown_0811F7A4
 _0801D9BC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801D9C0:
 	.4byte 0x84000002
 _0801D9C4:
@@ -4140,7 +4140,7 @@ _0801D9D4:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DA3C  @ =gOamData
+	ldr r5, _0801DA3C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DA40  @ =0x84000002
@@ -4167,7 +4167,7 @@ _0801DA34:
 _0801DA38:
 	.4byte gUnknown_0811C1C0
 _0801DA3C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DA40:
 	.4byte 0x84000002
 _0801DA44:
@@ -4198,7 +4198,7 @@ _0801DA44:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DC20  @ =gOamData
+	ldr r5, _0801DC20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DC24  @ =0x84000002
@@ -4325,7 +4325,7 @@ _0801DB40:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DC20  @ =gOamData
+	ldr r5, _0801DC20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DC24  @ =0x84000002
@@ -4414,7 +4414,7 @@ _0801DC18:
 _0801DC1C:
 	.4byte gUnknown_0811C1C0
 _0801DC20:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DC24:
 	.4byte 0x84000002
 _0801DC28:
@@ -4457,7 +4457,7 @@ _0801DC40:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DCA8  @ =gOamData
+	ldr r5, _0801DCA8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DCAC  @ =0x84000002
@@ -4484,7 +4484,7 @@ _0801DCA0:
 _0801DCA4:
 	.4byte gUnknown_0811C1C0
 _0801DCA8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DCAC:
 	.4byte 0x84000002
 _0801DCB0:
@@ -4515,7 +4515,7 @@ _0801DCB0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DD84  @ =gOamData
+	ldr r5, _0801DD84  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DD88  @ =0x84000002
@@ -4595,7 +4595,7 @@ _0801DD7C:
 _0801DD80:
 	.4byte gUnknown_0811F7A4
 _0801DD84:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DD88:
 	.4byte 0x84000002
 _0801DD8C:
@@ -4634,7 +4634,7 @@ _0801DD9C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DE04  @ =gOamData
+	ldr r5, _0801DE04  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DE08  @ =0x84000002
@@ -4661,7 +4661,7 @@ _0801DDFC:
 _0801DE00:
 	.4byte gUnknown_0811C1C0
 _0801DE04:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DE08:
 	.4byte 0x84000002
 _0801DE0C:
@@ -4692,7 +4692,7 @@ _0801DE0C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DFF0  @ =gOamData
+	ldr r5, _0801DFF0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DFF4  @ =0x84000002
@@ -4820,7 +4820,7 @@ _0801DF0A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801DFF0  @ =gOamData
+	ldr r5, _0801DFF0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801DFF4  @ =0x84000002
@@ -4913,7 +4913,7 @@ _0801DFE8:
 _0801DFEC:
 	.4byte gUnknown_0811C1C0
 _0801DFF0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801DFF4:
 	.4byte 0x84000002
 _0801DFF8:
@@ -4956,7 +4956,7 @@ _0801E010:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E0D8  @ =gOamData
+	ldr r5, _0801E0D8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E0DC  @ =0x84000002
@@ -5031,7 +5031,7 @@ _0801E0D0:
 _0801E0D4:
 	.4byte gUnknown_0811C1C0
 _0801E0D8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E0DC:
 	.4byte 0x84000002
 _0801E0E0:
@@ -5070,7 +5070,7 @@ _0801E0F0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E1C8  @ =gOamData
+	ldr r5, _0801E1C8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E1CC  @ =0x84000002
@@ -5152,7 +5152,7 @@ _0801E1C0:
 _0801E1C4:
 	.4byte gUnknown_0811F7A4
 _0801E1C8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E1CC:
 	.4byte 0x84000002
 _0801E1D0:
@@ -5191,7 +5191,7 @@ _0801E1E0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E2A8  @ =gOamData
+	ldr r5, _0801E2A8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E2AC  @ =0x84000002
@@ -5266,7 +5266,7 @@ _0801E2A0:
 _0801E2A4:
 	.4byte gUnknown_0811C1C0
 _0801E2A8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E2AC:
 	.4byte 0x84000002
 _0801E2B0:
@@ -5305,7 +5305,7 @@ _0801E2C0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E3CC  @ =gOamData
+	ldr r5, _0801E3CC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E3D0  @ =0x84000002
@@ -5417,7 +5417,7 @@ _0801E3C4:
 _0801E3C8:
 	.4byte gUnknown_0811C1C0
 _0801E3CC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E3D0:
 	.4byte 0x84000002
 _0801E3D4:
@@ -5517,7 +5517,7 @@ _0801E426:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E824  @ =gOamData
+	ldr r5, _0801E824  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E828  @ =0x84000002
@@ -5648,7 +5648,7 @@ _0801E52C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E824  @ =gOamData
+	ldr r5, _0801E824  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E828  @ =0x84000002
@@ -5779,7 +5779,7 @@ _0801E630:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E824  @ =gOamData
+	ldr r5, _0801E824  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E828  @ =0x84000002
@@ -5909,7 +5909,7 @@ _0801E744:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E824  @ =gOamData
+	ldr r5, _0801E824  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E828  @ =0x84000002
@@ -5985,7 +5985,7 @@ _0801E81C:
 _0801E820:
 	.4byte gUnknown_0811C1C0
 _0801E824:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E828:
 	.4byte 0x84000002
 _0801E82C:
@@ -6070,7 +6070,7 @@ _0801E86E:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801E9AC  @ =gOamData
+	ldr r5, _0801E9AC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801E9B0  @ =0x84000002
@@ -6184,7 +6184,7 @@ _0801E9A4:
 _0801E9A8:
 	.4byte gUnknown_0811C1C0
 _0801E9AC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801E9B0:
 	.4byte 0x84000002
 _0801E9B4:
@@ -6262,7 +6262,7 @@ _0801EA02:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EDF8  @ =gOamData
+	ldr r5, _0801EDF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EDFC  @ =0x84000002
@@ -6373,7 +6373,7 @@ _0801EAE0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EDF8  @ =gOamData
+	ldr r5, _0801EDF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EDFC  @ =0x84000002
@@ -6484,7 +6484,7 @@ _0801EBBC:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EDF8  @ =gOamData
+	ldr r5, _0801EDF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EDFC  @ =0x84000002
@@ -6592,7 +6592,7 @@ _0801EC92:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EDF8  @ =gOamData
+	ldr r5, _0801EDF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EDFC  @ =0x84000002
@@ -6695,7 +6695,7 @@ _0801ED70:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EDF8  @ =gOamData
+	ldr r5, _0801EDF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EDFC  @ =0x84000002
@@ -6748,7 +6748,7 @@ _0801EDF0:
 _0801EDF4:
 	.4byte gUnknown_0811C1C0
 _0801EDF8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801EDFC:
 	.4byte 0x84000002
 _0801EE00:
@@ -6899,7 +6899,7 @@ _0801EEFA:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801EFF8  @ =gOamData
+	ldr r5, _0801EFF8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801EFFC  @ =0x84000002
@@ -7016,7 +7016,7 @@ _0801EFF0:
 _0801EFF4:
 	.4byte gUnknown_082B30AC
 _0801EFF8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801EFFC:
 	.4byte 0x84000002
 _0801F000:
@@ -7052,7 +7052,7 @@ _0801F022:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801F120  @ =gOamData
+	ldr r5, _0801F120  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801F124  @ =0x84000002
@@ -7169,7 +7169,7 @@ _0801F118:
 _0801F11C:
 	.4byte gUnknown_082B30AC
 _0801F120:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801F124:
 	.4byte 0x84000002
 _0801F128:
@@ -7205,7 +7205,7 @@ _0801F14A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0801F234  @ =gOamData
+	ldr r5, _0801F234  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801F238  @ =0x84000002
@@ -7311,7 +7311,7 @@ _0801F22C:
 _0801F230:
 	.4byte gUnknown_082B30AC
 _0801F234:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801F238:
 	.4byte 0x84000002
 _0801F23C:
@@ -7370,7 +7370,7 @@ sub_0801F254: @ 0x0801F254
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801F538  @ =gOamData
+	ldr r5, _0801F538  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801F53C  @ =0x84000002
@@ -7482,7 +7482,7 @@ _0801F346:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801F538  @ =gOamData
+	ldr r5, _0801F538  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801F53C  @ =0x84000002
@@ -7594,7 +7594,7 @@ _0801F424:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801F538  @ =gOamData
+	ldr r5, _0801F538  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801F53C  @ =0x84000002
@@ -7704,7 +7704,7 @@ _0801F530:
 _0801F534:
 	.4byte gUnknown_082B30AC
 _0801F538:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801F53C:
 	.4byte 0x84000002
 _0801F540:
@@ -7750,7 +7750,7 @@ sub_0801F554: @ 0x0801F554
 	str r5, [r6]
 	ldrh r4, [r0]
 	lsl r4, r4, #3
-	ldr r6, _0801F81C  @ =gOamData
+	ldr r6, _0801F81C  @ =gOamBuffer
 	mov r10, r6
 	add r4, r4, r10
 	mov r5, r9
@@ -8078,7 +8078,7 @@ _0801F814:
 _0801F818:
 	.4byte gUnknown_082AF7A0
 _0801F81C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801F820:
 	.4byte 0x84000002
 _0801F824:
@@ -8134,7 +8134,7 @@ sub_0801F838: @ 0x0801F838
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FB20  @ =gOamData
+	ldr r5, _0801FB20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FB24  @ =0x84000002
@@ -8247,7 +8247,7 @@ _0801F92C:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FB20  @ =gOamData
+	ldr r5, _0801FB20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FB24  @ =0x84000002
@@ -8360,7 +8360,7 @@ _0801FA0C:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FB20  @ =gOamData
+	ldr r5, _0801FB20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FB24  @ =0x84000002
@@ -8472,7 +8472,7 @@ _0801FB18:
 _0801FB1C:
 	.4byte gUnknown_082AF7A0
 _0801FB20:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801FB24:
 	.4byte 0x84000002
 _0801FB28:
@@ -8547,7 +8547,7 @@ _0801FB5E:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FF50  @ =gOamData
+	ldr r5, _0801FF50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FF54  @ =0x84000002
@@ -8674,7 +8674,7 @@ _0801FC54:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FF50  @ =gOamData
+	ldr r5, _0801FF50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FF54  @ =0x84000002
@@ -8801,7 +8801,7 @@ _0801FD50:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FF50  @ =gOamData
+	ldr r5, _0801FF50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FF54  @ =0x84000002
@@ -8934,7 +8934,7 @@ _0801FE62:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _0801FF50  @ =gOamData
+	ldr r5, _0801FF50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0801FF54  @ =0x84000002
@@ -9019,7 +9019,7 @@ _0801FF48:
 _0801FF4C:
 	.4byte gUnknown_082B3544
 _0801FF50:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0801FF54:
 	.4byte 0x84000002
 _0801FF58:
@@ -9101,7 +9101,7 @@ _0801FFA0:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _080201D0  @ =gOamData
+	ldr r5, _080201D0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080201D4  @ =0x84000002
@@ -9229,7 +9229,7 @@ _0802009C:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _080201D0  @ =gOamData
+	ldr r5, _080201D0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080201D4  @ =0x84000002
@@ -9343,7 +9343,7 @@ _080201C8:
 _080201CC:
 	.4byte gUnknown_082B5674
 _080201D0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _080201D4:
 	.4byte 0x84000002
 _080201D8:
@@ -9418,7 +9418,7 @@ _0802020E:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020600  @ =gOamData
+	ldr r5, _08020600  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020604  @ =0x84000002
@@ -9545,7 +9545,7 @@ _08020304:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020600  @ =gOamData
+	ldr r5, _08020600  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020604  @ =0x84000002
@@ -9672,7 +9672,7 @@ _08020400:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020600  @ =gOamData
+	ldr r5, _08020600  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020604  @ =0x84000002
@@ -9805,7 +9805,7 @@ _08020512:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020600  @ =gOamData
+	ldr r5, _08020600  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020604  @ =0x84000002
@@ -9890,7 +9890,7 @@ _080205F8:
 _080205FC:
 	.4byte gUnknown_082B3544
 _08020600:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08020604:
 	.4byte 0x84000002
 _08020608:
@@ -9972,7 +9972,7 @@ _08020650:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020880  @ =gOamData
+	ldr r5, _08020880  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020884  @ =0x84000002
@@ -10100,7 +10100,7 @@ _0802074C:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08020880  @ =gOamData
+	ldr r5, _08020880  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08020884  @ =0x84000002
@@ -10214,7 +10214,7 @@ _08020878:
 _0802087C:
 	.4byte gUnknown_082B5674
 _08020880:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08020884:
 	.4byte 0x84000002
 _08020888:
@@ -11468,7 +11468,7 @@ _08021176:
 	cmp r0, #98
 	bgt _080211FA
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 	b _080211FA
 _080211B8:
 	.4byte 0x030000CC
@@ -11601,7 +11601,7 @@ _08021280:
 	cmp r0, #98
 	bgt _080212C0
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _080212C0:
 	ldr r0, _08021514  @ =0x030000D4
 	ldr r2, [r0]
@@ -11692,7 +11692,7 @@ _0802131A:
 	cmp r0, #98
 	bgt _0802137A
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _0802137A:
 	ldr r0, _08021514  @ =0x030000D4
 	ldr r2, [r0]
@@ -11776,7 +11776,7 @@ _080213CE:
 	cmp r0, #98
 	bgt _08021426
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _08021426:
 	ldr r0, _08021514  @ =0x030000D4
 	ldr r2, [r0]
@@ -11860,7 +11860,7 @@ _0802147A:
 	cmp r0, #98
 	bgt _080214D2
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _080214D2:
 	ldr r2, _08021514  @ =0x030000D4
 	ldr r1, [r2]
@@ -11983,14 +11983,14 @@ _080215AE:
 	bx r0
 	THUMB_FUNC_END sub_08021534
 
-	THUMB_FUNC_START sub_080215B4
-sub_080215B4: @ 0x080215B4
+	THUMB_FUNC_START bonus_stoparrow_init_callback
+bonus_stoparrow_init_callback: @ 0x080215B4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, sp, #20
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	bl sub_080720AC
 	mov r0, #68
 	mov r1, #128
@@ -11998,15 +11998,15 @@ sub_080215B4: @ 0x080215B4
 	bl sub_0807204C
 	ldr r7, _08021648  @ =0x030000D0
 	mov r0, #12
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r7]
 	ldr r5, _0802164C  @ =0x030000D4
 	mov r0, #24
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r5]
 	ldr r4, _08021650  @ =0x030000D8
 	mov r0, #24
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	ldr r0, [r5]
 	mov r1, #0
@@ -12377,7 +12377,7 @@ _0802177E:
 	strb r5, [r0, #8]
 	mov r0, #9
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	add sp, sp, #20
 	pop {r3}
 	mov r8, r3
@@ -12418,10 +12418,10 @@ _0802191C:
 	.4byte 0x030000E0
 _08021920:
 	.4byte gUnknown_080798B0
-	THUMB_FUNC_END sub_080215B4
+	THUMB_FUNC_END bonus_stoparrow_init_callback
 
-	THUMB_FUNC_START sub_08021924
-sub_08021924: @ 0x08021924
+	THUMB_FUNC_START bonus_stoparrow_main_callback
+bonus_stoparrow_main_callback: @ 0x08021924
 	push {r4,r5,lr}
 	sub sp, sp, #4
 	ldr r0, _08021990  @ =gUnknown_03000BBC
@@ -12467,7 +12467,7 @@ _08021970:
 	ldr r0, _080219A0  @ =0x030000DC
 	ldr r0, [r0]
 	bl _call_via_r0
-	bl sub_080331FC
+	bl process_input
 	add sp, sp, #4
 	pop {r4,r5}
 	pop {r0}
@@ -12482,10 +12482,10 @@ _0802199C:
 	.4byte 0x0000199A
 _080219A0:
 	.4byte 0x030000DC
-	THUMB_FUNC_END sub_08021924
+	THUMB_FUNC_END bonus_stoparrow_main_callback
 
-	THUMB_FUNC_START sub_080219A4
-sub_080219A4: @ 0x080219A4
+	THUMB_FUNC_START bonus_stoparrow_display_callback
+bonus_stoparrow_display_callback: @ 0x080219A4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12511,7 +12511,7 @@ sub_080219A4: @ 0x080219A4
 	ldr r6, _08021B6C  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r6]
-	ldr r7, _08021B70  @ =gOamData
+	ldr r7, _08021B70  @ =gOamBuffer
 	str r7, [r6, #4]
 	ldr r0, _08021B74  @ =0x85000100
 	str r0, [r6, #8]
@@ -12717,7 +12717,7 @@ _08021B68:
 _08021B6C:
 	.4byte 0x040000D4
 _08021B70:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08021B74:
 	.4byte 0x85000100
 _08021B78:
@@ -12740,7 +12740,7 @@ _08021B98:
 	.4byte 0x030000E0
 _08021B9C:
 	.4byte 0x80000200
-	THUMB_FUNC_END sub_080219A4
+	THUMB_FUNC_END bonus_stoparrow_display_callback
 
 	THUMB_FUNC_START sub_08021BA0
 sub_08021BA0: @ 0x08021BA0
@@ -13401,7 +13401,7 @@ sub_0802200C: @ 0x0802200C
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022324  @ =gOamData
+	ldr r5, _08022324  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022328  @ =0x84000002
@@ -13522,7 +13522,7 @@ _08022112:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022324  @ =gOamData
+	ldr r5, _08022324  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022328  @ =0x84000002
@@ -13642,7 +13642,7 @@ _08022200:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022324  @ =gOamData
+	ldr r5, _08022324  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022328  @ =0x84000002
@@ -13758,7 +13758,7 @@ _0802231C:
 _08022320:
 	.4byte gUnknown_082AEF74
 _08022324:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022328:
 	.4byte 0x84000002
 _0802232C:
@@ -13925,7 +13925,7 @@ _0802245A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022538  @ =gOamData
+	ldr r5, _08022538  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0802253C  @ =0x84000002
@@ -14035,7 +14035,7 @@ _08022530:
 _08022534:
 	.4byte gUnknown_08125928
 _08022538:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802253C:
 	.4byte 0x84000002
 _08022540:
@@ -14147,7 +14147,7 @@ _0802260A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080226E8  @ =gOamData
+	ldr r5, _080226E8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080226EC  @ =0x84000002
@@ -14257,7 +14257,7 @@ _080226E0:
 _080226E4:
 	.4byte gUnknown_08125928
 _080226E8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _080226EC:
 	.4byte 0x84000002
 _080226F0:
@@ -14369,7 +14369,7 @@ _080227BA:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022874  @ =gOamData
+	ldr r5, _08022874  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022878  @ =0x84000002
@@ -14462,7 +14462,7 @@ _0802286C:
 _08022870:
 	.4byte gUnknown_08125928
 _08022874:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022878:
 	.4byte 0x84000002
 _0802287C:
@@ -14530,7 +14530,7 @@ sub_08022890: @ 0x08022890
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0802298C  @ =gOamData
+	ldr r5, _0802298C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022990  @ =0x84000002
@@ -14606,7 +14606,7 @@ _08022984:
 _08022988:
 	.4byte gUnknown_0811C1C0
 _0802298C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022990:
 	.4byte 0x84000002
 _08022994:
@@ -14643,7 +14643,7 @@ _080229A4:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022A64  @ =gOamData
+	ldr r5, _08022A64  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022A68  @ =0x84000002
@@ -14715,7 +14715,7 @@ _08022A5C:
 _08022A60:
 	.4byte gUnknown_0811C1C0
 _08022A64:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022A68:
 	.4byte 0x84000002
 _08022A6C:
@@ -14752,7 +14752,7 @@ _08022A7C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022B48  @ =gOamData
+	ldr r5, _08022B48  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022B4C  @ =0x84000002
@@ -14831,7 +14831,7 @@ _08022B40:
 _08022B44:
 	.4byte gUnknown_0811F7A4
 _08022B48:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022B4C:
 	.4byte 0x84000002
 _08022B50:
@@ -14868,7 +14868,7 @@ _08022B60:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022C20  @ =gOamData
+	ldr r5, _08022C20  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022C24  @ =0x84000002
@@ -14940,7 +14940,7 @@ _08022C18:
 _08022C1C:
 	.4byte gUnknown_0811C1C0
 _08022C20:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022C24:
 	.4byte 0x84000002
 _08022C28:
@@ -14977,7 +14977,7 @@ _08022C38:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022DE8  @ =gOamData
+	ldr r5, _08022DE8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022DEC  @ =0x84000002
@@ -15100,7 +15100,7 @@ _08022D0A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022DE8  @ =gOamData
+	ldr r5, _08022DE8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022DEC  @ =0x84000002
@@ -15172,7 +15172,7 @@ _08022DE0:
 _08022DE4:
 	.4byte gUnknown_0811C1C0
 _08022DE8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022DEC:
 	.4byte 0x84000002
 _08022DF0:
@@ -15213,7 +15213,7 @@ _08022E08:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022EC8  @ =gOamData
+	ldr r5, _08022EC8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022ECC  @ =0x84000002
@@ -15285,7 +15285,7 @@ _08022EC0:
 _08022EC4:
 	.4byte gUnknown_0811C1C0
 _08022EC8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022ECC:
 	.4byte 0x84000002
 _08022ED0:
@@ -15322,7 +15322,7 @@ _08022EE0:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08022FAC  @ =gOamData
+	ldr r5, _08022FAC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08022FB0  @ =0x84000002
@@ -15401,7 +15401,7 @@ _08022FA4:
 _08022FA8:
 	.4byte gUnknown_0811F7A4
 _08022FAC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08022FB0:
 	.4byte 0x84000002
 _08022FB4:
@@ -15438,7 +15438,7 @@ _08022FC4:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023084  @ =gOamData
+	ldr r5, _08023084  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023088  @ =0x84000002
@@ -15510,7 +15510,7 @@ _0802307C:
 _08023080:
 	.4byte gUnknown_0811C1C0
 _08023084:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023088:
 	.4byte 0x84000002
 _0802308C:
@@ -15547,7 +15547,7 @@ _0802309C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023254  @ =gOamData
+	ldr r5, _08023254  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023258  @ =0x84000002
@@ -15670,7 +15670,7 @@ _0802316E:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023254  @ =gOamData
+	ldr r5, _08023254  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023258  @ =0x84000002
@@ -15746,7 +15746,7 @@ _0802324C:
 _08023250:
 	.4byte gUnknown_0811C1C0
 _08023254:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023258:
 	.4byte 0x84000002
 _0802325C:
@@ -15787,7 +15787,7 @@ _08023274:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0802333C  @ =gOamData
+	ldr r5, _0802333C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023340  @ =0x84000002
@@ -15863,7 +15863,7 @@ _08023334:
 _08023338:
 	.4byte gUnknown_0811C1C0
 _0802333C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023340:
 	.4byte 0x84000002
 _08023344:
@@ -15900,7 +15900,7 @@ _08023354:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023428  @ =gOamData
+	ldr r5, _08023428  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0802342C  @ =0x84000002
@@ -15983,7 +15983,7 @@ _08023420:
 _08023424:
 	.4byte gUnknown_0811F7A4
 _08023428:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802342C:
 	.4byte 0x84000002
 _08023430:
@@ -16020,7 +16020,7 @@ _08023440:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023508  @ =gOamData
+	ldr r5, _08023508  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _0802350C  @ =0x84000002
@@ -16096,7 +16096,7 @@ _08023500:
 _08023504:
 	.4byte gUnknown_0811C1C0
 _08023508:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802350C:
 	.4byte 0x84000002
 _08023510:
@@ -16133,7 +16133,7 @@ _08023520:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023620  @ =gOamData
+	ldr r5, _08023620  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023624  @ =0x84000002
@@ -16240,7 +16240,7 @@ _08023618:
 _0802361C:
 	.4byte gUnknown_0811C1C0
 _08023620:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023624:
 	.4byte 0x84000002
 _08023628:
@@ -16320,7 +16320,7 @@ sub_0802363C: @ 0x0802363C
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023A50  @ =gOamData
+	ldr r5, _08023A50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023A54  @ =0x84000002
@@ -16453,7 +16453,7 @@ _0802375A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023A50  @ =gOamData
+	ldr r5, _08023A50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023A54  @ =0x84000002
@@ -16586,7 +16586,7 @@ _08023862:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023A50  @ =gOamData
+	ldr r5, _08023A50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023A54  @ =0x84000002
@@ -16721,7 +16721,7 @@ _08023980:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023A50  @ =gOamData
+	ldr r5, _08023A50  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023A54  @ =0x84000002
@@ -16785,7 +16785,7 @@ _08023A48:
 _08023A4C:
 	.4byte gUnknown_0811C1C0
 _08023A50:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023A54:
 	.4byte 0x84000002
 _08023A58:
@@ -16887,7 +16887,7 @@ _08023AB2:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08023BF0  @ =gOamData
+	ldr r5, _08023BF0  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08023BF4  @ =0x84000002
@@ -16996,7 +16996,7 @@ _08023BE8:
 _08023BEC:
 	.4byte gUnknown_0811C1C0
 _08023BF0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08023BF4:
 	.4byte 0x84000002
 _08023BF8:
@@ -17054,7 +17054,7 @@ sub_08023C08: @ 0x08023C08
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08024014  @ =gOamData
+	ldr r5, _08024014  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024018  @ =0x84000002
@@ -17167,7 +17167,7 @@ _08023CFE:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08024014  @ =gOamData
+	ldr r5, _08024014  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024018  @ =0x84000002
@@ -17279,7 +17279,7 @@ _08023DDC:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08024014  @ =gOamData
+	ldr r5, _08024014  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024018  @ =0x84000002
@@ -17391,7 +17391,7 @@ _08023EBA:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08024014  @ =gOamData
+	ldr r5, _08024014  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024018  @ =0x84000002
@@ -17496,7 +17496,7 @@ _08023F9C:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08024014  @ =gOamData
+	ldr r5, _08024014  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024018  @ =0x84000002
@@ -17536,7 +17536,7 @@ _0802400C:
 _08024010:
 	.4byte gUnknown_0811C1C0
 _08024014:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08024018:
 	.4byte 0x84000002
 _0802401C:
@@ -17678,7 +17678,7 @@ sub_080240D0: @ 0x080240D0
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080243E8  @ =gOamData
+	ldr r5, _080243E8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080243EC  @ =0x84000002
@@ -17799,7 +17799,7 @@ _080241D6:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080243E8  @ =gOamData
+	ldr r5, _080243E8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080243EC  @ =0x84000002
@@ -17919,7 +17919,7 @@ _080242C4:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080243E8  @ =gOamData
+	ldr r5, _080243E8  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080243EC  @ =0x84000002
@@ -18035,7 +18035,7 @@ _080243E0:
 _080243E4:
 	.4byte gUnknown_082B30AC
 _080243E8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _080243EC:
 	.4byte 0x84000002
 _080243F0:
@@ -18114,7 +18114,7 @@ _08024422:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08024554  @ =gOamData
+	ldr r5, _08024554  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024558  @ =0x84000002
@@ -18222,7 +18222,7 @@ _0802454C:
 _08024550:
 	.4byte gUnknown_082B0080
 _08024554:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08024558:
 	.4byte 0x84000002
 _0802455C:
@@ -18272,7 +18272,7 @@ _08024570:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _080246FC  @ =gOamData
+	ldr r5, _080246FC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024700  @ =0x84000002
@@ -18436,7 +18436,7 @@ _080246F4:
 _080246F8:
 	.4byte gUnknown_082AF7A0
 _080246FC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08024700:
 	.4byte 0x84000002
 _08024704:
@@ -18893,7 +18893,7 @@ _08024A22:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08024B54  @ =gOamData
+	ldr r5, _08024B54  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024B58  @ =0x84000002
@@ -19001,7 +19001,7 @@ _08024B4C:
 _08024B50:
 	.4byte gUnknown_082B0080
 _08024B54:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08024B58:
 	.4byte 0x84000002
 _08024B5C:
@@ -19051,7 +19051,7 @@ _08024B70:
 	str r0, [r4]
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r5, _08024CFC  @ =gOamData
+	ldr r5, _08024CFC  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08024D00  @ =0x84000002
@@ -19215,7 +19215,7 @@ _08024CF4:
 _08024CF8:
 	.4byte gUnknown_082AF7A0
 _08024CFC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08024D00:
 	.4byte 0x84000002
 _08024D04:
@@ -19443,7 +19443,7 @@ sub_08024E5C: @ 0x08024E5C
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08025184  @ =gOamData
+	ldr r5, _08025184  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08025188  @ =0x84000002
@@ -19568,7 +19568,7 @@ _08024F6A:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08025184  @ =gOamData
+	ldr r5, _08025184  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08025188  @ =0x84000002
@@ -19692,7 +19692,7 @@ _08025060:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _08025184  @ =gOamData
+	ldr r5, _08025184  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08025188  @ =0x84000002
@@ -19804,7 +19804,7 @@ _0802517C:
 _08025180:
 	.4byte gUnknown_082AF7A0
 _08025184:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08025188:
 	.4byte 0x84000002
 _0802518C:
@@ -19882,7 +19882,7 @@ _080251C2:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080255B4  @ =gOamData
+	ldr r5, _080255B4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080255B8  @ =0x84000002
@@ -20016,7 +20016,7 @@ _080252C8:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080255B4  @ =gOamData
+	ldr r5, _080255B4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080255B8  @ =0x84000002
@@ -20150,7 +20150,7 @@ _080253D2:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080255B4  @ =gOamData
+	ldr r5, _080255B4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080255B8  @ =0x84000002
@@ -20291,7 +20291,7 @@ _080254FC:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _080255B4  @ =gOamData
+	ldr r5, _080255B4  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _080255B8  @ =0x84000002
@@ -20351,7 +20351,7 @@ _080255AC:
 _080255B0:
 	.4byte gUnknown_082B3544
 _080255B4:
-	.4byte gOamData
+	.4byte gOamBuffer
 _080255B8:
 	.4byte 0x84000002
 _080255BC:
@@ -20466,7 +20466,7 @@ _08025640:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0802588C  @ =gOamData
+	ldr r5, _0802588C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08025890  @ =0x84000002
@@ -20599,7 +20599,7 @@ _08025748:
 	str r0, [r4]
 	ldrh r0, [r6]
 	lsl r0, r0, #3
-	ldr r5, _0802588C  @ =gOamData
+	ldr r5, _0802588C  @ =gOamBuffer
 	add r0, r0, r5
 	str r0, [r4, #4]
 	ldr r0, _08025890  @ =0x84000002
@@ -20720,7 +20720,7 @@ _08025884:
 _08025888:
 	.4byte gUnknown_082B5674
 _0802588C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08025890:
 	.4byte 0x84000002
 _08025894:
@@ -23463,7 +23463,7 @@ _08026C36:
 	cmp r0, #98
 	bgt _08026CB6
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 	b _08026CB6
 _08026C74:
 	.4byte 0x030000E4
@@ -23592,7 +23592,7 @@ _08026D38:
 	cmp r0, #98
 	bgt _08026D74
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _08026D74:
 	ldr r0, _08026FC8  @ =0x030000F4
 	ldr r0, [r0]
@@ -23683,7 +23683,7 @@ _08026DCE:
 	cmp r0, #98
 	bgt _08026E2E
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _08026E2E:
 	ldr r0, _08026FC8  @ =0x030000F4
 	ldr r0, [r0]
@@ -23767,7 +23767,7 @@ _08026E82:
 	cmp r0, #98
 	bgt _08026EDA
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _08026EDA:
 	ldr r0, _08026FC8  @ =0x030000F4
 	ldr r0, [r0]
@@ -23851,7 +23851,7 @@ _08026F2E:
 	cmp r0, #98
 	bgt _08026F86
 	mov r0, #1
-	bl sub_08014A58
+	bl add_lives
 _08026F86:
 	ldr r2, _08026FC8  @ =0x030000F4
 	ldr r1, [r2]
@@ -23974,8 +23974,8 @@ _08027062:
 	bx r0
 	THUMB_FUNC_END sub_08026FE8
 
-	THUMB_FUNC_START sub_08027068
-sub_08027068: @ 0x08027068
+	THUMB_FUNC_START bonus_swapboxes_init_callback
+bonus_swapboxes_init_callback: @ 0x08027068
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -23983,7 +23983,7 @@ sub_08027068: @ 0x08027068
 	push {r5-r7}
 	sub sp, sp, #24
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	bl sub_080720AC
 	mov r0, #68
 	mov r1, #128
@@ -23991,23 +23991,23 @@ sub_08027068: @ 0x08027068
 	bl sub_0807204C
 	ldr r7, _08027110  @ =0x030000E8
 	mov r0, #16
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r7]
 	ldr r4, _08027114  @ =0x030000EC
 	mov r0, #4
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	ldr r4, _08027118  @ =0x030000F0
 	mov r0, #4
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	ldr r5, _0802711C  @ =0x030000F4
 	mov r0, #44
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r5]
 	ldr r4, _08027120  @ =0x030000F8
 	mov r0, #24
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	ldr r0, [r5]
 	mov r1, #0
@@ -25099,7 +25099,7 @@ _080276E2:
 	strb r0, [r1, #2]
 	mov r0, #10
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	add sp, sp, #24
 	pop {r3-r5}
 	mov r8, r3
@@ -25148,10 +25148,10 @@ _080278F8:
 	.4byte 0x03000C0C
 _080278FC:
 	.4byte 0x030000F0
-	THUMB_FUNC_END sub_08027068
+	THUMB_FUNC_END bonus_swapboxes_init_callback
 
-	THUMB_FUNC_START sub_08027900
-sub_08027900: @ 0x08027900
+	THUMB_FUNC_START bonus_swapboxes_main_callback
+bonus_swapboxes_main_callback: @ 0x08027900
 	push {r4,r5,lr}
 	sub sp, sp, #4
 	ldr r0, _0802797C  @ =gUnknown_03000BBC
@@ -25204,7 +25204,7 @@ _08027958:
 	ldr r0, _0802798C  @ =0x03000C10
 	ldr r0, [r0]
 	bl _call_via_r0
-	bl sub_080331FC
+	bl process_input
 	add sp, sp, #4
 	pop {r4,r5}
 	pop {r0}
@@ -25221,10 +25221,10 @@ _08027988:
 	.4byte 0x0000199A
 _0802798C:
 	.4byte 0x03000C10
-	THUMB_FUNC_END sub_08027900
+	THUMB_FUNC_END bonus_swapboxes_main_callback
 
-	THUMB_FUNC_START sub_08027990
-sub_08027990: @ 0x08027990
+	THUMB_FUNC_START bonus_swapboxes_display_callback
+bonus_swapboxes_display_callback: @ 0x08027990
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25250,7 +25250,7 @@ sub_08027990: @ 0x08027990
 	ldr r6, _08027B64  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r6]
-	ldr r7, _08027B68  @ =gOamData
+	ldr r7, _08027B68  @ =gOamBuffer
 	str r7, [r6, #4]
 	ldr r0, _08027B6C  @ =0x85000100
 	str r0, [r6, #8]
@@ -25463,7 +25463,7 @@ _08027B60:
 _08027B64:
 	.4byte 0x040000D4
 _08027B68:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08027B6C:
 	.4byte 0x85000100
 _08027B70:
@@ -25486,7 +25486,7 @@ _08027B90:
 	.4byte 0x03000C08
 _08027B94:
 	.4byte 0x80000200
-	THUMB_FUNC_END sub_08027990
+	THUMB_FUNC_END bonus_swapboxes_display_callback
 
 	THUMB_FUNC_START sub_08027B98
 sub_08027B98: @ 0x08027B98
@@ -26392,7 +26392,7 @@ sub_080281C8: @ 0x080281C8
 	mov r10, r0
 	ldrh r0, [r3]
 	lsl r0, r0, #3
-	ldr r1, _08028290  @ =gOamData
+	ldr r1, _08028290  @ =gOamBuffer
 	add r3, r0, r1
 	ldrb r0, [r4, #13]
 	cmp r0, #0
@@ -26484,7 +26484,7 @@ _08028264:
 	blt _08028200
 	b _08028324
 _08028290:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08028294:
 	.4byte 0x040000D4
 _08028298:
@@ -27422,14 +27422,14 @@ _08028958:
 	.4byte 0x00001134
 	THUMB_FUNC_END sub_08028824
 
-	THUMB_FUNC_START sub_0802895C
-sub_0802895C: @ 0x0802895C
+	THUMB_FUNC_START option_menu_init_callback
+option_menu_init_callback: @ 0x0802895C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	sub sp, sp, #4
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r0, _080289D0  @ =gUnknown_030012A0
 	mov r5, #0
 	strh r5, [r0]
@@ -27453,7 +27453,7 @@ sub_0802895C: @ 0x0802895C
 	bl sub_08006968
 	ldr r4, _080289DC  @ =0x030000FC
 	ldr r0, _080289E0  @ =0x00001150
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	str r1, [r4]
 	mov r0, sp
@@ -27573,11 +27573,11 @@ _08028A48:
 	strh r0, [r2]
 	mov r0, #3
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	ldr r6, _08028BD8  @ =gUnknown_08B3A4DC
 	ldrh r0, [r6]
 	lsl r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	ldr r1, [r7]
 	ldr r3, _08028BDC  @ =0x00001144
 	add r2, r1, r3
@@ -27617,7 +27617,7 @@ _08028ADE:
 	ldr r4, _08028BE8  @ =gUnknown_08D7B10C
 	ldrh r0, [r4]
 	lsl r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	ldr r3, _08028BB0  @ =0x030000FC
 	ldr r1, [r3]
 	ldr r5, _08028BEC  @ =0x00001148
@@ -27762,10 +27762,10 @@ _08028C00:
 	.4byte gUnknown_03001730
 _08028C04:
 	.4byte 0x01000008
-	THUMB_FUNC_END sub_0802895C
+	THUMB_FUNC_END option_menu_init_callback
 
-	THUMB_FUNC_START sub_08028C08
-sub_08028C08: @ 0x08028C08
+	THUMB_FUNC_START option_menu_main_callback
+option_menu_main_callback: @ 0x08028C08
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -27777,7 +27777,7 @@ sub_08028C08: @ 0x08028C08
 	mov r5, #64
 	mov r1, #128
 	mov r8, r1
-	bl sub_080331FC
+	bl process_input
 	ldr r2, _08028C78  @ =0x030000FC
 	ldr r1, [r2]
 	ldr r0, _08028C7C  @ =0x00001128
@@ -28054,10 +28054,10 @@ _08028E3C:
 	.4byte 0x0000112C
 _08028E40:
 	.4byte 0x01000400
-	THUMB_FUNC_END sub_08028C08
+	THUMB_FUNC_END option_menu_main_callback
 
-	THUMB_FUNC_START sub_08028E44
-sub_08028E44: @ 0x08028E44
+	THUMB_FUNC_START option_menu_display_callback
+option_menu_display_callback: @ 0x08028E44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -28108,7 +28108,7 @@ _08028E9E:
 	ldr r1, _08028FEC  @ =0x040000D4
 	add r3, sp, #4
 	str r3, [r1]
-	ldr r0, _08028FF0  @ =gOamData
+	ldr r0, _08028FF0  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _08028FF4  @ =0x85000100
 	str r0, [r1, #8]
@@ -28273,7 +28273,7 @@ _08028FE8:
 _08028FEC:
 	.4byte 0x040000D4
 _08028FF0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08028FF4:
 	.4byte 0x85000100
 _08028FF8:
@@ -28296,7 +28296,7 @@ _08029004:
 _0802901A:
 	bl sub_0801B4BC
 	ldr r1, _08029040  @ =0x040000D4
-	ldr r0, _08029044  @ =gOamData
+	ldr r0, _08029044  @ =gOamBuffer
 	str r0, [r1]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -28315,10 +28315,10 @@ _0802901A:
 _08029040:
 	.4byte 0x040000D4
 _08029044:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08029048:
 	.4byte 0x84000100
-	THUMB_FUNC_END sub_08028E44
+	THUMB_FUNC_END option_menu_display_callback
 
 	THUMB_FUNC_START sub_0802904C
 sub_0802904C: @ 0x0802904C
@@ -28753,8 +28753,8 @@ _08029358:
 	.4byte 0x0300010D
 	THUMB_FUNC_END sub_0802919C
 
-	THUMB_FUNC_START sub_0802935C
-sub_0802935C: @ 0x0802935C
+	THUMB_FUNC_START level_results_init_callback
+level_results_init_callback: @ 0x0802935C
 	push {r4,r5,lr}
 	sub sp, sp, #4
 	ldr r1, _0802937C  @ =0x0300010F
@@ -28786,7 +28786,7 @@ _0802938C:
 _08029390:
 	strb r0, [r1]
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r1, _0802940C  @ =0x03000C1C
 	mov r0, #0
 	strb r0, [r1]
@@ -29051,7 +29051,7 @@ _08029558:
 	ldrb r0, [r0]
 	lsl r0, r0, #24
 	asr r0, r0, #24
-	bl sub_080149F8
+	bl set_lives
 	ldr r0, _08029604  @ =0x0300010F
 	ldrb r0, [r0]
 	lsl r0, r0, #24
@@ -29168,10 +29168,10 @@ _0802969C:
 	.4byte 0x03000DD0
 _080296A0:
 	.4byte gUnknown_03000B74
-	THUMB_FUNC_END sub_0802935C
+	THUMB_FUNC_END level_results_init_callback
 
-	THUMB_FUNC_START sub_080296A4
-sub_080296A4: @ 0x080296A4
+	THUMB_FUNC_START level_results_main_callback
+level_results_main_callback: @ 0x080296A4
 	push {r4-r7,lr}
 	sub sp, sp, #12
 	mov r4, #0
@@ -29183,7 +29183,7 @@ sub_080296A4: @ 0x080296A4
 	b _080297DA
 _080296B8:
 	mov r4, #50
-	bl sub_080331FC
+	bl process_input
 	ldr r0, _08029778  @ =0x03000DDC
 	ldrb r0, [r0]
 	lsl r0, r0, #24
@@ -29676,7 +29676,7 @@ _08029A74:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_080296A4
+	THUMB_FUNC_END level_results_main_callback
 
 	THUMB_FUNC_START sub_08029A80
 sub_08029A80: @ 0x08029A80
@@ -29813,8 +29813,8 @@ _08029B80:
 	.4byte 0x0300010E
 	THUMB_FUNC_END sub_08029A80
 
-	THUMB_FUNC_START sub_08029B84
-sub_08029B84: @ 0x08029B84
+	THUMB_FUNC_START level_results_display_callback
+level_results_display_callback: @ 0x08029B84
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -29840,7 +29840,7 @@ sub_08029B84: @ 0x08029B84
 	ldr r4, _08029C08  @ =0x040000D4
 	mov r0, sp
 	str r0, [r4]
-	ldr r0, _08029C0C  @ =gOamData
+	ldr r0, _08029C0C  @ =gOamBuffer
 	mov r8, r0
 	str r0, [r4, #4]
 	ldr r0, _08029C10  @ =0x85000100
@@ -29883,14 +29883,14 @@ _08029C04:
 _08029C08:
 	.4byte 0x040000D4
 _08029C0C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08029C10:
 	.4byte 0x85000100
 _08029C14:
 	.4byte 0x03000E00
 _08029C18:
 	.4byte 0x84000100
-	THUMB_FUNC_END sub_08029B84
+	THUMB_FUNC_END level_results_display_callback
 
 	THUMB_FUNC_START sub_08029C1C
 sub_08029C1C: @ 0x08029C1C
@@ -30476,7 +30476,7 @@ sub_08029FD0: @ 0x08029FD0
 	ldr r0, _0802A010  @ =0x03000124
 	mov r1, #1
 	str r1, [r0]
-	ldr r1, _0802A014  @ =gUnknown_08076D70
+	ldr r1, _0802A014  @ =gInterruptHandlers+0x18
 	mov r0, #2
 	bl SetFlashTimerIntr
 	mov r6, #0
@@ -30501,7 +30501,7 @@ _08029FF4:
 _0802A010:
 	.4byte 0x03000124
 _0802A014:
-	.4byte gUnknown_08076D70
+	.4byte gInterruptHandlers+0x18
 _0802A018:
 	.4byte 0x0000FFFC
 _0802A01C:
@@ -31207,7 +31207,7 @@ sub_0802A4B4: @ 0x0802A4B4
 	strb r0, [r1]
 	mov r0, #5
 	mov r1, #2
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	ldr r0, _0802A504  @ =gUnknown_03001938
 	ldr r1, [r0]
 	mov r2, #2
@@ -31473,7 +31473,7 @@ _0802A6A6:
 	cmp r6, r2
 	bcs _0802A74C
 	ldr r7, _0802A76C  @ =0x040000D4
-	ldr r4, _0802A784  @ =gOamData
+	ldr r4, _0802A784  @ =gOamBuffer
 	ldr r3, _0802A788  @ =0x000003FF
 	ldr r0, [sp]
 	and r0, r0, r3
@@ -31579,7 +31579,7 @@ _0802A77C:
 _0802A780:
 	.4byte 0x03000132
 _0802A784:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802A788:
 	.4byte 0x000003FF
 _0802A78C:
@@ -31654,7 +31654,7 @@ _0802A7C4:
 	mov r1, #0
 	str r1, [sp]
 	ldr r6, _0802A8CC  @ =0x040000D4
-	ldr r5, _0802A8D8  @ =gOamData
+	ldr r5, _0802A8D8  @ =gOamBuffer
 	ldr r2, _0802A8D0  @ =0x03000138
 	mov r12, r2
 	ldr r3, _0802A8DC  @ =0xFFFFFE00
@@ -31756,7 +31756,7 @@ _0802A8D0:
 _0802A8D4:
 	.4byte 0x06010000
 _0802A8D8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802A8DC:
 	.4byte 0xFFFFFE00
 _0802A8E0:
@@ -31791,7 +31791,7 @@ sub_0802A8F0: @ 0x0802A8F0
 	bge _0802A9E6
 	mov r10, r3
 	ldr r7, _0802A9FC  @ =0x040000D4
-	ldr r0, _0802AA00  @ =gOamData
+	ldr r0, _0802AA00  @ =gOamBuffer
 	mov r12, r0
 _0802A91C:
 	mov r3, r10
@@ -31910,7 +31910,7 @@ _0802A9F8:
 _0802A9FC:
 	.4byte 0x040000D4
 _0802AA00:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802AA04:
 	.4byte 0x06010000
 _0802AA08:
@@ -31939,7 +31939,7 @@ sub_0802AA1C: @ 0x0802AA1C
 sub_0802AA28: @ 0x0802AA28
 	push {lr}
 	sub sp, sp, #12
-	bl sub_080331FC
+	bl process_input
 	ldr r2, _0802AA4C  @ =0x03000130
 	ldrb r3, [r2]
 	cmp r3, #2
@@ -31991,13 +31991,13 @@ _0802AA8C:
 	.4byte 0x00007FFF
 	THUMB_FUNC_END sub_0802AA28
 
-	THUMB_FUNC_START sub_0802AA90
-sub_0802AA90: @ 0x0802AA90
+	THUMB_FUNC_START help_display_callback
+help_display_callback: @ 0x0802AA90
 	push {lr}
-	bl sub_080088F0
+	bl demo_display_callback
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_0802AA90
+	THUMB_FUNC_END help_display_callback
 
 	.byte 0x00
 	.byte 0x00
@@ -32042,8 +32042,8 @@ _0802AAE2:
 	bx r0
 	THUMB_FUNC_END sub_0802AA9C
 
-	THUMB_FUNC_START sub_0802AAE8
-sub_0802AAE8: @ 0x0802AAE8
+	THUMB_FUNC_START respawn_init_callback
+respawn_init_callback: @ 0x0802AAE8
 	push {r4-r7,lr}
 	mov r2, #128
 	lsl r2, r2, #19
@@ -32065,7 +32065,7 @@ sub_0802AAE8: @ 0x0802AAE8
 	strb r0, [r1]
 	mov r0, #4
 	mov r1, #2
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	b _0802AC82
 _0802AB18:
 	.4byte gMainState
@@ -32280,10 +32280,10 @@ _0802ACA4:
 	.4byte 0x03000155
 _0802ACA8:
 	.4byte 0x03000150
-	THUMB_FUNC_END sub_0802AAE8
+	THUMB_FUNC_END respawn_init_callback
 
-	THUMB_FUNC_START sub_0802ACAC
-sub_0802ACAC: @ 0x0802ACAC
+	THUMB_FUNC_START respawn_main_callback
+respawn_main_callback: @ 0x0802ACAC
 	push {r4,lr}
 	ldr r2, _0802ACF4  @ =0x03000150
 	ldrb r0, [r2]
@@ -32412,7 +32412,7 @@ _0802ADA4:
 	pop {r4}
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_0802ACAC
+	THUMB_FUNC_END respawn_main_callback
 
 	.byte 0x00
 	.byte 0x00
@@ -32681,7 +32681,7 @@ _0802AF70:
 	bge _0802B01A
 	ldr r0, _0802B03C  @ =0x040000D4
 	mov r12, r0
-	ldr r6, _0802B05C  @ =gOamData
+	ldr r6, _0802B05C  @ =gOamBuffer
 	ldr r1, _0802B060  @ =0x000003FF
 	ldr r2, [sp]
 	and r2, r2, r1
@@ -32790,7 +32790,7 @@ _0802B054:
 _0802B058:
 	.4byte 0x03000156
 _0802B05C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802B060:
 	.4byte 0x000003FF
 _0802B064:
@@ -32860,7 +32860,7 @@ _0802B0C4:
 	bge _0802B16E
 	ldr r0, _0802B190  @ =0x040000D4
 	mov r12, r0
-	ldr r6, _0802B1B0  @ =gOamData
+	ldr r6, _0802B1B0  @ =gOamBuffer
 	ldr r1, _0802B1B4  @ =0x000003FF
 	ldr r2, [sp]
 	and r2, r2, r1
@@ -32969,7 +32969,7 @@ _0802B1A8:
 _0802B1AC:
 	.4byte 0x03000154
 _0802B1B0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802B1B4:
 	.4byte 0x000003FF
 _0802B1B8:
@@ -33039,7 +33039,7 @@ _0802B218:
 	bge _0802B2BE
 	ldr r0, _0802B2E0  @ =0x040000D4
 	mov r12, r0
-	ldr r6, _0802B300  @ =gOamData
+	ldr r6, _0802B300  @ =gOamBuffer
 	ldr r1, _0802B304  @ =0x000003FF
 	ldr r2, [sp]
 	and r2, r2, r1
@@ -33146,7 +33146,7 @@ _0802B2F8:
 _0802B2FC:
 	.4byte 0x03000154
 _0802B300:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802B304:
 	.4byte 0x000003FF
 _0802B308:
@@ -33216,7 +33216,7 @@ _0802B368:
 	bge _0802B412
 	ldr r0, _0802B434  @ =0x040000D4
 	mov r12, r0
-	ldr r6, _0802B454  @ =gOamData
+	ldr r6, _0802B454  @ =gOamBuffer
 	ldr r1, _0802B458  @ =0x000003FF
 	ldr r2, [sp]
 	and r2, r2, r1
@@ -33325,7 +33325,7 @@ _0802B44C:
 _0802B450:
 	.4byte 0x03000154
 _0802B454:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802B458:
 	.4byte 0x000003FF
 _0802B45C:
@@ -33496,7 +33496,7 @@ _0802B578:
 	cmp r6, r0
 	bge _0802B61E
 	ldr r7, _0802B640  @ =0x040000D4
-	ldr r4, _0802B658  @ =gOamData
+	ldr r4, _0802B658  @ =gOamBuffer
 	ldr r0, _0802B65C  @ =0x000003FF
 	ldr r2, [sp]
 	and r2, r2, r0
@@ -33604,7 +33604,7 @@ _0802B650:
 _0802B654:
 	.4byte 0x03000155
 _0802B658:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802B65C:
 	.4byte 0x000003FF
 _0802B660:
@@ -33764,13 +33764,13 @@ sub_0802B780: @ 0x0802B780
 
 	.byte 0x00
 	.byte 0x00
-	THUMB_FUNC_START sub_0802B78C
-sub_0802B78C: @ 0x0802B78C
+	THUMB_FUNC_START respawn_display_callback
+respawn_display_callback: @ 0x0802B78C
 	push {lr}
-	bl sub_080088F0
+	bl demo_display_callback
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_0802B78C
+	THUMB_FUNC_END respawn_display_callback
 
 	.byte 0x00
 	.byte 0x00
@@ -34040,7 +34040,7 @@ sub_0802B998: @ 0x0802B998
 	push {r4,r5,lr}
 	ldr r5, _0802B9CC  @ =0x080006D8
 	ldr r0, _0802B9D0  @ =0x00001068
-	bl sub_08034854
+	bl arena_allocate
 	add r4, r0, #0
 	ldr r2, _0802B9D4  @ =0x0400041A
 	add r0, r5, #0
@@ -34081,7 +34081,7 @@ sub_0802B9E4: @ 0x0802B9E4
 	push {lr}
 	mov r0, #240
 	lsl r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	ldr r1, _0802B9FC  @ =0x03000C30
 	str r0, [r1, #4]
 	mov r0, #0
@@ -34103,7 +34103,7 @@ sub_0802BA00: @ 0x0802BA00
 	bne _0802BA16
 	mov r0, #240
 	lsl r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4, #4]
 	str r5, [r4]
 _0802BA16:
@@ -34296,7 +34296,7 @@ sub_0802BB4C: @ 0x0802BB4C
 	push {r4,lr}
 	sub sp, sp, #4
 	mov r0, #84
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	ldr r4, _0802BB78  @ =0x03000C40
 	str r1, [r4, #32]
@@ -34338,7 +34338,7 @@ sub_0802BB80: @ 0x0802BB80
 	cmp r4, #0
 	bne _0802BBB4
 	mov r0, #84
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	str r1, [r5, #32]
 	mov r0, sp
@@ -34539,7 +34539,7 @@ _0802BCF2:
 	ldr r7, _0802BD1C  @ =0x08001760
 	sub r4, r0, r7
 	add r0, r4, #0
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	ldr r0, _0802BD20  @ =0x03000C90
 	str r1, [r0, #24]
@@ -34567,7 +34567,7 @@ _0802BD2E:
 	ldrh r0, [r5, #2]
 	lsl r0, r0, #4
 	add r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	ldr r1, _0802BE00  @ =0x03000C90
 	str r0, [r1, #20]
 	add r0, sp, #4
@@ -34578,7 +34578,7 @@ _0802BD2E:
 _0802BD46:
 	mov r0, #228
 	lsl r0, r0, #1
-	bl sub_08034854
+	bl arena_allocate
 	stm r6!, {r0}
 	sub r4, r4, #1
 	cmp r4, #0
@@ -34894,8 +34894,8 @@ _0802BF6C:
 	.4byte sub_0802C080
 	THUMB_FUNC_END sub_0802BF28
 
-	THUMB_FUNC_START sub_0802BF70
-sub_0802BF70: @ 0x0802BF70
+	THUMB_FUNC_START tm0over_interrupt_handler
+tm0over_interrupt_handler: @ 0x0802BF70
 	push {r4,r5,lr}
 	ldr r0, _0802BF9C  @ =0x03000CB0
 	ldr r5, [r0, #104]
@@ -34923,7 +34923,7 @@ _0802BF9C:
 	.4byte 0x03000CB0
 _0802BFA0:
 	.4byte 0x04000005
-	THUMB_FUNC_END sub_0802BF70
+	THUMB_FUNC_END tm0over_interrupt_handler
 
 	THUMB_FUNC_START sub_0802BFA4
 sub_0802BFA4: @ 0x0802BFA4
@@ -37289,7 +37289,7 @@ sub_0802D06C: @ 0x0802D06C
 	push {r7}
 	sub sp, sp, #4
 	mov r0, #144
-	bl sub_08034854
+	bl arena_allocate
 	ldr r1, _0802D0B8  @ =0x03000170
 	str r0, [r1, #28]
 	mov r8, r1
@@ -37364,7 +37364,7 @@ sub_0802D0E8: @ 0x0802D0E8
 	cmp r0, #0
 	bne _0802D12E
 	mov r0, #144
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4, #28]
 	mov r8, r4
 	mov r1, #0
@@ -37520,8 +37520,8 @@ _0802D204:
 	.4byte 0x03000170
 	THUMB_FUNC_END sub_0802D1DC
 
-	THUMB_FUNC_START sub_0802D208
-sub_0802D208: @ 0x0802D208
+	THUMB_FUNC_START movie_main_callback
+movie_main_callback: @ 0x0802D208
 	push {r4,lr}
 	ldr r4, _0802D224  @ =0x03000DCC
 	ldrb r0, [r4]
@@ -37547,7 +37547,7 @@ _0802D230:
 	ldr r0, [r4]
 	bl sub_0805739C
 	bl sub_0802BE50
-	bl sub_080331FC
+	bl process_input
 	ldr r1, _0802D264  @ =gUnknown_03000B54
 	ldr r0, [r1]
 	add r2, r0, #1
@@ -37828,7 +37828,7 @@ _0802D460:
 	.4byte gUnknown_030012E8
 _0802D464:
 	.4byte 0x030001A0
-	THUMB_FUNC_END sub_0802D208
+	THUMB_FUNC_END movie_main_callback
 
 	THUMB_FUNC_START sub_0802D468
 sub_0802D468: @ 0x0802D468
@@ -37923,11 +37923,11 @@ _0802D50C:
 	.4byte gUnknown_08B37424
 	THUMB_FUNC_END sub_0802D468
 
-	THUMB_FUNC_START sub_0802D510
-sub_0802D510: @ 0x0802D510
+	THUMB_FUNC_START movie_init_callback
+movie_init_callback: @ 0x0802D510
 	push {r4,lr}
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r4, _0802D564  @ =0x030001A0
 	ldrb r0, [r4, #5]
 	mov r1, #128
@@ -37980,10 +37980,10 @@ _0802D580:
 	.4byte sub_0802D608
 _0802D584:
 	.4byte 0x0000FF7F
-	THUMB_FUNC_END sub_0802D510
+	THUMB_FUNC_END movie_init_callback
 
-	THUMB_FUNC_START sub_0802D588
-sub_0802D588: @ 0x0802D588
+	THUMB_FUNC_START movie_display_callback
+movie_display_callback: @ 0x0802D588
 	push {r4-r6,lr}
 	sub sp, sp, #16
 	add r0, sp, #8
@@ -38006,7 +38006,7 @@ sub_0802D588: @ 0x0802D588
 	ldr r5, _0802D5E8  @ =0x040000D4
 	add r4, sp, #4
 	str r4, [r5]
-	ldr r6, _0802D5EC  @ =gOamData
+	ldr r6, _0802D5EC  @ =gOamBuffer
 	str r6, [r5, #4]
 	ldr r4, _0802D5F0  @ =0x85000100
 	str r4, [r5, #8]
@@ -38035,14 +38035,14 @@ _0802D5E4:
 _0802D5E8:
 	.4byte 0x040000D4
 _0802D5EC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802D5F0:
 	.4byte 0x85000100
 _0802D5F4:
 	.4byte 0x030001A0
 _0802D5F8:
 	.4byte 0x84000100
-	THUMB_FUNC_END sub_0802D588
+	THUMB_FUNC_END movie_display_callback
 
 	THUMB_FUNC_START sub_0802D5FC
 sub_0802D5FC: @ 0x0802D5FC
@@ -38175,7 +38175,7 @@ _0802D6D8:
 sub_0802D6DC: @ 0x0802D6DC
 	push {r4,r5,lr}
 	sub sp, sp, #12
-	bl sub_080331FC
+	bl process_input
 	bl sub_08029C20
 	mov r1, #0
 	ldr r4, _0802D710  @ =0x030001A8
@@ -38849,7 +38849,7 @@ sub_0802DBEC: @ 0x0802DBEC
 	ldr r1, _0802DCD0  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r1]
-	ldr r0, _0802DCD4  @ =gOamData
+	ldr r0, _0802DCD4  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _0802DCD8  @ =0x85000100
 	str r0, [r1, #8]
@@ -38959,7 +38959,7 @@ _0802DCBA:
 _0802DCD0:
 	.4byte 0x040000D4
 _0802DCD4:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802DCD8:
 	.4byte 0x85000100
 _0802DCDC:
@@ -38996,7 +38996,7 @@ _0802DD18:
 	add r0, r7, #0
 	bl sub_08035108
 	ldr r1, _0802DD40  @ =0x040000D4
-	ldr r0, _0802DD44  @ =gOamData
+	ldr r0, _0802DD44  @ =gOamBuffer
 	str r0, [r1]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -39015,7 +39015,7 @@ _0802DD3C:
 _0802DD40:
 	.4byte 0x040000D4
 _0802DD44:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802DD48:
 	.4byte 0x80000200
 	THUMB_FUNC_END sub_0802DBEC
@@ -39038,10 +39038,10 @@ sub_0802DD4C: @ 0x0802DD4C
 	str r2, [r0]
 _0802DD68:
 	mov r0, #3
-	bl sub_08034884
+	bl arena_save_head
 	ldr r4, _0802DDD0  @ =0x030001BC
 	mov r0, #64
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	mov r1, #0
 	strb r1, [r0]
@@ -39055,7 +39055,7 @@ _0802DD68:
 	ldr r0, _0802DDD4  @ =0x040000D4
 	mov r1, sp
 	str r1, [r0]
-	ldr r2, _0802DDD8  @ =gOamData
+	ldr r2, _0802DDD8  @ =gOamBuffer
 	str r2, [r0, #4]
 	ldr r1, _0802DDDC  @ =0x85000100
 	str r1, [r0, #8]
@@ -39092,7 +39092,7 @@ _0802DDD0:
 _0802DDD4:
 	.4byte 0x040000D4
 _0802DDD8:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802DDDC:
 	.4byte 0x85000100
 _0802DDE0:
@@ -39106,7 +39106,7 @@ sub_0802DDE8: @ 0x0802DDE8
 	push {lr}
 	bl sub_080382A8
 	mov r0, #3
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r1, _0802DE04  @ =0x030001B4
 	mov r0, #0
 	str r0, [r1]
@@ -39235,7 +39235,7 @@ _0802DED8:
 	mov r4, #0
 	mov r0, #8
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	mov r2, #128
 	lsl r2, r2, #19
 	ldrh r0, [r2]
@@ -39297,7 +39297,7 @@ sub_0802DF50: @ 0x0802DF50
 	mov r5, r8
 	push {r5-r7}
 	sub sp, sp, #12
-	bl sub_080331FC
+	bl process_input
 	bl sub_08029C20
 	ldr r6, _0802DFA0  @ =0x030001C4
 	mov r5, #0
@@ -40541,7 +40541,7 @@ sub_0802E888: @ 0x0802E888
 	ldr r1, _0802E8DC  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r1]
-	ldr r0, _0802E8E0  @ =gOamData
+	ldr r0, _0802E8E0  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _0802E8E4  @ =0x85000100
 	str r0, [r1, #8]
@@ -40571,7 +40571,7 @@ sub_0802E888: @ 0x0802E888
 _0802E8DC:
 	.4byte 0x040000D4
 _0802E8E0:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802E8E4:
 	.4byte 0x85000100
 _0802E8E8:
@@ -40959,7 +40959,7 @@ _0802EBC6:
 _0802EBCE:
 	bl sub_0801B4BC
 	ldr r2, _0802EC20  @ =0x040000D4
-	ldr r0, _0802EC24  @ =gOamData
+	ldr r0, _0802EC24  @ =gOamBuffer
 	str r0, [r2]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -41000,7 +41000,7 @@ _0802EC1C:
 _0802EC20:
 	.4byte 0x040000D4
 _0802EC24:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802EC28:
 	.4byte 0x84000100
 _0802EC2C:
@@ -41013,7 +41013,7 @@ _0802EC30:
 sub_0802EC34: @ 0x0802EC34
 	push {r4,r5,lr}
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	bl sub_08038B18
 	ldr r4, _0802ECAC  @ =gUnknown_087DED6C
 	add r0, r4, #0
@@ -41025,7 +41025,7 @@ sub_0802EC34: @ 0x0802EC34
 	strh r1, [r2]
 	mov r0, #8
 	mov r1, #3
-	bl sub_08032788
+	bl copy_palettes_to_vram
 	add r0, r4, #0
 	bl sub_08029C9C
 	ldr r5, _0802ECB4  @ =gUnknown_03000BB4
@@ -41042,7 +41042,7 @@ _0802EC6E:
 	bl sub_080348C8
 	ldr r4, _0802ECBC  @ =0x030001C4
 	ldr r0, _0802ECC0  @ =0x000008FC
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4]
 	bl sub_0802DE08
 	bl sub_08071FE4
@@ -41113,7 +41113,7 @@ sub_0802ECF0: @ 0x0802ECF0
 	cmp r0, #0
 	beq _0802ED04
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 _0802ED04:
 	mov r2, #128
 	lsl r2, r2, #19
@@ -41832,7 +41832,7 @@ _0802F1E8:
 sub_0802F1EC: @ 0x0802F1EC
 	push {r4-r7,lr}
 	sub sp, sp, #12
-	bl sub_080331FC
+	bl process_input
 	bl sub_08008238
 	ldr r7, _0802F228  @ =0x030001C8
 	ldrb r1, [r7]
@@ -42164,7 +42164,7 @@ sub_0802F440: @ 0x0802F440
 	ldr r1, _0802F498  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r1]
-	ldr r0, _0802F49C  @ =gOamData
+	ldr r0, _0802F49C  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _0802F4A0  @ =0x85000100
 	str r0, [r1, #8]
@@ -42195,7 +42195,7 @@ _0802F494:
 _0802F498:
 	.4byte 0x040000D4
 _0802F49C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802F4A0:
 	.4byte 0x85000100
 _0802F4A4:
@@ -42296,7 +42296,7 @@ _0802F556:
 	mov r0, r8
 	bl sub_08035108
 	ldr r1, _0802F584  @ =0x040000D4
-	ldr r0, _0802F588  @ =gOamData
+	ldr r0, _0802F588  @ =gOamBuffer
 	str r0, [r1]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -42319,7 +42319,7 @@ _0802F580:
 _0802F584:
 	.4byte 0x040000D4
 _0802F588:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802F58C:
 	.4byte 0x80000200
 	THUMB_FUNC_END sub_0802F440
@@ -42947,7 +42947,7 @@ sub_0802F9D8: @ 0x0802F9D8
 	cmp r12, r8
 	bcs _0802FADE
 	ldr r5, _0802FAF0  @ =0x040000D4
-	ldr r7, _0802FAF4  @ =gOamData
+	ldr r7, _0802FAF4  @ =gOamBuffer
 _0802FA16:
 	mov r1, r9
 	add r1, r1, r12
@@ -43064,7 +43064,7 @@ _0802FADE:
 _0802FAF0:
 	.4byte 0x040000D4
 _0802FAF4:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802FAF8:
 	.4byte gUnknown_080CB7F0
 _0802FAFC:
@@ -43143,7 +43143,7 @@ sub_0802FB60: @ 0x0802FB60
 	lsl r0, r0, #24
 	mov r6, #0
 	ldr r7, _0802FC08  @ =0x040000D4
-	ldr r5, _0802FC0C  @ =gOamData
+	ldr r5, _0802FC0C  @ =gOamBuffer
 	lsr r0, r0, #20
 	mov r12, r0
 _0802FB88:
@@ -43214,7 +43214,7 @@ _0802FB88:
 _0802FC08:
 	.4byte 0x040000D4
 _0802FC0C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _0802FC10:
 	.4byte gUnknown_082EC748
 _0802FC14:
@@ -44344,7 +44344,7 @@ sub_08030408: @ 0x08030408
 	ldr r5, _0803046C  @ =0x030001D8
 	mov r0, #135
 	lsl r0, r0, #4
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	str r1, [r5]
 	mov r0, sp
@@ -45065,7 +45065,7 @@ _08030998:
 	mov r5, r9
 	ldrh r0, [r5]
 	lsl r0, r0, #3
-	ldr r1, _080309D4  @ =gOamData
+	ldr r1, _080309D4  @ =gOamBuffer
 	add r4, r0, r1
 	add r6, r2, #0
 	ldr r0, [r6, #12]
@@ -45094,7 +45094,7 @@ _080309CC:
 _080309D0:
 	.4byte gUnknown_030012F4
 _080309D4:
-	.4byte gOamData
+	.4byte gOamBuffer
 _080309D8:
 	ldr r5, [sp, #16]
 	lsl r1, r5, #16
@@ -45315,7 +45315,7 @@ _08030B76:
 	mov r5, r9
 	ldrh r0, [r5]
 	lsl r0, r0, #3
-	ldr r4, _08030C78  @ =gOamData
+	ldr r4, _08030C78  @ =gOamBuffer
 	add r0, r0, r4
 	str r0, [r3, #4]
 	ldr r0, _08030C7C  @ =0x84000002
@@ -45439,7 +45439,7 @@ _08030C70:
 _08030C74:
 	.4byte 0x040000D4
 _08030C78:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08030C7C:
 	.4byte 0x84000002
 _08030C80:
@@ -45527,7 +45527,7 @@ _08030CFE:
 _08030D18:
 	ldrh r0, [r7]
 	lsl r0, r0, #3
-	ldr r1, _08030D5C  @ =gOamData
+	ldr r1, _08030D5C  @ =gOamBuffer
 	add r5, r0, r1
 	add r0, r4, #0
 	add r1, r7, #0
@@ -45559,7 +45559,7 @@ _08030D18:
 	mov r0, #128
 	b _08030D6C
 _08030D5C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08030D60:
 	.4byte gUnknown_030009D8
 _08030D64:
@@ -45923,7 +45923,7 @@ sub_08030FC8: @ 0x08030FC8
 	push {r7}
 	sub sp, sp, #4
 	mov r0, #84
-	bl sub_08034854
+	bl arena_allocate
 	ldr r1, _08031014  @ =0x030001E8
 	str r0, [r1, #28]
 	mov r8, r1
@@ -45970,7 +45970,7 @@ sub_08031018: @ 0x08031018
 	cmp r0, #0
 	bne _0803105E
 	mov r0, #84
-	bl sub_08034854
+	bl arena_allocate
 	str r0, [r4, #28]
 	mov r8, r4
 	mov r1, #0
@@ -46174,7 +46174,7 @@ sub_08031170: @ 0x08031170
 	cmp r5, #0
 	bne _080311AC
 	mov r0, #160
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	str r1, [r4, #108]
 	str r5, [sp]
@@ -46865,7 +46865,7 @@ sub_08031690: @ 0x08031690
 	push {r4,r5,lr}
 	sub sp, sp, #4
 	mov r0, #160
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	ldr r4, _080316C4  @ =0x03000210
 	str r1, [r4, #108]
@@ -47557,7 +47557,7 @@ _08031B34:
 	mov r1, r9
 	ldrh r3, [r1]
 	lsl r3, r3, #3
-	ldr r2, _08031BCC  @ =gOamData
+	ldr r2, _08031BCC  @ =gOamBuffer
 	add r3, r3, r2
 	ldr r0, _08031BD0  @ =gUnknown_082EC748
 	mov r1, r8
@@ -47632,7 +47632,7 @@ _08031BC4:
 _08031BC8:
 	.4byte 0x040000D4
 _08031BCC:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08031BD0:
 	.4byte gUnknown_082EC748
 _08031BD4:
@@ -47656,7 +47656,7 @@ sub_08031BF0: @ 0x08031BF0
 	push {lr}
 	sub sp, sp, #8
 	mov r0, #72
-	bl sub_08034854
+	bl arena_allocate
 	add r1, r0, #0
 	ldr r0, _08031C14  @ =0x03000284
 	str r1, [r0]
@@ -48074,7 +48074,7 @@ _08031EDC:
 sub_08031EE8: @ 0x08031EE8
 	push {r4-r6,lr}
 	sub sp, sp, #4
-	bl sub_080331FC
+	bl process_input
 	bl sub_08029C20
 	bl sub_0802A458
 	cmp r0, #0
@@ -48348,7 +48348,7 @@ sub_080320E4: @ 0x080320E4
 	ldr r1, _08032120  @ =0x040000D4
 	add r0, sp, #4
 	str r0, [r1]
-	ldr r0, _08032124  @ =gOamData
+	ldr r0, _08032124  @ =gOamBuffer
 	str r0, [r1, #4]
 	ldr r0, _08032128  @ =0x85000100
 	str r0, [r1, #8]
@@ -48369,7 +48369,7 @@ sub_080320E4: @ 0x080320E4
 _08032120:
 	.4byte 0x040000D4
 _08032124:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08032128:
 	.4byte 0x85000100
 _0803212C:
@@ -48397,7 +48397,7 @@ _08032156:
 	add r0, r4, #0
 	bl sub_08035108
 	ldr r1, _08032180  @ =0x040000D4
-	ldr r0, _08032184  @ =gOamData
+	ldr r0, _08032184  @ =gOamBuffer
 	str r0, [r1]
 	mov r0, #224
 	lsl r0, r0, #19
@@ -48418,7 +48418,7 @@ _0803217C:
 _08032180:
 	.4byte 0x040000D4
 _08032184:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08032188:
 	.4byte 0x80000200
 	THUMB_FUNC_END sub_080320E4
@@ -48428,7 +48428,7 @@ sub_0803218C: @ 0x0803218C
 	push {r4,lr}
 	sub sp, sp, #4
 	mov r0, #0
-	bl sub_08034898
+	bl arena_restore_head
 	ldr r1, _080321EC  @ =gUnknown_03001930
 	ldr r0, _080321F0  @ =gUnknown_0300192C
 	mov r4, #0
@@ -48493,11 +48493,11 @@ sub_0803220C: @ 0x0803220C
 
 	.byte 0x00
 	.byte 0x00
-	THUMB_FUNC_START sub_08032210
-sub_08032210: @ 0x08032210
+	THUMB_FUNC_START level_scroll_main_callback
+level_scroll_main_callback: @ 0x08032210
 	push {r4,lr}
-	bl sub_080331FC
-	ldr r0, _0803224C  @ =gUnknown_030012E0
+	bl process_input
+	ldr r0, _0803224C  @ =gHeldKeys
 	ldrh r2, [r0]
 	mov r1, #192
 	lsl r1, r1, #2
@@ -48524,7 +48524,7 @@ _08032232:
 	.byte 0x00
 	.byte 0x00
 _0803224C:
-	.4byte gUnknown_030012E0
+	.4byte gHeldKeys
 _08032250:
 	.4byte gUnknown_030019A0
 _08032254:
@@ -48566,7 +48566,7 @@ _080322A0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_08032210
+	THUMB_FUNC_END level_scroll_main_callback
 
 	.byte 0x00
 	.byte 0x00
@@ -48594,7 +48594,7 @@ sub_080322A8: @ 0x080322A8
 	str r1, [r3]
 	ldrh r1, [r6]
 	lsl r1, r1, #3
-	ldr r5, _0803235C  @ =gOamData
+	ldr r5, _0803235C  @ =gOamBuffer
 	add r1, r1, r5
 	str r1, [r3, #4]
 	ldr r1, _08032360  @ =0x84000002
@@ -48664,7 +48664,7 @@ _08032354:
 _08032358:
 	.4byte gUnknown_082E8900
 _0803235C:
-	.4byte gOamData
+	.4byte gOamBuffer
 _08032360:
 	.4byte 0x84000002
 _08032364:
@@ -48675,8 +48675,8 @@ _0803236C:
 	.4byte 0xFFFFFE00
 	THUMB_FUNC_END sub_080322A8
 
-	THUMB_FUNC_START sub_08032370
-sub_08032370: @ 0x08032370
+	THUMB_FUNC_START level_scroll_init_callback
+level_scroll_init_callback: @ 0x08032370
 	push {r4,r5,lr}
 	sub sp, sp, #12
 	bl sub_080720E4
@@ -48720,16 +48720,16 @@ _080323C4:
 	.4byte 0x03000B78
 _080323C8:
 	.4byte 0x03001A00
-	THUMB_FUNC_END sub_08032370
+	THUMB_FUNC_END level_scroll_init_callback
 
-	THUMB_FUNC_START sub_080323CC
-sub_080323CC: @ 0x080323CC
+	THUMB_FUNC_START level_scroll_display_callback
+level_scroll_display_callback: @ 0x080323CC
 	push {r4,r5,lr}
 	ldr r4, _080323E4  @ =gMainState
 	ldr r5, [r4]
 	mov r0, #13
 	str r0, [r4]
-	bl sub_080088F0
+	bl demo_display_callback
 	str r5, [r4]
 	pop {r4,r5}
 	pop {r0}
@@ -48738,7 +48738,7 @@ sub_080323CC: @ 0x080323CC
 	.byte 0x00
 _080323E4:
 	.4byte gMainState
-	THUMB_FUNC_END sub_080323CC
+	THUMB_FUNC_END level_scroll_display_callback
 
 	THUMB_FUNC_START sub_080323E8
 sub_080323E8: @ 0x080323E8

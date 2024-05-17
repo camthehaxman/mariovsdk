@@ -16,11 +16,12 @@ SECTIONS
 		src/title.o(.text);
 		src/intro.o(.text);
 		asm/rom_801BAD8.o(.text);
-		src/rom_8032408.o(.text);
+		src/init.o(.text);
 		asm/rom_8032408.o(.text);
 		src/rom_8032FB0.o(.text);
 		asm/rom_8032FB0.o(.text);
 		src/rom_8033C38.o(.text);
+		src/arena.o(.text);
 		asm/rom_8033D80.o(.text);
 		asm/syscall.o(.text);
 		src/agb_flash.o(.text);
@@ -46,6 +47,8 @@ SECTIONS
 	ALIGN(4)
 	{
 		data/data.o(.data);
+		src/arena.o(.rodata);
+		data/data2.o(.data);
 	}
 
 	. = 0x03000000;
@@ -121,13 +124,13 @@ SECTIONS
 		. = 0xBE4;		gUnknown_03000BE4 = .;
 		. = 0xBE8;		gUnknown_03000BE8 = .;
 		. = 0xC28;		gUnknown_03000C28 = .;
-		. = 0xEA0;		gOamData = .;
+		. = 0xEA0;		gOamBuffer = .;
 		. = 0x12A0;		gUnknown_030012A0 = .;
 		. = 0x12A8;		gUnknown_030012A8 = .;
 		. = 0x12B0;		gUnknown_030012B0 = .;
 		. = 0x12C0;		gUnknown_030012C0 = .;
 		. = 0x12D0;		gUnknown_030012D0 = .;
-		. = 0x12E0;		gUnknown_030012E0 = .;
+		. = 0x12E0;		gHeldKeys = .;
 		. = 0x12E8;		gUnknown_030012E8 = .;
 		. = 0x12F4;		gUnknown_030012F4 = .;
 		. = 0x12F8;		gUnknown_030012F8 = .;
@@ -139,7 +142,7 @@ SECTIONS
 		. = 0x170C;		gUnknown_0300170C = .;
 		. = 0x1710;		gUnknown_03001710 = .;
 		. = 0x1714;		gUnknown_03001714 = .;
-		. = 0x1718;		gUnknown_03001718 = .;
+		. = 0x1718;		gRNGSeed = .;
 		. = 0x171C;		gUnknown_0300171C = .;
 		. = 0x1720;		gUnknown_03001720 = .;
 		. = 0x1724;		gUnknown_03001724 = .;
@@ -147,7 +150,7 @@ SECTIONS
 		. = 0x1740;		gUnknown_03001740 = .;
 		. = 0x1744;		gUnknown_03001744 = .;
 		. = 0x1748;		gUnknown_03001748 = .;
-		. = 0x1750;		gUnknown_03001750 = .;
+		. = 0x1750;		gArena = .;
 		. = 0x1770;		gUnknown_03001770 = .;
 		. = 0x192C;		gUnknown_0300192C = .;
 		. = 0x1930;		gUnknown_03001930 = .;
