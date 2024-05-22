@@ -1787,7 +1787,7 @@ _080355EC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _08035654  @ =gUnknown_03000B80
 	mov r0, #2
 	strb r0, [r1]
@@ -1833,7 +1833,7 @@ _08035670:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _080356A8
 _0803567C:
 	mov r0, #2
@@ -1847,7 +1847,7 @@ _0803567C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080356B0  @ =gUnknown_03000B80
 	mov r1, #2
 	strb r1, [r0]
@@ -2098,7 +2098,7 @@ _08035838:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080358A4  @ =gUnknown_03000B80
 	mov r0, #3
 	strb r0, [r1]
@@ -2141,7 +2141,7 @@ _080358C0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _080358F8
 _080358CC:
 	mov r0, #2
@@ -2155,7 +2155,7 @@ _080358CC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08035900  @ =gUnknown_03000B80
 	mov r1, #3
 	strb r1, [r0]
@@ -4129,11 +4129,11 @@ sub_080367C0: @ 0x080367C0
 	ldrb r2, [r4]
 	mov r0, #2
 	add r3, sp, #4
-	bl sub_0800FE2C
+	bl get_level_stats_0800FE2C
 	ldrb r0, [r5]
 	ldrb r1, [r4]
 	mov r2, #2
-	bl sub_0801095C
+	bl get_level_highscore_0801095C
 	add r3, r0, #0
 	lsl r3, r3, #16
 	lsr r3, r3, #16
@@ -4161,11 +4161,11 @@ _08036810:
 	ldrb r2, [r4]
 	mov r0, #3
 	add r3, sp, #4
-	bl sub_0800FE2C
+	bl get_level_stats_0800FE2C
 	ldrb r0, [r5]
 	ldrb r1, [r4]
 	mov r2, #3
-	bl sub_0801095C
+	bl get_level_highscore_0801095C
 	add r3, r0, #0
 	lsl r3, r3, #16
 	lsr r3, r3, #16
@@ -5129,7 +5129,7 @@ _08036F84:
 	add r1, r4, #0
 	mov r2, #0
 	add r3, sp, #4
-	bl sub_0800FE2C
+	bl get_level_stats_0800FE2C
 	cmp r6, r4
 	bls _08036FA2
 	lsl r1, r4, #24
@@ -5153,7 +5153,7 @@ _08036FB0:
 	mov r0, #3
 	mov r2, #0
 	add r3, sp, #4
-	bl sub_0800FE2C
+	bl get_level_stats_0800FE2C
 	cmp r6, r4
 	bls _08036FD2
 	lsl r1, r4, #24
@@ -5382,7 +5382,7 @@ _08037166:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080371CC  @ =0x03000300
 	ldr r1, [r1]
 	str r0, [r1, #16]
@@ -5395,7 +5395,7 @@ _08037166:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #1
 	mov r1, #0
 	bl sub_080379BC
@@ -5584,7 +5584,7 @@ _080372F0:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0803732C  @ =0x03000300
 	ldr r1, [r1]
 	str r0, [r1, #16]
@@ -5597,7 +5597,7 @@ _080372F0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _080374D0
 _0803732C:
 	.4byte 0x03000300
@@ -5639,7 +5639,7 @@ _08037360:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080373EC  @ =0x03000304
 	ldr r1, [r1]
 	str r0, [r1, #16]
@@ -5676,7 +5676,7 @@ _080373B2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _080373C8:
 	ldrb r0, [r4]
 	add r0, r0, #1
@@ -5786,7 +5786,7 @@ _0803746A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r2, #128
 	lsl r2, r2, #19
 	ldrh r0, [r2]
@@ -5856,7 +5856,7 @@ world_intro_main_callback: @ 0x080374E0
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08037544  @ =gUnknown_030009C8
 	ldr r0, [r0]
 	cmp r0, #3
@@ -7896,7 +7896,7 @@ _080383B6:
 	add r0, r2, #0
 	add r1, r6, #0
 	mov r2, #16
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r2, r8
 	add r2, r2, #156
 	str r0, [r2]
@@ -11774,7 +11774,7 @@ _0803A004:
 	str r4, [sp, #8]
 	mov r1, #20
 	mov r2, #16
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r6, #124]
 _0803A02E:
 	ldr r2, [sp, #16]
@@ -14675,7 +14675,7 @@ _0803B544:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r5, #0
 	add r0, r0, #64
 	ldrb r0, [r0]
@@ -14962,7 +14962,7 @@ _0803B75E:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r7, #0
 	add r0, r0, #64
 	ldrb r0, [r0]
@@ -15606,7 +15606,7 @@ _0803BC6E:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r7, #0
 	add r0, r0, #64
 	ldrb r0, [r0]
@@ -15696,7 +15696,7 @@ _0803BD1C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r7, #0
 	add r0, r0, #64
 	ldrb r0, [r0]
@@ -16035,7 +16035,7 @@ _0803BFE8:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r7, #0
 	add r1, r4, #0
 	bl sub_0803B3B4
@@ -16349,7 +16349,7 @@ _0803C272:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0803C27E:
 	mov r0, #1
 	neg r0, r0
@@ -16495,7 +16495,7 @@ _0803C36A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0803C394
 _0803C38A:
 	mov r0, #15
@@ -16578,7 +16578,7 @@ _0803C3FC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0803C42A:
 	ldr r0, _0803C488  @ =0x03001940
 	ldr r1, [r0]
@@ -16731,7 +16731,7 @@ _0803C52A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0803C554
 _0803C54A:
 	mov r0, #15
@@ -16824,7 +16824,7 @@ _0803C5D0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0803C5FE:
 	ldr r0, _0803C648  @ =0x03001940
 	ldr r1, [r0]
@@ -22468,7 +22468,7 @@ _0803EEF0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0803EF7A
 	.byte 0x00
 	.byte 0x00
@@ -25143,7 +25143,7 @@ _08040250:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08040400
 _08040272:
 	ldr r1, [r7]
@@ -25208,7 +25208,7 @@ _08040294:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08040400
 	.byte 0x00
 	.byte 0x00
@@ -25270,7 +25270,7 @@ _0804032C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08040400
 	.byte 0x00
 	.byte 0x00
@@ -25301,7 +25301,7 @@ _08040370:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08040400
 _080403A4:
 	.4byte 0xFFFFFF00
@@ -25415,7 +25415,7 @@ _08040410:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0804047C:
 	mov r0, #1
 	neg r0, r0
@@ -25789,7 +25789,7 @@ _080406AA:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08040760
 _08040734:
 	.4byte gUnknown_030019A0
@@ -25812,7 +25812,7 @@ _08040738:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08040760:
 	mov r0, #1
 	neg r0, r0
@@ -27178,7 +27178,7 @@ _080410DE:
 	str r2, [sp, #8]
 	add r0, r4, #0
 	mov r2, #16
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r1}
@@ -29276,7 +29276,7 @@ _08041FA0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08041FF0
 _08041FDC:
 	.4byte gUnknown_080B521C
@@ -29381,7 +29381,7 @@ _08042070:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _080420A0:
 	strb r4, [r7, #20]
 	mov r1, #20
@@ -30555,7 +30555,7 @@ _080428F0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	strh r4, [r5]
 _08042910:
 	add sp, sp, #24
@@ -30868,7 +30868,7 @@ _08042B24:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	strh r4, [r5]
 _08042B42:
 	add sp, sp, #12
@@ -44361,7 +44361,7 @@ sub_08048ABC: @ 0x08048ABC
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #2
 	mov r1, #128
 	mov r2, #0
@@ -47591,7 +47591,7 @@ sub_08049EC8: @ 0x08049EC8
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #1
 	b _08049F02
 	.byte 0x00
@@ -49569,7 +49569,7 @@ _0804ABE0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0804AC0A:
 	mov r0, #18
 	bl sub_08071E14
@@ -60247,7 +60247,7 @@ sub_0804F95C: @ 0x0804F95C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, _0804F9C8  @ =gUnknown_030019A0
 	ldr r0, [r2]
 	mov r1, #128
@@ -68974,7 +68974,7 @@ sub_080538B4: @ 0x080538B4
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08053900:
 	add sp, sp, #12
 	pop {r4}
@@ -73318,7 +73318,7 @@ sub_08055A34: @ 0x08055A34
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	bl sub_08055AE4
 	ldr r0, _08055A90  @ =0x030009F4
 	ldr r2, _08055A94  @ =0x08053A71
@@ -74934,7 +74934,7 @@ _08056636:
 	str r6, [sp, #8]
 	mov r1, #12
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0805666E
 _0805665A:
 	ldr r0, [r4]
@@ -74945,7 +74945,7 @@ _0805665A:
 	str r3, [sp, #8]
 	mov r1, #8
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805666E:
 	ldrh r1, [r4, #4]
 	ldr r0, _08056684  @ =0x03001C18
@@ -74990,7 +74990,7 @@ _080566AC:
 	mov r1, #8
 _080566BA:
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _080566D2
 _080566C2:
 	ldr r1, [r2]
@@ -77428,7 +77428,7 @@ _080577FE:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08057832:
 	ldr r2, _08057874  @ =0x030003C8
 	ldrb r1, [r2]
@@ -77457,7 +77457,7 @@ _0805784A:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -77747,7 +77747,7 @@ sub_08057A58: @ 0x08057A58
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08057A94:
 	ldr r2, _08057B54  @ =0x030003CB
 	ldrb r0, [r2]
@@ -77926,7 +77926,7 @@ _08057BC8:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08057BEA:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -78062,7 +78062,7 @@ _08057CC4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08057CEA:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -78118,7 +78118,7 @@ _08057D46:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r4, #0
 	add r0, r0, #64
 	ldrb r2, [r0]
@@ -78192,7 +78192,7 @@ _08057DC8:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08057DE8:
 	mov r0, #0
 	ldrsh r3, [r4, r0]
@@ -78286,7 +78286,7 @@ sub_08057E54: @ 0x08057E54
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _08057EC4  @ =0x03001968
 	ldrh r0, [r5]
 	str r0, [r1]
@@ -78344,7 +78344,7 @@ _08057ECC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08058240
 	.byte 0x00
 	.byte 0x00
@@ -78649,7 +78649,7 @@ _08058136:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r5, #32]
 	mov r1, #128
 	lsl r1, r1, #5
@@ -78971,7 +78971,7 @@ sub_08058350: @ 0x08058350
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r5, r5, #2
 	lsl r5, r5, #24
 	lsr r5, r5, #24
@@ -80840,7 +80840,7 @@ sub_0805914C: @ 0x0805914C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -82199,7 +82199,7 @@ _08059B0C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08059B50:
 	add r0, r5, #0
 	add r0, r0, #160
@@ -82428,7 +82428,7 @@ _08059CC6:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08059CFA:
 	ldr r2, _08059D3C  @ =0x0300042E
 	ldrb r1, [r2]
@@ -82457,7 +82457,7 @@ _08059D12:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -83062,7 +83062,7 @@ sub_0805A184: @ 0x0805A184
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805A1B4:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -83111,7 +83111,7 @@ _0805A1FC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, [r4, #32]
 	mov r0, #200
 	lsl r0, r0, #7
@@ -83268,7 +83268,7 @@ sub_0805A304: @ 0x0805A304
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, _0805A36C  @ =gUnknown_03001A1C
 	ldr r1, [r2]
 	mov r0, #128
@@ -85456,7 +85456,7 @@ sub_0805B308: @ 0x0805B308
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -86963,7 +86963,7 @@ _0805BDF2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805BE26:
 	ldr r2, _0805BE68  @ =0x030004E8
 	ldrb r1, [r2]
@@ -86992,7 +86992,7 @@ _0805BE3E:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -87857,7 +87857,7 @@ _0805C4A0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805C4C2:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -87981,7 +87981,7 @@ _0805C588:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805C5AE:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -88037,7 +88037,7 @@ _0805C60A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r4, #0
 	add r0, r0, #64
 	ldrb r2, [r0]
@@ -88111,7 +88111,7 @@ _0805C68C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805C6AC:
 	mov r0, #0
 	ldrsh r3, [r4, r0]
@@ -88205,7 +88205,7 @@ sub_0805C718: @ 0x0805C718
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0805C788  @ =0x03001968
 	ldrh r0, [r5]
 	str r0, [r1]
@@ -88266,7 +88266,7 @@ _0805C790:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0805CA00
 _0805C7D8:
 	.4byte gUnknown_03001A1C
@@ -88429,7 +88429,7 @@ _0805C906:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r5, #32]
 	mov r1, #128
 	lsl r1, r1, #5
@@ -91217,7 +91217,7 @@ sub_0805DD94: @ 0x0805DD94
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -92714,7 +92714,7 @@ _0805E892:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805E8C6:
 	ldr r2, _0805E908  @ =0x030005E8
 	ldrb r1, [r2]
@@ -92743,7 +92743,7 @@ _0805E8DE:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -93097,7 +93097,7 @@ _0805EB74:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805EB96:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -93233,7 +93233,7 @@ _0805EC70:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805EC96:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -93289,7 +93289,7 @@ _0805ECF2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r4, #0
 	add r0, r0, #64
 	ldrb r2, [r0]
@@ -93363,7 +93363,7 @@ _0805ED74:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0805ED94:
 	mov r0, #0
 	ldrsh r3, [r4, r0]
@@ -93456,7 +93456,7 @@ sub_0805EE00: @ 0x0805EE00
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0805EE70  @ =0x03001968
 	ldrh r0, [r5]
 	str r0, [r1]
@@ -93516,7 +93516,7 @@ _0805EE78:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0805F0F0
 	.byte 0x00
 	.byte 0x00
@@ -93748,7 +93748,7 @@ _0805F066:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r5, #32]
 	mov r1, #128
 	lsl r1, r1, #5
@@ -94016,7 +94016,7 @@ sub_0805F210: @ 0x0805F210
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r5, r5, #2
 	lsl r5, r5, #24
 	lsr r5, r5, #24
@@ -97923,7 +97923,7 @@ sub_08060F0C: @ 0x08060F0C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -98830,7 +98830,7 @@ _0806159A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _080615CE:
 	ldr r2, _08061610  @ =0x0300068C
 	ldrb r1, [r2]
@@ -98859,7 +98859,7 @@ _080615E6:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -99187,7 +99187,7 @@ _08061858:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806187A:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -99311,7 +99311,7 @@ _08061940:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08061966:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -99367,7 +99367,7 @@ _080619C2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r4, #0
 	add r0, r0, #64
 	ldrb r2, [r0]
@@ -99441,7 +99441,7 @@ _08061A44:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08061A64:
 	mov r0, #0
 	ldrsh r3, [r4, r0]
@@ -99538,7 +99538,7 @@ sub_08061AD0: @ 0x08061AD0
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _08061B48  @ =0x03001968
 	ldrh r0, [r6]
 	str r0, [r1]
@@ -99598,7 +99598,7 @@ _08061B50:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08061E4C
 	.byte 0x00
 	.byte 0x00
@@ -99895,7 +99895,7 @@ _08061DC2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r6, #32]
 	mov r4, #128
 	lsl r4, r4, #5
@@ -100633,7 +100633,7 @@ sub_080622F4: @ 0x080622F4
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -100719,7 +100719,7 @@ sub_08062388: @ 0x08062388
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080623E8  @ =0x0300197C
 	mov r0, #4
 	strb r0, [r1]
@@ -101525,7 +101525,7 @@ _0806298A:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _080629BE:
 	ldr r2, _08062A00  @ =0x030006B8
 	ldrb r1, [r2]
@@ -101554,7 +101554,7 @@ _080629D6:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	ldr r1, [r5]
 	bl sub_08040FC0
@@ -101830,7 +101830,7 @@ _08062BE4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08062C06:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -101954,7 +101954,7 @@ _08062CCC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08062CF2:
 	ldrb r1, [r4, #12]
 	mov r0, #1
@@ -102010,7 +102010,7 @@ _08062D4E:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r0, r4, #0
 	add r0, r0, #64
 	ldrb r2, [r0]
@@ -102067,7 +102067,7 @@ sub_08062D8C: @ 0x08062D8C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _08062DFC  @ =0x03001968
 	ldrh r0, [r5]
 	str r0, [r1]
@@ -102125,7 +102125,7 @@ _08062E04:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08063128
 	.byte 0x00
 	.byte 0x00
@@ -102443,7 +102443,7 @@ _0806309C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r5, #32]
 	mov r1, #128
 	lsl r1, r1, #5
@@ -102665,7 +102665,7 @@ sub_080631FC: @ 0x080631FC
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r5, r5, #2
 	lsl r5, r5, #24
 	lsr r5, r5, #24
@@ -103292,7 +103292,7 @@ sub_080636A4: @ 0x080636A4
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4}
 	pop {r0}
@@ -103419,7 +103419,7 @@ sub_08063784: @ 0x08063784
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080637E4  @ =0x0300197C
 	mov r0, #4
 	strb r0, [r1]
@@ -103861,7 +103861,7 @@ sub_08063A8C: @ 0x08063A8C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	bl sub_08034238
 	mov r0, #0
 	mov r1, #0
@@ -104398,7 +104398,7 @@ _08063ED2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _08063F06:
 	mov r3, #0
 	ldrsh r0, [r7, r3]
@@ -105188,7 +105188,7 @@ _080644D8:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08064560
 _080644F0:
 	.4byte 0x030006E0
@@ -105293,7 +105293,7 @@ sub_08064574: @ 0x08064574
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _080645EC  @ =0x03001968
 	ldrh r0, [r4]
 	str r0, [r1]
@@ -105520,7 +105520,7 @@ _08064740:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, [r5, #32]
 	asr r2, r2, #8
 	sub r2, r2, #8
@@ -105713,7 +105713,7 @@ sub_08064894: @ 0x08064894
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add r5, r5, #2
 	lsl r5, r5, #24
 	lsr r5, r5, #24
@@ -109089,7 +109089,7 @@ sub_080661D0: @ 0x080661D0
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _0806623C  @ =0x030006E0
 	ldr r4, [r0]
 	add r0, r4, #0
@@ -110919,7 +110919,7 @@ sub_08066F44: @ 0x08066F44
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	add sp, sp, #12
 	pop {r4,r5}
 	pop {r0}
@@ -113682,7 +113682,7 @@ _080683DE:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08068424  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -113765,7 +113765,7 @@ _08068488:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _080684EE
 _08068496:
 	mov r0, #150
@@ -113786,7 +113786,7 @@ _08068496:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080684F8  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114114,7 +114114,7 @@ sub_08068700: @ 0x08068700
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #128
 	lsl r0, r0, #15
 	str r0, [r4, #92]
@@ -114271,7 +114271,7 @@ _0806882C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08068868  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114328,7 +114328,7 @@ _080688A4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080688F0  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114462,7 +114462,7 @@ _0806897E:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080689E0  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114490,7 +114490,7 @@ _080689E4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08068A28  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114548,7 +114548,7 @@ _08068A30:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08068AA4  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -114591,7 +114591,7 @@ _08068AB0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _08068AF8  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -115071,7 +115071,7 @@ sub_08068E34: @ 0x08068E34
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldrh r0, [r4]
 	cmp r0, #135
 	bne _08068EBC
@@ -115541,7 +115541,7 @@ sub_080691B0: @ 0x080691B0
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #128
 	lsl r0, r0, #15
 	str r0, [r4, #92]
@@ -115715,7 +115715,7 @@ sub_080692FC: @ 0x080692FC
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #128
 	lsl r0, r0, #15
 	str r0, [r4, #92]
@@ -115949,7 +115949,7 @@ sub_080694B8: @ 0x080694B8
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldrh r0, [r4]
 	cmp r0, #135
 	bne _0806951C
@@ -116040,7 +116040,7 @@ sub_0806955C: @ 0x0806955C
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldrh r0, [r4]
 	cmp r0, #135
 	bne _080695CC
@@ -116125,7 +116125,7 @@ sub_08069608: @ 0x08069608
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #128
 	lsl r0, r0, #15
 	str r0, [r4, #92]
@@ -116349,7 +116349,7 @@ _080697C2:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080697F4  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -116384,7 +116384,7 @@ _08069808:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, [r5]
 	add r0, r2, #0
 	add r0, r0, #24
@@ -116452,7 +116452,7 @@ _0806988C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _080698D4  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -116501,7 +116501,7 @@ _080698E4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, [r5]
 	add r0, r2, #0
 	add r0, r0, #24
@@ -116554,7 +116554,7 @@ sub_08069940: @ 0x08069940
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, #128
 	lsl r0, r0, #15
 	str r0, [r4, #92]
@@ -116882,7 +116882,7 @@ sub_08069BB4: @ 0x08069BB4
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldrh r0, [r4]
 	cmp r0, #135
 	bne _08069C18
@@ -118224,7 +118224,7 @@ _0806A5B6:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0806A626
 	.byte 0x00
 	.byte 0x00
@@ -118247,7 +118247,7 @@ _0806A5EC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, _0806A634  @ =0x030006E4
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -118439,7 +118439,7 @@ sub_0806A6F0: @ 0x0806A6F0
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r0, r8
 	ldr r2, [r0]
 	add r0, r2, #0
@@ -119005,7 +119005,7 @@ _0806ABE6:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _0806AC86
 	.byte 0x00
 	.byte 0x00
@@ -119080,7 +119080,7 @@ _0806AC1E:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806AC86:
 	ldr r3, _0806ACD0  @ =0x030006E4
 	ldr r1, [r3]
@@ -119153,7 +119153,7 @@ sub_0806ACE4: @ 0x0806ACE4
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r4, _0806AD84  @ =0x030006E4
 	ldr r2, [r4]
 	add r0, r2, #0
@@ -119300,7 +119300,7 @@ _0806ADFE:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r4, _0806AE74  @ =0x030006E4
 	ldr r0, [r4]
 	ldr r0, [r0, #4]
@@ -119766,7 +119766,7 @@ _0806B1A4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r0, [r4]
 	ldr r0, [r0, #4]
 	add r0, r0, #61
@@ -120291,7 +120291,7 @@ _0806B57C:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	mov r4, #144
 	str r4, [sp]
 	str r5, [sp, #4]
@@ -123644,7 +123644,7 @@ sub_0806CDE8: @ 0x0806CDE8
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r2, [r5]
 	add r0, r2, #0
 	add r0, r0, #24
@@ -124311,7 +124311,7 @@ _0806D2D8:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D30E:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124359,7 +124359,7 @@ _0806D33C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D366:
 	ldr r0, _0806D37C  @ =0x03001D70
 	ldr r1, [r0, #48]
@@ -124406,7 +124406,7 @@ _0806D388:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D3C2:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124442,7 +124442,7 @@ _0806D3DC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D404:
 	ldr r0, _0806D41C  @ =0x03001D70
 	ldr r1, [r0, #52]
@@ -124493,7 +124493,7 @@ _0806D428:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D464:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124528,7 +124528,7 @@ _0806D47C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D4A6:
 	ldr r0, _0806D4B4  @ =0x03001D70
 	ldr r1, [r0, #56]
@@ -124570,7 +124570,7 @@ _0806D4BC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D4F8:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124615,7 +124615,7 @@ _0806D520:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D54A:
 	ldr r0, _0806D560  @ =0x03001D70
 	ldr r1, [r0, #60]
@@ -124710,7 +124710,7 @@ _0806D5C0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D5F8:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124755,7 +124755,7 @@ _0806D620:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D64A:
 	ldr r0, _0806D660  @ =0x03001D70
 	ldr r1, [r0, #84]
@@ -124847,7 +124847,7 @@ _0806D6BC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D6F4:
 	ldrh r0, [r5]
 	cmp r0, #4
@@ -124896,7 +124896,7 @@ _0806D724:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D74E:
 	ldr r1, _0806D764  @ =0x03001D70
 	ldr r0, [r1, #96]
@@ -124959,7 +124959,7 @@ _0806D7A4:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 _0806D7C2:
 	ldrh r0, [r4]
 	add r0, r0, #1
@@ -125665,7 +125665,7 @@ _0806DCEC:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DD20  @ =0x03001E20
 	mov r0, #1
 	str r0, [r1]
@@ -125695,7 +125695,7 @@ _0806DD24:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DD58  @ =0x03001E20
 	ldr r0, [r1]
 	sub r0, r0, #1
@@ -125725,7 +125725,7 @@ _0806DD5C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DD9C  @ =0x03001E20
 	ldr r0, [r1]
 	sub r0, r0, #1
@@ -125764,7 +125764,7 @@ _0806DDA0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DDDC  @ =0x03001E20
 	ldr r0, [r1]
 	sub r0, r0, #1
@@ -125799,7 +125799,7 @@ _0806DDE0:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DE00  @ =0x03001E20
 	mov r0, #1
 	str r0, [r1, #16]
@@ -125818,7 +125818,7 @@ _0806DE04:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, _0806DE20  @ =0x03001E20
 	mov r0, #1
 	b _0806DFC4
@@ -129431,7 +129431,7 @@ sub_0806F898: @ 0x0806F898
 	mov r1, #12
 	mov r2, #10
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 _0806F8E0:
 	mov r3, #0
@@ -129616,7 +129616,7 @@ _0806FA28:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, [r4, #12]
 	bl sub_08040FC0
 _0806FA4E:
@@ -129764,7 +129764,7 @@ _0806FB22:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	ldr r1, [r4, #12]
 	bl sub_08040FC0
 _0806FB68:
@@ -130071,7 +130071,7 @@ _0806FD62:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 _0806FD8E:
 	add sp, sp, #12
@@ -130149,7 +130149,7 @@ _0806FDBC:
 	mov r1, #12
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	str r0, [r4]
 	b _0806FEAA
 _0806FE24:
@@ -132888,7 +132888,7 @@ _0807123C:
 	mov r1, #8
 	mov r2, #16
 	mov r3, #64
-	bl sub_08071990
+	bl play_sound_effect_08071990
 	b _08071312
 _0807124A:
 	cmp r0, #25
@@ -133886,8 +133886,8 @@ _0807198A:
 
 	.byte 0x00
 	.byte 0x00
-	THUMB_FUNC_START sub_08071990
-sub_08071990: @ 0x08071990
+	THUMB_FUNC_START play_sound_effect_08071990
+play_sound_effect_08071990: @ 0x08071990
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -134196,7 +134196,7 @@ _08071BBC:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	THUMB_FUNC_END sub_08071990
+	THUMB_FUNC_END play_sound_effect_08071990
 
 	THUMB_FUNC_START dma1_interrupt_handler
 dma1_interrupt_handler: @ 0x08071BCC

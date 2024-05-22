@@ -146,7 +146,7 @@ void init_main_callback(void)
       case 8:
         if (gUnknown_030012E8 & 11)
         {
-            sub_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
             gUnknown_0300029C->unk1000 = gUnknown_0300029C->unk1008->unk4;
             gUnknown_0300029C->unk1008 = NULL;
         }

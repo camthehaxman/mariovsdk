@@ -185,7 +185,7 @@ void sub_08007544(void)
     }
     
     if (gUnknown_03000038 & 0x2000000)
-        sub_08071990(68, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(68, 8, 16, 64, 0, 128, 0);
     
     if (r7 && gUnknown_03000B54 <= 0x708 && !(gUnknown_03001A1C & 0x80))
     {

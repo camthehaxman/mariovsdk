@@ -52,7 +52,7 @@ void title_main_callback(void)
     process_input();
     sub_08029C20();
     if (gUnknown_030000AC == 0 && gUnknown_03000C28 == 0 && gUnknown_030000B0 == -1)
-        gUnknown_030000B0 = sub_08071990(229, 8, 16, 64, 0, 128, 0);
+        gUnknown_030000B0 = play_sound_effect_08071990(229, 8, 16, 64, 0, 128, 0);
     if (gUnknown_03000BE0 > 5)
         REG_DISPCNT = 0x1740;
     arr[0] = 0;
@@ -95,7 +95,7 @@ void title_main_callback(void)
     {
         if (sub_08034004() != 0 && !(gUnknown_030012E8 & 2) && !(gHeldKeys & 2))
         {
-            sub_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
             sub_080070E8(3, 1);
             gUnknown_03000BD0 = 1;
         }

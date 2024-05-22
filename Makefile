@@ -22,6 +22,7 @@ CFILES   := \
 	src/rom_80066FC.c \
 	src/main.c \
 	src/rom1.c \
+	src/savefile.c \
 	src/title.c \
 	src/intro.c \
 	src/init.c \
@@ -38,12 +39,14 @@ SFILES   := \
 	asm/rom_8001BA4.s \
 	asm/rom_80066FC.s \
 	asm/rom1.s \
+	asm/savefile.s \
 	asm/rom_801BAD8.s \
 	asm/rom_8032408.s \
 	asm/rom_8032FB0.s \
 	asm/rom_8033D80.s \
 	asm/syscall.s \
 	asm/rom_80747B8.s \
+	data/data-rom1.s \
 	data/data.s \
 	data/data2.s
 OFILES   := $(SFILES:.s=.o) $(CFILES:.c=.o)

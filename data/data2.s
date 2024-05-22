@@ -398,8 +398,8 @@ gUnknown_080788C8:
 gUnknown_080788E0:
 	.INCBIN "baserom.gba", 0x788E0, 0x788F4-0x788E0
 
-	.GLOBAL gUnknown_080788F4
-gUnknown_080788F4:
+	.GLOBAL pSelectedSaveFileNum
+pSelectedSaveFileNum:
 	.INCBIN "baserom.gba", 0x788F4, 0x788F8-0x788F4
 
 	.GLOBAL gUnknown_080788F8

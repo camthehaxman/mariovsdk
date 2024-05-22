@@ -28,8 +28,12 @@ struct Struct30002B8
 
 struct Struct30012D0
 {
-    u8 filler0[6];
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[2];
     u16 unk6;
+    s16 unk8;
+    u16 unkA;
 };
 
 struct Struct30009B0
@@ -78,7 +82,7 @@ struct UnknownStruct5
 };
 
 // These may be the same. Don't know yet.
-struct UnknownStruct4
+struct UnknownStruct4  // gUnknown_03000B90
 {
     struct UnknownStruct5 *unk0;
     u32 unk4;
@@ -172,6 +176,27 @@ extern u8 gUnknown_03000033;
 extern u32 gUnknown_03000034;
 extern u32 gUnknown_03000038;
 extern u32 gUnknown_0300003C;
+extern u16 gUnknown_03000040;
+extern u16 gUnknown_03000042;
+extern u16 gUnknown_03000044;
+extern u16 gUnknown_03000046;
+extern u16 gUnknown_03000048;
+extern u16 gUnknown_0300004A;
+extern u16 gUnknown_0300004C;
+extern u8 gFileSelectMenuSel;
+extern u8 gUnknown_03000059;
+extern u8 gUnknown_0300005B;
+extern u8 gUnknown_0300005C;
+extern u8 gUnknown_0300005D;
+extern u8 gUnknown_0300005E;
+extern u8 gUnknown_0300005F;
+extern u8 gUnknown_03000060;
+extern u8 gUnknown_03000061;
+extern u8 gUnknown_03000062;
+extern u8 gUnknown_03000063;
+extern u8 gUnknown_03000064;
+extern u8 gUnknown_03000065;
+extern u8 gUnknown_03000066[];
 extern struct UnknownStruct15 *gUnknown_030000A4;
 extern u8 gPressStartFadeDir;
 extern u8 gTitleScreenFrameCounter;
@@ -218,6 +243,7 @@ extern u8 gUnknown_03000BD0;
 extern u32 gUnknown_03000BE0;
 extern u16 gUnknown_03000BE4;
 extern u16 gUnknown_03000BE8;
+extern u8 gUnknown_03000C20;
 extern u8 gUnknown_03000C28;
 extern u32 gUnknown_030009DC;
 extern struct OamData gOamBuffer[];
@@ -256,6 +282,7 @@ extern u32 gUnknown_03001A1C;
 extern u8 gUnknown_03001A30[];  // unknown type
 extern u8 gUnknown_03001A38;
 extern struct UnknownStruct8 gUnknown_03001B30;
+extern u8 gUnknown_03001BA0;
 extern u8 gUnknown_03001BDC;
 extern struct UnknownStruct7 *gUnknown_03001C78;
 extern void *gUnknown_03007FFC;
@@ -363,7 +390,7 @@ void sub_080714A8(void);
 void sub_0807166C();
 void sub_08071800(void);
 void sub_0807194C(void);
-int sub_08071990();
+int play_sound_effect_08071990();
 void sub_08071C24(void);
 void sub_08071CD4(void);
 void sub_08071E14();

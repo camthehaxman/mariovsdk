@@ -2,34 +2,6 @@
 
 	.data
 
-	@ What is this first part? Seems unreferenced.
-
-	.INCBIN "baserom.gba", 0x76360, 0x76368-0x76360
-
-	.GLOBAL gUnknown_08076368
-gUnknown_08076368:
-	.INCBIN "baserom.gba", 0x76368, 0x76387-0x76368
-
-	.GLOBAL gUnknown_08076387
-gUnknown_08076387:
-	.INCBIN "baserom.gba", 0x76387, 0x7638C-0x76387
-
-	.GLOBAL gUnknown_0807638C
-gUnknown_0807638C:
-	.INCBIN "baserom.gba", 0x7638C, 0x763AC-0x7638C
-
-	.GLOBAL gUnknown_080763AC
-gUnknown_080763AC:
-	.INCBIN "baserom.gba", 0x763AC, 0x763CC-0x763AC
-
-	.GLOBAL gUnknown_080763CC
-gUnknown_080763CC:
-	.INCBIN "baserom.gba", 0x763CC, 0x763D2-0x763CC
-
-	.GLOBAL gUnknown_080763D2
-gUnknown_080763D2:
-	.INCBIN "baserom.gba", 0x763D2, 0x763D6-0x763D2
-
 	.GLOBAL gUnknown_080763D6
 gUnknown_080763D6:
 	.INCBIN "baserom.gba", 0x763D6, 0x763DC-0x763D6

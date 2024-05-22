@@ -13,6 +13,8 @@ SECTIONS
 		src/main.o(.text);
 		src/rom1.o(.text);
 		asm/rom1.o(.text);
+		src/savefile.o(.text);
+		asm/savefile.o(.text);
 		src/title.o(.text);
 		src/intro.o(.text);
 		asm/rom_801BAD8.o(.text);
@@ -46,6 +48,8 @@ SECTIONS
 	.data :
 	ALIGN(4)
 	{
+		data/data-rom1.o(.data);
+		src/savefile.o(.rodata);
 		data/data.o(.data);
 		src/arena.o(.rodata);
 		data/data2.o(.data);
@@ -68,6 +72,27 @@ SECTIONS
 		. = 0x34;		gUnknown_03000034 = .;
 		. = 0x38;		gUnknown_03000038 = .;
 		. = 0x3C;		gUnknown_0300003C = .;
+		. = 0x40;		gUnknown_03000040 = .;
+		. = 0x42;		gUnknown_03000042 = .;
+		. = 0x44;		gUnknown_03000044 = .;
+		. = 0x46;		gUnknown_03000046 = .;
+		. = 0x48;		gUnknown_03000048 = .;
+		. = 0x4A;		gUnknown_0300004A = .;
+		. = 0x4C;		gUnknown_0300004C = .;
+		. = 0x58;		gFileSelectMenuSel = .;
+		. = 0x59;		gUnknown_03000059 = .;
+		. = 0x5B;		gUnknown_0300005B = .;
+		. = 0x5C;		gUnknown_0300005C = .;
+		. = 0x5D;		gUnknown_0300005D = .;
+		. = 0x5E;		gUnknown_0300005E = .;
+		. = 0x5F;		gUnknown_0300005F = .;
+		. = 0x60;		gUnknown_03000060 = .;
+		. = 0x61;		gUnknown_03000061 = .;
+		. = 0x62;		gUnknown_03000062 = .;
+		. = 0x63;		gUnknown_03000063 = .;
+		. = 0x64;		gUnknown_03000064 = .;
+		. = 0x65;		gUnknown_03000065 = .;
+		. = 0x66;		gUnknown_03000066 = .;
 		. = 0xA4;		gUnknown_030000A4 = .;
 		. = 0xA8;		gPressStartFadeDir = .;
 		. = 0xA9;		gTitleScreenFrameCounter = .;
@@ -123,6 +148,7 @@ SECTIONS
 		. = 0xBE0;		gUnknown_03000BE0 = .;
 		. = 0xBE4;		gUnknown_03000BE4 = .;
 		. = 0xBE8;		gUnknown_03000BE8 = .;
+		. = 0xC20;		gUnknown_03000C20 = .;
 		. = 0xC28;		gUnknown_03000C28 = .;
 		. = 0xEA0;		gOamBuffer = .;
 		. = 0x12A0;		gUnknown_030012A0 = .;
@@ -160,6 +186,7 @@ SECTIONS
 		. = 0x1A30;		gUnknown_03001A30 = .;
 		. = 0x1A38;		gUnknown_03001A38 = .;
 		. = 0x1B30;		gUnknown_03001B30 = .;
+		. = 0x1BA0;		gUnknown_03001BA0 = .;
 		. = 0x1BDC;		gUnknown_03001BDC = .;
 		. = 0x1C78;		gUnknown_03001C78 = .;
 		. = 0x1F2C;		gFlashTimeoutFlag = .;
@@ -181,4 +208,5 @@ SECTIONS
     {
         *(*);
     }
+	gUnknown_080763CC = 0x080763CC;
 }
