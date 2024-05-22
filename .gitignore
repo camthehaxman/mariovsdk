@@ -5,6 +5,7 @@ src/*.s
 *.gba
 *.map
 *.dump
+ldscript.txt
 
 # Tools
 tools/*

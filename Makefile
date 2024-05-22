@@ -37,18 +37,24 @@ SFILES   := \
 	asm/crt0.s \
 	asm/rom_800023C.s \
 	asm/rom_8001BA4.s \
+	asm/level_scroll.s \
 	asm/rom_80066FC.s \
+	asm/demo.s \
 	asm/rom1.s \
 	asm/savefile.s \
+	asm/pause.s \
+	asm/clear_gameover.s \
 	asm/rom_801BAD8.s \
+	asm/movie.s \
+	asm/ereader.s \
 	asm/rom_8032408.s \
 	asm/rom_8032FB0.s \
 	asm/rom_8033D80.s \
 	asm/syscall.s \
 	asm/rom_80747B8.s \
-	data/data-rom1.s \
+	data/agb_flash.s \
 	data/data.s \
-	data/data2.s
+	data/data3.s
 OFILES   := $(SFILES:.s=.o) $(CFILES:.c=.o)
 
 src/agb_flash.o: CC1FLAGS := -O1 -mthumb-interwork
@@ -82,3 +88,6 @@ $(ELF): $(OFILES) $(LDSCRIPT)
 
 %.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
+
+ldscript.txt: ldscript.in
+	$(CPP) -P $< > $@

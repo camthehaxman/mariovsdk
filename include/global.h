@@ -288,10 +288,10 @@ extern struct UnknownStruct7 *gUnknown_03001C78;
 extern void *gUnknown_03007FFC;
 
 extern u8 *const gUnknown_0807820C;
-extern void (*const gInitCallbacks[])(void);
-extern void (*const gMainCallbacks[])(void);
-extern void (*const gDisplayCallbacks[])(void);
-extern void (*const gUnknown_080783E0[])(void);
+extern void (*gInitCallbacks[])(void);
+extern void (*gMainCallbacks[])(void);
+extern void (*gDisplayCallbacks[])(void);
+extern void (*gUnknown_080783E0[])(void);
 extern const u32 gUnknown_0807846C[];
 extern const struct UnknownStruct17 gUnknown_0807954C[];
 extern const u8 gUnknown_0807956C[];
@@ -305,6 +305,92 @@ extern struct UnknownStruct16 gUnknown_0886CFCC;  // non-const (likely in .data 
 //------------------------------------------------------------------------------
 // Functions
 //------------------------------------------------------------------------------
+
+void intro_init_callback(void);
+void credits_init_callback(void);
+void demo_init_callback(void);
+void file_select_init_callback(void);
+void option_menu_init_callback(void);
+void demo_init_callback(void);
+void state6_init_callback(void);
+void title_init_callback(void);
+void level_select_init_callback(void);
+void expert_level_select_init_callback(void);
+void state10_init_callback(void);
+void state11_init_callback(void);
+void state12_init_callback(void);
+void state13_init_callback(void);
+void respawn_init_callback(void);
+void pause_init_callback(void);
+void help_init_callback(void);
+void respawn_init_callback(void);
+void clear_gameover_init_callback(void);
+void level_results_init_callback(void);
+void bonus_stoparrow_init_callback(void);
+void bonus_swapboxes_init_callback(void);
+void state24_init_callback(void);
+void state25_init_callback(void);
+void state26_27_init_callback(void);
+void state28_init_callback(void);
+void state29_init_callback(void);
+void movie_init_callback(void);
+void fadetransition_init_callback(void);
+void world_intro_init_callback(void);
+void level_scroll_init_callback(void);
+void init_init_callback(void);
+
+void intro_main_callback(void);
+void credits_main_callback(void);
+void demo_main_callback(void);
+void file_select_main_callback(void);
+void option_menu_main_callback(void);
+void title_main_callback(void);
+void level_select_main_callback(void);
+void expert_level_select_main_callback(void);
+void state10_11_main_callback(void);
+void state13_15_main_callback(void);
+void respawn_main_callback(void);
+void state13_15_main_callback(void);
+void pause_main_callback(void);
+void help_main_callback(void);
+void respawn_main_callback(void);
+void clear_gameover_main_callback(void);
+void level_results_main_callback(void);
+void bonus_stoparrow_main_callback(void);
+void bonus_swapboxes_main_callback(void);
+void state24_25_main_callback(void);
+void state26_27_main_callback(void);
+void state28_main_callback(void);
+void state29_main_callback(void);
+void movie_main_callback(void);
+void fadetransition_main_callback(void);
+void world_intro_main_callback(void);
+void level_scroll_main_callback(void);
+void init_main_callback(void);
+
+void intro_display_callback(void);
+void credits_display_callback(void);
+void demo_display_callback(void);
+void file_select_display_callback(void);
+void option_menu_display_callback(void);
+void title_display_callback(void);
+void level_select_display_callback(void);
+void expert_level_select_display_callback(void);
+void respawn_display_callback(void);
+void pause_display_callback(void);
+void help_display_callback(void);
+void clear_gameover_display_callback(void);
+void level_results_display_callback(void);
+void bonus_stoparrow_display_callback(void);
+void bonus_swapboxes_display_callback(void);
+void state24_25_display_callback(void);
+void state26_27_display_callback(void);
+void state28_display_callback(void);
+void state29_display_callback(void);
+void movie_display_callback(void);
+void world_intro_display_callback(void);
+void level_scroll_display_callback(void);
+void init_display_callback(void);
 
 // crt0.s
 void irq_enable_t(void);

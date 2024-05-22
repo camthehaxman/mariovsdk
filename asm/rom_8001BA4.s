@@ -10290,3 +10290,29 @@ _080066E6:
 _080066F8:
 	.4byte 0x030008E8
 	THUMB_FUNC_END sub_0800667C
+
+.section .data
+
+	.GLOBAL gUnknown_0807820C
+gUnknown_0807820C:
+	.4byte 0x02000000
+
+	.GLOBAL gUnknown_08078210
+gUnknown_08078210:
+	.INCBIN "baserom.gba", 0x78210, 0x78214-0x78210
+
+	.GLOBAL gUnknown_08078214
+gUnknown_08078214:
+	.INCBIN "baserom.gba", 0x78214, 0x78216-0x78214
+
+	.GLOBAL gUnknown_08078216
+gUnknown_08078216:
+	.INCBIN "baserom.gba", 0x78216, 0x7822C-0x78216
+
+	.GLOBAL gUnknown_0807822C
+gUnknown_0807822C:
+	.INCBIN "baserom.gba", 0x7822C, 0x78234-0x7822C
+
+	.GLOBAL gUnknown_08078234
+gUnknown_08078234:
+	.INCBIN "baserom.gba", 0x78234, 0x7823C-0x78234

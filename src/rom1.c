@@ -116,7 +116,7 @@ void sub_080072A4(void)
     sub_0802919C(gUnknown_03000B58, gUnknown_03000B74);
 }
 
-void sub_0800748C(void)
+void state6_init_callback(void)
 {
     u32 r5;
     struct UnknownStruct6 *r1;

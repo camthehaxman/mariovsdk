@@ -139138,3 +139138,129 @@ _08073E34:
 _08073E38:
 	.4byte 0x04000080
 	THUMB_FUNC_END sub_08073E1C
+
+.section .data
+
+	.GLOBAL gUnknown_08B39FC4
+gUnknown_08B39FC4:
+	.INCBIN "baserom.gba", 0xB39FC4, 0xB3A004-0xB39FC4
+
+	.GLOBAL gUnknown_08B3A004
+gUnknown_08B3A004:
+	.INCBIN "baserom.gba", 0xB3A004, 0xB3A0A8-0xB3A004
+
+	.GLOBAL gUnknown_08B3A0A8
+gUnknown_08B3A0A8:
+	.INCBIN "baserom.gba", 0xB3A0A8, 0xB3A4AC-0xB3A0A8
+
+	.GLOBAL gUnknown_08B3A4AC
+gUnknown_08B3A4AC:
+	.INCBIN "baserom.gba", 0xB3A4AC, 0xB3A4DC-0xB3A4AC
+
+	.GLOBAL gUnknown_08B3A4DC
+gUnknown_08B3A4DC:
+	.INCBIN "baserom.gba", 0xB3A4DC, 0xB3A4E0-0xB3A4DC
+
+	.GLOBAL gUnknown_08B3A4E0
+gUnknown_08B3A4E0:
+	.INCBIN "baserom.gba", 0xB3A4E0, 0xD7B10C-0xB3A4E0
+
+	.GLOBAL gUnknown_08D7B10C
+gUnknown_08D7B10C:
+	.INCBIN "baserom.gba", 0xD7B10C, 0xD7B110-0xD7B10C
+
+	.GLOBAL gUnknown_08D7B110
+gUnknown_08D7B110:
+	.INCBIN "baserom.gba", 0xD7B110, 0xD7B116-0xD7B110
+
+	.GLOBAL gUnknown_08D7B116
+gUnknown_08D7B116:
+	.INCBIN "baserom.gba", 0xD7B116, 0xEBFE90-0xD7B116
+
+	.GLOBAL gUnknown_08EBFE90
+gUnknown_08EBFE90:
+	.INCBIN "baserom.gba", 0xEBFE90
+
+.section .rodata
+
+	.ALIGN 2
+	.ASCII "MultiSio010918\0"
+
+	.ALIGN 2
+	.ASCII "SENDING COMPLETED\n\n"
+	.ASCII "Press A Button to Resend\n"
+	.ASCII "Press B Button to Cancel.\0"
+
+	.ALIGN 2
+	.ASCII "SENDING...\n\n"
+	.ASCII "Please DO NOT TURN OFF\n"
+	.ASCII "Game Boy Advance Systems\n"
+	.ASCII "or Disconnect the\n"
+	.ASCII "Game Boy Advance\n"
+	.ASCII "Game Link cable.\0"
+
+	.ALIGN 2
+	.ASCII "READY TO SEND\n\n"
+	.ASCII "Press A Button on GBA with\n"
+	.ASCII "Mario vs. Donkey Kong to\n"
+	.ASCII "begin sending new level to.\0"
+
+	.ALIGN 2
+	.ASCII "READY TO SEND\n\n"
+	.ASCII "Link e-Reader to\n"
+	.ASCII "Mario vs. Donkey Kong and\n"
+	.ASCII "select the e-Reader card\n"
+	.ASCII "Menu and ADD LEVEL to begin.\n"
+	.ASCII "Press B Button to Cancel\0"
+
+	.ALIGN 2
+	.GLOBAL gUnknown_08076F6C
+gUnknown_08076F6C:
+	.ASCII "LOST ALL\0"
+
+	.ALIGN 2
+	.GLOBAL gUnknown_08076F78
+gUnknown_08076F78:
+	.ASCII "MINI MARIOS\0"
+
+	.ALIGN 2
+	.GLOBAL gUnknown_08076F84
+gUnknown_08076F84:
+	.ASCII "GET TOY CARDS!\0"
+
+	.ALIGN 2
+	.GLOBAL gUnknown_08076F94
+gUnknown_08076F94:
+	.INCBIN "baserom.gba", 0x76F94, 0x76F98-0x76F94
+
+	.GLOBAL gUnknown_08076F98
+gUnknown_08076F98:
+	.INCBIN "baserom.gba", 0x76F98, 0x76FA0-0x76F98
+
+	.GLOBAL gUnknown_08076FA0
+gUnknown_08076FA0:
+	.INCBIN "baserom.gba", 0x76FA0, 0x76FB8-0x76FA0
+
+	.GLOBAL gUnknown_08076FB8
+gUnknown_08076FB8:
+	.INCBIN "baserom.gba", 0x76FB8, 0x76FBC-0x76FB8
+
+	.GLOBAL gUnknown_08076FBC
+gUnknown_08076FBC:
+	.INCBIN "baserom.gba", 0x76FBC, 0x76FC4-0x76FBC
+
+	.GLOBAL gUnknown_08076FC4
+gUnknown_08076FC4:
+	.INCBIN "baserom.gba", 0x76FC4, 0x76FC8-0x76FC4
+
+	.GLOBAL gUnknown_08076FC8
+gUnknown_08076FC8:
+	.INCBIN "baserom.gba", 0x76FC8, 0x76FD0-0x76FC8
+
+	.GLOBAL gUnknown_08076FD0
+gUnknown_08076FD0:
+	.INCBIN "baserom.gba", 0x76FD0, 0x76FD4-0x76FD0
+
+	.GLOBAL gUnknown_08076FD4
+gUnknown_08076FD4:
+	.INCBIN "baserom.gba", 0x76FD4, 0x77F9C-0x76FD4

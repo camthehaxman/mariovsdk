@@ -1,6 +1,6 @@
 	.INCLUDE "macro.inc"
 
-	.data
+	.section .rodata
 
 	.GLOBAL gUnknown_080763D6
 gUnknown_080763D6:
