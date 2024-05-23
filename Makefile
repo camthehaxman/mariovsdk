@@ -7,6 +7,8 @@ AS       := $(DEVKITARM)/bin/arm-none-eabi-as
 LD       := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY  := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
+GBAGFX   := tools/gbagfx/gbagfx
+
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I asminclude
@@ -54,7 +56,8 @@ SFILES   := \
 	asm/rom_80747B8.s \
 	data/agb_flash.s \
 	data/data.s \
-	data/data3.s
+	data/data3.s \
+	data/data4.s
 OFILES   := $(SFILES:.s=.o) $(CFILES:.c=.o)
 
 src/agb_flash.o: CC1FLAGS := -O1 -mthumb-interwork
@@ -64,7 +67,6 @@ src/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
 src/libc.o: CC1 := $(CC1_OLD)
 src/libc.o: CC1FLAGS := -O2
 
-
 #### Main Targets ####
 
 compare: $(ROM)
@@ -72,7 +74,13 @@ compare: $(ROM)
 
 clean:
 	$(RM) $(ROM) $(ELF) $(MAP) $(OFILES) src/*.s
+	find . -name '*.4bpp' -exec rm {} +
+	$(MAKE) -C tools/gbagfx clean
 
+#### Tools ####
+
+$(GBAGFX):
+	$(MAKE) -C tools/gbagfx
 
 #### Recipes ####
 
@@ -91,3 +99,10 @@ $(ELF): $(OFILES) $(LDSCRIPT)
 
 ldscript.txt: ldscript.in
 	$(CPP) -P $< > $@
+
+#### Graphics ####
+
+data/data4.o: graphics/082E8908.4bpp
+
+%.4bpp: %.png $(GBAGFX)
+	$(GBAGFX) $< $@

@@ -6,6 +6,7 @@
 	X(asm/rom_80066FC.o) \
 	X(src/main.o) \
 	X(data/data3.o) \
+	X(data/data4.o) \
 	X(src/rom1.o) \
 	X(asm/demo.o) \
 	X(asm/rom1.o) \
