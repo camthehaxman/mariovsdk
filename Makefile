@@ -19,6 +19,7 @@ ELF      := $(ROM:.gba=.elf)
 MAP      := $(ROM:.gba=.map)
 LDSCRIPT := ldscript.txt
 CFILES   := \
+	src/level_scroll.c \
 	src/rom_80066FC.c \
 	src/main.c \
 	src/rom1.c \
@@ -37,7 +38,6 @@ SFILES   := \
 	asm/crt0.s \
 	asm/rom_800023C.s \
 	asm/rom_8001BA4.s \
-	asm/level_scroll.s \
 	asm/rom_80066FC.s \
 	asm/demo.s \
 	asm/rom1.s \

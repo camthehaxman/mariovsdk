@@ -9,7 +9,7 @@ state13_15_main_callback: @ 0x08007B58
 	sub sp, sp, #12
 	bl sub_08029C20
 	bl process_input
-	ldr r0, _08007BB8  @ =gUnknown_030012E8
+	ldr r0, _08007BB8  @ =gSomeKeys_030012E8
 	ldrh r0, [r0]
 	ldr r1, _08007BBC  @ =gHeldKeys
 	ldrh r1, [r1]
@@ -26,7 +26,7 @@ state13_15_main_callback: @ 0x08007B58
 	mov r1, #1
 	mov r9, r1
 _08007B8E:
-	ldr r0, _08007BC8  @ =0x03001A00
+	ldr r0, _08007BC8  @ =gUnknown_03001A00
 	mov r2, r9
 	strb r2, [r0]
 	ldr r1, _08007BCC  @ =gUnknown_03000038
@@ -48,7 +48,7 @@ _08007B8E:
 	.byte 0x00
 	.byte 0x00
 _08007BB8:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _08007BBC:
 	.4byte gHeldKeys
 _08007BC0:
@@ -56,7 +56,7 @@ _08007BC0:
 _08007BC4:
 	.4byte 0x00001B08
 _08007BC8:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 _08007BCC:
 	.4byte gUnknown_03000038
 _08007BD0:
@@ -162,7 +162,7 @@ _08007C70:
 _08007C92:
 	mov r0, #20
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r4, _08007CE4  @ =gUnknown_030019A0
 	ldr r0, _08007CE8  @ =gUnknown_03000B90
 	ldr r3, [r0, #32]
@@ -228,7 +228,7 @@ _08007D04:
 	beq _08007D50
 	mov r0, #21
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r3, _08007D44  @ =gUnknown_030019A0
 	ldr r2, [r4, #32]
 	mov r0, #15
@@ -438,7 +438,7 @@ _08007EB8:
 	mov r0, #21
 _08007EBA:
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _08007F6E
 	.byte 0x00
 	.byte 0x00
@@ -454,7 +454,7 @@ _08007EC8:
 	cmp r2, #20
 	bne _08007EEC
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r1, _08007EE8  @ =gUnknown_03000B74
 	ldrb r0, [r1]
 	add r0, r0, #1
@@ -465,7 +465,7 @@ _08007EE8:
 _08007EEC:
 	mov r0, #21
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r2, _08007F18  @ =gUnknown_03000B74
 	ldrb r0, [r2]
 	add r0, r0, #1
@@ -527,13 +527,13 @@ _08007F42:
 	bl CpuSet
 	mov r0, #12
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _08007F6E:
 	ldr r1, _08007FF4  @ =gUnknown_03000034
 	ldr r0, _08007FF8  @ =gUnknown_03001A1C
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r0, _08007FFC  @ =0x03001A00
+	ldr r0, _08007FFC  @ =gUnknown_03001A00
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _08007FAA
@@ -563,7 +563,7 @@ _08007FAA:
 	ldrsh r0, [r4, r2]
 	cmp r0, #2
 	bne _0800800C
-	ldr r0, _08007FFC  @ =0x03001A00
+	ldr r0, _08007FFC  @ =gUnknown_03001A00
 	ldrb r0, [r0]
 	bl sub_0802BEA4
 	b _08008016
@@ -594,7 +594,7 @@ _08007FF4:
 _08007FF8:
 	.4byte gUnknown_03001A1C
 _08007FFC:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 _08008000:
 	.4byte gUnknown_030009D0
 _08008004:
@@ -607,7 +607,7 @@ _0800800C:
 	beq _08008016
 	bl sub_0802BE50
 _08008016:
-	ldr r0, _080080D4  @ =0x03001A00
+	ldr r0, _080080D4  @ =gUnknown_03001A00
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _08008022
@@ -617,7 +617,7 @@ _08008022:
 	ldr r0, [r0]
 	cmp r0, #0
 	bge _080080C6
-	ldr r0, _080080DC  @ =gUnknown_030012E8
+	ldr r0, _080080DC  @ =gSomeKeys_030012E8
 	ldrh r0, [r0]
 	cmp r0, #8
 	bne _0800807E
@@ -645,7 +645,7 @@ _08008022:
 	bne _0800807E
 	mov r0, #16
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	bl sub_08071C24
 	str r4, [sp]
 	mov r0, #128
@@ -679,7 +679,7 @@ _0800807E:
 	str r1, [r3]
 	mov r0, #17
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	bl sub_08071C24
 	str r4, [sp]
 	mov r0, #128
@@ -699,11 +699,11 @@ _080080C6:
 	pop {r0}
 	bx r0
 _080080D4:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 _080080D8:
 	.4byte gUnknown_0300002C
 _080080DC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _080080E0:
 	.4byte gUnknown_03000B54
 _080080E4:
@@ -730,7 +730,7 @@ demo_main_callback: @ 0x080080F8
 	and r0, r0, r1
 	cmp r0, #0
 	bne _0800812A
-	ldr r0, _08008178  @ =gUnknown_030012E8
+	ldr r0, _08008178  @ =gSomeKeys_030012E8
 	ldrh r0, [r0]
 	ldr r1, _0800817C  @ =gHeldKeys
 	ldrh r1, [r1]
@@ -752,7 +752,7 @@ _0800812A:
 	bne _0800813C
 	mov r5, #1
 _0800813C:
-	ldr r0, _08008188  @ =0x03001A00
+	ldr r0, _08008188  @ =gUnknown_03001A00
 	strb r5, [r0]
 	ldr r2, _0800818C  @ =gUnknown_03000038
 	ldr r0, _08008190  @ =gUnknown_03000034
@@ -777,12 +777,12 @@ _0800813C:
 	strb r0, [r2]
 	mov r0, #7
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _080081C6
 _08008174:
 	.4byte gUnknown_03001938
 _08008178:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0800817C:
 	.4byte gHeldKeys
 _08008180:
@@ -790,7 +790,7 @@ _08008180:
 _08008184:
 	.4byte gUnknown_03001A1C
 _08008188:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 _0800818C:
 	.4byte gUnknown_03000038
 _08008190:
@@ -821,7 +821,7 @@ _080081B4:
 _080081BE:
 	mov r0, #7
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _080081C6:
 	ldr r1, _08008210  @ =gUnknown_03000034
 	ldr r0, _08008214  @ =gUnknown_03001A1C
@@ -848,7 +848,7 @@ _080081F6:
 	ldrsh r0, [r4, r1]
 	cmp r0, #2
 	bne _08008224
-	ldr r0, _08008220  @ =0x03001A00
+	ldr r0, _08008220  @ =gUnknown_03001A00
 	ldrb r0, [r0]
 	bl sub_0802BEA4
 	b _0800822C
@@ -861,7 +861,7 @@ _08008218:
 _0800821C:
 	.4byte gUnknown_03000B90
 _08008220:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 _08008224:
 	cmp r5, #0
 	beq _0800822C
@@ -2063,7 +2063,7 @@ _08008AEC:
 _08008AF0:
 	mov r0, #24
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _08008B0C
 _08008AFA:
 	ldr r0, _08008B10  @ =gUnknown_03000B90
@@ -2072,7 +2072,7 @@ _08008AFA:
 	bl sub_08004428
 	mov r0, #13
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 _08008B0C:
 	pop {r0}
 	bx r0

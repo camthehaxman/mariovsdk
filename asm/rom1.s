@@ -146,7 +146,7 @@ _08008D04:
 	ldrh r0, [r2]
 	cmp r0, #1
 	bne _08008D28
-	ldr r1, _08008D20  @ =gUnknown_030012E8
+	ldr r1, _08008D20  @ =gSomeKeys_030012E8
 	ldr r0, _08008D24  @ =gUnknown_03001708
 	strh r4, [r0]
 	strh r4, [r2]
@@ -155,7 +155,7 @@ _08008D04:
 _08008D1C:
 	.4byte gHeldKeys
 _08008D20:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _08008D24:
 	.4byte gUnknown_03001708
 _08008D28:
@@ -167,7 +167,7 @@ _08008D30:
 	bl sub_08004FBC
 	bl sub_08005FA0
 	bl sub_0801B310
-	ldr r0, _08008D74  @ =gUnknown_030012E8
+	ldr r0, _08008D74  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #8
 	and r0, r0, r1
@@ -178,7 +178,7 @@ _08008D30:
 	bne _08008D68
 	mov r0, #13
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r1, _08008D78  @ =gUnknown_03000B90
 	mov r2, #18
 	ldrsh r0, [r1, r2]
@@ -194,7 +194,7 @@ _08008D68:
 	.byte 0x00
 	.byte 0x00
 _08008D74:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _08008D78:
 	.4byte gUnknown_03000B90
 	THUMB_FUNC_END state10_11_main_callback
@@ -7745,7 +7745,7 @@ sub_0800C5A4: @ 0x0800C5A4
 	and r0, r0, r1
 	cmp r0, #0
 	beq _0800C624
-	ldr r0, _0800C61C  @ =0x03000B78
+	ldr r0, _0800C61C  @ =gUnknown_03000B78
 	strb r6, [r0]
 	ldr r0, _0800C620  @ =0xBFFFFFFF
 	and r1, r1, r0
@@ -7769,7 +7769,7 @@ _0800C614:
 _0800C618:
 	.4byte gUnknown_030019A0
 _0800C61C:
-	.4byte 0x03000B78
+	.4byte gUnknown_03000B78
 _0800C620:
 	.4byte 0xBFFFFFFF
 _0800C624:
@@ -7802,7 +7802,7 @@ _0800C640:
 	bgt _0800C65A
 	b _0800C862
 _0800C65A:
-	ldr r0, _0800C6DC  @ =gUnknown_030012E8
+	ldr r0, _0800C6DC  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r3, #32
 	add r0, r3, #0
@@ -7870,7 +7870,7 @@ _0800C6D4:
 _0800C6D8:
 	.4byte gUnknown_03001720
 _0800C6DC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0800C6E0:
 	.4byte 0x030008C8
 _0800C6E4:
@@ -8095,7 +8095,7 @@ _0800C870:
 	bne _0800C87E
 	b _0800CA66
 _0800C87E:
-	ldr r0, _0800C900  @ =gUnknown_030012E8
+	ldr r0, _0800C900  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r3, #64
 	add r0, r3, #0
@@ -8163,7 +8163,7 @@ _0800C8F8:
 _0800C8FC:
 	.4byte gUnknown_0300170C
 _0800C900:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0800C904:
 	.4byte gHeldKeys
 _0800C908:

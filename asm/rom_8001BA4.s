@@ -7267,7 +7267,7 @@ _080050BA:
 	bl play_sound_effect_08071990
 	mov r0, #8
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r0, _080050E4  @ =gUnknown_03000BD0
 	strb r4, [r0]
 	ldrh r1, [r5]
@@ -8337,7 +8337,7 @@ _080058B0:
 	bl play_sound_effect_08071990
 	mov r0, #7
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _080058D4:
 	ldr r0, _08005910  @ =0x03000004
 	ldrb r1, [r0]

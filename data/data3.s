@@ -1,82 +1,6 @@
 
 	.section .data
 
-	.GLOBAL gUnknown_080783E0
-gUnknown_080783E0:
-	.4byte sub_0801BAD4
-	.4byte sub_08034828
-	.4byte sub_08008BF4
-	.4byte sub_08014880
-	.4byte sub_0802904C
-	.4byte sub_08008BF4
-	.4byte sub_08008BF4
-	.4byte sub_0801BA6C
-	.4byte sub_0801B220
-	.4byte sub_0803704C
-	.4byte sub_08008D7C
-	.4byte sub_08008D7C
-	.4byte 0
-	.4byte sub_08008BF4
-	.4byte sub_0802B780
-	.4byte sub_08008BF4
-	.4byte sub_0801BEC8
-	.4byte sub_0802AA1C
-	.4byte sub_0802B780
-	.4byte 0
-	.4byte sub_0801CB98
-	.4byte sub_08029C1C
-	.4byte sub_08021BA0
-	.4byte sub_08027B98
-	.4byte sub_0802ECF0
-	.4byte sub_0802ECF0
-	.4byte sub_0802DDE8
-	.4byte sub_0802DDE8
-	.4byte sub_0802F5BC
-	.4byte sub_0803220C
-	.4byte sub_0802D5FC
-	.4byte sub_08029E70
-	.4byte sub_080379B8
-	.4byte sub_080323E8
-	.4byte sub_08032784
-
-	.GLOBAL gUnknown_0807846C
-gUnknown_0807846C:
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-	.4byte sub_08015044
-
 	.GLOBAL gUnknown_080784F8
 gUnknown_080784F8:
 	.INCBIN "baserom.gba", 0x784F8, 0x78558-0x784F8
@@ -1449,13 +1373,17 @@ gUnknown_082E84D4:
 gUnknown_082E84DC:
 	.INCBIN "baserom.gba", 0x2E84DC, 0x2E8900-0x2E84DC
 
+@
+
 	.GLOBAL gUnknown_082E8900
 gUnknown_082E8900:
 	.INCBIN "baserom.gba", 0x2E8900, 0x2E8908-0x2E8900
 
 	.GLOBAL gUnknown_082E8908
 gUnknown_082E8908:
-	.INCBIN "baserom.gba", 0x2E8908, 0x2E8A50-0x2E8908
+	.INCBIN "baserom.gba", 0x2E8908, 0x2E8A08-0x2E8908
+
+	.INCBIN "baserom.gba", 0x2E8A08, 0x2E8A50-0x2E8A08
 
 	.GLOBAL gUnknown_082E8A50
 gUnknown_082E8A50:

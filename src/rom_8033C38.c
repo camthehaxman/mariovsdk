@@ -209,7 +209,7 @@ void sub_08033FC8(void)
     s32 i;
 
     gHeldKeys = 0xFFFF;
-    gUnknown_030012E8 = 0;
+    gSomeKeys_030012E8 = 0;
     gUnknown_03001708 = 0;
     for (i = 0; i < 16; i++)
         gUnknown_030012B0[i] = 20;
@@ -217,7 +217,7 @@ void sub_08033FC8(void)
 
 u8 sub_08034004(void)
 {
-    if (gUnknown_03001740 != 0 && (gUnknown_030012E8 & 9))
+    if (gUnknown_03001740 != 0 && (gSomeKeys_030012E8 & 9))
         return TRUE;
     else
         return FALSE;
@@ -325,7 +325,7 @@ bool32 sub_08034178(void)
     if ((gHeldKeys & START_BUTTON) &&  (gHeldKeys & SELECT_BUTTON) && (gHeldKeys & A_BUTTON) && (gHeldKeys & B_BUTTON)
      && gMainState != MAIN_STATE_TITLE_SCREEN && gMainState != MAIN_STATE_INIT)
     {
-        sub_080070E8(7, 1);
+        goto_state_080070E8(7, 1);
         gUnknown_03000B80 = 0;
         gUnknown_03000B58 = 0;
         gUnknown_03000B74 = 0;
@@ -945,7 +945,7 @@ void credits_init_callback(void)
         sub_0802D468(3, 61, 8, 3);
     else
         sub_0802D468(3, 47, 7, 7);
-    sub_080070E8(30, 1);
+    goto_state_080070E8(30, 1);
 }
 
 void credits_main_callback(void)

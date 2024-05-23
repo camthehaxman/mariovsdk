@@ -63,7 +63,7 @@ _0802D26C:
 	beq _0802D2A6
 	cmp r2, #180
 	ble _0802D2A6
-	ldr r0, _0802D2CC  @ =gUnknown_030012E8
+	ldr r0, _0802D2CC  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #10
 	and r0, r0, r1
@@ -80,7 +80,7 @@ _0802D26C:
 	str r0, [r4]
 	mov r0, #30
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D2A6:
 	ldr r4, _0802D2D4  @ =0x030001A0
 	ldrb r1, [r4, #4]
@@ -103,7 +103,7 @@ _0802D2B4:
 	mov r0, #30
 	b _0802D40C
 _0802D2CC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D2D0:
 	.4byte gUnknown_08B30768
 _0802D2D4:
@@ -118,7 +118,7 @@ _0802D2D8:
 	beq _0802D324
 	cmp r2, #180
 	ble _0802D324
-	ldr r0, _0802D310  @ =gUnknown_030012E8
+	ldr r0, _0802D310  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #10
 	and r0, r0, r1
@@ -132,19 +132,19 @@ _0802D2D8:
 	beq _0802D314
 	mov r0, #8
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802D324
 	.byte 0x00
 	.byte 0x00
 _0802D310:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D314:
 	add r0, r4, #0
 	mov r1, #1
 	bl sub_080148A4
 	mov r0, #32
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D324:
 	ldr r0, _0802D344  @ =0x030001A0
 	ldrb r1, [r0, #4]
@@ -179,7 +179,7 @@ _0802D354:
 	beq _0802D39E
 	cmp r2, #180
 	ble _0802D39E
-	ldr r0, _0802D384  @ =gUnknown_030012E8
+	ldr r0, _0802D384  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #10
 	and r0, r0, r1
@@ -191,10 +191,10 @@ _0802D354:
 	beq _0802D388
 	mov r0, #8
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802D39E
 _0802D384:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D388:
 	ldr r0, _0802D3B8  @ =gUnknown_03000B58
 	strb r1, [r0]
@@ -204,7 +204,7 @@ _0802D388:
 	bl sub_080148A4
 	mov r0, #32
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D39E:
 	ldr r0, _0802D3BC  @ =0x030001A0
 	ldrb r1, [r0, #4]
@@ -246,7 +246,7 @@ _0802D3D8:
 	cmp r2, #5
 	ble _0802D3FE
 _0802D3EA:
-	ldr r0, _0802D414  @ =gUnknown_030012E8
+	ldr r0, _0802D414  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #10
 	and r0, r0, r1
@@ -254,7 +254,7 @@ _0802D3EA:
 	beq _0802D3FE
 	ldrb r0, [r4, #6]
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D3FE:
 	ldr r2, _0802D418  @ =0x030001A0
 	ldrb r1, [r2, #4]
@@ -265,10 +265,10 @@ _0802D3FE:
 	ldrb r0, [r2, #6]
 _0802D40C:
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802D452
 _0802D414:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D418:
 	.4byte 0x030001A0
 _0802D41C:
@@ -279,7 +279,7 @@ _0802D41C:
 	beq _0802D43E
 	cmp r2, #180
 	ble _0802D43E
-	ldr r0, _0802D460  @ =gUnknown_030012E8
+	ldr r0, _0802D460  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #10
 	and r0, r0, r1
@@ -287,7 +287,7 @@ _0802D41C:
 	beq _0802D43E
 	ldrb r0, [r4, #6]
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D43E:
 	ldr r2, _0802D464  @ =0x030001A0
 	ldrb r1, [r2, #4]
@@ -297,7 +297,7 @@ _0802D43E:
 	bne _0802D452
 	ldrb r0, [r2, #6]
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802D452:
 	bl sub_080082C8
 	bl sub_0801B310
@@ -305,7 +305,7 @@ _0802D452:
 	pop {r0}
 	bx r0
 _0802D460:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D464:
 	.4byte 0x030001A0
 	THUMB_FUNC_END movie_main_callback
@@ -550,7 +550,7 @@ sub_0802D614: @ 0x0802D614
 	add r4, r0, #0
 	mov r0, #26
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r2, _0802D648  @ =0x030001C0
 	str r4, [r2]
 	ldr r1, _0802D64C  @ =0x030001B4

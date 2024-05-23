@@ -19,7 +19,7 @@
 	X(asm/rom_801BAD8.o) \
 	X(asm/movie.o) \
 	X(asm/ereader.o) \
-	X(asm/level_scroll.o) \
+	X(src/level_scroll.o) \
 	X(src/init.o) \
 	X(asm/rom_8032408.o) \
 	X(src/rom_8032FB0.o) \
@@ -89,7 +89,7 @@ SECTIONS
 		. = 0x34;		gUnknown_03000034 = .;
 		. = 0x38;		gUnknown_03000038 = .;
 		. = 0x3C;		gUnknown_0300003C = .;
-		. = 0x40;		gUnknown_03000040 = .;
+		. = 0x40;		gSomeOamIndex_03000040 = .;
 		. = 0x42;		gUnknown_03000042 = .;
 		. = 0x44;		gUnknown_03000044 = .;
 		. = 0x46;		gUnknown_03000046 = .;
@@ -174,7 +174,7 @@ SECTIONS
 		. = 0x12C0;		gUnknown_030012C0 = .;
 		. = 0x12D0;		gUnknown_030012D0 = .;
 		. = 0x12E0;		gHeldKeys = .;
-		. = 0x12E8;		gUnknown_030012E8 = .;
+		. = 0x12E8;		gSomeKeys_030012E8 = .;
 		. = 0x12F4;		gUnknown_030012F4 = .;
 		. = 0x12F8;		gUnknown_030012F8 = .;
 		. = 0x12FC;		gUnknown_030012FC = .;
@@ -199,6 +199,7 @@ SECTIONS
 		. = 0x1930;		gUnknown_03001930 = .;
 		. = 0x1938;		gUnknown_03001938 = .;
 		. = 0x19A0;		gUnknown_030019A0 = .;
+		. = 0x1A00;		gUnknown_03001A00 = .;
 		. = 0x1A1C;		gUnknown_03001A1C = .;
 		. = 0x1A30;		gUnknown_03001A30 = .;
 		. = 0x1A38;		gUnknown_03001A38 = .;

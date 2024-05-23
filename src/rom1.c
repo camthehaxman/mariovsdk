@@ -217,12 +217,12 @@ void sub_08007544(void)
         {
             asm(""::"r"(gUnknown_03000B54));  // Why is this variable read? Is it volatile?
             add_lives(-1);
-            sub_080070E8(14, 0);
+            goto_state_080070E8(14, 0);
         }
         else
         {
             add_lives(-1);
-            sub_080070E8(20, 1);
+            goto_state_080070E8(20, 1);
         }
     }
 
@@ -237,7 +237,7 @@ void sub_08007544(void)
     else
     {
         if ((gUnknown_03001A1C & 0x80) && sub_08072144() != 0)
-            sub_080070E8(13, 1);
+            goto_state_080070E8(13, 1);
     }
 
     if (gUnknown_03000038 & 0x2000)

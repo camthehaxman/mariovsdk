@@ -49,7 +49,7 @@ _0802D718:
 	.4byte _0802DB80
 	.4byte _0802DB8C
 _0802D754:
-	ldr r0, _0802D784  @ =gUnknown_030012E8
+	ldr r0, _0802D784  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r1, #9
 	and r1, r1, r2
@@ -74,7 +74,7 @@ _0802D754:
 	.byte 0x00
 	.byte 0x00
 _0802D784:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D788:
 	.4byte 0x030001A8
 _0802D78C:
@@ -122,7 +122,7 @@ _0802D7D8:
 _0802D7DC:
 	.4byte 0x030001A8
 _0802D7E0:
-	ldr r0, _0802D7FC  @ =gUnknown_030012E8
+	ldr r0, _0802D7FC  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #2
 	and r0, r0, r1
@@ -137,7 +137,7 @@ _0802D7E0:
 	mov r0, #22
 	b _0802DBAC
 _0802D7FC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D800:
 	ldr r5, _0802D814  @ =0x030001B8
 	ldr r1, [r5]
@@ -216,7 +216,7 @@ _0802D890:
 _0802D894:
 	.4byte gUnknown_0807C850
 _0802D898:
-	ldr r0, _0802D8CC  @ =gUnknown_030012E8
+	ldr r0, _0802D8CC  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r1, #9
 	and r1, r1, r2
@@ -242,7 +242,7 @@ _0802D898:
 	.byte 0x00
 	.byte 0x00
 _0802D8CC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D8D0:
 	.4byte 0x030001B8
 _0802D8D4:
@@ -261,7 +261,7 @@ _0802D8E2:
 	mov r0, #22
 	b _0802DBAC
 _0802D8EE:
-	ldr r0, _0802D90C  @ =gUnknown_030012E8
+	ldr r0, _0802D90C  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #2
 	and r0, r0, r1
@@ -277,7 +277,7 @@ _0802D8EE:
 	mov r0, #22
 	b _0802DBAC
 _0802D90C:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802D910:
 	mov r0, #1
 	bl sub_08038228
@@ -493,7 +493,7 @@ _0802DAA0:
 _0802DAA4:
 	.4byte 0x030001B0
 _0802DAA8:
-	ldr r0, _0802DAD4  @ =gUnknown_030012E8
+	ldr r0, _0802DAD4  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #9
 	and r0, r0, r1
@@ -516,11 +516,11 @@ _0802DAB6:
 	bl play_sound_effect_08071990
 	b _0802DBD4
 _0802DAD4:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802DAD8:
 	.4byte 0x030001A8
 _0802DADC:
-	ldr r0, _0802DAEC  @ =gUnknown_030012E8
+	ldr r0, _0802DAEC  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #9
 	and r0, r0, r1
@@ -530,7 +530,7 @@ _0802DADC:
 	.byte 0x00
 	.byte 0x00
 _0802DAEC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802DAF0:
 	bl sub_0802F06C
 _0802DAF4:
@@ -640,7 +640,7 @@ _0802DBAC:
 _0802DBB6:
 	mov r0, #25
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802DBD4
 _0802DBC0:
 	ldr r0, _0802DBE0  @ =0x030001B0
@@ -1389,7 +1389,7 @@ _0802E144:
 	add r0, r0, #196
 	str r4, [r0]
 _0802E162:
-	ldr r0, _0802E18C  @ =gUnknown_030012E8
+	ldr r0, _0802E18C  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r4, #9
 	and r4, r4, r1
@@ -1413,7 +1413,7 @@ _0802E170:
 _0802E188:
 	.4byte 0x030001C4
 _0802E18C:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802E190:
 	cmp r1, #2
 	beq _0802E236
@@ -1436,7 +1436,7 @@ _0802E196:
 	bgt _0802E1C4
 	mov r0, #26
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802E762
 _0802E1C0:
 	.4byte gUnknown_0807CA98
@@ -1520,7 +1520,7 @@ _0802E236:
 	strb r4, [r0]
 	mov r0, #12
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r0, [r5]
 	add r0, r0, #204
 	b _0802E75E
@@ -1539,7 +1539,7 @@ _0802E276:
 	strb r4, [r0]
 	mov r0, #3
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	str r4, [sp]
 	mov r0, #128
 	str r0, [sp, #4]
@@ -1551,7 +1551,7 @@ _0802E276:
 _0802E290:
 	.4byte gUnknown_03000BB4
 _0802E294:
-	ldr r0, _0802E2C0  @ =gUnknown_030012E8
+	ldr r0, _0802E2C0  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #32
 	and r0, r0, r1
@@ -1575,7 +1575,7 @@ _0802E2B0:
 	mov r0, #23
 	b _0802E420
 _0802E2C0:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802E2C4:
 	mov r0, #16
 	and r0, r0, r1
@@ -1936,7 +1936,7 @@ _0802E54C:
 	mov r0, #27
 	b _0802E5F6
 _0802E55A:
-	ldr r0, _0802E5C4  @ =gUnknown_030012E8
+	ldr r0, _0802E5C4  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r3, #9
 	and r3, r3, r2
@@ -1989,7 +1989,7 @@ _0802E5AA:
 	.byte 0x00
 	.byte 0x00
 _0802E5C4:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802E5C8:
 	.4byte gUnknown_08076800
 _0802E5CC:
@@ -2006,7 +2006,7 @@ _0802E5CC:
 	strb r0, [r1]
 	mov r0, #12
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0802E5EA:
 	mov r1, #0
 	str r1, [sp]
@@ -2161,7 +2161,7 @@ _0802E6FE:
 _0802E70C:
 	.4byte gUnknown_0807CA94
 _0802E710:
-	ldr r0, _0802E740  @ =gUnknown_030012E8
+	ldr r0, _0802E740  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #11
 	and r0, r0, r1
@@ -2185,7 +2185,7 @@ _0802E710:
 	bl play_sound_effect_08071990
 	b _0802E758
 _0802E740:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802E744:
 	str r1, [sp]
 	mov r0, #128
@@ -3720,7 +3720,7 @@ _0802F24E:
 _0802F25C:
 	.4byte 0x030001C9
 _0802F260:
-	ldr r0, _0802F2A8  @ =gUnknown_030012E8
+	ldr r0, _0802F2A8  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r1, #9
 	and r1, r1, r2
@@ -3756,7 +3756,7 @@ _0802F260:
 	.byte 0x00
 	.byte 0x00
 _0802F2A8:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802F2AC:
 	.4byte 0x030001C9
 _0802F2B0:
@@ -3803,7 +3803,7 @@ _0802F2EA:
 	mov r0, #25
 _0802F2FE:
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0802F432
 _0802F306:
 	ldr r0, _0802F340  @ =gUnknown_03001708
@@ -3898,7 +3898,7 @@ _0802F3A8:
 _0802F3AC:
 	.4byte 0x030001CA
 _0802F3B0:
-	ldr r0, _0802F3EC  @ =gUnknown_030012E8
+	ldr r0, _0802F3EC  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r4, #9
 	and r4, r4, r2
@@ -3927,7 +3927,7 @@ _0802F3B0:
 	bl sub_0802D614
 	b _0802F432
 _0802F3EC:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0802F3F0:
 	.4byte gUnknown_0807CA94
 _0802F3F4:
@@ -9597,7 +9597,7 @@ _08031CAE:
 	bl play_sound_effect_08071990
 	b _08031D38
 _08031CBC:
-	ldr r0, _08031CE8  @ =gUnknown_030012E8
+	ldr r0, _08031CE8  @ =gSomeKeys_030012E8
 	ldrh r1, [r0]
 	mov r0, #9
 	and r0, r0, r1
@@ -9619,9 +9619,9 @@ _08031CBC:
 	ldr r0, [r1]
 	b _08031D3C
 _08031CE8:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _08031CEC:
-	ldr r0, _08031D14  @ =gUnknown_030012E8
+	ldr r0, _08031D14  @ =gSomeKeys_030012E8
 	ldrh r2, [r0]
 	mov r1, #9
 	and r1, r1, r2
@@ -9642,7 +9642,7 @@ _08031CEC:
 	.byte 0x00
 	.byte 0x00
 _08031D14:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _08031D18:
 	mov r0, #2
 	and r0, r0, r2
@@ -9910,7 +9910,7 @@ state29_main_callback: @ 0x08031EE8
 	bne _08031F06
 	mov r0, #25
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _080320D6
 _08031F06:
 	ldr r1, _08031F28  @ =0x0300028C
@@ -10103,7 +10103,7 @@ _0803206C:
 	bl sub_0802EE54
 	mov r0, #25
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _080320D2
 _0803207A:
 	mov r1, sp

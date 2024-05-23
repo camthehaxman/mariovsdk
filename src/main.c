@@ -121,6 +121,84 @@ void (*gDisplayCallbacks[])(void) =
     init_display_callback,
 };
 
+void (*gUnknown_080783E0[])(void) =
+{
+    sub_0801BAD4,
+    sub_08034828,
+    sub_08008BF4,
+    sub_08014880,
+    sub_0802904C,
+    sub_08008BF4,
+    sub_08008BF4,
+    sub_0801BA6C,
+    sub_0801B220,
+    sub_0803704C,
+    sub_08008D7C,
+    sub_08008D7C,
+    NULL,
+    sub_08008BF4,
+    sub_0802B780,
+    sub_08008BF4,
+    sub_0801BEC8,
+    sub_0802AA1C,
+    sub_0802B780,
+    NULL,
+    sub_0801CB98,
+    sub_08029C1C,
+    sub_08021BA0,
+    sub_08027B98,
+    sub_0802ECF0,
+    sub_0802ECF0,
+    sub_0802DDE8,
+    sub_0802DDE8,
+    sub_0802F5BC,
+    sub_0803220C,
+    sub_0802D5FC,
+    sub_08029E70,
+    sub_080379B8,
+    sub_080323E8,
+    sub_08032784,
+};
+
+void (*gUnknown_0807846C[])(void) =
+{
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+    sub_08015044,
+};
+
 // 0x08006DF8
 void AgbMain(void)
 {
@@ -261,24 +339,24 @@ static void main_loop(void)
     }
 }
 
-void sub_080070E8(s32 a, s32 b)
+void goto_state_080070E8(s32 state, s32 b)
 {
     if (gNextMainState != MAIN_STATE_FADETRANSITION)
     {
-        if (gUnknown_03000BB4 != MAIN_STATE_INTRO && a == MAIN_STATE_LEVEL_SELECT)
-            a = MAIN_STATE_EWORLD_LEVEL_SELECT;
+        if (gUnknown_03000BB4 != MAIN_STATE_INTRO && state == MAIN_STATE_LEVEL_SELECT)
+            state = MAIN_STATE_EWORLD_LEVEL_SELECT;
         if (b == 0)
         {
-            gNextMainState = a;
+            gNextMainState = state;
         }
         else
         {
-            gUnknown_030009CC = a;
+            gUnknown_030009CC = state;
             gUnknown_030009C8 = gNextMainState;
             gNextMainState = MAIN_STATE_FADETRANSITION;
         }
 
         gUnknown_03000024 = 1;
-        gUnknown_030012E8 = gUnknown_03001708 = 0;
+        gSomeKeys_030012E8 = gUnknown_03001708 = 0;
     }
 }

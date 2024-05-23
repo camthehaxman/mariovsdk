@@ -32,12 +32,12 @@ void clear_oam_and_buffer(void)
 
 void sub_08033024(void)
 {
-    if (gUnknown_030012E8 == 8 || gUnknown_030012E8 == 2)
+    if (gSomeKeys_030012E8 == 8 || gSomeKeys_030012E8 == 2)
     {
-        sub_080070E8(12, 1);
+        goto_state_080070E8(12, 1);
         gUnknown_030012F8 = 0;
         gHeldKeys = 0;
-        gUnknown_030012E8 = 0;
+        gSomeKeys_030012E8 = 0;
         play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
         return;
     }
@@ -46,20 +46,20 @@ void sub_08033024(void)
     {
         if (gUnknown_0807DD94[0] > gUnknown_030012F8)
         {
-            gUnknown_030012E8 = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 0];
+            gSomeKeys_030012E8 = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 0];
             gHeldKeys = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 1];
-            if ((gHeldKeys & 0x200) && (gUnknown_030012E8 & 0x40))
+            if ((gHeldKeys & 0x200) && (gSomeKeys_030012E8 & 0x40))
             {
-                sub_080070E8(18, 0);
+                goto_state_080070E8(18, 0);
                 gUnknown_030012F8 = 0;
                 gHeldKeys = 0;
-                gUnknown_030012E8 = 0;
+                gSomeKeys_030012E8 = 0;
                 gUnknown_030019A0 |= 0x200000;
                 gUnknown_03001744 = 1;
             }
             else
             {
-                sub_0806D1AC(gUnknown_030012E8, gHeldKeys);
+                sub_0806D1AC(gSomeKeys_030012E8, gHeldKeys);
                 if (gUnknown_03001938 & 0x800)
                 {
                     sub_0800EE70();
@@ -72,22 +72,22 @@ void sub_08033024(void)
         }
         else
         {
-            sub_080070E8(6, 0);
+            goto_state_080070E8(6, 0);
             gUnknown_030012F8 = 0;
             gHeldKeys = 0;
-            gUnknown_030012E8 = 0;
+            gSomeKeys_030012E8 = 0;
         }
     }
 }
 
 void sub_08033148(void)
 {
-    if (gUnknown_030012E8 == 8 || gUnknown_030012E8 == 2)
+    if (gSomeKeys_030012E8 == 8 || gSomeKeys_030012E8 == 2)
     {
-        sub_080070E8(7, 1);
+        goto_state_080070E8(7, 1);
         gUnknown_030012F8 = 0;
         gHeldKeys = 0;
-        gUnknown_030012E8 = 0;
+        gSomeKeys_030012E8 = 0;
         play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
         return;
     }
@@ -96,16 +96,16 @@ void sub_08033148(void)
     {
         if (gUnknown_0807DD94[0] > gUnknown_030012F8)
         {
-            gUnknown_030012E8 = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 0];
+            gSomeKeys_030012E8 = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 0];
             gHeldKeys = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 1];
             gUnknown_030012F8++;
         }
         else
         {
-            sub_080070E8(7, 1);
+            goto_state_080070E8(7, 1);
             gUnknown_030012F8 = 0;
             gHeldKeys = 0;
-            gUnknown_030012E8 = 0;
+            gSomeKeys_030012E8 = 0;
         }
     }
 
@@ -126,7 +126,7 @@ static inline bool32 inline_2(void)
     if ((gHeldKeys & START_BUTTON) &&  (gHeldKeys & SELECT_BUTTON) && (gHeldKeys & A_BUTTON) && (gHeldKeys & B_BUTTON)
      && gMainState != MAIN_STATE_TITLE_SCREEN && gMainState != MAIN_STATE_INIT)
     {
-        sub_080070E8(7, 1);
+        goto_state_080070E8(7, 1);
         gUnknown_03000B80 = 0;
         gUnknown_03000B58 = 0;
         gUnknown_03000B74 = 0;
@@ -154,7 +154,7 @@ void process_input(void)
     r4 = gUnknown_03001938;
     if (r4 & 0x400)
     {
-        gUnknown_030012E8 = keys & ~gHeldKeys;
+        gSomeKeys_030012E8 = keys & ~gHeldKeys;
         gHeldKeys = keys;
 
         if ((keys & (START_BUTTON | SELECT_BUTTON)) == (START_BUTTON | SELECT_BUTTON) && (keys & A_BUTTON) && (keys & B_BUTTON) && gMainState != MAIN_STATE_TITLE_SCREEN)
@@ -165,16 +165,16 @@ void process_input(void)
         {
             u16 r2 = inline_1();
 
-            gUnknown_030012E8 = r2 & ~gHeldKeys;
+            gSomeKeys_030012E8 = r2 & ~gHeldKeys;
             gHeldKeys = r2;
         }
 
     }
     else
     {
-        gUnknown_030012E8 = keys & ~gHeldKeys;
+        gSomeKeys_030012E8 = keys & ~gHeldKeys;
         gHeldKeys = keys;
-        if (gUnknown_03001740 == 0 && gUnknown_030012E8 == 0 && keys == 0)
+        if (gUnknown_03001740 == 0 && gSomeKeys_030012E8 == 0 && keys == 0)
             gUnknown_03001740 = 1;
     }
 
@@ -195,13 +195,13 @@ void process_input(void)
         }
         else if (gUnknown_03000C28 != 0)
         {
-            gUnknown_030012E8 = gHeldKeys = 0;
+            gSomeKeys_030012E8 = gHeldKeys = 0;
         }
         else if (gMainState == MAIN_STATE_LEVEL_PLAY)
         {
             if (gUnknown_03000B54 <= 10)
             {
-                gUnknown_030012E8 = gHeldKeys = 0;
+                gSomeKeys_030012E8 = gHeldKeys = 0;
             }
         }
         gUnknown_03001708 = 0;
@@ -210,7 +210,7 @@ void process_input(void)
         {
             u16 r3 = 1 << i;
 
-            if (gUnknown_030012E8 & r3)
+            if (gSomeKeys_030012E8 & r3)
                 gUnknown_03001708 |= r3;
             if ((u16)gHeldKeys & r3)
             {

@@ -118,7 +118,7 @@ void init_main_callback(void)
         }
         break;
       case 3:
-        sub_080070E8(0, 0);
+        goto_state_080070E8(0, 0);
         sub_0807220C(gUnknown_080788FC->unk0_5);
         break;
       case 4:
@@ -144,7 +144,7 @@ void init_main_callback(void)
         gUnknown_0300029C->unk1000 = 3;
         break;
       case 8:
-        if (gUnknown_030012E8 & 11)
+        if (gSomeKeys_030012E8 & 11)
         {
             play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
             gUnknown_0300029C->unk1000 = gUnknown_0300029C->unk1008->unk4;

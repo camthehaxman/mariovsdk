@@ -1,5 +1,5 @@
 	.INCLUDE "macro.inc"
-
+.if 0
 	THUMB_FUNC_START level_scroll_main_callback
 level_scroll_main_callback: @ 0x08032210
 	push {r4,lr}
@@ -53,7 +53,7 @@ _08032264:
 	bl sub_08072118
 	mov r0, #19
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 _08032280:
 	ldr r4, _08032298  @ =gUnknown_03000B90
 	ldr r0, [r4, #12]
@@ -83,7 +83,7 @@ sub_080322A8: @ 0x080322A8
 	add r6, r0, #0
 	add r7, r1, #0
 	mov r12, r2
-	ldr r1, _08032344  @ =0x03000B78
+	ldr r1, _08032344  @ =gUnknown_03000B78
 	ldrb r1, [r1]
 	cmp r1, #0
 	beq _0803233E
@@ -159,7 +159,7 @@ _0803233E:
 	pop {r1}
 	bx r1
 _08032344:
-	.4byte 0x03000B78
+	.4byte gUnknown_03000B78
 _08032348:
 	.4byte 0x040000D4
 _0803234C:
@@ -207,9 +207,9 @@ level_scroll_init_callback: @ 0x08032370
 	ldr r1, _080323C0  @ =0xBFFFFFFF
 	and r0, r0, r1
 	str r0, [r2]
-	ldr r0, _080323C4  @ =0x03000B78
+	ldr r0, _080323C4  @ =gUnknown_03000B78
 	strb r5, [r0]
-	ldr r0, _080323C8  @ =0x03001A00
+	ldr r0, _080323C8  @ =gUnknown_03001A00
 	strb r4, [r0]
 	add sp, sp, #12
 	pop {r4,r5}
@@ -224,9 +224,9 @@ _080323BC:
 _080323C0:
 	.4byte 0xBFFFFFFF
 _080323C4:
-	.4byte 0x03000B78
+	.4byte gUnknown_03000B78
 _080323C8:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 	THUMB_FUNC_END level_scroll_init_callback
 
 	THUMB_FUNC_START level_scroll_display_callback
@@ -250,10 +250,10 @@ _080323E4:
 	THUMB_FUNC_START sub_080323E8
 sub_080323E8: @ 0x080323E8
 	push {lr}
-	ldr r1, _08032400  @ =0x03000B78
+	ldr r1, _08032400  @ =gUnknown_03000B78
 	mov r0, #0
 	strb r0, [r1]
-	ldr r1, _08032404  @ =0x03001A00
+	ldr r1, _08032404  @ =gUnknown_03001A00
 	mov r0, #1
 	strb r0, [r1]
 	bl sub_0800F060
@@ -262,7 +262,8 @@ sub_080323E8: @ 0x080323E8
 	.byte 0x00
 	.byte 0x00
 _08032400:
-	.4byte 0x03000B78
+	.4byte gUnknown_03000B78
 _08032404:
-	.4byte 0x03001A00
+	.4byte gUnknown_03001A00
 	THUMB_FUNC_END sub_080323E8
+.endif

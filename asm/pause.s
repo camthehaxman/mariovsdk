@@ -20,7 +20,7 @@ sub_0801BAD8: @ 0x0801BAD8
 	bne _0801BB10
 	mov r0, #14
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0801BB34
 	.byte 0x00
 	.byte 0x00
@@ -40,14 +40,14 @@ _0801BB10:
 	bhi _0801BB2C
 	mov r0, #9
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0801BB34
 _0801BB28:
 	.4byte gUnknown_03000B80
 _0801BB2C:
 	mov r0, #8
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 _0801BB34:
 	ldr r1, _0801BB40  @ =0x030000B6
 	ldrh r0, [r1]
@@ -59,7 +59,7 @@ _0801BB34:
 _0801BB40:
 	.4byte 0x030000B6
 _0801BB44:
-	ldr r2, _0801BB74  @ =gUnknown_030012E8
+	ldr r2, _0801BB74  @ =gSomeKeys_030012E8
 	ldrh r1, [r2]
 	mov r0, #64
 	and r0, r0, r1
@@ -84,7 +84,7 @@ _0801BB44:
 	.byte 0x00
 	.byte 0x00
 _0801BB74:
-	.4byte gUnknown_030012E8
+	.4byte gSomeKeys_030012E8
 _0801BB78:
 	.4byte 0x030000B4
 _0801BB7C:
@@ -171,7 +171,7 @@ _0801BBEC:
 	bl sub_080720AC
 	mov r0, #14
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0801BE1C
 	.byte 0x00
 	.byte 0x00
@@ -231,7 +231,7 @@ _0801BC6C:
 	str r0, [r3]
 	mov r0, #20
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r0, _0801BCB0  @ =gUnknown_03000BD0
 	str r5, [r0]
 _0801BC96:
@@ -336,7 +336,7 @@ _0801BD54:
 	mov r0, #8
 _0801BD56:
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	b _0801BCA2
 _0801BD5E:
 	str r4, [sp]
@@ -394,7 +394,7 @@ _0801BDAC:
 	str r0, [r3]
 	mov r0, #20
 	mov r1, #1
-	bl sub_080070E8
+	bl goto_state_080070E8
 	ldr r1, _0801BDE4  @ =gUnknown_03000BD0
 	mov r0, #1
 	str r0, [r1]
@@ -430,7 +430,7 @@ _0801BE04:
 	bl play_sound_effect_08071990
 	mov r0, #19
 	mov r1, #0
-	bl sub_080070E8
+	bl goto_state_080070E8
 	bl sub_08072118
 _0801BE1C:
 	ldr r0, _0801BE30  @ =0x030000B4
