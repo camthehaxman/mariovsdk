@@ -1,6 +1,7 @@
 #include "gba/gba.h"
 #include "global.h"
 #include "arena.h"
+#include "main.h"
 
 extern const u8 gfxPressStartOam[];
 extern const u8 gfxPressStart4bpp[];
@@ -19,7 +20,7 @@ void title_init_callback(void)
     arena_restore_head(0);
     sub_08071CD4();
     gUnknown_03001740 = 0;
-    gUnknown_03000BE0 = 0;
+    gIntroTitleTimer_03000BE0 = 0;
     gUnknown_030000B0 = -1;
     gUnknown_030012A0 = 0;
     gUnknown_03001710 = 0;
@@ -33,7 +34,7 @@ void title_init_callback(void)
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     gUnknown_03000BE4 = 0;
     gUnknown_03000BE8 = 0;
-    gUnknown_03000B54 = 0;
+    gMoveFrameCounter_03000B54 = 0;
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 128, 1);
     seed_rng_with_timer();
@@ -54,7 +55,7 @@ void title_main_callback(void)
     sub_08029C20();
     if (gUnknown_030000AC == 0 && gUnknown_03000C28 == 0 && gUnknown_030000B0 == -1)
         gUnknown_030000B0 = play_sound_effect_08071990(229, 8, 16, 64, 0, 128, 0);
-    if (gUnknown_03000BE0 > 5)
+    if (gIntroTitleTimer_03000BE0 > 5)
         REG_DISPCNT = 0x1740;
     arr[0] = 0;
     arr[1] = 13;
@@ -70,14 +71,14 @@ void title_main_callback(void)
         gUnknown_03000BE8++;
     else
         gUnknown_03000BE8 = 0;
-    if (gUnknown_03000BE0 > 1280)
+    if (gIntroTitleTimer_03000BE0 > 1280)
     {
         if (gUnknown_03000B64 > 7 || gUnknown_03000B64 < 0)
             gUnknown_03000B64 = 0;
         sub_08071E14(229);
         if (gUnknown_0807954C[gUnknown_03000B64].unk0 != 0)
         {
-            sub_0802D468(3, 23, 7, 0);
+            init_movie_0802D468(3, 23, MAIN_STATE_TITLE_SCREEN, 0);
             goto_state_080070E8(30, 1);
         }
         else
@@ -103,8 +104,8 @@ void title_main_callback(void)
         sub_0801B88C();
     }
     sub_08008238();
-    gUnknown_03000BE0++;
-    gUnknown_03000BE0 &= 0xFFFF;
+    gIntroTitleTimer_03000BE0++;
+    gIntroTitleTimer_03000BE0 &= 0xFFFF;
 }
 
 void sub_0801B88C(void)
@@ -148,7 +149,7 @@ void sub_0801B88C(void)
 
 void title_display_callback(void)
 {
-    gUnknown_03000B54++;
+    gMoveFrameCounter_03000B54++;
     DmaFill32(3, 0xA0, gOamBuffer, 0x400);
     if (gUnknown_03000C28 == 0 && sub_080721A8(gUnknown_030000B0) != 0)
     {

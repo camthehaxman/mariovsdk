@@ -5246,7 +5246,7 @@ _0803706C:
 	mov r0, #16
 	bl arena_allocate
 	str r0, [r4]
-	ldr r1, _08037098  @ =gUnknown_03000BE0
+	ldr r1, _08037098  @ =gIntroTitleTimer_03000BE0
 	mov r0, #0
 	str r0, [r1]
 	str r0, [sp, #12]
@@ -5265,7 +5265,7 @@ _08037090:
 _08037094:
 	.4byte 0x030002FC
 _08037098:
-	.4byte gUnknown_03000BE0
+	.4byte gIntroTitleTimer_03000BE0
 _0803709C:
 	.4byte gUnknown_03000B80
 _080370A0:
@@ -5865,7 +5865,7 @@ world_intro_main_callback: @ 0x080374E0
 	mov r1, #41
 	mov r2, #8
 	mov r3, #1
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	mov r1, #1
 	bl goto_state_080070E8
@@ -7839,7 +7839,7 @@ _08038352:
 	cmp r2, #6
 	bne _080383B6
 	ldr r0, _08038378  @ =0x0300030C
-	ldr r1, _0803837C  @ =gUnknown_03000B54
+	ldr r1, _0803837C  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	ldr r1, [r1]
 	sub r0, r0, r1
@@ -7855,7 +7855,7 @@ _08038374:
 _08038378:
 	.4byte 0x0300030C
 _0803837C:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08038380:
 	.4byte 0x03000310
 _08038384:
@@ -7881,7 +7881,7 @@ _08038394:
 	add r7, r0, #1
 _080383AC:
 	ldr r0, _080383F8  @ =0x0300030C
-	ldr r1, _080383FC  @ =gUnknown_03000B54
+	ldr r1, _080383FC  @ =gMoveFrameCounter_03000B54
 	ldr r1, [r1]
 	str r1, [r0]
 	sub r2, r7, #1
@@ -7922,7 +7922,7 @@ _080383F4:
 _080383F8:
 	.4byte 0x0300030C
 _080383FC:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08038400:
 	mov r0, r8
 	add r0, r0, #70
@@ -73262,7 +73262,7 @@ _080559EE:
 	ldr r1, _08055A24  @ =0x030009F8
 	ldr r0, _08055A28  @ =0x08054C9D
 	str r0, [r1]
-	ldr r1, _08055A2C  @ =0x03000A00
+	ldr r1, _08055A2C  @ =gUnknown_03000A00
 	ldr r0, _08055A30  @ =0x08055AA1
 	str r0, [r1]
 	bl _call_via_r2
@@ -73286,7 +73286,7 @@ _08055A24:
 _08055A28:
 	.4byte sub_08054C9C
 _08055A2C:
-	.4byte 0x03000A00
+	.4byte gUnknown_03000A00
 _08055A30:
 	.4byte sub_08055AA0
 	THUMB_FUNC_END sub_080559D0
@@ -76437,7 +76437,7 @@ _080570FA:
 	cmp r0, #3
 	bne _0805717C
 	bl sub_08029CB0
-	ldr r1, _08057148  @ =0x03000DCC
+	ldr r1, _08057148  @ =gUnknown_03000DCC
 	mov r0, #1
 	strb r0, [r1]
 	b _0805717C
@@ -76446,12 +76446,12 @@ _08057140:
 _08057144:
 	.4byte 0x03001C00
 _08057148:
-	.4byte 0x03000DCC
+	.4byte gUnknown_03000DCC
 _0805714C:
 	ldr r0, [r7]
 	cmp r0, #0
 	ble _0805717C
-	ldr r0, _0805719C  @ =0x03000DCC
+	ldr r0, _0805719C  @ =gUnknown_03000DCC
 	ldrb r1, [r0]
 	cmp r1, #0
 	bne _0805717C
@@ -76490,7 +76490,7 @@ _0805717C:
 	.byte 0x00
 	.byte 0x00
 _0805719C:
-	.4byte 0x03000DCC
+	.4byte gUnknown_03000DCC
 _080571A0:
 	.4byte 0x04000054
 _080571A4:
@@ -76663,7 +76663,7 @@ sub_080572B8: @ 0x080572B8
 	ldr r0, [r0]
 	cmp r1, r0
 	bne _080572CC
-	ldr r0, _080572DC  @ =0x03000A00
+	ldr r0, _080572DC  @ =gUnknown_03000A00
 	ldr r0, [r0]
 	bl _call_via_r0
 _080572CC:
@@ -76676,7 +76676,7 @@ _080572CC:
 _080572D8:
 	.4byte 0x03001BE8
 _080572DC:
-	.4byte 0x03000A00
+	.4byte gUnknown_03000A00
 	THUMB_FUNC_END sub_080572B8
 
 	THUMB_FUNC_START sub_080572E0
@@ -76832,7 +76832,7 @@ sub_0805739C: @ 0x0805739C
 	cmp r0, r4
 	bne _080573EC
 	strh r2, [r5]
-	ldr r0, _080573E8  @ =0x03000A00
+	ldr r0, _080573E8  @ =gUnknown_03000A00
 	ldr r0, [r0]
 	bl _call_via_r0
 	b _080573F6
@@ -76841,7 +76841,7 @@ _080573E0:
 _080573E4:
 	.4byte 0x03001BE8
 _080573E8:
-	.4byte 0x03000A00
+	.4byte gUnknown_03000A00
 _080573EC:
 	ldrh r0, [r5]
 	mul r0, r6, r0
@@ -123812,7 +123812,7 @@ sub_0806CF2C: @ 0x0806CF2C
 	ldr r1, _0806CF54  @ =0x030009F8
 	ldr r0, _0806CF58  @ =0x0806B961
 	str r0, [r1]
-	ldr r1, _0806CF5C  @ =0x03000A00
+	ldr r1, _0806CF5C  @ =gUnknown_03000A00
 	ldr r0, _0806CF60  @ =0x0806CF65
 	str r0, [r1]
 	bl _call_via_r2
@@ -123827,7 +123827,7 @@ _0806CF54:
 _0806CF58:
 	.4byte sub_0806B960
 _0806CF5C:
-	.4byte 0x03000A00
+	.4byte gUnknown_03000A00
 _0806CF60:
 	.4byte sub_0806CF64
 	THUMB_FUNC_END sub_0806CF2C

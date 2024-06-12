@@ -6,7 +6,7 @@ void intro_init_callback(void)
 {
     const void *arr[4];
 
-    gUnknown_03000BE0 = 0;
+    gIntroTitleTimer_03000BE0 = 0;
     gUnknown_03000BD0 = 0;
     gUnknown_030012A0 = 0;
     gUnknown_03001710 = 0;
@@ -20,7 +20,7 @@ void intro_init_callback(void)
     REG_BLDY = gUnknown_08866A48.bldY;
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     REG_DISPCNT = 0x100;
-    gUnknown_03000B54 = 0;
+    gMoveFrameCounter_03000B54 = 0;
     sub_08029CDC(gUnknown_08866A48.bldCnt, gUnknown_08866A48.bldAlpha, gUnknown_08866A48.bldY);
 }
 
@@ -34,19 +34,19 @@ void sub_0801BA6C(void)
 void intro_main_callback(void)
 {
     sub_08029C20();
-    gUnknown_03000BE0++;
-    if (gUnknown_03000BE0 > 180)
+    gIntroTitleTimer_03000BE0++;
+    if (gIntroTitleTimer_03000BE0 > 180)
     {
-        sub_0802D468(3, 23, 7, 0);
+        init_movie_0802D468(3, 23, MAIN_STATE_TITLE_SCREEN, 0);
         gNextMainState = MAIN_STATE_MOVIE;
     }
     sub_08008238();
-    gUnknown_03000BE0 &= 0xFFFF;
+    gIntroTitleTimer_03000BE0 &= 0xFFFF;
 }
 
 void intro_display_callback(void)
 {
-    gUnknown_03000B54++;
+    gMoveFrameCounter_03000B54++;
 }
 
 void sub_0801BAD4(void)

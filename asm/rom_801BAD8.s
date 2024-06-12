@@ -38,7 +38,7 @@ bonus_stoparrow_init_callback: @ 0x080215B4
 	strh r1, [r0]
 	ldr r0, _08021664  @ =gUnknown_030009DC
 	ldr r5, [r0]
-	ldr r0, _08021668  @ =gUnknown_03000B54
+	ldr r0, _08021668  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	bl sub_0802F5C0
 	add r4, r0, #0
@@ -86,7 +86,7 @@ _08021660:
 _08021664:
 	.4byte gUnknown_030009DC
 _08021668:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _0802166C:
 	ldr r1, [r7]
 	mov r0, #4
@@ -12039,7 +12039,7 @@ bonus_swapboxes_init_callback: @ 0x08027068
 	strh r1, [r0]
 	ldr r0, _08027134  @ =gUnknown_030009DC
 	ldr r6, [r0]
-	ldr r0, _08027138  @ =gUnknown_03000B54
+	ldr r0, _08027138  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	bl sub_0802F5C0
 	add r4, r0, #0
@@ -12089,7 +12089,7 @@ _08027130:
 _08027134:
 	.4byte gUnknown_030009DC
 _08027138:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _0802713C:
 	ldr r1, [r7]
 	mov r0, #4
@@ -16480,7 +16480,7 @@ sub_08029128: @ 0x08029128
 	ldrb r3, [r0]
 	mov r0, #3
 	mov r2, #4
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	mov r1, #1
 	bl goto_state_080070E8
@@ -17519,7 +17519,7 @@ _080298F2:
 	mov r1, #43
 	mov r2, #13
 	mov r3, #2
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	b _08029A52
 	.byte 0x00
@@ -17591,7 +17591,7 @@ _08029982:
 	mov r1, #45
 	mov r2, #13
 	mov r3, #5
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	b _08029A52
 _080299C0:
@@ -17641,7 +17641,7 @@ _080299E4:
 	cmp r0, #0
 	beq _08029A50
 _08029A1A:
-	ldr r0, _08029A34  @ =gUnknown_03000B54
+	ldr r0, _08029A34  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	bl sub_0802F5C0
 	mov r1, #1
@@ -17655,9 +17655,9 @@ _08029A1A:
 _08029A30:
 	.4byte gUnknown_03001A30
 _08029A34:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08029A38:
-	ldr r0, _08029A4C  @ =gUnknown_03000B54
+	ldr r0, _08029A4C  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	bl sub_0802F5C0
 	mov r1, #1
@@ -17667,7 +17667,7 @@ _08029A38:
 	mov r0, #23
 	b _08029A52
 _08029A4C:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08029A50:
 	mov r0, #22
 _08029A52:

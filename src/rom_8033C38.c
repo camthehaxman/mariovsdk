@@ -942,9 +942,9 @@ void credits_init_callback(void)
     
     arena_restore_head(0);
     if (gUnknown_03000B80 == 1)
-        sub_0802D468(3, 61, 8, 3);
+        init_movie_0802D468(3, 61, MAIN_STATE_LEVEL_SELECT, 3);
     else
-        sub_0802D468(3, 47, 7, 7);
+        init_movie_0802D468(3, 47, MAIN_STATE_TITLE_SCREEN, 7);
     goto_state_080070E8(30, 1);
 }
 

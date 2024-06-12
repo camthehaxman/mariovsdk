@@ -1550,7 +1550,7 @@ void pick_file(void)
             }
             else
             {
-                sub_0802D468(3, 41, 8, 1);
+                init_movie_0802D468(3, 41, MAIN_STATE_LEVEL_SELECT, 1);
                 goto_state_080070E8(MAIN_STATE_MOVIE, 1);
                 one = 1;
                 inlinefunc3(*pSelectedSaveFileNum, one);

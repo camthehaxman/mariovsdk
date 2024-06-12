@@ -20,13 +20,13 @@ void sub_08007170(void)
     sub_080317F8();
     gUnknown_030009EC = 1;
     sub_0802BF1C();
-    gUnknown_03000B54 = gUnknown_03000B90.unk0->unk8 * 60 + 60;
+    gMoveFrameCounter_03000B54 = gUnknown_03000B90.unk0->unk8 * 60 + 60;
     if (gUnknown_03000B80 == 0 && (gUnknown_03000B90.unk20 & 8))
     {
         u32 var;
         
         if (gUnknown_03000B44 > 60)
-            gUnknown_03000B54 += gUnknown_03000B44 - 60;
+            gMoveFrameCounter_03000B54 += gUnknown_03000B44 - 60;
         var = sub_0802F5C0(gUnknown_03000B44);
         gUnknown_030009DC = var;
         gUnknown_03000B44 = 0;
@@ -41,7 +41,7 @@ void sub_08007170(void)
     gUnknown_0300002C = -1;
     gUnknown_03000B60 = 0;
     sub_080386DC();
-    sub_08031BF0(gUnknown_0300192C, gUnknown_03001930);
+    sub_08031BF0(&gUnknown_0300192C, &gUnknown_03001930);
     if (gUnknown_03000B90.unk20 & 8)
     {
         gUnknown_03000B4C = gUnknown_03000B48;
@@ -147,7 +147,7 @@ void state6_init_callback(void)
 void sub_08007544(void)
 {
     bool32 r7 = FALSE;
-    s32 *r3 = &gUnknown_03000B54;
+    s32 *r3 = &gMoveFrameCounter_03000B54;
     s32 r2 = *r3;
     
     if (r2 > 0x708)
@@ -170,10 +170,10 @@ void sub_08007544(void)
                 *r3 = r2 - gUnknown_03001748;
             }
         }
-        if (gUnknown_03000B54 <= 0 && !(gUnknown_030019A0 & 0x80000000))
+        if (gMoveFrameCounter_03000B54 <= 0 && !(gUnknown_030019A0 & 0x80000000))
         {
             gUnknown_03001B30.unk14 |= 32;
-            gUnknown_03000B54 = 0;
+            gMoveFrameCounter_03000B54 = 0;
             gUnknown_03001A1C |= 0x400;
             gUnknown_03000029 = 0;
             if (gMainState != MAIN_STATE_TUTORIAL && gMainState != MAIN_STATE_DEMO)
@@ -187,7 +187,7 @@ void sub_08007544(void)
     if (gUnknown_03000038 & 0x2000000)
         play_sound_effect_08071990(68, 8, 16, 64, 0, 128, 0);
     
-    if (r7 && gUnknown_03000B54 <= 0x708 && !(gUnknown_03001A1C & 0x80))
+    if (r7 && gMoveFrameCounter_03000B54 <= 0x708 && !(gUnknown_03001A1C & 0x80))
     {
         gUnknown_03000029 = 0;
         if (gMainState != MAIN_STATE_TUTORIAL && gMainState != MAIN_STATE_DEMO)
@@ -215,7 +215,7 @@ void sub_08007544(void)
         gUnknown_030009D8++;
         if (gUnknown_03000BBC > 1)
         {
-            asm(""::"r"(gUnknown_03000B54));  // Why is this variable read? Is it volatile?
+            asm(""::"r"(gMoveFrameCounter_03000B54));  // Why is this variable read? Is it volatile?
             add_lives(-1);
             goto_state_080070E8(14, 0);
         }
@@ -344,7 +344,7 @@ void sub_08007544(void)
 
     if (gUnknown_03000B5C == 0)
     {
-        if (gUnknown_03000B54 > 0x708)
+        if (gMoveFrameCounter_03000B54 > 0x708)
         {
             if (gUnknown_03000038 & 0x4000000)
             {
@@ -363,7 +363,7 @@ void sub_08007544(void)
                 }
             }
         }
-        if (gUnknown_03000B5C == 0 && gUnknown_03000B54 > 0x708)
+        if (gUnknown_03000B5C == 0 && gMoveFrameCounter_03000B54 > 0x708)
         {
             if ((gUnknown_03000038 & 1)
              || ((gUnknown_03001A1C & 1) && (gUnknown_03000034 & 4) && !(gUnknown_03001A1C & 4)))

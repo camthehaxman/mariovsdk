@@ -19,7 +19,7 @@
 	X(src/pause.o) \
 	X(asm/clear_gameover.o) \
 	X(asm/rom_801BAD8.o) \
-	X(asm/movie.o) \
+	X(src/movie.o) \
 	X(asm/ereader.o) \
 	X(src/level_scroll.o) \
 	X(src/init.o) \
@@ -120,6 +120,14 @@ SECTIONS
 		. = 0xB0;		gUnknown_030000B0 = .;
 		. = 0xB4;		gUnknown_030000B4 = .;
 		. = 0xB6;		gUnknown_030000B6 = .;
+		. = 0x1A0;		gMovieState_030001A0 = .;
+		. = 0x1A8;		gUnknown_030001A8 = .;
+		. = 0x1AC;		gUnknown_030001AC = .;
+		. = 0x1B0;		gUnknown_030001B0 = .;
+		. = 0x1B4;		gUnknown_030001B4 = .;
+		. = 0x1B8;		gUnknown_030001B8 = .;
+		. = 0x1BC;		gUnknown_030001BC = .;
+		. = 0x1C0;		gUnknown_030001C0 = .;
 		. = 0x29C;		gUnknown_0300029C = .;
 		. = 0x2A0;		gUnknown_030002A0 = .;
 		. = 0x2AA;		gUnknown_030002AA = .;
@@ -147,12 +155,13 @@ SECTIONS
 		. = 0x9E8;		gUnknown_030009E8 = .;
 		. = 0x9EC;		gUnknown_030009EC = .;
 		. = 0x9FC;		gUnknown_030009FC = .;
+		. = 0xA00;		gUnknown_03000A00 = .;
 		. = 0xA0C;		gUnknown_03000A0C = .;
 		. = 0xB44;		gUnknown_03000B44 = .;
 		. = 0xB48;		gUnknown_03000B48 = .;
 		. = 0xB4C;		gUnknown_03000B4C = .;
 		. = 0xB50;		gUnknown_03000B50 = .;
-		. = 0xB54;		gUnknown_03000B54 = .;
+		. = 0xB54;		gMoveFrameCounter_03000B54 = .;
 		. = 0xB58;		gUnknown_03000B58 = .;
 		. = 0xB5C;		gUnknown_03000B5C = .;
 		. = 0xB60;		gUnknown_03000B60 = .;
@@ -168,7 +177,7 @@ SECTIONS
 		. = 0xBB8;		gUnknown_03000BB8 = .;
 		. = 0xBBC;		gUnknown_03000BBC = .;
 		. = 0xBD0;		gUnknown_03000BD0 = .;
-		. = 0xBE0;		gUnknown_03000BE0 = .;
+		. = 0xBE0;		gIntroTitleTimer_03000BE0 = .;
 		. = 0xBE4;		gUnknown_03000BE4 = .;
 		. = 0xBE8;		gUnknown_03000BE8 = .;
 		. = 0xBEC;		gUnknown_03000BEC = .;
@@ -177,6 +186,7 @@ SECTIONS
 		. = 0xBF8;		gUnknown_03000BF8 = .;
 		. = 0xC20;		gUnknown_03000C20 = .;
 		. = 0xC28;		gUnknown_03000C28 = .;
+		. = 0xDCC;		gUnknown_03000DCC = .;
 		. = 0xEA0;		gOamBuffer = .;
 		. = 0x12A0;		gUnknown_030012A0 = .;
 		. = 0x12A8;		gUnknown_030012A8 = .;

@@ -199,7 +199,7 @@ void process_input(void)
         }
         else if (gMainState == MAIN_STATE_LEVEL_PLAY)
         {
-            if (gUnknown_03000B54 <= 10)
+            if (gMoveFrameCounter_03000B54 <= 10)
             {
                 gSomeKeys_030012E8 = gHeldKeys = 0;
             }

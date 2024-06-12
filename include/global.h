@@ -161,6 +161,21 @@ struct UnknownStruct17
     u8 unk1;
 };
 
+struct Struct1A0
+{
+    void *unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 nextState;  // next state after movie finishes
+    u8 movieID;  // current movie ID
+};
+
+struct Struct0802D614
+{
+    u8 filler0[6];
+    u16 unk6;
+};
+
 //------------------------------------------------------------------------------
 // Variables
 //------------------------------------------------------------------------------
@@ -206,6 +221,14 @@ extern u8 gUnknown_030000AC;
 extern s32 gUnknown_030000B0;
 extern u8 gUnknown_030000B4;
 extern u16 gUnknown_030000B6;
+extern struct Struct1A0 gMovieState_030001A0;
+extern u32 gUnknown_030001A8;
+extern void *gUnknown_030001AC;
+extern u32 gUnknown_030001B0;
+extern u32 gUnknown_030001B4;
+extern u32 gUnknown_030001B8;
+extern u8 *gUnknown_030001BC;
+extern struct Struct0802D614 *gUnknown_030001C0;
 extern u8 gUnknown_030002A0[];
 extern u16 gUnknown_030002AA;
 extern struct Struct30002B8 gUnknown_030002B0;
@@ -224,12 +247,13 @@ extern u8 gUnknown_030009E4[];  // unknown type
 extern u8 gUnknown_030009E8;
 extern u8 gUnknown_030009EC;
 extern u8 gUnknown_030009FC;
+extern void (*gUnknown_03000A00)(void);
 extern u16 gUnknown_03000A0C;
 extern s32 gUnknown_03000B44;
 extern u32 gUnknown_03000B48;
 extern u32 gUnknown_03000B4C;
 extern u8 gUnknown_03000B50;
-extern s32 gUnknown_03000B54;
+extern s32 gMoveFrameCounter_03000B54;
 extern s8 gUnknown_03000B58;
 extern u8 gUnknown_03000B5C;
 extern u8 gUnknown_03000B60;
@@ -245,7 +269,7 @@ extern s8 gUnknown_03000BB4;
 extern u32 gUnknown_03000BB8;
 extern s8 gUnknown_03000BBC;
 extern u8 gUnknown_03000BD0;
-extern u32 gUnknown_03000BE0;
+extern u32 gIntroTitleTimer_03000BE0;
 extern u16 gUnknown_03000BE4;
 extern u16 gUnknown_03000BE8;
 extern u8 gUnknown_03000BEC;
@@ -255,6 +279,7 @@ extern u8 gUnknown_03000BF8;
 extern u8 gUnknown_03000C20;
 extern u8 gUnknown_03000C28;
 extern u32 gUnknown_030009DC;
+extern u8 gUnknown_03000DCC;
 extern struct OamData gOamBuffer[];
 extern s16 gUnknown_030012A0;
 extern void (*gUnknown_030012A8)(void);
@@ -283,8 +308,8 @@ extern u8 gUnknown_03001744;
 extern u16 gUnknown_03001748;
 extern struct Arena gArena;
 extern struct UnknownStruct9 gUnknown_03001770;
-extern u8 gUnknown_0300192C[];  // unknown type
-extern u8 gUnknown_03001930[];  // unknown type
+extern u16 gUnknown_0300192C;
+extern u16 gUnknown_03001930;
 extern u32 gUnknown_03001938;
 extern u32 gUnknown_030019A0;
 extern u8 gUnknown_03001A00;
@@ -436,6 +461,7 @@ void sub_0802F5BC(void);
 void sub_0803220C(void);
 void sub_0802D5FC(void);
 void sub_08029E70(void);
+void sub_08029EB4(void);
 void sub_080379B8(void);
 void sub_080323E8(void);
 void sub_08032784(void);
@@ -465,6 +491,7 @@ void sub_08006D44(void);
 void goto_state_080070E8(s32, s32);
 void sub_08007170(void);
 void sub_08008238(void);
+void sub_080082C8(void);
 void sub_08008CE4(void);
 void sub_0800EE70(void);
 void sub_0800EF0C(void);
@@ -474,7 +501,10 @@ void sub_0800F744();
 // There seems to be some conflict with the parameter types here
 //void sub_080107E8(u8 world, u8 level, u16 arg2);
 void sub_08011428();
+void sub_080148A4(u32, int);
+int sub_080148F0(u32);
 void add_lives();
+int sub_08014BB4(void);
 void sub_0801500C();
 void sub_0801B310(void);
 void sub_0801B88C(void);
@@ -499,12 +529,15 @@ void sub_0802C7A4(void);
 void sub_0802C938(void);
 void sub_0802CF08(void);
 void sub_0802D1D0(void);
-void sub_0802D468();
+void init_movie_0802D468(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void sub_0802F060(void);
+int sub_0802F090(void *);
 void sub_0802F1D4(void);
 int sub_0802F5C0();
 void sub_0803109C(void);
 void sub_080317F8(void);
+int sub_08031944(struct Struct0802D614 *);
+void sub_08031978(struct Struct0802D614 *);
 void sub_08031BF0();
 int sub_08031E04(void);
 void copy_palettes_to_vram();
@@ -541,6 +574,9 @@ void sub_08040D50(void);
 s8 sub_08040EE8();
 struct UnknownStruct6 *sub_08040F30(s8);
 void sub_0805727C(void);
+void sub_0805739C(void *);
+void sub_080573FC(u16 *, u16 *, u16 *, u16 *, void *);
+void sub_08057420(void *);
 u16 sub_0806C2C4(void);
 void sub_0806D1AC(u16, u16);
 void sub_080714A8(void);

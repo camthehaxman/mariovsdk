@@ -309,7 +309,7 @@ _08007DA6:
 	mov r1, #62
 	mov r2, #1
 	mov r3, #8
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	b _08007EBA
 	.byte 0x00
@@ -373,7 +373,7 @@ _08007E2E:
 	mov r1, #46
 	mov r2, #1
 	mov r3, #6
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	b _08007EBA
 	.byte 0x00
@@ -518,7 +518,7 @@ _08007F42:
 	str r0, [r1]
 	str r5, [r2]
 	ldr r1, _08007FE4  @ =gUnknown_03000B44
-	ldr r0, _08007FE8  @ =gUnknown_03000B54
+	ldr r0, _08007FE8  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r0, _08007FEC  @ =gUnknown_03001A30
@@ -584,7 +584,7 @@ _08007FE0:
 _08007FE4:
 	.4byte gUnknown_03000B44
 _08007FE8:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08007FEC:
 	.4byte gUnknown_03001A30
 _08007FF0:
@@ -621,7 +621,7 @@ _08008022:
 	ldrh r0, [r0]
 	cmp r0, #8
 	bne _0800807E
-	ldr r0, _080080E0  @ =gUnknown_03000B54
+	ldr r0, _080080E0  @ =gMoveFrameCounter_03000B54
 	ldr r0, [r0]
 	cmp r0, #0
 	ble _0800807E
@@ -705,7 +705,7 @@ _080080D8:
 _080080DC:
 	.4byte gSomeKeys_030012E8
 _080080E0:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _080080E4:
 	.4byte gUnknown_03000B5C
 _080080E8:

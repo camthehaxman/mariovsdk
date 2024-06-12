@@ -1762,7 +1762,7 @@ sub_0800991C: @ 0x0800991C
 	ldr r0, _08009A38  @ =gUnknown_03000BBC
 	ldrb r0, [r0]
 	mov r9, r0
-	ldr r0, _08009A3C  @ =gUnknown_03000B54
+	ldr r0, _08009A3C  @ =gMoveFrameCounter_03000B54
 	ldr r1, [r0]
 	lsl r0, r1, #4
 	add r0, r0, r1
@@ -1873,7 +1873,7 @@ _080099EC:
 	strb r0, [r6, #16]
 _08009A1E:
 	strb r7, [r6, #14]
-	ldr r0, _08009A3C  @ =gUnknown_03000B54
+	ldr r0, _08009A3C  @ =gMoveFrameCounter_03000B54
 	ldr r1, [r0]
 	cmp r1, #59
 	bgt _08009A5C
@@ -1888,7 +1888,7 @@ _08009A34:
 _08009A38:
 	.4byte gUnknown_03000BBC
 _08009A3C:
-	.4byte gUnknown_03000B54
+	.4byte gMoveFrameCounter_03000B54
 _08009A40:
 	.4byte 0x03000A10
 _08009A44:

@@ -4692,7 +4692,7 @@ _08011920:
 	mov r1, #41
 	mov r2, #8
 	mov r3, #1
-	bl sub_0802D468
+	bl init_movie_0802D468
 	mov r0, #30
 	mov r1, #1
 	bl goto_state_080070E8
