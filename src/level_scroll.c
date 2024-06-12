@@ -30,13 +30,13 @@ void level_scroll_main_callback(void)
 }
 
 extern struct OamData gUnknown_082E8900;
-extern u8 gUnknown_082E8908[0x100];
+extern u8 gfxBackToGame4bpp[0x100];
 
-int sub_080322A8(u16 *oamIndex, u16 *tileNum, u16 *offset)
+int add_back_to_game_icon(u16 *oamIndex, u16 *tileNum, u16 *offset)
 {
 	if (gUnknown_03000B78 != 0)
 	{
-		DmaCopy32(3, gUnknown_082E8908, (void *)(VRAM + 0x10000 + *offset), 0x100);
+		DmaCopy32(3, gfxBackToGame4bpp, (void *)(VRAM + 0x10000 + *offset), 0x100);
 		DmaCopy32(3, &gUnknown_082E8900, &gOamBuffer[*oamIndex], sizeof(struct OamData));
 		gOamBuffer[*oamIndex].tileNum = *tileNum;
 		gOamBuffer[*oamIndex].x = 200;

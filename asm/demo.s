@@ -1852,7 +1852,7 @@ _08008946:
 	add r0, r5, #0
 	add r1, r7, #0
 	add r2, r6, #0
-	bl sub_080322A8
+	bl add_back_to_game_icon
 	mov r7, r8
 	str r7, [r4]
 	mov r0, #224

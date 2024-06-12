@@ -6,9 +6,9 @@
 gUnknown_082E8900:
 	.INCBIN "baserom.gba", 0x2E8900, 0x2E8908-0x2E8900
 
-	.GLOBAL gUnknown_082E8908
-gUnknown_082E8908:
-	.INCBIN "graphics/082E8908.4bpp"
+	.GLOBAL gfxBackToGame4bpp
+gfxBackToGame4bpp:
+	.INCBIN "graphics/BackToGame.4bpp"
 
 	.INCBIN "baserom.gba", 0x2E8A08, 0x2E8A50-0x2E8A08
 

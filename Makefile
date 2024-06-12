@@ -35,7 +35,8 @@ CFILES   := \
 	src/agb_flash.c \
 	src/agb_flash_1m.c \
 	src/agb_flash_mx.c \
-	src/libc.c
+	src/libc.c \
+	src/pause.c
 SFILES   := \
 	asm/crt0.s \
 	asm/rom_800023C.s \
@@ -44,7 +45,6 @@ SFILES   := \
 	asm/demo.s \
 	asm/rom1.s \
 	asm/savefile.s \
-	asm/pause.s \
 	asm/clear_gameover.s \
 	asm/rom_801BAD8.s \
 	asm/movie.s \
@@ -102,7 +102,7 @@ ldscript.txt: ldscript.in
 
 #### Graphics ####
 
-data/data4.o: graphics/082E8908.4bpp
+data/data4.o: graphics/BackToGame.4bpp
 
 %.4bpp: %.png $(GBAGFX)
 	$(GBAGFX) $< $@
