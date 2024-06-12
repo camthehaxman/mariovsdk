@@ -25751,44 +25751,44 @@ gUnknown_08B2D578:
 gUnknown_08B2DC74:
 	.INCBIN "baserom.gba", 0xB2DC74, 0xB2F070-0xB2DC74
 
-	.GLOBAL gUnknown_08B2F070
-gUnknown_08B2F070:
+	.GLOBAL gMovie6
+gMovie6:
 	.INCBIN "baserom.gba", 0xB2F070, 0xB2F5B8-0xB2F070
 
-	.GLOBAL gUnknown_08B2F5B8
-gUnknown_08B2F5B8:
+	.GLOBAL gMovie5
+gMovie5:
 	.INCBIN "baserom.gba", 0xB2F5B8, 0xB2FFDC-0xB2F5B8
 
-	.GLOBAL gUnknown_08B2FFDC
-gUnknown_08B2FFDC:
+	.GLOBAL gMovie2
+gMovie2:
 	.INCBIN "baserom.gba", 0xB2FFDC, 0xB30768-0xB2FFDC
 
-	.GLOBAL gUnknown_08B30768
-gUnknown_08B30768:
+	.GLOBAL gMovie4
+gMovie4:
 	.INCBIN "baserom.gba", 0xB30768, 0xB30F94-0xB30768
 
-	.GLOBAL gUnknown_08B30F94
-gUnknown_08B30F94:
+	.GLOBAL gMovie1
+gMovie1:
 	.INCBIN "baserom.gba", 0xB30F94, 0xB32118-0xB30F94
 
-	.GLOBAL gUnknown_08B32118
-gUnknown_08B32118:
+	.GLOBAL gMovie0
+gMovie0:
 	.INCBIN "baserom.gba", 0xB32118, 0xB35FC0-0xB32118
 
-	.GLOBAL gUnknown_08B35FC0
-gUnknown_08B35FC0:
+	.GLOBAL gMovie7
+gMovie7:
 	.INCBIN "baserom.gba", 0xB35FC0, 0xB37168-0xB35FC0
 
-	.GLOBAL gUnknown_08B37168
-gUnknown_08B37168:
+	.GLOBAL gMovie3
+gMovie3:
 	.INCBIN "baserom.gba", 0xB37168, 0xB3732C-0xB37168
 
-	.GLOBAL gUnknown_08B3732C
-gUnknown_08B3732C:
+	.GLOBAL gMovie8
+gMovie8:
 	.INCBIN "baserom.gba", 0xB3732C, 0xB37424-0xB3732C
 
-	.GLOBAL gUnknown_08B37424
-gUnknown_08B37424:
+	.GLOBAL gMovie9
+gMovie9:
 	.INCBIN "baserom.gba", 0xB37424, 0xB3961C-0xB37424
 
 	.GLOBAL gUnknown_08B3961C

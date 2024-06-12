@@ -29,6 +29,8 @@
 	X(src/rom_8033C38.o) \
 	X(src/arena.o) \
 	X(asm/rom_8033D80.o) \
+	X(src/movie_2.o) \
+	X(asm/movie_2.o) \
 	X(asm/syscall.o) \
 	X(src/agb_flash.o) \
 	X(src/agb_flash_1m.o) \
@@ -154,6 +156,8 @@ SECTIONS
 		. = 0x9E4;		gUnknown_030009E4 = .;
 		. = 0x9E8;		gUnknown_030009E8 = .;
 		. = 0x9EC;		gUnknown_030009EC = .;
+		. = 0x9F4;		gUnknown_030009F4 = .;
+		. = 0x9F8;		gUnknown_030009F8 = .;
 		. = 0x9FC;		gUnknown_030009FC = .;
 		. = 0xA00;		gUnknown_03000A00 = .;
 		. = 0xA0C;		gUnknown_03000A0C = .;
@@ -226,6 +230,11 @@ SECTIONS
 		. = 0x1B30;		gUnknown_03001B30 = .;
 		. = 0x1BA0;		gUnknown_03001BA0 = .;
 		. = 0x1BDC;		gUnknown_03001BDC = .;
+		. = 0x1BE8;		gUnknown_03001BE8 = .;
+		. = 0x1BF8;		gUnknown_03001BF8 = .;
+		. = 0x1C00;		gUnknown_03001C00 = .;
+		. = 0x1C18;		gUnknown_03001C18 = .;
+		. = 0x1C34;		gUnknown_03001C34 = .;
 		. = 0x1C78;		gUnknown_03001C78 = .;
 		. = 0x1F2C;		gFlashTimeoutFlag = .;
 		. = 0x1F30;		PollFlashStatus = .;

@@ -161,9 +161,88 @@ struct UnknownStruct17
     u8 unk1;
 };
 
+struct Movie_child_child8
+{
+    u8 filler0[0x50];
+};  // size = 0x50
+
+struct Movie_child_child10
+{
+    u8 filler0[0x8];
+    u32 unk8;
+    u32 unkC;
+};  // size = 0x10
+
+struct Movie_child_child18
+{
+    u8 filler0[0x10];
+};  // size = 0x10
+
+struct Movie_child_child20
+{
+    u8 filler0[0xC];
+};  // size = 0xC
+
+struct Movie_child_child28
+{
+    u8 filler0[0x100];
+    u8 unk100;
+    u8 filler101[1];
+    u8 unk102;
+    u16 unk104;
+    s32 unk108;
+    s32 unk10C;
+};  // size = 0x110
+
+struct Movie_child_child30_sub_child
+{
+    u8 filler0[0x30];
+    u16 unk30;
+};
+
+struct Movie_child_child30_sub
+{
+    struct Movie_child_child30_sub_child *unk0;
+    u8 filler4[4];
+};  // size = 8
+
+struct Movie_child_child30
+{
+    struct Movie_child_child30_sub unk0[1];
+    u8 filler8[0x31-8];
+    u8 unk31;
+    u8 filler32[0x94-0x32];
+    u8 unk94;
+    u32 unk98;
+};  // size = 0x9C
+
+struct Movie_child
+{
+    u32 unk0;
+    u16 unk4;
+    struct Movie_child_child8 *unk8;
+    u16 unkC;
+    struct Movie_child_child10 *unk10;
+    u16 unk14;
+    struct Movie_child_child18 *unk18;
+    u16 unk1C;
+    struct Movie_child_child20 *unk20;
+    u16 unk24;
+    struct Movie_child_child28 *unk28;
+    u16 unk2C;
+    struct Movie_child_child30 *unk30;
+};  // size = 0x34
+
+struct Movie
+{
+    u16 unk0;
+    u8 filler2[2];
+    struct Movie_child *unk4;
+};
+
 struct Struct1A0
 {
-    void *unk0;
+    struct Movie *unk0;
     u8 unk4;
     u8 unk5;
     u8 nextState;  // next state after movie finishes
@@ -175,6 +254,19 @@ struct Struct0802D614
     u8 filler0[6];
     u16 unk6;
 };
+
+struct Struct1C18  // movie related?
+{
+    u32 unk0;
+    u32 unk4;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+    u8 unk10;
+    u8 unk11;
+    u8 filler12[0x14-0x12];
+};  // size = 0x14
 
 //------------------------------------------------------------------------------
 // Variables
@@ -246,6 +338,8 @@ extern u16 gUnknown_030009D8;
 extern u8 gUnknown_030009E4[];  // unknown type
 extern u8 gUnknown_030009E8;
 extern u8 gUnknown_030009EC;
+extern void (*gUnknown_030009F4)(void);
+extern void (*gUnknown_030009F8)(void);
 extern u8 gUnknown_030009FC;
 extern void (*gUnknown_03000A00)(void);
 extern u16 gUnknown_03000A0C;
@@ -319,6 +413,12 @@ extern u8 gUnknown_03001A38;
 extern struct UnknownStruct8 gUnknown_03001B30;
 extern u8 gUnknown_03001BA0;
 extern u8 gUnknown_03001BDC;
+extern s32 gUnknown_03001BE8;
+extern u16 gUnknown_03001BF8;
+extern u16 gUnknown_03001C00;
+//extern struct Struct1C18 *gUnknown_03001C18;
+extern struct Struct1C18 *gUnknown_03001C18;
+extern u8 gUnknown_03001C34;
 extern struct UnknownStruct7 *gUnknown_03001C78;
 extern void *gUnknown_03007FFC;
 
@@ -574,9 +674,9 @@ void sub_08040D50(void);
 s8 sub_08040EE8();
 struct UnknownStruct6 *sub_08040F30(s8);
 void sub_0805727C(void);
-void sub_0805739C(void *);
-void sub_080573FC(u16 *, u16 *, u16 *, u16 *, void *);
-void sub_08057420(void *);
+void sub_0805739C(struct Movie *);
+void sub_080573FC(u16 *, u16 *, u16 *, u16 *, struct Movie *);
+void sub_08057420(struct Movie *);
 u16 sub_0806C2C4(void);
 void sub_0806D1AC(u16, u16);
 void sub_080714A8(void);

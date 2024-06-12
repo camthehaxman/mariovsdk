@@ -15,3 +15,6 @@ tools/agbcc
 # Emulator save files
 *.sav
 *.sgm
+
+# Miscellaneous rubbish
+*.swp

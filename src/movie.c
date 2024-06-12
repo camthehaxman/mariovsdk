@@ -3,7 +3,16 @@
 #include "arena.h"
 #include "main.h"
 
-extern u8 gUnknown_08B30768[];
+extern struct Movie gMovie0;
+extern struct Movie gMovie1;
+extern struct Movie gMovie2;
+extern struct Movie gMovie3;
+extern struct Movie gMovie4;
+extern struct Movie gMovie5;
+extern struct Movie gMovie6;
+extern struct Movie gMovie7;
+extern struct Movie gMovie8;
+extern struct Movie gMovie9;
 
 static inline void someinline(int a, int b, int nextState, int movieID)
 {
@@ -11,7 +20,7 @@ static inline void someinline(int a, int b, int nextState, int movieID)
     gMovieState_030001A0.unk5 = b;
     gMovieState_030001A0.nextState = nextState;
     gMovieState_030001A0.movieID = movieID;
-    gMovieState_030001A0.unk0 = gUnknown_08B30768;
+    gMovieState_030001A0.unk0 = &gMovie4;
 }
 
 void movie_main_callback(void)
@@ -118,17 +127,6 @@ void movie_main_callback(void)
     sub_0801B310();
 }
 
-extern u8 gUnknown_08B32118[];
-extern u8 gUnknown_08B30F94[];
-extern u8 gUnknown_08B2FFDC[];
-extern u8 gUnknown_08B30768[];
-extern u8 gUnknown_08B2F5B8[];
-extern u8 gUnknown_08B2F070[];
-extern u8 gUnknown_08B35FC0[];
-extern u8 gUnknown_08B37168[];
-extern u8 gUnknown_08B3732C[];
-extern u8 gUnknown_08B37424[];
-
 void init_movie_0802D468(u8 arg0, u8 arg1, u8 nextState, u8 movieID)
 {
     gMovieState_030001A0.unk4 = arg0;
@@ -137,16 +135,16 @@ void init_movie_0802D468(u8 arg0, u8 arg1, u8 nextState, u8 movieID)
     gMovieState_030001A0.movieID = movieID;
     switch (movieID)
     {
-    case 0: gMovieState_030001A0.unk0 = gUnknown_08B32118; break;
-    case 1: gMovieState_030001A0.unk0 = gUnknown_08B30F94; break;
-    case 2: gMovieState_030001A0.unk0 = gUnknown_08B2FFDC; break;
-    case 4: gMovieState_030001A0.unk0 = gUnknown_08B30768; break;
-    case 5: gMovieState_030001A0.unk0 = gUnknown_08B2F5B8; break;
-    case 6: gMovieState_030001A0.unk0 = gUnknown_08B2F070; break;
-    case 7: gMovieState_030001A0.unk0 = gUnknown_08B35FC0; break;
-    case 3: gMovieState_030001A0.unk0 = gUnknown_08B37168; break;
-    case 8: gMovieState_030001A0.unk0 = gUnknown_08B3732C; break;
-    case 9: gMovieState_030001A0.unk0 = gUnknown_08B37424; break;
+    case 0: gMovieState_030001A0.unk0 = &gMovie0; break;
+    case 1: gMovieState_030001A0.unk0 = &gMovie1; break;
+    case 2: gMovieState_030001A0.unk0 = &gMovie2; break;
+    case 4: gMovieState_030001A0.unk0 = &gMovie4; break;
+    case 5: gMovieState_030001A0.unk0 = &gMovie5; break;
+    case 6: gMovieState_030001A0.unk0 = &gMovie6; break;
+    case 7: gMovieState_030001A0.unk0 = &gMovie7; break;
+    case 3: gMovieState_030001A0.unk0 = &gMovie3; break;
+    case 8: gMovieState_030001A0.unk0 = &gMovie8; break;
+    case 9: gMovieState_030001A0.unk0 = &gMovie9; break;
     }
 }
 
