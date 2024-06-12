@@ -1,3 +1,9 @@
+# Don't echo build commands unless VERBOSE is set
+VERBOSE ?= 0
+ifeq ($(VERBOSE),0)
+  QUIET := @
+endif
+
 #### Tools ####
 
 CC1      := tools/agbcc/bin/agbcc
@@ -20,44 +26,8 @@ ROM      := mariovsdk.gba
 ELF      := $(ROM:.gba=.elf)
 MAP      := $(ROM:.gba=.map)
 LDSCRIPT := ldscript.txt
-CFILES   := \
-	src/level_scroll.c \
-	src/rom_80066FC.c \
-	src/main.c \
-	src/rom1.c \
-	src/savefile.c \
-	src/title.c \
-	src/intro.c \
-	src/init.c \
-	src/rom_8032FB0.c \
-	src/rom_8033C38.c \
-	src/arena.c \
-	src/agb_flash.c \
-	src/agb_flash_1m.c \
-	src/agb_flash_mx.c \
-	src/libc.c \
-	src/pause.c
-SFILES   := \
-	asm/crt0.s \
-	asm/rom_800023C.s \
-	asm/rom_8001BA4.s \
-	asm/rom_80066FC.s \
-	asm/demo.s \
-	asm/rom1.s \
-	asm/savefile.s \
-	asm/clear_gameover.s \
-	asm/rom_801BAD8.s \
-	asm/movie.s \
-	asm/ereader.s \
-	asm/rom_8032408.s \
-	asm/rom_8032FB0.s \
-	asm/rom_8033D80.s \
-	asm/syscall.s \
-	asm/rom_80747B8.s \
-	data/agb_flash.s \
-	data/data.s \
-	data/data3.s \
-	data/data4.s
+CFILES := $(wildcard src/*.c)
+SFILES := $(wildcard asm/*.s) $(wildcard data/*.s)
 OFILES   := $(SFILES:.s=.o) $(CFILES:.c=.o)
 
 src/agb_flash.o: CC1FLAGS := -O1 -mthumb-interwork
@@ -73,7 +43,8 @@ compare: $(ROM)
 	md5sum -c checksum.md5
 
 clean:
-	$(RM) $(ROM) $(ELF) $(MAP) $(OFILES) src/*.s
+	$(RM) $(ROM) $(ELF) $(MAP) src/*.s
+	find . -name '*.o' -exec rm {} +
 	find . -name '*.4bpp' -exec rm {} +
 	$(MAKE) -C tools/gbagfx clean
 
@@ -91,11 +62,13 @@ $(ELF): $(OFILES) $(LDSCRIPT)
 	$(OBJCOPY) -O binary --pad-to 0x9000000 $< $@
 
 %.o: %.c
-	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CC1FLAGS) -o $*.s
-	$(AS) $(ASFLAGS) $*.s -o $*.o
+	@echo "Compiling " $<
+	$(QUIET) $(CPP) $(CPPFLAGS) $< | $(CC1) $(CC1FLAGS) -o $*.s
+	$(QUIET) $(AS) $(ASFLAGS) $*.s -o $*.o
 
 %.o: %.s
-	$(AS) $(ASFLAGS) $< -o $@
+	@echo "Assembling " $<
+	$(QUIET) $(AS) $(ASFLAGS) $< -o $@
 
 ldscript.txt: ldscript.in
 	$(CPP) -P $< > $@
@@ -103,6 +76,7 @@ ldscript.txt: ldscript.in
 #### Graphics ####
 
 data/data4.o: graphics/BackToGame.4bpp
+asm/savefile.o: graphics/PressStart.4bpp
 
 %.4bpp: %.png $(GBAGFX)
 	$(GBAGFX) $< $@

@@ -1,5 +1,6 @@
 	.INCLUDE "macro.inc"
 
+.if 0
 	THUMB_FUNC_START sub_08008BF4
 sub_08008BF4: @ 0x08008BF4
 	push {lr}
@@ -98,7 +99,7 @@ state11_init_callback: @ 0x08008C9C
 	bl sub_080386DC
 	mov r0, #0
 	bl sub_08004634
-	ldr r2, _08008CD8  @ =0x03000A0C
+	ldr r2, _08008CD8  @ =gUnknown_03000A0C
 	ldr r1, _08008CDC  @ =0x0400000A
 	ldrh r0, [r1]
 	strh r0, [r2]
@@ -112,7 +113,7 @@ state11_init_callback: @ 0x08008C9C
 	.byte 0x00
 	.byte 0x00
 _08008CD8:
-	.4byte 0x03000A0C
+	.4byte gUnknown_03000A0C
 _08008CDC:
 	.4byte 0x0400000A
 _08008CE0:
@@ -121,25 +122,25 @@ _08008CE0:
 
 	THUMB_FUNC_START sub_08008CE4
 sub_08008CE4: @ 0x08008CE4
-	ldr r1, _08008CEC  @ =0x030009FC
+	ldr r1, _08008CEC  @ =gUnknown_030009FC
 	mov r0, #0
 	strb r0, [r1]
 	bx lr
 _08008CEC:
-	.4byte 0x030009FC
+	.4byte gUnknown_030009FC
 	THUMB_FUNC_END sub_08008CE4
 
 	THUMB_FUNC_START state10_11_main_callback
 state10_11_main_callback: @ 0x08008CF0
 	push {r4,r5,lr}
-	ldr r5, _08008D00  @ =0x030009FC
+	ldr r5, _08008D00  @ =gUnknown_030009FC
 	ldrb r4, [r5]
 	cmp r4, #0
 	beq _08008D04
 	bl process_input
 	b _08008D30
 _08008D00:
-	.4byte 0x030009FC
+	.4byte gUnknown_030009FC
 _08008D04:
 	bl process_input
 	ldr r2, _08008D1C  @ =gHeldKeys
@@ -203,7 +204,7 @@ _08008D78:
 sub_08008D7C: @ 0x08008D7C
 	push {lr}
 	ldr r0, _08008D98  @ =0x0400000A
-	ldr r1, _08008D9C  @ =0x03000A0C
+	ldr r1, _08008D9C  @ =gUnknown_03000A0C
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bl sub_080062D0
@@ -216,9 +217,9 @@ sub_08008D7C: @ 0x08008D7C
 _08008D98:
 	.4byte 0x0400000A
 _08008D9C:
-	.4byte 0x03000A0C
+	.4byte gUnknown_03000A0C
 	THUMB_FUNC_END sub_08008D7C
-
+.endif
 	THUMB_FUNC_START sub_08008DA0
 sub_08008DA0: @ 0x08008DA0
 	push {r4-r7,lr}

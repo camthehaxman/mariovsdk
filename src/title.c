@@ -1,8 +1,9 @@
 #include "gba/gba.h"
 #include "global.h"
+#include "arena.h"
 
-extern const u8 gUnknown_085F49D0[];
-extern const u8 gUnknown_085F49D8[];
+extern const u8 gfxPressStartOam[];
+extern const u8 gfxPressStart4bpp[];
 
 enum
 {
@@ -153,8 +154,8 @@ void title_display_callback(void)
     {
         u8 var;
 
-        DmaCopy32(3, gUnknown_085F49D0, gOamBuffer, 8);
-        DmaCopy32(3, gUnknown_085F49D8, (void *)(VRAM + 0x10000), 0x200);
+        DmaCopy32(3, gfxPressStartOam, gOamBuffer, 8);
+        DmaCopy32(3, gfxPressStart4bpp, (void *)(VRAM + 0x10000), 0x200);
         gOamBuffer[0].tileNum = 0;
         gOamBuffer[0].x = 204;
         gOamBuffer[0].y = 124;

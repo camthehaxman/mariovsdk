@@ -9,7 +9,8 @@
 	X(data/data4.o) \
 	X(src/rom1.o) \
 	X(asm/demo.o) \
-	X(asm/rom1.o) \
+	X(src/rom2.o) \
+	X(asm/rom2.o) \
 	X(src/savefile.o) \
 	X(asm/savefile.o) \
 	X(data/data.o) \
@@ -145,6 +146,8 @@ SECTIONS
 		. = 0x9E4;		gUnknown_030009E4 = .;
 		. = 0x9E8;		gUnknown_030009E8 = .;
 		. = 0x9EC;		gUnknown_030009EC = .;
+		. = 0x9FC;		gUnknown_030009FC = .;
+		. = 0xA0C;		gUnknown_03000A0C = .;
 		. = 0xB44;		gUnknown_03000B44 = .;
 		. = 0xB48;		gUnknown_03000B48 = .;
 		. = 0xB4C;		gUnknown_03000B4C = .;

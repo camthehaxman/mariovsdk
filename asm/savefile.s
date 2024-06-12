@@ -25754,13 +25754,15 @@ gUnknown_085E90D0:
 gUnknown_085E9360:
 	.INCBIN "baserom.gba", 0x5E9360, 0x5F49D0-0x5E9360
 
-	.GLOBAL gUnknown_085F49D0
-gUnknown_085F49D0:
+	.GLOBAL gfxPressStartOam
+gfxPressStartOam:
 	.INCBIN "baserom.gba", 0x5F49D0, 0x5F49D8-0x5F49D0
 
-	.GLOBAL gUnknown_085F49D8
-gUnknown_085F49D8:
-	.INCBIN "baserom.gba", 0x5F49D8, 0x5F61B4-0x5F49D8
+	.GLOBAL gfxPressStart4bpp
+gfxPressStart4bpp:
+	.INCBIN "graphics/PressStart.4bpp"
+
+	.INCBIN "baserom.gba", 0x5F4BD8, 0x5F61B4-0x5F4BD8
 
 	.GLOBAL gUnknown_085F61B4
 gUnknown_085F61B4:

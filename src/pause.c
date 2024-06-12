@@ -3,7 +3,7 @@
 #include "main.h"
 
 #if NONMATCHING
-s8 sub_0801BAD8(void)
+s8 process_pause_menu(void)
 {
     int r6;
     u8 spC;
@@ -179,7 +179,7 @@ s8 sub_0801BAD8(void)
 }
 #else
 __attribute__((naked))
-s8 sub_0801BAD8(void)
+s8 process_pause_menu(void)
 {
     asm(
     "push {r4-r7,lr}\n\
@@ -641,7 +641,7 @@ void pause_init_callback(void)
 void pause_main_callback(void)
 {
     process_input();
-    switch (sub_0801BAD8())
+    switch (process_pause_menu())
     {
     case 0:
         sub_0800F070(0);
