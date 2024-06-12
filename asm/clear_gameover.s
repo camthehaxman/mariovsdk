@@ -56,7 +56,7 @@ _0801BF64:
 	str r4, [r0, #8]
 	str r4, [r0, #12]
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r0, #6
 	mov r1, #3
 	bl copy_palettes_to_vram
@@ -286,7 +286,7 @@ _0801C140:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #0
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r0, _0801C178  @ =gUnknown_03000B80
 	ldrb r0, [r0]
 	lsl r0, r0, #24

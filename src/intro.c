@@ -14,7 +14,7 @@ void intro_init_callback(void)
     arr[1] = NULL;
     arr[2] = NULL;
     arr[3] = NULL;
-    sub_08032F24(arr, 0);
+    something_with_loading_graphics_08032F24(arr, 0);
     REG_BLDCNT = gUnknown_08866A48.bldCnt;
     REG_BLDALPHA = gUnknown_08866A48.bldAlpha;
     REG_BLDY = gUnknown_08866A48.bldY;

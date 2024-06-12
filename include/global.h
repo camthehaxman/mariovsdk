@@ -642,7 +642,7 @@ void sub_08031BF0();
 int sub_08031E04(void);
 void copy_palettes_to_vram();
 void sub_08032C44(struct UnknownStruct4 *);
-void sub_08032F24();
+void something_with_loading_graphics_08032F24();
 void sub_08032F68(void);
 void clear_oam_and_buffer(void);
 void process_input(void);

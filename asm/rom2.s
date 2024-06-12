@@ -848,7 +848,7 @@ sub_080091A8: @ 0x080091A8
 	lsr r0, r0, #16
 	mov r3, r12
 	str r0, [r3, #36]
-	ldr r0, _080095B8  @ =gUnknown_082F0BE4
+	ldr r0, _080095B8  @ =gfxScore4bpp
 	str r0, [r7]
 	ldrh r0, [r6]
 	ldr r1, _080095AC  @ =0x06010000
@@ -1290,7 +1290,7 @@ _080095B0:
 _080095B4:
 	.4byte gUnknown_082EAE80
 _080095B8:
-	.4byte gUnknown_082F0BE4
+	.4byte gfxScore4bpp
 _080095BC:
 	.4byte gUnknown_082E84DC
 _080095C0:
@@ -14386,7 +14386,7 @@ gUnknown_082EAE78:
 
 	.GLOBAL gUnknown_082EAE80
 gUnknown_082EAE80:
-	.INCBIN "baserom.gba", 0x2EAE80, 0x2EAF00-0x2EAE80
+	.INCBIN "graphics/Unknown2EAE80.4bpp"
 
 	.GLOBAL gUnknown_082EAF00
 gUnknown_082EAF00:
@@ -14788,9 +14788,11 @@ gUnknown_082F0B38:
 gUnknown_082F0BDC:
 	.INCBIN "baserom.gba", 0x2F0BDC, 0x2F0BE4-0x2F0BDC
 
-	.GLOBAL gUnknown_082F0BE4
-gUnknown_082F0BE4:
-	.INCBIN "baserom.gba", 0x2F0BE4, 0x2F0C88-0x2F0BE4
+	.GLOBAL gfxScore4bpp
+gfxScore4bpp:
+	.INCBIN "graphics/Score.4bpp"
+
+	.INCBIN "baserom.gba", 0x2F0C64, 0x2F0C88-0x2F0C64
 
 	.GLOBAL gUnknown_082F0C88
 gUnknown_082F0C88:

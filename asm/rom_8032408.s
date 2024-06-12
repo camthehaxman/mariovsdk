@@ -959,8 +959,8 @@ _08032EFE:
 
 	.byte 0x00
 	.byte 0x00
-	THUMB_FUNC_START sub_08032F24
-sub_08032F24: @ 0x08032F24
+	THUMB_FUNC_START something_with_loading_graphics_08032F24
+something_with_loading_graphics_08032F24: @ 0x08032F24
 	push {r4-r6,lr}
 	sub sp, sp, #52
 	add r4, r0, #0
@@ -994,7 +994,7 @@ _08032F40:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	THUMB_FUNC_END sub_08032F24
+	THUMB_FUNC_END something_with_loading_graphics_08032F24
 
 	THUMB_FUNC_START sub_08032F68
 sub_08032F68: @ 0x08032F68

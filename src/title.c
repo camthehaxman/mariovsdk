@@ -28,7 +28,7 @@ void title_init_callback(void)
     arr[1] = gUnknown_0886A328;
     arr[2] = &gUnknown_0886CFCC;
     arr[3] = NULL;
-    sub_08032F24(arr, 0);
+    something_with_loading_graphics_08032F24(arr, 0);
     var = sub_08006968(&gUnknown_0886CFCC);
     gUnknown_030000A4 = var;
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);

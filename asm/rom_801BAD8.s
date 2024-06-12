@@ -239,7 +239,7 @@ _0802177E:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #2
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #202
@@ -12845,7 +12845,7 @@ _08027664:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #2
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r1, #128
 	lsl r1, r1, #19
 	strh r0, [r1]

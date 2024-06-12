@@ -12276,7 +12276,7 @@ _08015124:
 	mov r1, #1
 	neg r1, r1
 	mov r0, sp
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _08015164  @ =gUnknown_080794EC
 	mov r0, #0
 	ldrsb r0, [r4, r0]
@@ -12312,7 +12312,7 @@ _0801516C:
 	mov r1, #1
 	neg r1, r1
 	mov r0, sp
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _080151A8  @ =gUnknown_08079504
 	mov r0, #0
 	ldrsb r0, [r4, r0]
@@ -12337,7 +12337,7 @@ _080151AC:
 	mov r1, #1
 	neg r1, r1
 	mov r0, sp
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r0, #17
 	mov r1, #3
 	bl copy_palettes_to_vram
@@ -12359,7 +12359,7 @@ _080151D8:
 	mov r1, #1
 	neg r1, r1
 	mov r0, sp
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r0, #24
 _080151F0:
 	mov r1, #3
@@ -12599,7 +12599,7 @@ _08015362:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #2
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _08015468  @ =gUnknown_08079504
 	mov r0, #0
 	ldrsb r0, [r5, r0]
@@ -12710,7 +12710,7 @@ _0801546C:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r0, #17
 	b _08015566
 _08015498:
@@ -12739,7 +12739,7 @@ _080154A4:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r0, #24
 	b _08015566
 	.byte 0x00
@@ -12784,7 +12784,7 @@ _080154F4:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _08015534  @ =gUnknown_08079504
 	b _0801555C
 _08015528:
@@ -12812,7 +12812,7 @@ _0801553C:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _08015608  @ =gUnknown_080794EC
 _0801555C:
 	mov r0, #0
@@ -16137,7 +16137,7 @@ _08016E50:
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	ldr r1, _08016EBC  @ =gUnknown_08079504
 	mov r0, #0
 	ldrsb r0, [r4, r0]
@@ -16222,7 +16222,7 @@ _08016F08:
 	ldr r1, _08016F60  @ =gUnknown_087C81C8
 	str r1, [r0, #12]
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	add r0, sp, #36
 	mov r1, #0
 	strh r1, [r0]

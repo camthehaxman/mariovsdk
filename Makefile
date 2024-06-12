@@ -68,6 +68,7 @@ $(ELF): $(OFILES) $(LDSCRIPT)
 
 %.o: %.s
 	@echo "Assembling " $<
+	@echo "Deps: $^"
 	$(QUIET) $(AS) $(ASFLAGS) $< -o $@
 
 ldscript.txt: ldscript.in
@@ -75,8 +76,9 @@ ldscript.txt: ldscript.in
 
 #### Graphics ####
 
-data/data4.o: graphics/BackToGame.4bpp
-asm/savefile.o: graphics/PressStart.4bpp
-
 %.4bpp: %.png $(GBAGFX)
 	$(GBAGFX) $< $@
+
+# Automatically scan files for incbins and add them as a dependency
+.SECONDEXPANSION:
+$(SFILES:.s=.o): $$(shell sed -n '/INCBIN/s/.*"\([^"]*\)".*/\1/p' $$< | sort -u)

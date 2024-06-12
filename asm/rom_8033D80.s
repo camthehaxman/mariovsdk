@@ -1487,7 +1487,7 @@ expert_level_select_init_callback: @ 0x08035388
 	str r5, [sp, #12]
 	mov r0, sp
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #234
@@ -5288,7 +5288,7 @@ _080370A6:
 	str r0, [sp, #24]
 	add r0, sp, #12
 	mov r1, #3
-	bl sub_08032F24
+	bl something_with_loading_graphics_08032F24
 	bl sub_08037230
 	mov r0, #128
 	lsl r0, r0, #19
