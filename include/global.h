@@ -76,9 +76,15 @@ struct UnknownStruct6
 
 struct UnknownStruct5
 {
-    u8 filler0[4];
+    void *unk0;
     u32 unk4;
     u16 unk8;
+};
+
+struct UnknownStruct4_child
+{
+    u8 filler0[6];
+    u16 unk6;
 };
 
 // These may be the same. Don't know yet.
@@ -86,7 +92,7 @@ struct UnknownStruct4  // gUnknown_03000B90
 {
     struct UnknownStruct5 *unk0;
     u32 unk4;
-    u8 filler8[0xC-0x8];
+    struct UnknownStruct4_child *unk8;
     void (*unkC)(void);
     s16 unk10;
     s16 unk12;
@@ -374,14 +380,24 @@ extern u8 gUnknown_03000C20;
 extern u8 gUnknown_03000C28;
 extern u32 gUnknown_030009DC;
 extern u8 gUnknown_03000DCC;
+extern u16 gUnknown_03000E60;
+extern void *gUnknown_03000E70[];
+extern u32 gUnknown_03000E80;
+extern u32 gUnknown_03000E90;
+extern u8 *gUnknown_03000E88;
+extern u8 *gUnknown_03000E8C;
+extern void *gUnknown_03000E94;
 extern struct OamData gOamBuffer[];
 extern s16 gUnknown_030012A0;
+extern u16 gUnknown_030012A4;
 extern void (*gUnknown_030012A8)(void);
 extern u8 gUnknown_030012B0[];
 extern void (*gUnknown_030012C0)(void);
 extern struct Struct30012D0 gUnknown_030012D0;
 extern u16 gHeldKeys;
+extern u16 gUnknown_030012E4;
 extern u16 gSomeKeys_030012E8;
+extern u16 gUnknown_030012EC;
 extern s16 gUnknown_030012F4;
 extern s16 gUnknown_030012F8;
 extern void (*gUnknown_030012FC)(void);
@@ -581,6 +597,7 @@ void sub_08004634();
 void sub_08004FBC(void);
 void sub_08005FA0(void);
 void sub_080062D0(void);
+void sub_08006388(void);
 void sub_080064D4();
 int sub_080066FC(u32 *, int, int, int);
 struct UnknownStruct15 *sub_08006968();
@@ -607,6 +624,7 @@ void add_lives();
 int sub_08014BB4(void);
 void sub_0801500C();
 void sub_0801B310(void);
+void sub_0801B3C0(void);
 void sub_0801B88C(void);
 void sub_0802919C();
 void sub_08029C20(void);
@@ -617,14 +635,17 @@ void sub_0802A164(void);
 int sub_0802A464(void);
 void sub_0802BA94(void);
 void sub_0802BC98(void);
+void sub_0802BCA4();
 void sub_0802BE74(void);
 void sub_0802BEEC();
 void sub_0802BF1C(void);
+void sub_0802BF28(void);
 void sub_0802BFA4(void);
 void sub_0802C20C(void);
 void sub_0802C058(void);
 void sub_0802C104();
 void sub_0802C144();
+void sub_0802C1B0(void);
 void sub_0802C7A4(void);
 void sub_0802C938(void);
 void sub_0802CF08(void);
@@ -638,11 +659,12 @@ void sub_0803109C(void);
 void sub_080317F8(void);
 int sub_08031944(struct Struct0802D614 *);
 void sub_08031978(struct Struct0802D614 *);
+int sub_080319BC(u32, struct UnknownStruct5 *, int);
 void sub_08031BF0();
 int sub_08031E04(void);
-void copy_palettes_to_vram();
-void sub_08032C44(struct UnknownStruct4 *);
-void something_with_loading_graphics_08032F24();
+void load_palette();
+int sub_08032C44(struct UnknownStruct4 *);
+u16 something_with_loading_graphics_08032F24(const void **arg0, int arg1);
 void sub_08032F68(void);
 void clear_oam_and_buffer(void);
 void process_input(void);

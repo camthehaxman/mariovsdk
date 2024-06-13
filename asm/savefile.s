@@ -4264,7 +4264,7 @@ _080115E0:
 	strh r0, [r1]
 	mov r0, #1
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	mov r0, sp
 	strh r5, [r0]
 	ldr r1, _08011680  @ =gUnknown_03001730
@@ -12284,7 +12284,7 @@ _08015124:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	ldr r0, _08015168  @ =gUnknown_087B8A08
 	b _080151F8
 _0801515C:
@@ -12340,7 +12340,7 @@ _080151AC:
 	bl something_with_loading_graphics_08032F24
 	mov r0, #17
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	ldr r0, _080151D4  @ =gUnknown_087B8A08
 	b _080151F8
 	.byte 0x00
@@ -12363,7 +12363,7 @@ _080151D8:
 	mov r0, #24
 _080151F0:
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	ldr r0, _08015208  @ =gUnknown_087CB20C
 _080151F8:
 	bl sub_08006968
@@ -12823,7 +12823,7 @@ _08015560:
 	ldr r0, [r0]
 _08015566:
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add r0, r4, #0
 	bl sub_08006968
 	ldr r1, _0801560C  @ =0x03000070
@@ -16146,7 +16146,7 @@ _08016E50:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add r0, sp, #16
 	mov r1, #0
 	strh r1, [r0]
@@ -16237,7 +16237,7 @@ _08016F08:
 	bl CpuSet
 	mov r0, #17
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add r0, r4, #0
 	bl sub_08006968
 	ldr r1, _08016F6C  @ =0x03000070

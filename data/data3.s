@@ -595,7 +595,7 @@ gUnknown_0807DD94:
 
 	.GLOBAL gPalettes
 gPalettes:
-	.INCBIN "baserom.gba", 0x81D98, 0xA7D98-0x81D98
+	.INCBIN "baserom.gba", 0x81D98, 0x26000
 
 	.GLOBAL gUnknown_080A7D98
 gUnknown_080A7D98:

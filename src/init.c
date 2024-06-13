@@ -170,7 +170,7 @@ void sub_08032784(void)
 {
 }
 
-void copy_palettes_to_vram(u32 paletteNum, u32 flags)
+void load_palette(u32 paletteNum, u32 flags)
 {
     // I have to do this stupid cast for it to match.
     bool32 r4 = ((*(u8 *)gUnknown_080788FC & 24) != 0);

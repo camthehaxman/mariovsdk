@@ -59,7 +59,7 @@ _0801BF64:
 	bl something_with_loading_graphics_08032F24
 	mov r0, #6
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #194
@@ -301,7 +301,7 @@ _0801C140:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl copy_palettes_to_vram
+	bl load_palette
 	b _0801C19C
 _0801C170:
 	.4byte gUnknown_08823B74
@@ -324,7 +324,7 @@ _0801C184:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl copy_palettes_to_vram
+	bl load_palette
 _0801C19C:
 	mov r1, #128
 	lsl r1, r1, #19

@@ -1393,7 +1393,7 @@ void file_select_init_callback(void)
         sub_0807204C(10, 0x80, 1);
     sub_08029CDC(gUnknown_087B2FF8.unk30, gUnknown_087B2FF8.unk32, gUnknown_087B2FF8.unk34);
     REG_DISPCNT = 0x1B40;
-    copy_palettes_to_vram(1, 3);
+    load_palette(1, 3);
     CpuFill16(0, &gUnknown_03001730, 16);
     sub_080381E4(0, 0);
     for (i = 0; i < 3; i++)

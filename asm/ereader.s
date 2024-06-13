@@ -1064,7 +1064,7 @@ _0802DED8:
 	mov r4, #0
 	mov r0, #8
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	mov r2, #128
 	lsl r2, r2, #19
 	ldrh r0, [r2]
@@ -2854,7 +2854,7 @@ state24_init_callback: @ 0x0802EC34
 	strh r1, [r2]
 	mov r0, #8
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add r0, r4, #0
 	bl sub_08029C9C
 	ldr r5, _0802ECB4  @ =gUnknown_03000BB4
@@ -8119,7 +8119,7 @@ sub_080311FC: @ 0x080311FC
 	str r2, [sp, #12]
 	cmp r4, #0
 	bne _08031304
-	ldr r0, _080312FC  @ =0x03000E60
+	ldr r0, _080312FC  @ =gUnknown_03000E60
 	ldrh r0, [r0]
 	mov r8, r0
 	mov r2, #0
@@ -8194,7 +8194,7 @@ _080312F4:
 _080312F8:
 	.4byte gUnknown_0807DC70
 _080312FC:
-	.4byte 0x03000E60
+	.4byte gUnknown_03000E60
 _08031300:
 	.4byte 0x03000210
 _08031304:

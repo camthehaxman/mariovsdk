@@ -39,7 +39,7 @@ void title_init_callback(void)
         sub_0807204C(10, 128, 1);
     seed_rng_with_timer();
     sub_08029CDC(gUnknown_08867560.bldCnt, gUnknown_08867560.bldAlpha, gUnknown_08867560.bldY);
-    copy_palettes_to_vram(0, 3);
+    load_palette(0, 3);
     gPressStartFadeDir = FADE_UP;
     gTitleScreenFrameCounter = 3;
     gPressStartOpacity = 0;

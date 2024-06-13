@@ -394,7 +394,7 @@ _0802177E:
 	strb r5, [r0, #8]
 	mov r0, #9
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add sp, sp, #20
 	pop {r3}
 	mov r8, r3
@@ -13116,7 +13116,7 @@ _080276E2:
 	strb r0, [r1, #2]
 	mov r0, #10
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	add sp, sp, #24
 	pop {r3-r5}
 	mov r8, r3
@@ -15590,7 +15590,7 @@ _08028A48:
 	strh r0, [r2]
 	mov r0, #3
 	mov r1, #3
-	bl copy_palettes_to_vram
+	bl load_palette
 	ldr r6, _08028BD8  @ =gUnknown_08B3A4DC
 	ldrh r0, [r6]
 	lsl r0, r0, #1
@@ -19224,7 +19224,7 @@ help_init_callback: @ 0x0802A4B4
 	strb r0, [r1]
 	mov r0, #5
 	mov r1, #2
-	bl copy_palettes_to_vram
+	bl load_palette
 	ldr r0, _0802A504  @ =gUnknown_03001938
 	ldr r1, [r0]
 	mov r2, #2
@@ -20082,7 +20082,7 @@ respawn_init_callback: @ 0x0802AAE8
 	strb r0, [r1]
 	mov r0, #4
 	mov r1, #2
-	bl copy_palettes_to_vram
+	bl load_palette
 	b _0802AC82
 _0802AB18:
 	.4byte gMainState

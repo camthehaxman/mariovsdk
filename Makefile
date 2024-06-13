@@ -68,7 +68,6 @@ $(ELF): $(OFILES) $(LDSCRIPT)
 
 %.o: %.s
 	@echo "Assembling " $<
-	@echo "Deps: $^"
 	$(QUIET) $(AS) $(ASFLAGS) $< -o $@
 
 ldscript.txt: ldscript.in
