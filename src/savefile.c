@@ -1353,13 +1353,7 @@ void sub_08011428(u32 arg0)
 
 extern u8 gUnknown_085FEFE4[];
 extern u8 gUnknown_08617030[];
-extern struct
-{
-    u8 filler0[0x30];
-    u16 unk30;
-    u16 unk32;
-    u16 unk34;
-} gUnknown_087B2FF8;
+extern struct UnkStruct1_sub_child gUnknown_087B2FF8;
 
 void file_select_init_callback(void)
 {
@@ -1391,10 +1385,10 @@ void file_select_init_callback(void)
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 0x80, 1);
-    sub_08029CDC(gUnknown_087B2FF8.unk30, gUnknown_087B2FF8.unk32, gUnknown_087B2FF8.unk34);
+    set_blend_regs_08029CDC(gUnknown_087B2FF8.bldCnt, gUnknown_087B2FF8.bldAlpha, gUnknown_087B2FF8.bldY);
     REG_DISPCNT = 0x1B40;
     load_palette(1, 3);
-    CpuFill16(0, &gUnknown_03001730, 16);
+    CpuFill16(0, &gBGOffsets_03001730, 16);
     sub_080381E4(0, 0);
     for (i = 0; i < 3; i++)
         gUnknown_03000066[i] = sub_080111B4(i);
@@ -1422,25 +1416,25 @@ void sub_0801168C(u8 arg0)
         if (gUnknown_0300005D != 0)
         {
             s8 sp0[32] = {254, 46, 94, 142};  //gUnknown_0807638C
-            gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+            gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
         }
         else
         {
             s8 sp0[32] = {8, 65, 122};  //gUnknown_080763AC
-            gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+            gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
         }
         if (inlinefunc(gFileSelectMenuSel))
-            gUnknown_03001730.unkA = 0xFF00;
+            gBGOffsets_03001730.bg2vofs = 0xFF00;
         REG_DISPCNT = 0x1F40;
         REG_BLDCNT = 0x3B44;
         REG_BLDALPHA = 0x0808;
     }
     else
     {
-        gUnknown_03001730.unk6 = 0;
-        gUnknown_03001730.unkA = 0;
-        gUnknown_03001730.unk8 = 0;
-        gUnknown_03001730.unk2 = 0;
+        gBGOffsets_03001730.bg1vofs = 0;
+        gBGOffsets_03001730.bg2vofs = 0;
+        gBGOffsets_03001730.bg2hofs = 0;
+        gBGOffsets_03001730.bg0vofs = 0;
         REG_DISPCNT = 0x1B40;
     }
 }
@@ -1750,7 +1744,7 @@ void sub_08011CB4(void)
 
 void sub_08011F60(void)
 {
-    gUnknown_03001730.unk6 = 0xFF00;
+    gBGOffsets_03001730.bg1vofs = 0xFF00;
     if (sub_08034004())
     {
         u32 r1;
@@ -1793,17 +1787,17 @@ void sub_08011F60(void)
             if (gUnknown_0300005D != 0)
             {
                 s8 sp0[32] = {254, 46, 94, 142};
-                gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+                gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
             }
             else
             {
                 s8 sp0[32] = {8, 65, 122};
-                gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+                gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
             }
             if (inlinefunc(gFileSelectMenuSel))
-                gUnknown_03001730.unkA = 0xFF00;
+                gBGOffsets_03001730.bg2vofs = 0xFF00;
             else
-                gUnknown_03001730.unkA = 0;
+                gBGOffsets_03001730.bg2vofs = 0;
         }
         else if (gSomeKeys_030012E8 & DPAD_LEFT)
         {
@@ -1816,17 +1810,17 @@ void sub_08011F60(void)
             if (gUnknown_0300005D != 0)
             {
                 s8 sp0[32] = {254, 46, 94, 142};
-                gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+                gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
             }
             else
             {
                 s8 sp0[32] = {8, 65, 122};
-                gUnknown_03001730.unk8 = -sp0[gFileSelectMenuSel];
+                gBGOffsets_03001730.bg2hofs = -sp0[gFileSelectMenuSel];
             }
             if (inlinefunc(gFileSelectMenuSel))
-                gUnknown_03001730.unkA = 0xFF00;
+                gBGOffsets_03001730.bg2vofs = 0xFF00;
             else
-                gUnknown_03001730.unkA = 0;
+                gBGOffsets_03001730.bg2vofs = 0;
         }
     }
 }
@@ -1835,8 +1829,8 @@ void sub_08012230(void)  // for new save file?
 {
     s16 i;
 
-    gUnknown_03001730.unk2 = 0xFF00;
-    gUnknown_03001730.unk6 = 0xFF00;
+    gBGOffsets_03001730.bg0vofs = 0xFF00;
+    gBGOffsets_03001730.bg1vofs = 0xFF00;
     if (sub_08034004())
     {
         if (gUnknown_0300005C != 0)

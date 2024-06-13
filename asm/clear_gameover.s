@@ -69,7 +69,7 @@ _0801BF64:
 	ldrh r0, [r4, #48]
 	ldrh r1, [r4, #50]
 	ldrh r2, [r4, #52]
-	bl sub_08029CDC
+	bl set_blend_regs_08029CDC
 	b _0801C1B4
 	.byte 0x00
 	.byte 0x00
@@ -336,7 +336,7 @@ _0801C19C:
 	ldrh r0, [r2, #48]
 	ldrh r1, [r2, #50]
 	ldrh r2, [r2, #52]
-	bl sub_08029CDC
+	bl set_blend_regs_08029CDC
 _0801C1B4:
 	add r2, sp, #32
 	mov r0, #160

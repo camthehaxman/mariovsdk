@@ -1518,7 +1518,7 @@ expert_level_select_init_callback: @ 0x08035388
 	and r2, r2, r3
 	orr r2, r2, r6
 	bl CpuSet
-	ldr r0, _08035498  @ =gUnknown_03001730
+	ldr r0, _08035498  @ =gBGOffsets_03001730
 	strh r4, [r0]
 	strh r4, [r0, #4]
 	strh r4, [r0, #8]
@@ -1575,7 +1575,7 @@ _08035490:
 _08035494:
 	.4byte 0x001FFFFF
 _08035498:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 	THUMB_FUNC_END expert_level_select_init_callback
 
 	THUMB_FUNC_START sub_0803549C
@@ -2190,7 +2190,7 @@ _0803591A:
 	ldrh r0, [r1]
 	add r0, r0, #80
 	strh r0, [r1]
-	ldr r1, _08035948  @ =gUnknown_03001730
+	ldr r1, _08035948  @ =gBGOffsets_03001730
 	lsl r0, r0, #16
 	lsr r0, r0, #24
 	strh r0, [r1, #12]
@@ -2207,7 +2207,7 @@ _08035940:
 _08035944:
 	.4byte 0x030002D2
 _08035948:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _0803594C:
 	.4byte gUnknown_03000B80
 _08035950:
@@ -5431,11 +5431,11 @@ _080371E6:
 	ldrh r0, [r2, #48]
 	ldrh r1, [r2, #50]
 	ldrh r2, [r2, #52]
-	bl sub_08029CDC
+	bl set_blend_regs_08029CDC
 	add r0, sp, #28
 	mov r1, #0
 	strh r1, [r0]
-	ldr r4, _08037220  @ =gUnknown_03001730
+	ldr r4, _08037220  @ =gBGOffsets_03001730
 	ldr r2, _08037224  @ =0x01000008
 	add r1, r4, #0
 	bl CpuSet
@@ -5455,7 +5455,7 @@ _08037218:
 _0803721C:
 	.4byte gUnknown_0882B4C4
 _08037220:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08037224:
 	.4byte 0x01000008
 _08037228:
@@ -5733,7 +5733,7 @@ _08037420:
 	ldr r2, _0803745C  @ =0xFFFFCE00
 	add r0, r2, #0
 	strh r0, [r1]
-	ldr r1, _08037460  @ =gUnknown_03001730
+	ldr r1, _08037460  @ =gBGOffsets_03001730
 	lsl r0, r0, #16
 	asr r0, r0, #24
 	strh r0, [r1, #10]
@@ -5761,7 +5761,7 @@ _08037458:
 _0803745C:
 	.4byte 0xFFFFCE00
 _08037460:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08037464:
 	.4byte gUnknown_03000B80
 _08037468:
@@ -5815,7 +5815,7 @@ _080374B0:
 	mov r0, #4
 	strb r0, [r6]
 _080374C6:
-	ldr r1, _080374DC  @ =gUnknown_03001730
+	ldr r1, _080374DC  @ =gBGOffsets_03001730
 	ldrh r0, [r2]
 	lsl r0, r0, #16
 	asr r0, r0, #24
@@ -5828,7 +5828,7 @@ _080374D0:
 _080374D8:
 	.4byte 0x030002F8
 _080374DC:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 	THUMB_FUNC_END sub_080372A0
 
 	THUMB_FUNC_START world_intro_main_callback
@@ -8507,7 +8507,7 @@ _08038826:
 	add r0, r1, #4
 	ldr r1, _080388A0  @ =0x02020000
 	mov r2, #0
-	bl sub_08034790
+	bl load_gfx_to_vram_08034790
 _08038836:
 	mov r0, #1
 	strh r0, [r4]
@@ -12034,7 +12034,7 @@ _0803A204:
 	b _0803A402
 _0803A216:
 	mov r5, r8
-	ldr r0, _0803A298  @ =0x03000C2C
+	ldr r0, _0803A298  @ =gUnknown_03000C2C
 	mov r1, r9
 	ldr r2, [r0]
 	mov r0, r8
@@ -12101,7 +12101,7 @@ _0803A290:
 _0803A294:
 	.4byte 0xFFFFFE00
 _0803A298:
-	.4byte 0x03000C2C
+	.4byte gUnknown_03000C2C
 _0803A29C:
 	.4byte 0x03001958
 _0803A2A0:
@@ -75177,7 +75177,7 @@ sub_08056774: @ 0x08056774
 _08056808:
 	add r0, r4, #0
 	mov r1, #0
-	bl sub_08032814
+	bl setup_graphics_08032814
 	mov r2, #128
 	lsl r2, r2, #19
 	ldr r1, _080568BC  @ =0x0000F0FF
@@ -75306,7 +75306,7 @@ _08056900:
 _08056904:
 	add r0, r4, #0
 	mov r1, #0
-	bl sub_08032814
+	bl setup_graphics_08032814
 	ldrh r1, [r5]
 	orr r1, r1, r0
 	strh r1, [r5]

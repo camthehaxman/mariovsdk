@@ -4,7 +4,7 @@
 
 void intro_init_callback(void)
 {
-    const void *arr[4];
+    const struct UnkStruct1_sub_child *arr[4];
 
     gIntroTitleTimer_03000BE0 = 0;
     gUnknown_03000BD0 = 0;
@@ -21,7 +21,7 @@ void intro_init_callback(void)
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     REG_DISPCNT = 0x100;
     gMoveFrameCounter_03000B54 = 0;
-    sub_08029CDC(gUnknown_08866A48.bldCnt, gUnknown_08866A48.bldAlpha, gUnknown_08866A48.bldY);
+    set_blend_regs_08029CDC(gUnknown_08866A48.bldCnt, gUnknown_08866A48.bldAlpha, gUnknown_08866A48.bldY);
 }
 
 void sub_0801BA6C(void)

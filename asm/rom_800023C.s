@@ -608,7 +608,7 @@ _080009F8:
 	push {r4-r11,lr}
 	mov r12, r0
 	ldr r3, _0800168C  @ =gUnknown_0807AA58
-	ldr r4, _08001690  @ =0x03000970
+	ldr r4, _08001690  @ =gUnknown_03000970
 _08000A48:
 	ldrb r5, [r1, #152]
 	cmp r5, #0
@@ -1502,7 +1502,7 @@ _08001688:
 _0800168C:
 	.4byte gUnknown_0807AA58
 _08001690:
-	.4byte 0x03000970
+	.4byte gUnknown_03000970
 _08001694:
 	.4byte gUnknown_03001A1C
 _08001698:
@@ -1566,6 +1566,9 @@ _08001748:
 	pop {r4-r11}
 	bx lr
 ARM_FUNC_END sub_0800169C
+
+.GLOBAL sub_0800169C_end
+sub_0800169C_end:
 
 
 	ARM_FUNC_START sub_08001760
@@ -1632,6 +1635,9 @@ _08001828:
 	pop {r4-r11}
 	bx lr
 ARM_FUNC_END sub_08001760
+
+.GLOBAL sub_08001760_end
+sub_08001760_end:
 
 
 	ARM_FUNC_START sub_08001840

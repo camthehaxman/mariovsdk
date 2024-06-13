@@ -92,9 +92,9 @@ s16 fixed_reciprocal(s16 a)
 
 void vblank_interrupt_handler(void)
 {
-    sub_0802BEEC(&gUnknown_030012D0);
+    set_bg_offset_regs_0802BEEC(&gBGOffsets_030012D0);
     sub_0802BFA4();
-    sub_0802C144(gUnknown_030012D0.unk6);
+    sub_0802C144(gBGOffsets_030012D0.bg1vofs);
     sub_0802C058();
     sub_0807194C();
     irq_enable_t();
@@ -104,8 +104,8 @@ void vblank_interrupt_handler(void)
         {
             sub_08033EC8();
             gUnknown_03001748 = 0;
-            CpuCopy16(&gUnknown_03001730, &gUnknown_030012D0, 16);
-            sub_0802BEEC(&gUnknown_030012D0);
+            CpuCopy16(&gBGOffsets_03001730, &gBGOffsets_030012D0, 16);
+            set_bg_offset_regs_0802BEEC(&gBGOffsets_030012D0);
             sub_0802BE74();
             gUnknown_030012C0();
             sub_08033EC8();
@@ -482,7 +482,7 @@ void sub_0803446C(int a, int b)
 int sub_080344F8(s32 a)
 {
     s32 r2 = gUnknown_030012A0 >> 1;
-    
+
     a >>= 8;
     if (a < r2 + 64)
         return 1;
@@ -494,7 +494,7 @@ int sub_080344F8(s32 a)
 int sub_08034528(s32 a)
 {
     s32 r2 = gUnknown_03001710 >> 1;
-    
+
     a >>= 8;
     if (a < r2 + 24)
         return 1;
@@ -509,61 +509,61 @@ struct UnknownStruct1
     u8 unk4[1];  // unknown length
 };
 
-void sub_0803455C(struct UnknownStruct1 *a, u16 *b)
+void decompress_something_0803455C(struct CmprHeader *hdr, u16 *dest)
 {
-    u8 *r3 = a->unk4;
-    u32 r8 = a->unk0 >> 8;
-    u32 r5 = 0;
-    u8 r2;
-    u8 r6;
-    u16 r4;
-    
-    while (r5 < r8)
+    u8 *src = (u8 *)hdr + 4;  // skip over header
+    u32 size = hdr->size;  // size of uncompressed data
+    u32 pos = 0;
+    u8 count;
+    u8 srcByte;
+    u16 destWord;
+
+    while (pos < size)
     {
-        r2 = *r3++;
-        if (r2 & 0x80)
+        count = *src++;
+        if (count & 0x80)
         {
-            r2 &= ~0x80;
-            r2 += 3;
-            r6 = *r3++;
-            while (r2 != 0)
+            count &= ~0x80;
+            count += 3;
+            srcByte = *src++;
+            while (count != 0)
             {
-                if (r5 & 1)
+                if (pos & 1)
                 {
-                    r4 |= r6 << 8;
-                    *b++ = r4;
-                    r4 = 0;
+                    destWord |= srcByte << 8;
+                    *dest++ = destWord;
+                    destWord = 0;
                 }
                 else
                 {
-                    r4 = r6;
+                    destWord = srcByte;
                 }
-                r2--;
-                r5++;
+                count--;
+                pos++;
             }
         }
         else
         {
-            r2++;
-            while (r2 != 0)
+            count++;
+            while (count != 0)
             {
-                if (r5 & 1)
+                if (pos & 1)
                 {
-                    r4 |= *r3++ << 8;
-                    *b++ = r4;
-                    r4 = 0;
+                    destWord |= *src++ << 8;
+                    *dest++ = destWord;
+                    destWord = 0;
                 }
                 else
                 {
-                    r4 = *r3++;
+                    destWord = *src++;
                 }
-                r2--;
-                r5++;
+                count--;
+                pos++;
             }
         }
     }
-    if (r5 & 1)
-        *b = r4;
+    if (pos & 1)
+        *dest = destWord;
 }
 
 // TODO: This function is crazy. Fix later.
@@ -577,18 +577,18 @@ void sub_08034608(struct UnknownStruct1 *a, u16 *b)
     u32 r3;
     u32 r2;
     u32 sp4;
-    
+
     while (r5 < r9)
     {
         u8 r7 = *r4++;
-        
+
         while (r5 < r9)
         {
             if (r7 & 0x80)
             {
                 u8 r0 = *r4++;
                 u8 *ptr;
-                
+
                 r3 = r0 >> 4;
                 r2 = *r4++ | ((r0 & 0xF) << 8);
                 ptr = (u8 *)b + r5;
@@ -790,24 +790,24 @@ void sub_08034700(struct UnknownStruct1 *a, u8 *b)
     u8 *r4 = a->unk4;
     u32 r6 = 0;
     u32 r12 = a->unk0 >> 8;
-    
+
     while (r6 < r12)
     {
         u8 r8 = *r4++;
         u8 r7 = 0x80;
-        
+
         while (r7 != 0 && r6 < r12)
         {
             if (r8 & r7)
             {
                 u8 *r1;
                 u32 r2;
-                
+
                 u8 r0_1 = *r4++;
                 u32 r3 = r0_1 >> 4;
                 u32 r2_2 = *r4++ | ((r0_1 & 0xF) << 8);
                 r1 = b + r6 - r2_2 - 1;
-                
+
                 //r1 -= (r2 + 1);
                 r2 = r6 + r3;
                 //r7 /= 2;
@@ -914,32 +914,32 @@ _08034782:\n\
 	bx r0");
 }
 
-void *sub_08034790(struct UnknownStruct2 *a, u16 *b, int c)
+void *load_gfx_to_vram_08034790(struct CmprHeader *src, void *dest, int toVram)
 {
-    struct CompressionHeader header = a->header;
-    
+    struct CmprHeader header = *src;
+
     switch (header.compressionType)
     {
-    case 3:
-        sub_0803455C((struct UnknownStruct1 *)a, b);
+    case 3:  // custom compression algorithm?
+        decompress_something_0803455C(src, dest);
         break;
-    case 1:
-        if (c != 0)
-            LZ77UnCompVram(a, b);
+    case 1:  // LZ77
+        if (toVram)
+            LZ77UnCompVram(src, dest);
         else
-            LZ77UnCompWram(a, b);
+            LZ77UnCompWram(src, dest);
         break;
     default:
-        CpuCopy16(a->data, b, header.size);
+        CpuCopy16((u8 *)src + sizeof(struct CmprHeader), dest, header.size);
         break;
     }
-    return b;
+    return dest;
 }
 
 void credits_init_callback(void)
 {
     u8 arr[16];  // Needed to match. Probably some unused variable
-    
+
     arena_restore_head(0);
     if (gUnknown_03000B80 == 1)
         init_movie_0802D468(3, 61, MAIN_STATE_LEVEL_SELECT, 3);

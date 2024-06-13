@@ -2,49 +2,6 @@
 #include "global.h"
 #include "main.h"
 
-struct UnkStruct1_sub_child
-{
-    u8 filler0[0x8];
-    u32 unk8;
-    s32 unkC[1];
-    u8 filler10[0x1C-0x10];
-    u32 unk1C;
-    u8 filler20[0xC];
-    u16 unk2C;
-    u16 unk2E;
-    u16 unk30;
-    u16 unk32;
-    u16 unk34;
-    u8 filler36[2];
-    u16 unk38[4];
-    u32 unk40[4];
-    u32 unk50[1];  // unknown length
-};
-
-struct UnkStruct1_sub
-{
-    struct UnkStruct1_sub_child *unk0;
-    u16 unk4;
-    u8 unk6;
-    u8 unk7;
-};
-
-struct UnkStruct1
-{
-    struct UnkStruct1_sub unk0[4];
-    u8 unk20[4];
-    u8 unk24[4];
-    u32 unk28;
-    u8 unk2C;
-    u8 unk2D;
-    s8 unk2E;
-    u8 unk2F;
-    u8 unk30;
-    u8 unk31;
-    u8 unk32;
-    u8 unk33;
-};
-
 struct Struct08032D50
 {
     u8 filler0[0x40];
@@ -62,13 +19,6 @@ extern u32 gUnknown_0807DD4C[];
 extern u32 gUnknown_0807DD64[];
 extern u32 gUnknown_0807DD7C[];
 
-struct WTF
-{
-    u8 filler0[4];
-    u16 unk4;
-    u16 unk6;
-};
-
 struct Thing
 {
     u8 filler0[8];
@@ -78,12 +28,12 @@ struct Thing
 };
 
 u32 alloc_screen_base_block_08032E24(struct UnkStruct1_sub_child *arg0, int arg1, int arg2);
-void sub_08034790(void *, u32, int);
+void load_gfx_to_vram_08034790(void *, void *, int);
 void sub_0801B3DC(struct UnkStruct1_sub_child *, int, int);
 void sub_0802C0B8(struct UnkStruct1_sub_child *);
-void sub_08032E80(struct UnkStruct1_sub_child *arg0);
+void copy_some_palette_08032E80(struct UnkStruct1_sub_child *arg0);
 
-u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
+u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
 {
     u16 dispcnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     int i;
@@ -92,7 +42,7 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
 
     gUnknown_030012A4 = 0;
     gUnknown_030012EC = 0;
-    sub_0801B3C0();
+    reset_some_array_0801B3C0();
 
     for (i = 0; i < 4; i++)
     {
@@ -103,10 +53,10 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
         {
             dispcnt |= BGCNT_SCREENBASE(alloc_screen_base_block_08032E24(r4->unk0, i, i + 1));
             bgReg = &((volatile u16 *)REG_ADDR_BG0CNT)[i];
-            *bgReg = r4->unk0->unk38[i];
-            if (arg0->unk24[i] != 0)
+            *bgReg = r4->unk0->bgCnt[i];
+            if (arg0->bgPrio[i] != 0)
             {
-                *bgReg = (*bgReg & ~3) | ((arg0->unk24[i] - 1) & 3);
+                *bgReg = (*bgReg & ~3) | ((arg0->bgPrio[i] - 1) & 3);
             }
         }
     }
@@ -117,35 +67,37 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
 
         r4 = &arg0->unk0[i];
         r3 = r4->unk0;
-        if (r3 != NULL && r3->unk8 != 0)
+        if (r3 != NULL && r3->gfxOffset != 0)
         {
-            u8 r7 = r4->unk4;
-            struct UnkStruct1_sub *r5 = &arg0->unk0[arg0->unk20[r4->unk4]];
-            volatile u16 *bgReg = &((volatile u16 *)REG_ADDR_BG0CNT)[r4->unk4];
+            u8 bgNum = r4->bgNum;
+            struct UnkStruct1_sub *r5 = &arg0->unk0[arg0->unk20[r4->bgNum]];
+            volatile u16 *bgReg = &((volatile u16 *)REG_ADDR_BG0CNT)[r4->bgNum];
 
             if (r5->unk0 == NULL)
                 r5 = &arg0->unk0[i];
 
             if (r4->unk7 != 0)
             {
-                r7 = r4->unk7 - 1;
-                *bgReg = (*bgReg & ~0xC) | (r3->unk38[r7] & 0xC);
+                bgNum = r4->unk7 - 1;
+                // clear CHARBASE field
+                *bgReg = (*bgReg & ~0xC) | (r3->bgCnt[bgNum] & 0xC);
             }
 
             r3 = r4->unk0;
-            gUnknown_03000E88 = (u8 *)r3 + r3->unk8;
-            sub_08034790(gUnknown_03000E88 + 4, r5->unk0->unk50[r7] + r3->unk2C * 0x40, 1);
+            gUnknown_03000E88 = (u8 *)r3 + r3->gfxOffset;
+            load_gfx_to_vram_08034790(gUnknown_03000E88 + 4, r5->unk0->vramAddr50[bgNum] + r3->unk2C * 0x40, TRUE);
 
+            // set color mode
             {
-                u16 reg = *bgReg & ~0x80;
-                reg |= (r4->unk0->unk38[r4->unk4] & 0x80);
+                u16 reg = *bgReg & ~BGCNT_256COLOR;
+                reg |= (r4->unk0->bgCnt[r4->bgNum] & BGCNT_256COLOR);
                 *bgReg = reg;
             }
 
             if (r4->unk6 == 0)
             {
                 u32 one = 1;
-                sub_0801B3DC(r4->unk0, one & ~(r4->unk0->unk38[r7] >> 7), r7);
+                sub_0801B3DC(r4->unk0, one & ~(r4->unk0->bgCnt[bgNum] >> 7), bgNum);
             }
         }
     }
@@ -155,12 +107,12 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
     if (r2 != NULL)
     {
         gUnknown_030012E4 = r2->unk2E;
-        if (r2->unkC[arg0->unk32] == 0)
+        if (r2->unkOffsets[arg0->unk32] == 0)
         {
         }
-        else if (r2->unkC[arg0->unk32] > 0)
+        else if (r2->unkOffsets[arg0->unk32] > 0)
         {
-            struct WTF *r2_ = (void *)((u8 *)r2 + r2->unkC[arg0->unk32]);
+            struct UnkStruct1_sub_child_data *r2_ = (void *)((u8 *)r2 + r2->unkOffsets[arg0->unk32]);
             gUnknown_03001720 = r2_->unk4;
             gUnknown_0300170C = r2_->unk6;
             gUnknown_030012A4 = ((struct Thing *)gUnknown_03000E70[1])->unk8;
@@ -173,10 +125,10 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
         struct UnkStruct1_sub_child *r2 = arg0->unk0[arg0->unk20[arg0->unk2C]].unk0;
         struct UnkStruct1_sub_child *r5 = arg0->unk0[arg0->unk2D].unk0;
 
-        gUnknown_03000E80 = r2->unk40[arg0->unk2C];
-        gUnknown_03000E90 = r2->unk40[arg0->unk2C - 1];
+        gSomeVRAMAddr_03000E80 = r2->vramAddr40[arg0->unk2C];
+        gSomeVRAMAddr_03000E90 = r2->vramAddr40[arg0->unk2C - 1];
         gUnknown_03000E60 = r5->unk2C;
-        if (!(r5->unk38[0] & 0x80))
+        if (!(r5->bgCnt[0] & BGCNT_256COLOR))
             *(vu16 *)&gUnknown_03000E60 <<= 1;
         if (arg0->unk33 & 2)
         {
@@ -191,7 +143,7 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
     sub_0802C0B8(arg0->unk0[arg0->unk30].unk0);
     sub_0802BCA4(arg0->unk0[arg0->unk2F].unk0, arg1);
     if (arg0->unk2E >= 0)
-        sub_08032E80(arg0->unk0[arg0->unk2E].unk0);
+        copy_some_palette_08032E80(arg0->unk0[arg0->unk2E].unk0);
     if (arg0->unk33 & 1)
     {
         struct UnkStruct1_sub_child *r4;
@@ -199,9 +151,9 @@ u16 sub_08032814(struct UnkStruct1 *arg0, int arg1)
         if (r4 != NULL)
         {
             if (gUnknown_03000B90.unk12 != 2 || (gUnknown_030009D0 & 0x10))
-                sub_08029CDC(r4->unk30, r4->unk32, r4->unk34);
+                set_blend_regs_08029CDC(r4->bldCnt, r4->bldAlpha, r4->bldY);
             else
-                sub_08029CDC(r4->unk30 | 0x40, r4->unk32, r4->unk34);
+                set_blend_regs_08029CDC(r4->bldCnt | BLDCNT_EFF_ALPHA, r4->bldAlpha, r4->bldY);
         }
     }
     return dispcnt;
@@ -251,26 +203,26 @@ int sub_08032C44(struct UnknownStruct4 *arg0)
 {
     struct UnkStruct1 sp0 = {0};
     struct UnknownStruct5 *r6 = arg0->unk0;
-    void *r7 = r6->unk0;
+    struct UnkStruct1_sub_child *r7 = r6->unk0;
 
     sp0.unk0[0].unk0 = r7;
-    sp0.unk0[0].unk4 = 2;
-    sp0.unk0[1].unk0 = (void *)arg0->unk4;
-    sp0.unk0[1].unk4 = 1;
+    sp0.unk0[0].bgNum = 2;
+    sp0.unk0[1].unk0 = arg0->unk4;
+    sp0.unk0[1].bgNum = 1;
     sp0.unk33 |= 1;
     sp0.unk2E = 0;
     sp0.unk20[3] = 0;
     sp0.unk20[2] = 0;
     sp0.unk20[1] = 0;
     sp0.unk20[0] = 0;
-    sp0.unk0[2].unk4 = 0;
-    sp0.unk0[2].unk0 = (void *)arg0->unk4;
+    sp0.unk0[2].bgNum = 0;
+    sp0.unk0[2].unk0 = arg0->unk4;
     sp0.unk0[2].unk6 = 1;
     if (gUnknown_030009D0 & 0x18)
     {
-        sp0.unk24[0] = 0;
+        sp0.bgPrio[0] = 0;
         sp0.unk20[0] = 0;
-        sp0.unk0[2].unk4 = 0;
+        sp0.unk0[2].bgNum = 0;
         sp0.unk0[2].unk0 = r7;
         sp0.unk0[2].unk7 = 4;
         sp0.unk0[2].unk6 = 1;
@@ -280,15 +232,15 @@ int sub_08032C44(struct UnknownStruct4 *arg0)
     case 0:
         break;
     case 1:
-        sp0.unk24[2] = 2;
-        sp0.unk24[3] = 4;
+        sp0.bgPrio[2] = 2;
+        sp0.bgPrio[3] = 4;
         if (gUnknown_030009D0 & 0x18)
-            sp0.unk24[0] = 3;
+            sp0.bgPrio[0] = 3;
     }
     sp0.unk28 = r6->unk4;
     sp0.unk2C = 1;
     sp0.unk2D = 1;
-    REG_DISPCNT |= sub_08032814(&sp0, (gUnknown_03000B90.unk12 == 2) ? 1 : 0);
+    REG_DISPCNT |= setup_graphics_08032814(&sp0, (gUnknown_03000B90.unk12 == 2) ? 1 : 0);
     sub_08032B30(arg0->unk10, arg0->unk12);
     return sub_080319BC(arg0->unk4, r6, arg0->unk12);
 }
@@ -329,29 +281,29 @@ u32 alloc_screen_base_block_08032E24(struct UnkStruct1_sub_child *arg0, int arg1
 
     for (i = arg1; i < arg2; i++)
     {
-        if (arg0->unkC[i] > 0)
+        if (arg0->unkOffsets[i] > 0)
         {
             blockNum |= 1 << i;
-            gUnknown_03000E70[i] = r8 + arg0->unkC[i];
-            sub_08034790(gUnknown_03000E70[i] + 0x28, arg0->unk40[i], 1);
+            gUnknown_03000E70[i] = r8 + arg0->unkOffsets[i];
+            load_gfx_to_vram_08034790(gUnknown_03000E70[i] + 0x28, arg0->vramAddr40[i], 1);
         }
     }
     return blockNum;
 }
 
-void sub_08032E80(struct UnkStruct1_sub_child *arg0)
+void copy_some_palette_08032E80(struct UnkStruct1_sub_child *arg0)
 {
     u8 *src;
-    register u8 *r0 asm("r0");
+    register u8 *src_ asm("r0");
     register void *dest asm("r1");
 
-    if (arg0->unk1C != 0)
+    if (arg0->palOffset != 0)
     {
-        gUnknown_03000E8C = (u8 *)arg0 + arg0->unk1C;
-        src = gUnknown_03000E8C + 4;
-        r0 = src;
+        gPaletteData_03000E8C = (u8 *)arg0 + arg0->palOffset;
+        src = gPaletteData_03000E8C + 4;
+        src_ = src;
         dest = (void *)PLTT;
-        CpuCopy16(r0, dest, 0x200);
+        CpuCopy16(src_, dest, 0x200);
         sub_0802C104(0, 0, src);
     }
 }
@@ -361,43 +313,43 @@ int sub_08032EB4(void)
     return 0;
 }
 
-u16 sub_08032EB8(void *arg0)
+u16 sub_08032EB8(struct UnkStruct1_sub_child *arg0)
 {
     struct UnkStruct1 sp0 = {0};
 
     sp0.unk0[0].unk0 = arg0;
-    sp0.unk0[0].unk4 = 2;
-    return sub_08032814(&sp0, 0);
+    sp0.unk0[0].bgNum = 2;
+    return setup_graphics_08032814(&sp0, 0);
 }
 
-u16 sub_08032EE4(void *arg0)
+u16 sub_08032EE4(struct UnkStruct1_sub_child *arg0)
 {
     struct UnkStruct1 sp0 = {0};
-    int r2;
-    void *temp = arg0;
+    int i;
+    struct UnkStruct1_sub_child *temp = arg0;
 
-    for (r2 = 0; r2 < 4; r2++)
+    for (i = 0; i < 4; i++)
     {
-        sp0.unk0[r2].unk0 = temp;
-        sp0.unk0[0].unk4 = r2;
-        sp0.unk20[r2] = r2;
+        sp0.unk0[i].unk0 = temp;
+        sp0.unk0[0].bgNum = i;
+        sp0.unk20[i] = i;
     }
-    return sub_08032814(&sp0, 0);
+    return setup_graphics_08032814(&sp0, 0);
 }
 
-u16 something_with_loading_graphics_08032F24(const void **arg0, int arg1)
+u16 something_with_loading_graphics_08032F24(const struct UnkStruct1_sub_child *arg0[4], int arg1)
 {
     struct UnkStruct1 sp0 = {0};
-    int r2;
+    int i;
 
-    for (r2 = 0; r2 < 4; r2++)
+    for (i = 0; i < 4; i++)
     {
-        sp0.unk0[r2].unk4 = r2;
-        sp0.unk0[r2].unk0 = arg0[r2];
-        sp0.unk20[r2] = r2;
+        sp0.unk0[i].bgNum = i;
+        sp0.unk0[i].unk0 = arg0[i];
+        sp0.unk20[i] = i;
     }
     sp0.unk2E = arg1;
-    return sub_08032814(&sp0, 0);
+    return setup_graphics_08032814(&sp0, 0);
 }
 
 void sub_08032F68(void)
@@ -493,7 +445,7 @@ void sub_08033024(void)
 
 void sub_08033148(void)
 {
-    if (gSomeKeys_030012E8 == 8 || gSomeKeys_030012E8 == 2)
+    if (gSomeKeys_030012E8 == START_BUTTON || gSomeKeys_030012E8 == B_BUTTON)
     {
         goto_state_080070E8(7, 1);
         gUnknown_030012F8 = 0;
@@ -843,4 +795,52 @@ void sub_08033588(int a, int b, int c)
     }
 }
 
+/*
+int sub_08033658(void)
+{
+    int r7 = 0;
+    int r2;
+    int r6;
+    
+    r2 = gUnknown_030002B8.unk0 - gUnknown_030002B0.unk0;
+    if (r2 < 0)
+        r2 = gUnknown_030002B0.unk0 - gUnknown_030002B8.unk0;
+    r6 = gUnknown_030002B8.unk4 - gUnknown_030002B0.unk4;
+    if (r6 < 0)
+        r6 = gUnknown_030002B0.unk4 - gUnknown_030002B8.unk4;
+    //_0803367E
+    if (gUnknown_030002B0.unk0 != gUnknown_030002B8.unk0)
+    {
+        int r1 = gUnknown_030002C8.unk0;
+        if (r1 < 0)
+            r1 = -r1;
+        if (r2 > r1 && r2 > 255)
+            gUnknown_030002C8.unk0 += gUnknown_030002B0.unk0;
+        else
+            gUnknown_030002B0.unk0 = gUnknown_030002B8.unk0;
+    }
+    //_080336AA
+    else
+        r7 = 1;
+    //_080336AC
+    if (gUnknown_030002B0.unk4 != gUnknown_030002B8.unk4)
+    {
+        int r1 = gUnknown_030002C8.unk4;
+        if (r1 < 0)
+            r1 = -r1;
+        if (r6 > r1 && r6 > 255)
+            gUnknown_030002C8.unk4 += gUnknown_030002B0.unk4;
+        else
+            gUnknown_030002B0.unk4 = gUnknown_030002B8.unk4;
+    }
+    //_080336D6
+    else
+        r7++;
+    //_080336D8
+    gUnknown_030012A0 = (gUnknown_030002B0.unk0 >> 7);
+    gUnknown_03001710 = (gUnknown_030002B0.unk4 >> 7);
+    sub_08033440();
+    return r7 == 2;
+}
+*/
 asm(".align 2, 0");

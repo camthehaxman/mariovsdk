@@ -4255,7 +4255,7 @@ _080115E0:
 	ldrh r0, [r4, #48]
 	ldrh r1, [r4, #50]
 	ldrh r2, [r4, #52]
-	bl sub_08029CDC
+	bl set_blend_regs_08029CDC
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #218
@@ -4267,7 +4267,7 @@ _080115E0:
 	bl load_palette
 	mov r0, sp
 	strh r5, [r0]
-	ldr r1, _08011680  @ =gUnknown_03001730
+	ldr r1, _08011680  @ =gBGOffsets_03001730
 	ldr r2, _08011684  @ =0x01000008
 	bl CpuSet
 	mov r0, #0
@@ -4330,7 +4330,7 @@ _08011678:
 _0801167C:
 	.4byte 0x81000100
 _08011680:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08011684:
 	.4byte 0x01000008
 _08011688:
@@ -4361,7 +4361,7 @@ _080116AE:
 	mov r0, sp
 	mov r2, #32
 	bl memcpy
-	ldr r1, _08011700  @ =gUnknown_03001730
+	ldr r1, _08011700  @ =gBGOffsets_03001730
 	ldr r0, _08011704  @ =gFileSelectMenuSel
 	ldrb r0, [r0]
 	add r0, sp, r0
@@ -4399,7 +4399,7 @@ _080116AE:
 _080116FC:
 	.4byte gUnknown_080763AC
 _08011700:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08011704:
 	.4byte gFileSelectMenuSel
 _08011708:
@@ -4413,7 +4413,7 @@ _08011714:
 _08011716:
 	cmp r0, #0
 	beq _08011722
-	ldr r1, _0801173C  @ =gUnknown_03001730
+	ldr r1, _0801173C  @ =gBGOffsets_03001730
 	mov r0, #255
 	lsl r0, r0, #8
 	strh r0, [r1, #10]
@@ -4432,13 +4432,13 @@ _08011722:
 	ldr r2, _08011744  @ =0x00000808
 	b _0801175A
 _0801173C:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08011740:
 	.4byte 0x00003B44
 _08011744:
 	.4byte 0x00000808
 _08011748:
-	ldr r0, _08011764  @ =gUnknown_03001730
+	ldr r0, _08011764  @ =gBGOffsets_03001730
 	strh r1, [r0, #6]
 	strh r1, [r0, #10]
 	strh r1, [r0, #8]
@@ -4454,7 +4454,7 @@ _0801175A:
 	pop {r0}
 	bx r0
 _08011764:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 	THUMB_FUNC_END sub_0801168C
 
 	THUMB_FUNC_START pick_file
@@ -5524,7 +5524,7 @@ _08011F5C:
 sub_08011F60: @ 0x08011F60
 	push {r4-r6,lr}
 	sub sp, sp, #44
-	ldr r1, _08011FA0  @ =gUnknown_03001730
+	ldr r1, _08011FA0  @ =gBGOffsets_03001730
 	mov r6, #0
 	mov r0, #255
 	lsl r0, r0, #8
@@ -5554,7 +5554,7 @@ sub_08011F60: @ 0x08011F60
 	mov r0, #1
 	b _08011FAE
 _08011FA0:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08011FA4:
 	.4byte gFileSelectMenuSel
 _08011FA8:
@@ -5717,7 +5717,7 @@ _080120CE:
 	add r0, sp, #12
 	mov r2, #32
 	bl memcpy
-	ldr r1, _08012124  @ =gUnknown_03001730
+	ldr r1, _08012124  @ =gBGOffsets_03001730
 	ldr r0, _08012128  @ =gFileSelectMenuSel
 	ldrb r0, [r0]
 	add r0, sp, r0
@@ -5758,7 +5758,7 @@ _080120CE:
 _08012120:
 	.4byte gUnknown_080763AC
 _08012124:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08012128:
 	.4byte gFileSelectMenuSel
 _0801212C:
@@ -5828,7 +5828,7 @@ _0801219E:
 	add r0, sp, #12
 	mov r2, #32
 	bl memcpy
-	ldr r1, _080121F4  @ =gUnknown_03001730
+	ldr r1, _080121F4  @ =gBGOffsets_03001730
 	ldr r0, _080121F8  @ =gFileSelectMenuSel
 	ldrb r0, [r0]
 	add r0, sp, r0
@@ -5869,7 +5869,7 @@ _0801219E:
 _080121F0:
 	.4byte gUnknown_080763AC
 _080121F4:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _080121F8:
 	.4byte gFileSelectMenuSel
 _080121FC:
@@ -5885,7 +5885,7 @@ _0801220A:
 	cmp r1, #0
 	beq _08012220
 _08012210:
-	ldr r1, _0801221C  @ =gUnknown_03001730
+	ldr r1, _0801221C  @ =gBGOffsets_03001730
 	mov r0, #255
 	lsl r0, r0, #8
 	strh r0, [r1, #10]
@@ -5893,9 +5893,9 @@ _08012210:
 	.byte 0x00
 	.byte 0x00
 _0801221C:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08012220:
-	ldr r0, _0801222C  @ =gUnknown_03001730
+	ldr r0, _0801222C  @ =gBGOffsets_03001730
 	strh r1, [r0, #10]
 _08012224:
 	add sp, sp, #44
@@ -5903,14 +5903,14 @@ _08012224:
 	pop {r0}
 	bx r0
 _0801222C:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 	THUMB_FUNC_END sub_08011F60
 
 	THUMB_FUNC_START sub_08012230
 sub_08012230: @ 0x08012230
 	push {r4,r5,lr}
 	sub sp, sp, #16
-	ldr r1, _080122C4  @ =gUnknown_03001730
+	ldr r1, _080122C4  @ =gBGOffsets_03001730
 	mov r5, #0
 	mov r4, #0
 	mov r0, #255
@@ -5980,7 +5980,7 @@ _080122A4:
 	.byte 0x00
 	.byte 0x00
 _080122C4:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _080122C8:
 	.4byte gUnknown_0300005C
 _080122CC:
@@ -12878,7 +12878,7 @@ _080155CE:
 	add r0, r2, #0
 	strh r0, [r1]
 	strh r6, [r4]
-	ldr r1, _08015624  @ =gUnknown_03001730
+	ldr r1, _08015624  @ =gBGOffsets_03001730
 	ldr r2, _08015628  @ =0x01000008
 	add r0, r4, #0
 	bl CpuSet
@@ -12912,7 +12912,7 @@ _0801561C:
 _08015620:
 	.4byte 0x81000100
 _08015624:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08015628:
 	.4byte 0x01000008
 	THUMB_FUNC_END level_select_init_callback
@@ -15820,7 +15820,7 @@ level_select_main_callback: @ 0x08016BEC
 	bne _08016C04
 	b _08016FB0
 _08016C04:
-	ldr r2, _08016C2C  @ =gUnknown_03001730
+	ldr r2, _08016C2C  @ =gBGOffsets_03001730
 	ldr r0, _08016C30  @ =0x03000094
 	ldr r1, [r0]
 	mov r0, #0
@@ -15842,7 +15842,7 @@ _08016C1E:
 _08016C28:
 	.4byte 0x03000083
 _08016C2C:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08016C30:
 	.4byte 0x03000094
 _08016C34:
@@ -16249,7 +16249,7 @@ _08016F4C:
 	ldr r0, _08016F74  @ =0x00003D42
 	ldr r1, _08016F78  @ =0x0000A0A0
 	mov r2, #0
-	bl sub_08029CDC
+	bl set_blend_regs_08029CDC
 	b _0801706A
 	.byte 0x00
 	.byte 0x00
@@ -16330,7 +16330,7 @@ _08016FE0:
 	ldrh r0, [r1, #4]
 	add r0, r0, #80
 	strh r0, [r1, #4]
-	ldr r1, _08016FFC  @ =gUnknown_03001730
+	ldr r1, _08016FFC  @ =gBGOffsets_03001730
 	lsl r0, r0, #16
 	lsr r0, r0, #24
 	strh r0, [r1, #12]
@@ -16340,9 +16340,9 @@ _08016FF4:
 _08016FF8:
 	.4byte 0x03000094
 _08016FFC:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08017000:
-	ldr r0, _08017020  @ =gUnknown_03001730
+	ldr r0, _08017020  @ =gBGOffsets_03001730
 	ldr r1, _08017024  @ =0x03000094
 	ldr r1, [r1]
 	strh r2, [r1, #4]
@@ -16360,7 +16360,7 @@ _0801700A:
 	ldr r0, [r0]
 	mov pc, r0
 _08017020:
-	.4byte gUnknown_03001730
+	.4byte gBGOffsets_03001730
 _08017024:
 	.4byte 0x03000094
 _08017028:
@@ -25334,8 +25334,8 @@ _0801B3B4:
 	bx r0
 	THUMB_FUNC_END sub_0801B310
 
-	THUMB_FUNC_START sub_0801B3C0
-sub_0801B3C0: @ 0x0801B3C0
+	THUMB_FUNC_START reset_some_array_0801B3C0
+reset_some_array_0801B3C0: @ 0x0801B3C0
 	ldr r0, _0801B3D0  @ =0x03000098
 	mov r1, #0
 	str r1, [r0]
@@ -25350,7 +25350,7 @@ _0801B3D4:
 	.4byte 0x03000BDC
 _0801B3D8:
 	.4byte 0x0300009C
-	THUMB_FUNC_END sub_0801B3C0
+	THUMB_FUNC_END reset_some_array_0801B3C0
 
 	THUMB_FUNC_START sub_0801B3DC
 sub_0801B3DC: @ 0x0801B3DC

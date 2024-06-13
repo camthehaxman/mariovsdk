@@ -14,6 +14,89 @@
 // Types
 //------------------------------------------------------------------------------
 
+typedef u32 unknown;
+
+struct UnknownStruct15
+{
+    u8 unk0[0x108];
+    u32 unk108[0];
+};
+
+struct UnkStruct1_sub_child_data
+{
+    u8 filler0[4];
+    u16 unk4;
+    u16 unk6;
+};
+
+struct UnkStruct1_sub_child_data68_sub
+{
+    u32 unk0;
+    u32 unk4;
+    u16 unk8;
+    u8 fillerA[2];
+};  // size = 0xC
+
+struct UnkStruct1_sub_child_data68
+{
+    u16 unk0;
+    u16 unk2;
+    struct UnkStruct1_sub_child_data68_sub unk4[1];
+};
+
+struct CmprHeader
+{
+    u32 reserved:4;
+    u32 compressionType:4;  // 1 = LZ77
+    u32 size:24;  // size of decompressed data
+    // data follows this header
+};
+
+struct UnkStruct1_sub_child
+{
+    s32 unk0;
+    u8 filler4[4];
+    /*0x08*/ u32 gfxOffset;  // offset to CmprHeader containing graphics data. Actually 4 bytes ahead of this
+    /*0x0C*/ s32 unkOffsets[4];  // offsets to UnkStruct1_sub_child_data structs from the beginning of this struct
+    /*0x1C*/ u32 palOffset;  // offset from the beginning of this struct to palette. Palette is actually 4 bytes after the address.
+    u8 filler20[0xC];
+    u16 unk2C;
+    u16 unk2E;
+    /*0x30*/ u16 bldCnt;
+    /*0x32*/ u16 bldAlpha;
+    /*0x34*/ u16 bldY;
+    u8 filler36[2];
+    /*0x38*/ u16 bgCnt[4];  // bgcnt for BGs 0-3
+    /*0x40*/ u8 *vramAddr40[4];  // VRAM addresses?
+    /*0x50*/ u8 *vramAddr50[4];  // VRAM addresses?
+    u8 filler60[8];
+    u32 unk68;  // some offset
+};
+
+struct UnkStruct1_sub
+{
+    struct UnkStruct1_sub_child *unk0;
+    /*0x04*/ u16 bgNum;  // bgNum
+    u8 unk6;
+    u8 unk7;
+};
+
+struct UnkStruct1
+{
+    struct UnkStruct1_sub unk0[4];
+    u8 unk20[4];  // some indices (0 to 3)?
+    /*0x24*/ u8 bgPrio[4];  // priorities for each background
+    u32 unk28;
+    u8 unk2C;
+    u8 unk2D;
+    s8 unk2E;
+    u8 unk2F;
+    u8 unk30;
+    u8 unk31;
+    u8 unk32;  // some index
+    u8 unk33;
+};
+
 struct KeyInput
 {
     u16 keys:10;
@@ -26,14 +109,16 @@ struct Struct30002B8
     s32 unk4;
 };
 
-struct Struct30012D0
+struct BGOffsets
 {
-    u8 filler0[2];
-    u16 unk2;
-    u8 filler4[2];
-    u16 unk6;
-    s16 unk8;
-    u16 unkA;
+    u16 bg0hofs;
+    u16 bg0vofs;
+    u16 bg1hofs;
+    u16 bg1vofs;
+    s16 bg2hofs;
+    u16 bg2vofs;
+    u16 bg3hofs;
+    u16 bg3vofs;
 };
 
 struct Struct30009B0
@@ -54,19 +139,6 @@ struct Arena
     void *unk10[4];
 };
 
-struct CompressionHeader
-{
-    u32 unk0_0:4;
-    u32 compressionType:4;
-    u32 size:24;
-};
-
-struct UnknownStruct2
-{
-    struct CompressionHeader header;
-    u8 data[0];
-};
-
 struct UnknownStruct6
 {
     u8 filler0[0x20];
@@ -76,7 +148,7 @@ struct UnknownStruct6
 
 struct UnknownStruct5
 {
-    void *unk0;
+    struct UnkStruct1_sub_child *unk0;
     u32 unk4;
     u16 unk8;
 };
@@ -91,7 +163,7 @@ struct UnknownStruct4_child
 struct UnknownStruct4  // gUnknown_03000B90
 {
     struct UnknownStruct5 *unk0;
-    u32 unk4;
+    struct UnkStruct1_sub_child *unk4;
     struct UnknownStruct4_child *unk8;
     void (*unkC)(void);
     s16 unk10;
@@ -139,26 +211,6 @@ struct UnknownStruct9
     u32 unk20;
     u32 unk24;
     u16 unk28;
-};
-
-struct UnknownStruct14
-{
-    u8 filler0[0x30];
-    u16 bldCnt;
-    u16 bldAlpha;
-    u16 bldY;
-};
-
-struct UnknownStruct15
-{
-    u8 unk0[0x108];
-    u32 unk108[0];
-};
-
-struct UnknownStruct16
-{
-    u8 filler0[0x48];
-    u32 unk48;
 };
 
 struct UnknownStruct17
@@ -274,6 +326,112 @@ struct Struct1C18  // movie related?
     u8 filler12[0x14-0x12];
 };  // size = 0x14
 
+struct StructC30_child
+{
+	u8 filler0[0x8];
+    u32 unk8;
+	u32 unkC;
+};
+
+struct StructC30
+{
+    u32 unk0;
+    struct StructC30_child *unk4;
+};
+
+struct StructC40_child_child_child  // might not actually be a struct
+{
+    u8 filler0[0xC];
+    u8 unkC;
+};
+
+struct StructC40_child_child
+{
+    u8 filler0[8];
+    /*struct StructC40_child_child_child*/ u8 *unk8;
+};
+
+struct StructC40_child
+{
+    u32 unk0;
+    u8 unk4;
+    u16 unk6;
+    struct StructC40_child_child *unk8;  // possibly recursive struct StructC40_child?
+};  // size = 0xC
+
+struct StructC40_sub
+{
+    void *unk0;
+    u8 *unk4;
+};
+
+struct StructC40
+{
+    struct StructC40_sub unk0[1];
+    u8 filler0[4];
+    u8 fillerC[0x18-0xC];
+    u32 unk18;
+    u32 unk1C;
+    struct StructC40_child *unk20;
+};
+
+struct Struct807820C
+{
+    u8 filler0[0x600C];
+    u16 unk600C[1];
+};
+
+struct StructC70
+{
+    void *unk0;
+    u32 unk4;
+    void *unk8;
+    void *unkC;
+    u8 filler10[0x4];
+    void *unk14;
+    u32 unk18;
+};
+
+struct StructC90_child14
+{
+    u32 unk0;
+    u32 unk4;
+    u8 filler8[4];
+    u16 unkC;
+    u8 fillerE[2];
+};  // size = 0x10
+
+struct StructC90
+{
+    void *unk0;
+    void *unk4;
+    u16 unk8;
+    u16 unkA;
+    void *unkC[2];
+    struct StructC90_child14 *unk14;
+    void (*unk18)(void *, void *, void *, int);
+};
+
+struct StructCB0_child
+{
+    void (*unk0)();
+    u8 unk4;
+    struct StructCB0_child *unk8;
+    struct StructCB0_child *unkC;
+    u32 unk10;
+};
+
+struct StructCB0
+{
+    void (*unk0)();
+    u8 unk4;
+    void *unk8;
+    u8 fillerC[0x64-0xC];
+    u32 unk64;
+    struct StructCB0_child *unk68;
+    void *unk6C;
+};
+
 //------------------------------------------------------------------------------
 // Variables
 //------------------------------------------------------------------------------
@@ -319,6 +477,7 @@ extern u8 gUnknown_030000AC;
 extern s32 gUnknown_030000B0;
 extern u8 gUnknown_030000B4;
 extern u16 gUnknown_030000B6;
+extern s16 gUnknown_0300015A;
 extern struct Struct1A0 gMovieState_030001A0;
 extern u32 gUnknown_030001A8;
 extern void *gUnknown_030001AC;
@@ -341,6 +500,7 @@ extern u32 gUnknown_030009CC;
 extern u8 gUnknown_030009D0;
 extern u8 gUnknown_030009D4;
 extern u16 gUnknown_030009D8;
+extern u32 gUnknown_030009DC;
 extern u8 gUnknown_030009E4[];  // unknown type
 extern u8 gUnknown_030009E8;
 extern u8 gUnknown_030009EC;
@@ -378,14 +538,19 @@ extern s8 gUnknown_03000BF4;
 extern u8 gUnknown_03000BF8;
 extern u8 gUnknown_03000C20;
 extern u8 gUnknown_03000C28;
-extern u32 gUnknown_030009DC;
+extern void *gUnknown_03000C2C;
+extern struct StructC30 gUnknown_03000C30;
+extern struct StructC40 gUnknown_03000C40;
+extern struct StructC70 gUnknown_03000C70;
+extern struct StructC90 gUnknown_03000C90;
+extern struct StructCB0 gUnknown_03000CB0;
 extern u8 gUnknown_03000DCC;
 extern u16 gUnknown_03000E60;
 extern void *gUnknown_03000E70[];
-extern u32 gUnknown_03000E80;
-extern u32 gUnknown_03000E90;
+extern u8 *gSomeVRAMAddr_03000E80;
+extern u8 *gSomeVRAMAddr_03000E90;
 extern u8 *gUnknown_03000E88;
-extern u8 *gUnknown_03000E8C;
+extern u8 *gPaletteData_03000E8C;
 extern void *gUnknown_03000E94;
 extern struct OamData gOamBuffer[];
 extern s16 gUnknown_030012A0;
@@ -393,7 +558,7 @@ extern u16 gUnknown_030012A4;
 extern void (*gUnknown_030012A8)(void);
 extern u8 gUnknown_030012B0[];
 extern void (*gUnknown_030012C0)(void);
-extern struct Struct30012D0 gUnknown_030012D0;
+extern struct BGOffsets gBGOffsets_030012D0;
 extern u16 gHeldKeys;
 extern u16 gUnknown_030012E4;
 extern u16 gSomeKeys_030012E8;
@@ -412,7 +577,7 @@ extern u32 gRNGSeed;
 extern u16 gUnknown_0300171C;
 extern s16 gUnknown_03001720;
 extern s16 gUnknown_03001724;
-extern struct Struct30012D0 gUnknown_03001730;  // no idea what type this is
+extern struct BGOffsets gBGOffsets_03001730;  // no idea what type this is
 extern u8 gUnknown_03001740;
 extern u8 gUnknown_03001744;
 extern u16 gUnknown_03001748;
@@ -438,7 +603,7 @@ extern u8 gUnknown_03001C34;
 extern struct UnknownStruct7 *gUnknown_03001C78;
 extern void *gUnknown_03007FFC;
 
-extern u8 *const gUnknown_0807820C;
+extern struct Struct807820C *const gUnknown_0807820C;
 extern void (*gInitCallbacks[])(void);
 extern void (*gMainCallbacks[])(void);
 extern void (*gDisplayCallbacks[])(void);
@@ -448,10 +613,10 @@ extern const struct UnknownStruct17 gUnknown_0807954C[];
 extern const u8 gUnknown_0807956C[];
 extern const u8 gUnknown_08079698[];
 extern u16 *const gUnknown_0807DD94;
-extern const struct UnknownStruct14 gUnknown_08866A48;
-extern const struct UnknownStruct14 gUnknown_08867560;
-extern const u8 gUnknown_0886A328[];
-extern struct UnknownStruct16 gUnknown_0886CFCC;  // non-const (likely in .data instead of .rodata)
+extern const struct UnkStruct1_sub_child gUnknown_08866A48;
+extern const struct UnkStruct1_sub_child gUnknown_08867560;
+extern const struct UnkStruct1_sub_child gUnknown_0886A328;
+extern struct UnkStruct1_sub_child gUnknown_0886CFCC;  // non-const (likely in .data instead of .rodata)
 
 //------------------------------------------------------------------------------
 // Functions
@@ -544,7 +709,7 @@ void level_scroll_display_callback(void);
 void init_display_callback(void);
 
 void sub_0802BE50(void);
-void sub_0802BEA4(int);
+void sub_0802BEA4(u8);
 void sub_08072118(void);
 int sub_0800EF8C(void);
 int sub_0800EF30(void);
@@ -624,20 +789,20 @@ void add_lives();
 int sub_08014BB4(void);
 void sub_0801500C();
 void sub_0801B310(void);
-void sub_0801B3C0(void);
+void reset_some_array_0801B3C0(void);
 void sub_0801B88C(void);
 void sub_0802919C();
 void sub_08029C20(void);
-void sub_08029CDC();
+void set_blend_regs_08029CDC();
 int sub_08029FD0(void);
 int sub_0802A0A8(void);
 void sub_0802A164(void);
 int sub_0802A464(void);
 void sub_0802BA94(void);
 void sub_0802BC98(void);
-void sub_0802BCA4();
+void sub_0802BCA4(struct UnkStruct1_sub_child *, int);
 void sub_0802BE74(void);
-void sub_0802BEEC();
+void set_bg_offset_regs_0802BEEC(struct BGOffsets *bgOffsets);
 void sub_0802BF1C(void);
 void sub_0802BF28(void);
 void sub_0802BFA4(void);
@@ -659,12 +824,14 @@ void sub_0803109C(void);
 void sub_080317F8(void);
 int sub_08031944(struct Struct0802D614 *);
 void sub_08031978(struct Struct0802D614 *);
-int sub_080319BC(u32, struct UnknownStruct5 *, int);
+int sub_080319BC(struct UnkStruct1_sub_child *, struct UnknownStruct5 *, int);
 void sub_08031BF0();
 int sub_08031E04(void);
 void load_palette();
 int sub_08032C44(struct UnknownStruct4 *);
-u16 something_with_loading_graphics_08032F24(const void **arg0, int arg1);
+u16 sub_08032EB8(struct UnkStruct1_sub_child *arg0);
+u16 sub_08032EE4(struct UnkStruct1_sub_child *arg0);
+u16 something_with_loading_graphics_08032F24(const struct UnkStruct1_sub_child *arg0[4], int arg1);
 void sub_08032F68(void);
 void clear_oam_and_buffer(void);
 void process_input(void);

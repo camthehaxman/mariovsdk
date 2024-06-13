@@ -14,7 +14,7 @@ enum
 
 void title_init_callback(void)
 {
-    const void *arr[4];
+    const struct UnkStruct1_sub_child *arr[4];
     struct UnknownStruct15 *var;
 
     arena_restore_head(0);
@@ -25,7 +25,7 @@ void title_init_callback(void)
     gUnknown_030012A0 = 0;
     gUnknown_03001710 = 0;
     arr[0] = &gUnknown_08867560;
-    arr[1] = gUnknown_0886A328;
+    arr[1] = &gUnknown_0886A328;
     arr[2] = &gUnknown_0886CFCC;
     arr[3] = NULL;
     something_with_loading_graphics_08032F24(arr, 0);
@@ -38,7 +38,7 @@ void title_init_callback(void)
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 128, 1);
     seed_rng_with_timer();
-    sub_08029CDC(gUnknown_08867560.bldCnt, gUnknown_08867560.bldAlpha, gUnknown_08867560.bldY);
+    set_blend_regs_08029CDC(gUnknown_08867560.bldCnt, gUnknown_08867560.bldAlpha, gUnknown_08867560.bldY);
     load_palette(0, 3);
     gPressStartFadeDir = FADE_UP;
     gTitleScreenFrameCounter = 3;
@@ -59,10 +59,10 @@ void title_main_callback(void)
         REG_DISPCNT = 0x1740;
     arr[0] = 0;
     arr[1] = 13;
-    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_0807956C[gUnknown_03000BE4]], gUnknown_0886CFCC.unk48, 5);
+    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_0807956C[gUnknown_03000BE4]], gUnknown_0886CFCC.vramAddr40[2], 5);
     arr[0] = 22;
     arr[1] = 0;
-    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_08079698[gUnknown_03000BE8] + 3], gUnknown_0886CFCC.unk48, 5);
+    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_08079698[gUnknown_03000BE8] + 3], gUnknown_0886CFCC.vramAddr40[2], 5);
     if (gUnknown_03000BE4 < 299)
         gUnknown_03000BE4++;
     else

@@ -1,5 +1,5 @@
 	.INCLUDE "macro.inc"
-
+.if 1
 	THUMB_FUNC_START sub_08033658
 sub_08033658: @ 0x08033658
 	push {r4-r7,lr}
@@ -100,7 +100,7 @@ _080336FC:
 _08033700:
 	.4byte gUnknown_03001710
 	THUMB_FUNC_END sub_08033658
-
+.endif
 	THUMB_FUNC_START sub_08033704
 sub_08033704: @ 0x08033704
 	push {r4-r6,lr}

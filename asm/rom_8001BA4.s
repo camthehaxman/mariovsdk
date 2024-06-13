@@ -5309,7 +5309,7 @@ sub_080041B8: @ 0x080041B8
 	ldr r4, _080043D0  @ =gUnknown_08078210
 	ldr r1, [r4]
 	mov r2, #0
-	bl sub_08034790
+	bl load_gfx_to_vram_08034790
 	mov r3, #0
 	ldr r0, [r4]
 	ldr r0, [r0, #4]
@@ -5651,7 +5651,7 @@ _08004464:
 	ldr r1, [r5]
 _0800446E:
 	mov r2, #0
-	bl sub_08034790
+	bl load_gfx_to_vram_08034790
 	b _08004482
 _08004476:
 	add r0, r4, #4
