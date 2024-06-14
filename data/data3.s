@@ -573,8 +573,8 @@ gUnknown_0807DD14:
 gUnknown_0807DD1C:
 	.INCBIN "baserom.gba", 0x7DD1C, 0x7DD34-0x7DD1C
 
-	.GLOBAL gUnknown_0807DD34
-gUnknown_0807DD34:
+	.GLOBAL gPaletteIndices_0807DD34
+gPaletteIndices_0807DD34:
 	.INCBIN "baserom.gba", 0x7DD34, 0x7DD4C-0x7DD34
 
 	.GLOBAL gUnknown_0807DD4C
@@ -593,8 +593,8 @@ gUnknown_0807DD7C:
 gUnknown_0807DD94:
 	.INCBIN "baserom.gba", 0x7DD94, 0x81D98-0x7DD94
 
-	.GLOBAL gPalettes
-gPalettes:
+	.GLOBAL gPredefinedPalettes
+gPredefinedPalettes:
 	.INCBIN "baserom.gba", 0x81D98, 0x26000
 
 	.GLOBAL gUnknown_080A7D98

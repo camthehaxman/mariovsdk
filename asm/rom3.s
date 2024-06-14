@@ -1,4 +1,5 @@
 	.INCLUDE "macro.inc"
+	.INCLUDE "gba.inc"
 
 .if 0
 	THUMB_FUNC_START sub_0802B984
@@ -926,7 +927,7 @@ _0802BFB8:
 _0802BFBC:
 	.4byte gUnknown_03000CB0
 	THUMB_FUNC_END sub_0802BFA4
-.endif
+
 	THUMB_FUNC_START sub_0802BFC0
 sub_0802BFC0: @ 0x0802BFC0
 	push {r4-r7,lr}
@@ -1082,7 +1083,7 @@ _0802C0B4:
 sub_0802C0B8: @ 0x0802C0B8
 	push {lr}
 	add r1, r0, #0
-	ldr r3, _0802C0E0  @ =0x03000D20
+	ldr r3, _0802C0E0  @ =gUnknown_03000D20
 	cmp r1, #0
 	beq _0802C0D6
 	ldr r2, [r1]
@@ -1103,7 +1104,7 @@ _0802C0D6:
 	.byte 0x00
 	.byte 0x00
 _0802C0E0:
-	.4byte 0x03000D20
+	.4byte gUnknown_03000D20
 _0802C0E4:
 	.4byte 0x7FFFFFFF
 _0802C0E8:
@@ -1127,7 +1128,7 @@ _0802C0FE:
 	.byte 0x00
 	THUMB_FUNC_START sub_0802C104
 sub_0802C104: @ 0x0802C104
-	ldr r3, _0802C114  @ =0x03000D20
+	ldr r3, _0802C114  @ =gUnknown_03000D20
 	lsl r1, r1, #2
 	lsl r0, r0, #3
 	add r1, r1, r0
@@ -1137,7 +1138,7 @@ sub_0802C104: @ 0x0802C104
 	.byte 0x00
 	.byte 0x00
 _0802C114:
-	.4byte 0x03000D20
+	.4byte gUnknown_03000D20
 	THUMB_FUNC_END sub_0802C104
 
 	THUMB_FUNC_START sub_0802C118
@@ -1170,11 +1171,12 @@ _0802C13E:
 
 	.byte 0x00
 	.byte 0x00
+
 	THUMB_FUNC_START sub_0802C144
 sub_0802C144: @ 0x0802C144
 	push {r4,lr}
 	add r2, r0, #0
-	ldr r4, _0802C198  @ =0x03000D20
+	ldr r4, _0802C198  @ =gUnknown_03000D20
 	ldrh r1, [r4, #16]
 	mov r0, #128
 	lsl r0, r0, #3
@@ -1216,7 +1218,7 @@ _0802C192:
 	pop {r0}
 	bx r0
 _0802C198:
-	.4byte 0x03000D20
+	.4byte gUnknown_03000D20
 _0802C19C:
 	.4byte 0x040000D4
 _0802C1A0:
@@ -1231,7 +1233,7 @@ _0802C1AC:
 
 	THUMB_FUNC_START sub_0802C1B0
 sub_0802C1B0: @ 0x0802C1B0
-	ldr r1, _0802C1BC  @ =0x03000D20
+	ldr r1, _0802C1BC  @ =gUnknown_03000D20
 	mov r0, #128
 	lsl r0, r0, #3
 	strh r0, [r1, #16]
@@ -1239,9 +1241,9 @@ sub_0802C1B0: @ 0x0802C1B0
 	.byte 0x00
 	.byte 0x00
 _0802C1BC:
-	.4byte 0x03000D20
+	.4byte gUnknown_03000D20
 	THUMB_FUNC_END sub_0802C1B0
-
+.endif
 	THUMB_FUNC_START sub_0802C1C0
 sub_0802C1C0: @ 0x0802C1C0
 	push {lr}
@@ -3609,53 +3611,99 @@ gUnknown_08823B74:
 gUnknown_08825F04:
 	.INCBIN "baserom.gba", 0x825F04, 0x829B18-0x825F04
 
-	.GLOBAL gUnknown_08829B18
-gUnknown_08829B18:
+	.GLOBAL gClearGameoverGfxConfig
+gClearGameoverGfxConfig:
 	.INCBIN "baserom.gba", 0x829B18, 0x82B4C4-0x829B18
 
 	.GLOBAL gUnknown_0882B4C4
 gUnknown_0882B4C4:
 	.INCBIN "baserom.gba", 0x82B4C4, 0x85A088-0x82B4C4
 
-	.GLOBAL gUnknown_0885A088
-gUnknown_0885A088:
+	.GLOBAL gLevelResultsGfxConfig
+gLevelResultsGfxConfig:
 	.INCBIN "baserom.gba", 0x85A088, 0x85C4C4-0x85A088
 
-	.GLOBAL gUnknown_0885C4C4
-gUnknown_0885C4C4:
+	.GLOBAL gBonusStoparrowGfxConfig1
+gBonusStoparrowGfxConfig1:
 	.INCBIN "baserom.gba", 0x85C4C4, 0x85D720-0x85C4C4
 
-	.GLOBAL gUnknown_0885D720
-gUnknown_0885D720:
+	.GLOBAL gBonusStoparrowGfxConfig2
+gBonusStoparrowGfxConfig2:
 	.INCBIN "baserom.gba", 0x85D720, 0x86022C-0x85D720
 
-	.GLOBAL gUnknown_0886022C
-gUnknown_0886022C:
+	.GLOBAL gBonusSwapBoxesGfxConfig2
+gBonusSwapBoxesGfxConfig2:
 	.INCBIN "baserom.gba", 0x86022C, 0x8637E8-0x86022C
 
-	.GLOBAL gUnknown_088637E8
-gUnknown_088637E8:
+	.GLOBAL gBonusSwapBoxesGfxConfig1
+gBonusSwapBoxesGfxConfig1:
 	.INCBIN "baserom.gba", 0x8637E8, 0x866A48-0x8637E8
 
-	.GLOBAL gUnknown_08866A48
-gUnknown_08866A48:
-	.INCBIN "baserom.gba", 0x866A48, 0x867560-0x866A48
+	.GLOBAL gIntroGfxConfig
+gIntroGfxConfig:
+	.4byte 0x80000074
+	.byte 0x18, 0x0B, 0x00, 0x00
+	.4byte gIntroGfxConfig_tiles-gIntroGfxConfig
+	.4byte gIntroGfxConfig_bg0info-gIntroGfxConfig, 0, 0, 0
+	.4byte gIntroGfxConfig_pal-gIntroGfxConfig
+	.skip 12
+	.2byte 0, 0xA0
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	.byte 0, 1
+	.2byte 5, 0x105, 0x205, 0x305 @ bgCnt
+	.4byte 0x06000000, 0x06000800, 0x06001000, 0x06001800
+	.4byte 0x06004000, 0x06004000, 0x06004000, 0x06004000
+	.skip 8
+	.4byte 0
+	.4byte 0
+	.4byte 0
+  gIntroGfxConfig_tiles:
+	.4byte 0x76C
+	.INCBIN "baserom.gba", 0x866AC0, 0x76C
+  gIntroGfxConfig_bg0info:
+	.skip 4
+	.2byte 240
+	.2byte 160
+	.byte 0
+	.skip 3
+	.byte 0
+	.skip 3
+	.4byte REG_BG0HOFS
+	.4byte REG_BG0VOFS
+	.INCBIN "baserom.gba", 0x867244, 0x10
+	.INCBIN "graphics/Intro.tilemap.rle"
+	.BYTE 0xCD, 0xCD
+  gIntroGfxConfig_pal:
+	.4BYTE 0x200  @ palette size
+  0:	.INCBIN "graphics/Intro.gbapal"
+	PALETTE_FILL
 
-	.GLOBAL gUnknown_08867560
-gUnknown_08867560:
+	.GLOBAL gTitleGfxConfig0
+gTitleGfxConfig0:
 	.INCBIN "baserom.gba", 0x867560, 0x86A328-0x867560
 
-	.GLOBAL gUnknown_0886A328
-gUnknown_0886A328:
-	.INCBIN "baserom.gba", 0x86A328, 0x86CFCC-0x86A328
+	.GLOBAL gTitleGfxConfig1
+gTitleGfxConfig1:
+	.INCBIN "baserom.gba", 0x86A328, 0x86CA80-0x86A328
+	.INCBIN "graphics/Title1.tilemap.rle"
+	.BYTE 0xCD, 0xCD
+	.4BYTE 0x200
+	.INCBIN "graphics/Title1.gbapal"
 
-	.GLOBAL gUnknown_0886CFCC
-gUnknown_0886CFCC:
+	.GLOBAL gTitleGfxConfig2
+gTitleGfxConfig2:
 	.INCBIN "baserom.gba", 0x86CFCC, 0x8754F8-0x86CFCC
 
-	.GLOBAL gUnknown_088754F8
-gUnknown_088754F8:
-	.INCBIN "baserom.gba", 0x8754F8, 0xAF43E4-0x8754F8
+	.GLOBAL gOptionMenuGfxConfig
+gOptionMenuGfxConfig:
+	.INCBIN "baserom.gba", 0x8754F8, 0x875570-0x8754F8
+
+	.INCBIN "baserom.gba", 0x875570, 0x1CF4
+	@.INCBIN "graphics/OptionMenu.4bpp.lz"
+	
+	.INCBIN "baserom.gba", 0x877264, 0xAF43E4-0x877264
 
 	.GLOBAL gUnknown_08AF43E4
 gUnknown_08AF43E4:

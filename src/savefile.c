@@ -1310,7 +1310,7 @@ void process_some_key_sequence(void)  // unreferenced?
         {
             gUnknown_03000065++;
             if (gUnknown_03000065 == 10)
-                play_sound_effect_08071990(20, 8, 16, 64, 0, 0x80, 0);
+                play_sound_effect_08071990(SE_HERE_WEGO, 8, 16, 64, 0, 0x80, 0);
         }
         else if (gUnknown_03000065 != 0
          && gHeldKeys != 0
@@ -1353,7 +1353,7 @@ void sub_08011428(u32 arg0)
 
 extern u8 gUnknown_085FEFE4[];
 extern u8 gUnknown_08617030[];
-extern struct UnkStruct1_sub_child gUnknown_087B2FF8;
+extern struct GraphicsConfig gFileSelectGfxConfig;
 
 void file_select_init_callback(void)
 {
@@ -1381,13 +1381,13 @@ void file_select_init_callback(void)
     gUnknown_03000065 = 0;
     gUnknown_030012A0 = 0;
     gUnknown_03001710 = 0;
-    sub_08032EB8(&gUnknown_087B2FF8);
+    load_graphics_config_bg2_08032EB8(&gFileSelectGfxConfig);
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 0x80, 1);
-    set_blend_regs_08029CDC(gUnknown_087B2FF8.bldCnt, gUnknown_087B2FF8.bldAlpha, gUnknown_087B2FF8.bldY);
-    REG_DISPCNT = 0x1B40;
-    load_palette(1, 3);
+    set_blend_regs_08029CDC(gFileSelectGfxConfig.bldCnt, gFileSelectGfxConfig.bldAlpha, gFileSelectGfxConfig.bldY);
+    REG_DISPCNT = DISPCNT_BG0_ON|DISPCNT_BG1_ON|DISPCNT_BG3_ON|DISPCNT_OBJ_ON|DISPCNT_OBJ_1D_MAP;
+    load_predefined_palette(1, LOAD_BG_PALETTE|LOAD_OBJ_PALETTE);
     CpuFill16(0, &gBGOffsets_03001730, 16);
     sub_080381E4(0, 0);
     for (i = 0; i < 3; i++)
@@ -1501,11 +1501,11 @@ void pick_file(void)
             r5 = r0;
             if (*gUnknown_0807CA94 == 0 && r5 == 0)
             {
-                play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
             }
             else
             {
-                play_sound_effect_08071990(35, 8, 16, 64, 0, 0x80, 0);
+                play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 0x80, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 if (r5 > 0)
                     gFileSelectMenuSel = r5 - 1;
@@ -1518,13 +1518,13 @@ void pick_file(void)
         }
         else if (gFileSelectMenuSel == 4)
         {
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 0x80, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 0x80, 0);
             goto_state_080070E8(MAIN_STATE_OPTION_MENU, 1);
             return;
         }
         else if (gFileSelectMenuSel == 3)
         {
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 0x80, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 0x80, 0);
             goto_state_080070E8(29, 1);
             return;
         }
@@ -1532,7 +1532,7 @@ void pick_file(void)
         {
             u8 one;
 
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 0x80, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 0x80, 0);
             *pSelectedSaveFileNum = gFileSelectMenuSel;
             inlinefunc5(*pSelectedSaveFileNum);
             inlinefunc4(*pSelectedSaveFileNum);
@@ -1556,7 +1556,7 @@ void pick_file(void)
     }
     else if (gSomeKeys_030012E8 & B_BUTTON)
     {
-        play_sound_effect_08071990(22, 8, 16, 64, 0, 0x80, 0);
+        play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 0x80, 0);
         goto_state_080070E8(MAIN_STATE_TITLE_SCREEN, 1);
         return;
     }
@@ -1567,7 +1567,7 @@ void pick_file(void)
         {
             if (gSomeKeys_030012E8 & DPAD_RIGHT)
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 if (gUnknown_03000059 == 2 && gUnknown_0300005D == 0)
                     gFileSelectMenuSel++;
@@ -1577,13 +1577,13 @@ void pick_file(void)
             {
                 if (inlinefunc(gFileSelectMenuSel))
                 {
-                    play_sound_effect_08071990(178, 8, 16, 64, 0, 128, 0);
+                    play_sound_effect_08071990(SE_CURSOR_UP_DN, 8, 16, 64, 0, 128, 0);
                     gUnknown_03000059 = gFileSelectMenuSel;
                     gFileSelectMenuSel += 6;
                     gUnknown_0300005B = 1;
                     return;
                 }
-                play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
             }
         }
         else
@@ -1592,18 +1592,18 @@ void pick_file(void)
             {
                 if (gFileSelectMenuSel == 4)
                 {
-                    play_sound_effect_08071990(178, 8, 16, 64, 0, 128, 0);
+                    play_sound_effect_08071990(SE_CURSOR_UP_DN, 8, 16, 64, 0, 128, 0);
                     gUnknown_03000059 = gFileSelectMenuSel;
                     gFileSelectMenuSel++;
                 }
                 else
                 {
-                    play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+                    play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
                 }
             }
             if (gSomeKeys_030012E8 & DPAD_RIGHT)
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 gFileSelectMenuSel = 0;
             }
@@ -1611,7 +1611,7 @@ void pick_file(void)
     }
     else if (gSomeKeys_030012E8 & DPAD_RIGHT)
     {
-        play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
         gUnknown_03000059 = gFileSelectMenuSel;
         gFileSelectMenuSel = 0;
     }
@@ -1622,24 +1622,24 @@ void pick_file(void)
         {
             if (gSomeKeys_030012E8 & DPAD_LEFT)
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 if (gUnknown_03000059 == 4 && gUnknown_0300005D == 0)
                     gFileSelectMenuSel--;
                 gFileSelectMenuSel--;
             }
             if (gSomeKeys_030012E8 & DPAD_UP)
-                play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
         }
         else if (gSomeKeys_030012E8 & DPAD_UP)
         {
-            play_sound_effect_08071990(178, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_UP_DN, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             gFileSelectMenuSel--;
         }
         else if (gSomeKeys_030012E8 & DPAD_LEFT)
         {
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             if (gUnknown_0300005D == 0)
                 gFileSelectMenuSel--;
@@ -1649,10 +1649,10 @@ void pick_file(void)
     else
     {
         if (gSomeKeys_030012E8 & DPAD_UP)
-            play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
         if (gSomeKeys_030012E8 & DPAD_LEFT)
         {
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             gFileSelectMenuSel = 4;
         }
@@ -1663,7 +1663,7 @@ void sub_08011CB4(void)
 {
     if (gSomeKeys_030012E8 & DPAD_UP)
     {
-        play_sound_effect_08071990(178, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_CURSOR_UP_DN, 8, 16, 64, 0, 128, 0);
         gUnknown_03000059 = gFileSelectMenuSel;
         gFileSelectMenuSel -= 6;
         gUnknown_0300005B = 0;
@@ -1674,13 +1674,13 @@ void sub_08011CB4(void)
         {
             if (inlinefunc(gFileSelectMenuSel - 7))
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 gFileSelectMenuSel--;
             }
             else
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 gFileSelectMenuSel = 0;
                 gUnknown_0300005B = 0;
@@ -1688,7 +1688,7 @@ void sub_08011CB4(void)
         }
         else
         {
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             gFileSelectMenuSel = 0;
             gUnknown_0300005B = 0;
@@ -1700,13 +1700,13 @@ void sub_08011CB4(void)
         {
             if (inlinefunc(gFileSelectMenuSel - 5))
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 gFileSelectMenuSel++;
             }
             else
             {
-                play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+                play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
                 gUnknown_03000059 = gFileSelectMenuSel;
                 gFileSelectMenuSel = 5;
                 gUnknown_0300005B = 0;
@@ -1714,7 +1714,7 @@ void sub_08011CB4(void)
         }
         else
         {
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             gFileSelectMenuSel = 5;
             gUnknown_0300005B = 0;
@@ -1722,14 +1722,14 @@ void sub_08011CB4(void)
     }
 
     if (gSomeKeys_030012E8 & DPAD_DOWN)
-        play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
     if (sub_08034004())
     {
-        play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
         gUnknown_03000B80 = 2;
         if (gFileSelectMenuSel == 3)
         {
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
             goto_state_080070E8(29, 1);
         }
         else
@@ -1755,18 +1755,18 @@ void sub_08011F60(void)
             r1 = *gUnknown_0807CA94;
         if (!r1)
         {
-            play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
         }
         else
         {
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
             gUnknown_0300005B = 3;
             gUnknown_0300005C = 0;
         }
     }
     else if (gSomeKeys_030012E8 & B_BUTTON)
     {
-        play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
         gUnknown_03000059 = gFileSelectMenuSel;
         gFileSelectMenuSel = 0;
         gUnknown_0300005B = 0;
@@ -1775,11 +1775,11 @@ void sub_08011F60(void)
     else
     {
         if (gSomeKeys_030012E8 & (DPAD_UP|DPAD_DOWN))
-            play_sound_effect_08071990(27, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_ERROR, 8, 16, 64, 0, 128, 0);
         if (gSomeKeys_030012E8 & DPAD_RIGHT)
         {
             gUnknown_03000059 = gFileSelectMenuSel;
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             if (gFileSelectMenuSel < gUnknown_0300005D + 2)
                 gFileSelectMenuSel++;
             else
@@ -1802,7 +1802,7 @@ void sub_08011F60(void)
         else if (gSomeKeys_030012E8 & DPAD_LEFT)
         {
             gUnknown_03000059 = gFileSelectMenuSel;
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
             if (gFileSelectMenuSel != 0)
                 gFileSelectMenuSel--;
             else
@@ -1837,7 +1837,7 @@ void sub_08012230(void)  // for new save file?
         {
             u8 r1;
 
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
             r1 = gFileSelectMenuSel;
             if (r1 <= 2)
             {
@@ -1860,7 +1860,7 @@ void sub_08012230(void)  // for new save file?
         }
         else
         {
-            play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
             gUnknown_03000059 = gFileSelectMenuSel;
             gFileSelectMenuSel = 0;
             gUnknown_0300005B = 0;
@@ -1869,7 +1869,7 @@ void sub_08012230(void)  // for new save file?
     }
     else if (gSomeKeys_030012E8 & B_BUTTON)
     {
-        play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
         gUnknown_03000059 = gFileSelectMenuSel;
         gFileSelectMenuSel = 0;
         gUnknown_0300005B = 0;
@@ -1880,7 +1880,7 @@ void sub_08012230(void)  // for new save file?
         if (gUnknown_0300005C == 0)
         {
             gUnknown_0300005C++;
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
         }
     }
     else if (gSomeKeys_030012E8 & DPAD_LEFT)
@@ -1888,7 +1888,7 @@ void sub_08012230(void)  // for new save file?
         if (gUnknown_0300005C != 0)
         {
             gUnknown_0300005C--;
-            play_sound_effect_08071990(23, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_CURSOR_E, 8, 16, 64, 0, 128, 0);
         }
     }
 }
@@ -1940,11 +1940,11 @@ void file_select_main_callback(void)
             if (gUnknown_03000063 == 0 && *gUnknown_0807CA94 == 0)
                 gFileSelectMenuSel = 3;
             gUnknown_03000063 = 1;
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
         }
         else
         {
-            play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
             if (gFileSelectMenuSel == 3)
                 gFileSelectMenuSel--;
         }

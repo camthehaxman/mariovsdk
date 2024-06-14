@@ -231,11 +231,11 @@ _08021778:
 	mov r0, #3
 _0802177E:
 	strb r0, [r1, #16]
-	ldr r4, _080218EC  @ =gUnknown_0885C4C4
+	ldr r4, _080218EC  @ =gBonusStoparrowGfxConfig1
 	str r4, [sp]
 	str r4, [sp, #4]
 	str r4, [sp, #8]
-	ldr r0, _080218F0  @ =gUnknown_0885D720
+	ldr r0, _080218F0  @ =gBonusStoparrowGfxConfig2
 	str r0, [sp, #12]
 	mov r0, sp
 	mov r1, #2
@@ -394,7 +394,7 @@ _0802177E:
 	strb r5, [r0, #8]
 	mov r0, #9
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	add sp, sp, #20
 	pop {r3}
 	mov r8, r3
@@ -408,9 +408,9 @@ _080218E4:
 _080218E8:
 	.4byte 0x030000D0
 _080218EC:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _080218F0:
-	.4byte gUnknown_0885D720
+	.4byte gBonusStoparrowGfxConfig2
 _080218F4:
 	.4byte 0x030000CC
 _080218F8:
@@ -8926,7 +8926,7 @@ sub_080259C4: @ 0x080259C4
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r4, _08025A48  @ =gUnknown_0886022C
+	ldr r4, _08025A48  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r4, #68]
 	mov r0, sp
 	mov r3, #5
@@ -8978,7 +8978,7 @@ _08025A40:
 _08025A44:
 	.4byte 0x030000E4
 _08025A48:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08025A4C:
 	.4byte 0x030000F4
 _08025A50:
@@ -9007,7 +9007,7 @@ sub_08025A60: @ 0x08025A60
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08025AD8  @ =gUnknown_0886022C
+	ldr r0, _08025AD8  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -9053,7 +9053,7 @@ _08025ACC:
 _08025AD4:
 	.4byte 0x030000E4
 _08025AD8:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08025ADC:
 	.4byte 0x030000F0
 _08025AE0:
@@ -9105,7 +9105,7 @@ _08025B1E:
 	mov r10, r1
 	add r0, r0, r10
 	ldr r1, [r0]
-	ldr r7, _08025BBC  @ =gUnknown_0886022C
+	ldr r7, _08025BBC  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r7, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -9170,7 +9170,7 @@ _08025BB4:
 _08025BB8:
 	.4byte 0x030000E4
 _08025BBC:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08025BC0:
 	.4byte gSomeKeys_030012E8
 _08025BC4:
@@ -9324,7 +9324,7 @@ _08025C92:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _08025D18  @ =gUnknown_0886022C
+	ldr r4, _08025D18  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	str r6, [sp]
 	str r7, [sp, #4]
@@ -9349,7 +9349,7 @@ _08025D10:
 _08025D14:
 	.4byte 0x030000E4
 _08025D18:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08025D1C:
 	cmp r6, #14
 	bne _08025DC0
@@ -9419,7 +9419,7 @@ _08025D58:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _08025E38  @ =gUnknown_0886022C
+	ldr r4, _08025E38  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -9466,7 +9466,7 @@ _08025DC0:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _08025E38  @ =gUnknown_0886022C
+	ldr r4, _08025E38  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -9496,7 +9496,7 @@ _08025E2A:
 _08025E34:
 	.4byte 0x030000E4
 _08025E38:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08025E3C:
 	.4byte 0x030000EC
 _08025E40:
@@ -9532,7 +9532,7 @@ _08025E40:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _08025EBC  @ =gUnknown_0886022C
+	ldr r4, _08025EBC  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -9562,7 +9562,7 @@ _08025EB4:
 _08025EB8:
 	.4byte 0x030000E4
 _08025EBC:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 	THUMB_FUNC_END sub_08025AF4
 
 	THUMB_FUNC_START sub_08025EC0
@@ -10074,7 +10074,7 @@ _0802621C:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r6, _080262D8  @ =gUnknown_0886022C
+	ldr r6, _080262D8  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r6, #68]
 	mov r0, #5
 	mov r9, r0
@@ -10149,7 +10149,7 @@ _080262D0:
 _080262D4:
 	.4byte 0x030000E4
 _080262D8:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _080262DC:
 	.4byte 0x030000F0
 _080262E0:
@@ -10191,7 +10191,7 @@ sub_080262F0: @ 0x080262F0
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r6, _080263AC  @ =gUnknown_0886022C
+	ldr r6, _080263AC  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r6, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -10257,7 +10257,7 @@ _080263A4:
 _080263A8:
 	.4byte 0x030000E4
 _080263AC:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _080263B0:
 	.4byte gSomeKeys_030012E8
 _080263B4:
@@ -10338,7 +10338,7 @@ _08026400:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _080264E4  @ =gUnknown_0886022C
+	ldr r4, _080264E4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -10385,7 +10385,7 @@ _0802646A:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _080264E4  @ =gUnknown_0886022C
+	ldr r4, _080264E4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -10417,7 +10417,7 @@ _080264D4:
 _080264E0:
 	.4byte 0x030000E4
 _080264E4:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _080264E8:
 	.4byte 0x030000EC
 _080264EC:
@@ -10453,7 +10453,7 @@ _080264EC:
 	ldr r0, [r1]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r4, _08026564  @ =gUnknown_0886022C
+	ldr r4, _08026564  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r4, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -10481,7 +10481,7 @@ _0802655C:
 _08026560:
 	.4byte 0x030000E4
 _08026564:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 	THUMB_FUNC_END sub_080262F0
 
 	THUMB_FUNC_START sub_08026568
@@ -11377,7 +11377,7 @@ _08026B8A:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _08026BCC  @ =gUnknown_0886022C
+	ldr r0, _08026BCC  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11400,7 +11400,7 @@ _08026BC4:
 _08026BC8:
 	.4byte 0x030000E4
 _08026BCC:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08026BD0:
 	mov r0, #12
 	str r0, [sp, #12]
@@ -11412,7 +11412,7 @@ _08026BD0:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _08026C78  @ =gUnknown_0886022C
+	ldr r0, _08026C78  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11465,7 +11465,7 @@ _08026C36:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026C78  @ =gUnknown_0886022C
+	ldr r0, _08026C78  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -11485,7 +11485,7 @@ _08026C36:
 _08026C74:
 	.4byte 0x030000E4
 _08026C78:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08026C7C:
 	.4byte 0x030000F4
 _08026C80:
@@ -11507,7 +11507,7 @@ _08026C8C:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -11546,7 +11546,7 @@ _08026CDC:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11594,7 +11594,7 @@ _08026D38:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -11639,7 +11639,7 @@ _08026D74:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11685,7 +11685,7 @@ _08026DCE:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	mov r0, #5
 	str r0, [sp]
@@ -11727,7 +11727,7 @@ _08026E2E:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11770,7 +11770,7 @@ _08026E82:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	str r4, [sp]
 	mov r0, #0
@@ -11811,7 +11811,7 @@ _08026EDA:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r2, [r0, #68]
 	add r0, sp, #12
 	mov r3, #5
@@ -11854,7 +11854,7 @@ _08026F2E:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08026FC4  @ =gUnknown_0886022C
+	ldr r0, _08026FC4  @ =gBonusSwapBoxesGfxConfig2
 	ldr r3, [r0, #68]
 	str r4, [sp]
 	mov r0, #0
@@ -11903,7 +11903,7 @@ _08026FB8:
 _08026FC0:
 	.4byte 0x030000E4
 _08026FC4:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _08026FC8:
 	.4byte 0x030000F4
 _08026FCC:
@@ -12837,9 +12837,9 @@ _0802765E:
 	mov r1, #3
 _08027664:
 	strb r1, [r0]
-	ldr r0, _080278B8  @ =gUnknown_088637E8
+	ldr r0, _080278B8  @ =gBonusSwapBoxesGfxConfig1
 	str r0, [sp]
-	ldr r4, _080278BC  @ =gUnknown_0886022C
+	ldr r4, _080278BC  @ =gBonusSwapBoxesGfxConfig2
 	str r4, [sp, #4]
 	str r4, [sp, #8]
 	str r0, [sp, #12]
@@ -13116,7 +13116,7 @@ _080276E2:
 	strb r0, [r1, #2]
 	mov r0, #10
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	add sp, sp, #24
 	pop {r3-r5}
 	mov r8, r3
@@ -13130,9 +13130,9 @@ _080278B0:
 _080278B4:
 	.4byte 0x030000F8
 _080278B8:
-	.4byte gUnknown_088637E8
+	.4byte gBonusSwapBoxesGfxConfig1
 _080278BC:
-	.4byte gUnknown_0886022C
+	.4byte gBonusSwapBoxesGfxConfig2
 _080278C0:
 	.4byte 0x030000E4
 _080278C4:
@@ -15452,13 +15452,13 @@ option_menu_init_callback: @ 0x0802895C
 	strh r5, [r0]
 	ldr r0, _080289D4  @ =gUnknown_03001710
 	strh r5, [r0]
-	ldr r4, _080289D8  @ =gUnknown_088754F8
+	ldr r4, _080289D8  @ =gOptionMenuGfxConfig
 	ldrh r0, [r4, #48]
 	ldrh r1, [r4, #50]
 	ldrh r2, [r4, #52]
 	bl set_blend_regs_08029CDC
 	add r0, r4, #0
-	bl sub_08032EB8
+	bl load_graphics_config_bg2_08032EB8
 	mov r2, #128
 	lsl r2, r2, #19
 	mov r3, #192
@@ -15498,7 +15498,7 @@ _080289D0:
 _080289D4:
 	.4byte gUnknown_03001710
 _080289D8:
-	.4byte gUnknown_088754F8
+	.4byte gOptionMenuGfxConfig
 _080289DC:
 	.4byte 0x030000FC
 _080289E0:
@@ -15536,7 +15536,7 @@ _08028A1A:
 	mov r0, #140
 	lsl r0, r0, #1
 	add r1, r3, r0
-	ldr r2, _08028BBC  @ =gUnknown_088754F8
+	ldr r2, _08028BBC  @ =gOptionMenuGfxConfig
 	ldr r0, [r2, #64]
 	str r0, [r1]
 	mov r5, #142
@@ -15590,7 +15590,7 @@ _08028A48:
 	strh r0, [r2]
 	mov r0, #3
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	ldr r6, _08028BD8  @ =gUnknown_08B3A4DC
 	ldrh r0, [r6]
 	lsl r0, r0, #1
@@ -15606,7 +15606,7 @@ _08028A48:
 	ldrh r0, [r6]
 	cmp r5, r0
 	bge _08028ADE
-	ldr r4, _08028BE0  @ =gUnknown_08B3A4E0
+	ldr r4, _08028BE0  @ =gSoundEffectTable_08B3A4E0
 _08028AB4:
 	ldrb r0, [r4, #19]
 	cmp r0, #0
@@ -15742,7 +15742,7 @@ _08028BB4:
 _08028BB8:
 	.4byte 0x00001124
 _08028BBC:
-	.4byte gUnknown_088754F8
+	.4byte gOptionMenuGfxConfig
 _08028BC0:
 	.4byte gUnknown_0300192C
 _08028BC4:
@@ -15760,7 +15760,7 @@ _08028BD8:
 _08028BDC:
 	.4byte 0x00001144
 _08028BE0:
-	.4byte gUnknown_08B3A4E0
+	.4byte gSoundEffectTable_08B3A4E0
 _08028BE4:
 	.4byte 0x0000113E
 _08028BE8:
@@ -16814,9 +16814,9 @@ _08029390:
 	strh r1, [r0]
 	ldr r0, _08029418  @ =gUnknown_03001710
 	strh r1, [r0]
-	ldr r4, _0802941C  @ =gUnknown_0885A088
+	ldr r4, _0802941C  @ =gLevelResultsGfxConfig
 	add r0, r4, #0
-	bl sub_08032EB8
+	bl load_graphics_config_bg2_08032EB8
 	mov r0, #0
 	mov r1, #0
 	bl sub_0802BCA4
@@ -16868,7 +16868,7 @@ _08029414:
 _08029418:
 	.4byte gUnknown_03001710
 _0802941C:
-	.4byte gUnknown_0885A088
+	.4byte gLevelResultsGfxConfig
 _08029420:
 	.4byte 0x03000104
 _08029424:
@@ -16902,7 +16902,7 @@ _08029456:
 	bl sub_08029A80
 	add r0, r4, #0
 	bl sub_08030408
-	ldr r2, _080294B0  @ =gUnknown_0885A088
+	ldr r2, _080294B0  @ =gLevelResultsGfxConfig
 	ldrh r0, [r2, #48]
 	ldrh r1, [r2, #50]
 	ldrh r2, [r2, #52]
@@ -16938,7 +16938,7 @@ _080294A8:
 _080294AC:
 	.4byte gUnknown_03000BB4
 _080294B0:
-	.4byte gUnknown_0885A088
+	.4byte gLevelResultsGfxConfig
 _080294B4:
 	.4byte gBGOffsets_03001730
 _080294B8:
@@ -17718,7 +17718,7 @@ sub_08029A80: @ 0x08029A80
 	str r0, [sp]
 	str r1, [sp, #4]
 	mov r1, #8
-	ldr r0, _08029B70  @ =gUnknown_0885A088
+	ldr r0, _08029B70  @ =gLevelResultsGfxConfig
 	ldr r7, [r0, #72]
 	ldr r0, _08029B74  @ =0x03000104
 	ldr r0, [r0]
@@ -17766,7 +17766,7 @@ _08029AE6:
 	add r1, r1, r4
 	add r1, r1, r0
 	ldr r1, [r1]
-	ldr r6, _08029B70  @ =gUnknown_0885A088
+	ldr r6, _08029B70  @ =gLevelResultsGfxConfig
 	ldr r2, [r6, #76]
 	add r0, r5, #0
 	mov r3, #5
@@ -17819,7 +17819,7 @@ _08029B68:
 _08029B6C:
 	.4byte gUnknown_080763FC
 _08029B70:
-	.4byte gUnknown_0885A088
+	.4byte gLevelResultsGfxConfig
 _08029B74:
 	.4byte 0x03000104
 _08029B78:
@@ -19224,7 +19224,7 @@ help_init_callback: @ 0x0802A4B4
 	strb r0, [r1]
 	mov r0, #5
 	mov r1, #2
-	bl load_palette
+	bl load_predefined_palette
 	ldr r0, _0802A504  @ =gUnknown_03001938
 	ldr r1, [r0]
 	mov r2, #2
@@ -20082,7 +20082,7 @@ respawn_init_callback: @ 0x0802AAE8
 	strb r0, [r1]
 	mov r0, #4
 	mov r1, #2
-	bl load_palette
+	bl load_predefined_palette
 	b _0802AC82
 _0802AB18:
 	.4byte gMainState

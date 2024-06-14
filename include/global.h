@@ -16,23 +16,292 @@
 
 typedef u32 unknown;
 
+enum SoundEffect
+{
+    SE_CLIMB          = 0,
+    SE_SKID           = 1,
+    SE_POUND          = 2,
+    SE_TUMBLE1        = 3,
+    SE_STUN           = 4,
+    SE_BURN1          = 5,
+    SE_JUMP_1         = 6,
+    SE_GRUNT2         = 7,
+    SE_JUMP_4         = 8,
+    SE_JUMP_3         = 9,
+    SE_PICKUP         = 10,
+    SE_JUMP_5         = 11,
+    SE_COUNTER        = 12,
+    SE_ITEM1          = 13,
+    SE_STEPS2         = 14,
+    SE_KEY1           = 15,
+    SE_CRASH          = 16,
+    SE_THROW          = 17,
+    SE_WALK           = 18,
+    SE_PICKUP_CRYSTAL = 19,
+    SE_HERE_WEGO      = 20,
+    SE_LETS_GO        = 21,
+    SE_BACK           = 22,
+    SE_CURSOR_E       = 23,
+    SE_CURSOR_M       = 24,
+    SE_CURSOR_S       = 25,
+    SE_ERASE          = 26,
+    SE_ERROR          = 27,
+    SE_EXIT_ED        = 28,
+    SE_FIELD          = 29,
+    SE_GRID           = 30,
+    SE_ITEM           = 31,
+    SE_SELECT_M       = 32,
+    SE_SELECT_S       = 33,
+    SE_STAMP          = 34,
+    SE_START          = 35,
+    SE_BEAM           = 36,
+    SE_BURN2          = 37,
+    SE_BLOCK          = 38,
+    SE_EXIT           = 39,
+    SE_HURT           = 40,
+    SE_ITEMLAST       = 41,
+    SE_POUND2         = 42,
+    SE_SCUFF          = 43,
+    SE_SHOCK          = 44,
+    SE_KEY_DOOR       = 45,
+    SE_SPIN           = 46,
+    SE_SPLAT          = 47,
+    SE_SQUEAK         = 48,
+    SE_UNLOCK         = 49,
+    SE_WIREJUMP       = 50,
+    SE_SPIN_1         = 51,
+    SE_ONE_UP         = 52,
+    SE_HELP           = 53,
+    SE_SILENCE        = 54,
+    SE_SKIDSHORT      = 55,
+    SE_SWITCH1        = 56,
+    SE_SWITCH2        = 57,
+    SE_SWITCH3        = 58,
+    SE_BOING          = 59,
+    SE_JUMP_6         = 60,
+    SE_ROPE_UP        = 61,
+    SE_ROPE_DOWN      = 62,
+    SE_DOOR           = 63,
+    SE_SCROLL         = 64,
+    SE_RETURN         = 65,
+    SE_BLANK          = 66,
+    SE_LOOK_UP        = 67,
+    SE_MM_DIE         = 68,
+    SE_MM_BOING       = 69,
+    SE_MM_PROTECT     = 70,
+    SE_CHEST_OPEN     = 71,
+    SE_CHEST_CLOSE    = 72,
+    SE_OOF            = 73,
+    SE_DK_HURT        = 74,
+    SE_DK_BELLOW      = 75,
+    SE_SLAM2          = 76,
+    SE_FRUIT_FALL     = 77,
+    SE_POINTER        = 78,
+    SE_CHOOSE         = 79,
+    SE_EMPTY          = 80,
+    SE_TOY1           = 81,
+    SE_TOYLAST        = 82,
+    SE_WARP_OUT       = 83,
+    SE_WARP_IN        = 84,
+    SE_SQUEEZE        = 85,
+    SE_GLASS          = 86,
+    SE_LIFT           = 87,
+    SE_MM_OH_NO       = 88,
+    SE_JUMP_7         = 89,
+    SE_LEVEL_START    = 90,
+    SE_ELEV_GO        = 91,
+    SE_ELEV_STOP      = 92,
+    SE_EGG_FALL       = 93,
+    SE_DK_EXIT1       = 94,
+    SE_DK_BLUBBER     = 95,
+    SE_MOVIE_02       = 96,
+    SE_MOVIE_03       = 97,
+    SE_MOVIE_04       = 98,
+    SE_MOVIE_05       = 99,
+    SE_MOVIE_06       = 100,
+    SE_KEY2           = 101,
+    SE_KEY3           = 102,
+    SE_GRAB_WIRE      = 103,
+    SE_GRAB_ROPE      = 104,
+    SE_GRAB_LADDER    = 105,
+    SE_CRUSH          = 106,
+    SE_SPITFIRE       = 107,
+    SE_NINJI          = 108,
+    SE_CRUMBLE        = 109,
+    SE_LAVA           = 110,
+    SE_BUBBLE         = 111,
+    SE_FOUNTAIN       = 112,
+    SE_OUCH           = 113,
+    SE_RESTART        = 114,
+    SE_METALROLL      = 115,
+    SE_SHWING         = 116,
+    SE_KICK           = 117,
+    SE_BRICKMAN       = 118,
+    SE_SPIT           = 119,
+    SE_POP            = 120,
+    SE_GROWL          = 121,
+    SE_GROWL2         = 122,
+    SE_GHOST          = 123,
+    SE_SHY_WAKE       = 124,
+    SE_SHY_RUN        = 125,
+    SE_BOMB_PEEP      = 126,
+    SE_BOMB_JUMP      = 127,
+    SE_BOMB_FLASH     = 128,
+    SE_BOMB_BLOW      = 129,
+    SE_VAPORIZE       = 130,
+    SE_BAT            = 131,
+    SE_CANNON         = 132,
+    SE_CROUCH         = 133,
+    SE_SCATTER        = 134,
+    SE_REACH          = 135,
+    SE_DK_HEAD        = 136,
+    SE_GOTCHA         = 137,
+    SE_TOAD_WALK      = 138,
+    SE_TOAD_TOSS      = 139,
+    SE_BOX_FALL       = 140,
+    SE_SPARKY_LOOP    = 141,
+    SE_DK_BLUB        = 142,
+    SE_YANK           = 143,
+    SE_SPIKE          = 144,
+    SE_BONE           = 145,
+    SE_MM_BOINGUP     = 146,
+    SE_LASER          = 147,
+    SE_DK_JUMP        = 148,
+    SE_JUMP_8         = 149,
+    SE_TRASHCAN       = 150,
+    SE_KEY_TOAD       = 151,
+    SE_SHATTER        = 152,
+    SE_TOAD_CARRY     = 153,
+    SE_TOAD_SET       = 154,
+    SE_JUMP_A         = 155,
+    SE_JUMP_B         = 156,
+    SE_JUMP_C         = 157,
+    SE_JUMP_D         = 158,
+    SE_SHUFFLE        = 159,
+    SE_MOVIE_07       = 160,
+    SE_MOVIE_01       = 161,
+    SE_MINI_KEY       = 162,
+    SE_MOVIE2_1       = 163,
+    SE_MOVIE2_2       = 164,
+    SE_MOVIE2_3       = 165,
+    SE_MOVIE2_4       = 166,
+    SE_MOVIE2_5       = 167,
+    SE_MOVIE2_6       = 168,
+    SE_MOVIE2_7       = 169,
+    SE_MOVIE2_8       = 170,
+    SE_BOSS_ARM       = 171,
+    SE_BOSS_ARM2      = 172,
+    SE_BOSS_ARM3      = 173,
+    SE_BOSS_ARM4      = 174,
+    SE_BOSS_ARM5      = 175,
+    SE_BOSS_SWITCH    = 176,
+    SE_CURSOR_WORLD   = 177,
+    SE_CURSOR_UP_DN   = 178,
+    SE_BOSS_DIE1      = 179,
+    SE_BOSS_DIE2      = 180,
+    SE_BOSS_INTRO1    = 181,
+    SE_BOSS_INTRO3    = 182,
+    SE_PLUS_MAIN      = 183,
+    SE_BARREL         = 184,
+    SE_SPIKE_HIT      = 185,
+    SE_BIGBARREL_HIT  = 186,
+    SE_BIGBARREL_FALL = 187,
+    SE_TOADS_JUMP     = 188,
+    SE_TOADS_GRAB     = 189,
+    SE_MOVIE3_01      = 190,
+    SE_MOVIE3_02      = 191,
+    SE_MOVIE3_03      = 192,
+    SE_MOVIE3_04      = 193,
+    SE_MOVIE3_05      = 194,
+    SE_MOVIE3_06      = 195,
+    SE_MOVIE3_07      = 196,
+    SE_MOVIE3_08      = 197,
+    SE_MOVIE3_09      = 198,
+    SE_MOVIE3_10      = 199,
+    SE_MOVIE3_11      = 200,
+    SE_MOVIE3_12      = 201,
+    SE_MOVIE3_13      = 202,
+    SE_MOVIE3_14      = 203,
+    SE_MOVIE4_01      = 204,
+    SE_MOVIE4_02      = 205,
+    SE_MOVIE4_03      = 206,
+    SE_MOVIE4_04      = 207,
+    SE_MOVIE4_06      = 208,
+    SE_MOVIE4_07      = 209,
+    SE_MOVIE4_08      = 210,
+    SE_MOVIE4_09      = 211,
+    SE_MOVIE4_10      = 212,
+    SE_MOVIE5_01      = 213,
+    SE_MOVIE5_05      = 214,
+    SE_MOVIE5_07      = 215,
+    SE_MOVIE6_01      = 216,
+    SE_MOVIE6_02      = 217,
+    SE_MOVIE6_03      = 218,
+    SE_MOVIE6_04      = 219,
+    SE_MOVIE6_05      = 220,
+    SE_MOVIE6_06      = 221,
+    SE_MOVIE6_07      = 222,
+    SE_MOVIE6_08      = 223,
+    SE_MOVIE6_09      = 224,
+    SE_MOVIE6_10      = 225,
+    SE_MOVIE2_9       = 226,
+    SE_MOVIE2_10      = 227,
+    SE_MOVIE_08       = 228,
+    SE_TITLE          = 229,
+    SE_YOU_WON1       = 230,
+    SE_YOU_WON2       = 231,
+    SE_YOU_WON3       = 232,
+    SE_STAR           = 233,
+    SE_DK_WALK        = 234,
+    SE_SCUFF2         = 235,
+    SE_WORLD_START    = 236,
+    SE_MM_WAKEUP      = 237,
+    SE_MM_FREE        = 238,
+    SE_MM_MAMAMIAS    = 239,
+    SE_SPIKE_VANISH   = 240,
+    SE_SPIKE_APPEAR   = 241,
+    SE_BOSS_DIE3      = 242,
+    SE_BARREL_BOUNCE  = 243,
+    SE_ROCK_BOUNCE    = 244,
+    SE_MM_WALK        = 245,
+    SE_DK_GRUNT       = 246,
+    SE_RIBBON         = 247,
+    SE_WON_TEXT       = 248,
+    SE_DK_FALL        = 249,
+};
+
 struct UnknownStruct15
 {
     u8 unk0[0x108];
     u32 unk108[0];
 };
 
+struct CmprHeader
+{
+    u32 reserved:4;
+    u32 compressionType:4;  // 1 = LZ77
+    u32 size:24;  // size of decompressed data
+    // data follows this header
+};
+
 struct UnkStruct1_sub_child_data
 {
     u8 filler0[4];
-    u16 unk4;
-    u16 unk6;
+    u16 unk4;  // image width?
+    u16 unk6;  // image height?
+    s8 unk8;
+    u8 filler9[3];
+    s8 unkC;
+    void *unk10;  // pointer to BGxHOFS register?
+    void *unk14;  // pointer to BGxVOFS register?
+    u8 filler18[0x28-0x18];
+    // tilemap (with CmprHeader) immediately follows this
 };
 
 struct UnkStruct1_sub_child_data68_sub
 {
     u32 unk0;
-    u32 unk4;
+    u32 unk4;  // something to do with VRAM allocation?
     u16 unk8;
     u8 fillerA[2];
 };  // size = 0xC
@@ -44,20 +313,12 @@ struct UnkStruct1_sub_child_data68
     struct UnkStruct1_sub_child_data68_sub unk4[1];
 };
 
-struct CmprHeader
+struct GraphicsConfig
 {
-    u32 reserved:4;
-    u32 compressionType:4;  // 1 = LZ77
-    u32 size:24;  // size of decompressed data
-    // data follows this header
-};
-
-struct UnkStruct1_sub_child
-{
-    s32 unk0;
+    s32 unk0;  // size of this struct? bit 31 is some flag
     u8 filler4[4];
     /*0x08*/ u32 gfxOffset;  // offset to CmprHeader containing graphics data. Actually 4 bytes ahead of this
-    /*0x0C*/ s32 unkOffsets[4];  // offsets to UnkStruct1_sub_child_data structs from the beginning of this struct
+    /*0x0C*/ s32 unkOffsets[4];  // offsets to UnkStruct1_sub_child_data structs from the beginning of this struct. Is this tilemap related?
     /*0x1C*/ u32 palOffset;  // offset from the beginning of this struct to palette. Palette is actually 4 bytes after the address.
     u8 filler20[0xC];
     u16 unk2C;
@@ -67,15 +328,16 @@ struct UnkStruct1_sub_child
     /*0x34*/ u16 bldY;
     u8 filler36[2];
     /*0x38*/ u16 bgCnt[4];  // bgcnt for BGs 0-3
-    /*0x40*/ u8 *vramAddr40[4];  // VRAM addresses?
+    /*0x40*/ u8 *bgVramMapAddrs[4];  // VRAM tile map addresses for each BG?
     /*0x50*/ u8 *vramAddr50[4];  // VRAM addresses?
     u8 filler60[8];
     u32 unk68;  // some offset
+    u32 unk6C;  // some offset
 };
 
 struct UnkStruct1_sub
 {
-    struct UnkStruct1_sub_child *unk0;
+    struct GraphicsConfig *unk0;
     /*0x04*/ u16 bgNum;  // bgNum
     u8 unk6;
     u8 unk7;
@@ -94,7 +356,7 @@ struct UnkStruct1
     u8 unk30;
     u8 unk31;
     u8 unk32;  // some index
-    u8 unk33;
+    u8 unk33;  // flags: bit 0 = enable blending
 };
 
 struct KeyInput
@@ -148,7 +410,7 @@ struct UnknownStruct6
 
 struct UnknownStruct5
 {
-    struct UnkStruct1_sub_child *unk0;
+    struct GraphicsConfig *unk0;
     u32 unk4;
     u16 unk8;
 };
@@ -163,7 +425,7 @@ struct UnknownStruct4_child
 struct UnknownStruct4  // gUnknown_03000B90
 {
     struct UnknownStruct5 *unk0;
-    struct UnkStruct1_sub_child *unk4;
+    struct GraphicsConfig *unk4;
     struct UnknownStruct4_child *unk8;
     void (*unkC)(void);
     s16 unk10;
@@ -348,7 +610,7 @@ struct StructC40_child_child_child  // might not actually be a struct
 struct StructC40_child_child
 {
     u8 filler0[8];
-    /*struct StructC40_child_child_child*/ u8 *unk8;
+    struct StructC40_child_child_child *unk8;
 };
 
 struct StructC40_child
@@ -403,10 +665,10 @@ struct StructC90_child14
 
 struct StructC90
 {
-    void *unk0;
-    void *unk4;
+    void *unk0;  // DMA dest
+    void *unk4;  // DMA source
     u16 unk8;
-    u16 unkA;
+    u16 unkA;  // DMA transfer size (number of u16s)
     void *unkC[2];
     struct StructC90_child14 *unk14;
     void (*unk18)(void *, void *, void *, int);
@@ -418,10 +680,10 @@ struct StructCB0_child
     u8 unk4;
     struct StructCB0_child *unk8;
     struct StructCB0_child *unkC;
-    u32 unk10;
+    void *unk10;
 };
 
-struct StructCB0
+struct StructCB0  // possibly just an array of StructCB0_child rather than a struct
 {
     void (*unk0)();
     u8 unk4;
@@ -429,7 +691,17 @@ struct StructCB0
     u8 fillerC[0x64-0xC];
     u32 unk64;
     struct StructCB0_child *unk68;
-    void *unk6C;
+    struct StructCB0_child *unk6C;
+};
+
+struct StructD20
+{
+    void *unk0[1][2];
+    //u8 filler0[8];
+    void *unk8;
+    void *unkC;
+    u16 unk10;
+    u16 unk12;
 };
 
 //------------------------------------------------------------------------------
@@ -544,9 +816,10 @@ extern struct StructC40 gUnknown_03000C40;
 extern struct StructC70 gUnknown_03000C70;
 extern struct StructC90 gUnknown_03000C90;
 extern struct StructCB0 gUnknown_03000CB0;
+extern struct StructD20 gUnknown_03000D20;
 extern u8 gUnknown_03000DCC;
 extern u16 gUnknown_03000E60;
-extern void *gUnknown_03000E70[];
+extern struct UnkStruct1_sub_child_data *gUnknown_03000E70[];
 extern u8 *gSomeVRAMAddr_03000E80;
 extern u8 *gSomeVRAMAddr_03000E90;
 extern u8 *gUnknown_03000E88;
@@ -613,10 +886,10 @@ extern const struct UnknownStruct17 gUnknown_0807954C[];
 extern const u8 gUnknown_0807956C[];
 extern const u8 gUnknown_08079698[];
 extern u16 *const gUnknown_0807DD94;
-extern const struct UnkStruct1_sub_child gUnknown_08866A48;
-extern const struct UnkStruct1_sub_child gUnknown_08867560;
-extern const struct UnkStruct1_sub_child gUnknown_0886A328;
-extern struct UnkStruct1_sub_child gUnknown_0886CFCC;  // non-const (likely in .data instead of .rodata)
+extern const struct GraphicsConfig gIntroGfxConfig;
+extern const struct GraphicsConfig gTitleGfxConfig0;
+extern const struct GraphicsConfig gTitleGfxConfig1;
+extern struct GraphicsConfig gTitleGfxConfig2;  // non-const (likely in .data instead of .rodata)
 
 //------------------------------------------------------------------------------
 // Functions
@@ -790,9 +1063,10 @@ int sub_08014BB4(void);
 void sub_0801500C();
 void sub_0801B310(void);
 void reset_some_array_0801B3C0(void);
-void sub_0801B88C(void);
+void update_press_start_fade(void);
 void sub_0802919C();
 void sub_08029C20(void);
+void sub_08029CB0(void);
 void set_blend_regs_08029CDC();
 int sub_08029FD0(void);
 int sub_0802A0A8(void);
@@ -800,7 +1074,7 @@ void sub_0802A164(void);
 int sub_0802A464(void);
 void sub_0802BA94(void);
 void sub_0802BC98(void);
-void sub_0802BCA4(struct UnkStruct1_sub_child *, int);
+void sub_0802BCA4(struct GraphicsConfig *, int);
 void sub_0802BE74(void);
 void set_bg_offset_regs_0802BEEC(struct BGOffsets *bgOffsets);
 void sub_0802BF1C(void);
@@ -808,7 +1082,7 @@ void sub_0802BF28(void);
 void sub_0802BFA4(void);
 void sub_0802C20C(void);
 void sub_0802C058(void);
-void sub_0802C104();
+void sub_0802C104(int arg0, int arg1, void *arg2);
 void sub_0802C144();
 void sub_0802C1B0(void);
 void sub_0802C7A4(void);
@@ -824,14 +1098,19 @@ void sub_0803109C(void);
 void sub_080317F8(void);
 int sub_08031944(struct Struct0802D614 *);
 void sub_08031978(struct Struct0802D614 *);
-int sub_080319BC(struct UnkStruct1_sub_child *, struct UnknownStruct5 *, int);
+int sub_080319BC(struct GraphicsConfig *, struct UnknownStruct5 *, int);
 void sub_08031BF0();
 int sub_08031E04(void);
-void load_palette();
+enum
+{
+    LOAD_BG_PALETTE = (1 << 0),
+    LOAD_OBJ_PALETTE = (1 << 1),
+};
+void load_predefined_palette(u32 paletteNum, u32 flags);
 int sub_08032C44(struct UnknownStruct4 *);
-u16 sub_08032EB8(struct UnkStruct1_sub_child *arg0);
-u16 sub_08032EE4(struct UnkStruct1_sub_child *arg0);
-u16 something_with_loading_graphics_08032F24(const struct UnkStruct1_sub_child *arg0[4], int arg1);
+u16 load_graphics_config_bg2_08032EB8(struct GraphicsConfig *arg0);
+u16 load_graphics_config_08032EE4(struct GraphicsConfig *arg0);
+u16 something_with_loading_graphics_08032F24(const struct GraphicsConfig *arg0[4], int arg1);
 void sub_08032F68(void);
 void clear_oam_and_buffer(void);
 void process_input(void);

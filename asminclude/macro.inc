@@ -38,3 +38,9 @@
 	b \name			@ Now in ARM mode, jump to the actual function
 	.SECTION .text
 .ENDM
+
+.MACRO PALETTE_FILL
+	.REPT (0b+0x200-.)/2
+		.2BYTE 0x8421
+	.ENDR
+.ENDM

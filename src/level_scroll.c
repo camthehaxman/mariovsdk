@@ -55,7 +55,7 @@ void level_scroll_init_callback(void)
 	sub_08040F54();
 	gUnknown_03001A38 = 1;
 	sub_08071C24();
-	play_sound_effect_08071990(26, 8, 16, 64, 0, 128, 0);
+	play_sound_effect_08071990(SE_ERASE, 8, 16, 64, 0, 128, 0);
 	gUnknown_030019A0 &= ~0x40000000;
 	gUnknown_03000B78 = 1;
 	gUnknown_03001A00 = 0;

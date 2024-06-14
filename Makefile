@@ -14,8 +14,9 @@ LD       := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY  := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 GBAGFX   := tools/gbagfx/gbagfx
+RLE      := tools/rle/rle
 
-CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
+CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -g -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I asminclude
 
@@ -46,12 +47,16 @@ clean:
 	$(RM) $(ROM) $(ELF) $(MAP) src/*.s
 	find . -name '*.o' -exec rm {} +
 	find . -name '*.4bpp' -exec rm {} +
+	find . -name '*.8bpp' -exec rm {} +
+	find . -name '*.gbapal' -exec rm {} +
+	find . -name '*.lz' -exec rm {} +
+	find . -name '*.rle' -exec rm {} +
 	$(MAKE) -C tools/gbagfx clean
 
 #### Tools ####
 
-$(GBAGFX):
-	$(MAKE) -C tools/gbagfx
+$(GBAGFX): ; $(MAKE) -C tools/gbagfx
+$(RLE):    ; $(MAKE) -C tools/rle
 
 #### Recipes ####
 
@@ -75,8 +80,12 @@ ldscript.txt: ldscript.in
 
 #### Graphics ####
 
-%.4bpp: %.png $(GBAGFX)
-	$(GBAGFX) $< $@
+%.4bpp   : %.png $(GBAGFX) ; $(GBAGFX) $< $@
+%.8bpp   : %.png $(GBAGFX) ; $(GBAGFX) $< $@
+%.gbapal : %.pal $(GBAGFX) ; $(GBAGFX) $< $@
+%.lz     : %     $(GBAGFX) ; $(GBAGFX) $< $@
+%.pal    : %.png $(GBAGFX) ; $(GBAGFX) $< $@
+%.rle    : %     $(RLE)    ; $(RLE)    $< $@
 
 # Automatically scan files for incbins and add them as a dependency
 .SECONDEXPANSION:

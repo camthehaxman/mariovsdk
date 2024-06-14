@@ -14,31 +14,23 @@ struct Struct08032D50
     u16 unk56;
 };
 
-extern u32 gUnknown_0807DD34[];
+extern u32 gPaletteIndices_0807DD34[];
 extern u32 gUnknown_0807DD4C[];
 extern u32 gUnknown_0807DD64[];
 extern u32 gUnknown_0807DD7C[];
 
-struct Thing
-{
-    u8 filler0[8];
-    s8 unk8;
-    u8 filler9[3];
-    s8 unkC;
-};
-
-u32 alloc_screen_base_block_08032E24(struct UnkStruct1_sub_child *arg0, int arg1, int arg2);
+u32 load_bg_tilemap_08032E24(struct GraphicsConfig *arg0, int arg1, int arg2);
 void load_gfx_to_vram_08034790(void *, void *, int);
-void sub_0801B3DC(struct UnkStruct1_sub_child *, int, int);
-void sub_0802C0B8(struct UnkStruct1_sub_child *);
-void copy_some_palette_08032E80(struct UnkStruct1_sub_child *arg0);
+void sub_0801B3DC(struct GraphicsConfig *, int, int);
+void sub_0802C0B8(struct GraphicsConfig *);
+void copy_some_palette_08032E80(struct GraphicsConfig *arg0);
 
 u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
 {
     u16 dispcnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     int i;
     struct UnkStruct1_sub *r4;
-    struct UnkStruct1_sub_child *r2;
+    struct GraphicsConfig *r2;
 
     gUnknown_030012A4 = 0;
     gUnknown_030012EC = 0;
@@ -51,23 +43,23 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
         r4 = &arg0->unk0[arg0->unk20[i]];
         if (r4->unk0 != NULL)
         {
-            dispcnt |= BGCNT_SCREENBASE(alloc_screen_base_block_08032E24(r4->unk0, i, i + 1));
+            dispcnt |= load_bg_tilemap_08032E24(r4->unk0, i, i + 1) << 8;
             bgReg = &((volatile u16 *)REG_ADDR_BG0CNT)[i];
+            // init BGCNT
             *bgReg = r4->unk0->bgCnt[i];
+            // set priority if specified
             if (arg0->bgPrio[i] != 0)
-            {
                 *bgReg = (*bgReg & ~3) | ((arg0->bgPrio[i] - 1) & 3);
-            }
         }
     }
 
     for (i = 0; i < 4; i++)
     {
-        struct UnkStruct1_sub_child *r3;
+        struct GraphicsConfig *config;
 
         r4 = &arg0->unk0[i];
-        r3 = r4->unk0;
-        if (r3 != NULL && r3->gfxOffset != 0)
+        config = r4->unk0;
+        if (config != NULL && config->gfxOffset != 0)
         {
             u8 bgNum = r4->bgNum;
             struct UnkStruct1_sub *r5 = &arg0->unk0[arg0->unk20[r4->bgNum]];
@@ -80,12 +72,13 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
             {
                 bgNum = r4->unk7 - 1;
                 // clear CHARBASE field
-                *bgReg = (*bgReg & ~0xC) | (r3->bgCnt[bgNum] & 0xC);
+                *bgReg = (*bgReg & ~0xC) | (config->bgCnt[bgNum] & 0xC);
             }
 
-            r3 = r4->unk0;
-            gUnknown_03000E88 = (u8 *)r3 + r3->gfxOffset;
-            load_gfx_to_vram_08034790(gUnknown_03000E88 + 4, r5->unk0->vramAddr50[bgNum] + r3->unk2C * 0x40, TRUE);
+            config = r4->unk0;
+            gUnknown_03000E88 = (u8 *)config + config->gfxOffset;
+            // Load tiles
+            load_gfx_to_vram_08034790(gUnknown_03000E88 + 4, r5->unk0->vramAddr50[bgNum] + config->unk2C * 0x40, TRUE);
 
             // set color mode
             {
@@ -96,8 +89,7 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
 
             if (r4->unk6 == 0)
             {
-                u32 one = 1;
-                sub_0801B3DC(r4->unk0, one & ~(r4->unk0->bgCnt[bgNum] >> 7), bgNum);
+                sub_0801B3DC(r4->unk0, !(r4->unk0->bgCnt[bgNum] & BGCNT_256COLOR), bgNum);
             }
         }
     }
@@ -115,18 +107,18 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
             struct UnkStruct1_sub_child_data *r2_ = (void *)((u8 *)r2 + r2->unkOffsets[arg0->unk32]);
             gUnknown_03001720 = r2_->unk4;
             gUnknown_0300170C = r2_->unk6;
-            gUnknown_030012A4 = ((struct Thing *)gUnknown_03000E70[1])->unk8;
-            gUnknown_030012EC = ((struct Thing *)gUnknown_03000E70[1])->unkC;
+            gUnknown_030012A4 = gUnknown_03000E70[1]->unk8;
+            gUnknown_030012EC = gUnknown_03000E70[1]->unkC;
         }
     }
 
     if (arg0->unk28 != 0)
     {
-        struct UnkStruct1_sub_child *r2 = arg0->unk0[arg0->unk20[arg0->unk2C]].unk0;
-        struct UnkStruct1_sub_child *r5 = arg0->unk0[arg0->unk2D].unk0;
+        struct GraphicsConfig *r2 = arg0->unk0[arg0->unk20[arg0->unk2C]].unk0;
+        struct GraphicsConfig *r5 = arg0->unk0[arg0->unk2D].unk0;
 
-        gSomeVRAMAddr_03000E80 = r2->vramAddr40[arg0->unk2C];
-        gSomeVRAMAddr_03000E90 = r2->vramAddr40[arg0->unk2C - 1];
+        gSomeVRAMAddr_03000E80 = r2->bgVramMapAddrs[arg0->unk2C];
+        gSomeVRAMAddr_03000E90 = r2->bgVramMapAddrs[arg0->unk2C - 1];
         gUnknown_03000E60 = r5->unk2C;
         if (!(r5->bgCnt[0] & BGCNT_256COLOR))
             *(vu16 *)&gUnknown_03000E60 <<= 1;
@@ -144,16 +136,17 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
     sub_0802BCA4(arg0->unk0[arg0->unk2F].unk0, arg1);
     if (arg0->unk2E >= 0)
         copy_some_palette_08032E80(arg0->unk0[arg0->unk2E].unk0);
+    // init blend regs
     if (arg0->unk33 & 1)
     {
-        struct UnkStruct1_sub_child *r4;
-        r4 = arg0->unk0[arg0->unk31].unk0;
-        if (r4 != NULL)
+        struct GraphicsConfig *config;
+        config = arg0->unk0[arg0->unk31].unk0;
+        if (config != NULL)
         {
             if (gUnknown_03000B90.unk12 != 2 || (gUnknown_030009D0 & 0x10))
-                set_blend_regs_08029CDC(r4->bldCnt, r4->bldAlpha, r4->bldY);
+                set_blend_regs_08029CDC(config->bldCnt, config->bldAlpha, config->bldY);
             else
-                set_blend_regs_08029CDC(r4->bldCnt | BLDCNT_EFF_ALPHA, r4->bldAlpha, r4->bldY);
+                set_blend_regs_08029CDC(config->bldCnt | BLDCNT_EFF_ALPHA, config->bldAlpha, config->bldY);
         }
     }
     return dispcnt;
@@ -163,47 +156,47 @@ void sub_08032B30(s16 arg0, s16 arg1)
 {
     if (gUnknown_03000B80 == 0)
     {
-        if (gMainState == 5)
+        if (gMainState == MAIN_STATE_TUTORIAL)
         {
             if (arg0 <= 5)
-                load_palette(gUnknown_0807DD34[arg1], 1);
+                load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
             else
-                load_palette(gUnknown_0807DD4C[arg1], 1);
+                load_predefined_palette(gUnknown_0807DD4C[arg1], 1);
         }
         else
         {
             if (arg0 <= 11)
-                load_palette(gUnknown_0807DD34[arg1], 1);
+                load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
             else if (arg0 == 12)
-                load_palette(gUnknown_0807DD4C[arg1], 1);
+                load_predefined_palette(gUnknown_0807DD4C[arg1], 1);
             else if (arg0 == 13)
-                load_palette(gUnknown_0807DD64[arg1], 1);
+                load_predefined_palette(gUnknown_0807DD64[arg1], 1);
         }
     }
     else if (gUnknown_03000B80 == 1)
     {
         if (arg0 <= 5)
-            load_palette(gUnknown_0807DD7C[arg1], 1);
+            load_predefined_palette(gUnknown_0807DD7C[arg1], 1);
         else if (arg1 == 2)
-            load_palette(58, 1);
+            load_predefined_palette(58, 1);
         else
-            load_palette(gUnknown_0807DD64[arg1], 1);
+            load_predefined_palette(gUnknown_0807DD64[arg1], 1);
     }
     else if (gUnknown_03000B80 == 2)
-        load_palette(gUnknown_0807DD34[arg1], 1);
+        load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
     else if (gUnknown_03000B80 == 3)
-        load_palette(gUnknown_0807DD7C[arg1], 1);
+        load_predefined_palette(gUnknown_0807DD7C[arg1], 1);
     else if (gUnknown_03000B80 == 4)
-        load_palette(62, 1);
+        load_predefined_palette(62, 1);
     else if (gUnknown_03000B80 == 5)
-        load_palette(63, 1);
+        load_predefined_palette(63, 1);
 }
 
 int sub_08032C44(struct UnknownStruct4 *arg0)
 {
     struct UnkStruct1 sp0 = {0};
     struct UnknownStruct5 *r6 = arg0->unk0;
-    struct UnkStruct1_sub_child *r7 = r6->unk0;
+    struct GraphicsConfig *r7 = r6->unk0;
 
     sp0.unk0[0].unk0 = r7;
     sp0.unk0[0].bgNum = 2;
@@ -273,25 +266,28 @@ void sub_08032D50(struct Struct08032D50 *arg0)
         gUnknown_03000E94 = (u8 *)arg0 + arg0->unk40 * 0x6C;
 }
 
-u32 alloc_screen_base_block_08032E24(struct UnkStruct1_sub_child *arg0, int arg1, int arg2)
+// Loads the tilemaps for the specified BGs (from start to end)
+// Returns BG enable flags for DISPCNT
+u32 load_bg_tilemap_08032E24(struct GraphicsConfig *config, int start, int end)
 {
-    u8 *r8 = (u8 *)arg0;
-    u32 blockNum = 0;
+    u8 *base = (u8 *)config;
+    u32 dispcnt = 0;
     int i;
 
-    for (i = arg1; i < arg2; i++)
+    for (i = start; i < end; i++)
     {
-        if (arg0->unkOffsets[i] > 0)
+        if (config->unkOffsets[i] > 0)
         {
-            blockNum |= 1 << i;
-            gUnknown_03000E70[i] = r8 + arg0->unkOffsets[i];
-            load_gfx_to_vram_08034790(gUnknown_03000E70[i] + 0x28, arg0->vramAddr40[i], 1);
+            dispcnt |= 1 << i;
+            gUnknown_03000E70[i] = (struct UnkStruct1_sub_child_data *)(base + config->unkOffsets[i]);
+            // load tilemap
+            load_gfx_to_vram_08034790((u8 *)gUnknown_03000E70[i] + 0x28, config->bgVramMapAddrs[i], 1);
         }
     }
-    return blockNum;
+    return dispcnt;
 }
 
-void copy_some_palette_08032E80(struct UnkStruct1_sub_child *arg0)
+void copy_some_palette_08032E80(struct GraphicsConfig *arg0)
 {
     u8 *src;
     register u8 *src_ asm("r0");
@@ -313,7 +309,7 @@ int sub_08032EB4(void)
     return 0;
 }
 
-u16 sub_08032EB8(struct UnkStruct1_sub_child *arg0)
+u16 load_graphics_config_bg2_08032EB8(struct GraphicsConfig *arg0)
 {
     struct UnkStruct1 sp0 = {0};
 
@@ -322,11 +318,11 @@ u16 sub_08032EB8(struct UnkStruct1_sub_child *arg0)
     return setup_graphics_08032814(&sp0, 0);
 }
 
-u16 sub_08032EE4(struct UnkStruct1_sub_child *arg0)
+u16 load_graphics_config_08032EE4(struct GraphicsConfig *arg0)
 {
     struct UnkStruct1 sp0 = {0};
     int i;
-    struct UnkStruct1_sub_child *temp = arg0;
+    struct GraphicsConfig *temp = arg0;
 
     for (i = 0; i < 4; i++)
     {
@@ -337,7 +333,7 @@ u16 sub_08032EE4(struct UnkStruct1_sub_child *arg0)
     return setup_graphics_08032814(&sp0, 0);
 }
 
-u16 something_with_loading_graphics_08032F24(const struct UnkStruct1_sub_child *arg0[4], int arg1)
+u16 something_with_loading_graphics_08032F24(const struct GraphicsConfig *arg0[4], int arg1)
 {
     struct UnkStruct1 sp0 = {0};
     int i;
@@ -395,13 +391,13 @@ void clear_oam_and_buffer(void)
 
 void sub_08033024(void)
 {
-    if (gSomeKeys_030012E8 == 8 || gSomeKeys_030012E8 == 2)
+    if (gSomeKeys_030012E8 == START_BUTTON || gSomeKeys_030012E8 == B_BUTTON)
     {
         goto_state_080070E8(12, 1);
         gUnknown_030012F8 = 0;
         gHeldKeys = 0;
         gSomeKeys_030012E8 = 0;
-        play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
         return;
     }
 
@@ -411,7 +407,7 @@ void sub_08033024(void)
         {
             gSomeKeys_030012E8 = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 0];
             gHeldKeys = gUnknown_0807DD94[gUnknown_030012F8 * 2 + 1];
-            if ((gHeldKeys & 0x200) && (gSomeKeys_030012E8 & 0x40))
+            if ((gHeldKeys & L_BUTTON) && (gSomeKeys_030012E8 & DPAD_UP))
             {
                 goto_state_080070E8(18, 0);
                 gUnknown_030012F8 = 0;
@@ -451,7 +447,7 @@ void sub_08033148(void)
         gUnknown_030012F8 = 0;
         gHeldKeys = 0;
         gSomeKeys_030012E8 = 0;
-        play_sound_effect_08071990(22, 8, 16, 64, 0, 128, 0);
+        play_sound_effect_08071990(SE_BACK, 8, 16, 64, 0, 128, 0);
         return;
     }
 

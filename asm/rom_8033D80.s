@@ -1531,7 +1531,7 @@ expert_level_select_init_callback: @ 0x08035388
 	bl sub_08029C9C
 	mov r0, #2
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	bl sub_08071FE4
 	cmp r0, #11
 	beq _08035454
@@ -5322,7 +5322,7 @@ _080370E8:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	b _08037166
 	.byte 0x00
 	.byte 0x00
@@ -5356,7 +5356,7 @@ _0803712C:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl load_palette
+	bl load_predefined_palette
 	ldr r1, _080371C4  @ =gUnknown_080A8674
 	mov r0, #0
 	ldrsb r0, [r4, r0]
@@ -5364,7 +5364,7 @@ _0803712C:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #2
-	bl load_palette
+	bl load_predefined_palette
 _08037166:
 	ldr r0, _080371B8  @ =gUnknown_03000B58
 	mov r5, #0
@@ -8936,7 +8936,7 @@ _08038B5C:
 	cmp r2, #3
 	bne _08038B80
 	mov r0, #52
-	bl load_palette
+	bl load_predefined_palette
 	b _08038B9E
 	.byte 0x00
 	.byte 0x00
@@ -8955,12 +8955,12 @@ _08038B88:
 	mov r0, #54
 _08038B8E:
 	mov r1, #2
-	bl load_palette
+	bl load_predefined_palette
 	b _08038B9E
 _08038B96:
 	ldr r0, [r3, #4]
 	mov r1, #2
-	bl load_palette
+	bl load_predefined_palette
 _08038B9E:
 	pop {r0}
 	bx r0

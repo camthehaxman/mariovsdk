@@ -97,7 +97,7 @@ void sub_0802BAA0(void)
                 else
                 {
                     struct StructC40_child_child_child *r3;
-                    r4->unk8->unk8 += gUnknown_03000C40.unk18;
+                    r4->unk8->unk8 = (void *)((u8 *)r4->unk8->unk8 + gUnknown_03000C40.unk18);
                     r3 = (void *)r4->unk8->unk8;
                     if (r3 == (void *)gUnknown_03000C40.unk0[r4->unk0].unk4)
                     {
@@ -197,7 +197,7 @@ extern u8 sub_0800169C[]; extern u8 sub_0800169C_end[];
 extern u8 sub_08001760[]; extern u8 sub_08001760_end[];
 extern void *gUnknown_0807BB30[];
 
-void sub_0802BCA4(struct UnkStruct1_sub_child *arg0, int arg1 /*r6*/)
+void sub_0802BCA4(struct GraphicsConfig *arg0, int arg1)
 {
     register u32 r3 asm("r3") = 0x68;
     struct UnkStruct1_sub_child_data68 *r5;
@@ -248,7 +248,7 @@ void sub_0802BCA4(struct UnkStruct1_sub_child *arg0, int arg1 /*r6*/)
     gUnknown_03000C70.unk14 = gUnknown_03000C90.unk14;
     r4_ = r5->unk0;
     gUnknown_03000C70.unk0 = gUnknown_0807BB30[r4_];
-    CpuFill16(0, &gBGOffsets_03001730, 0x10);
+    CpuFill16(0, &gBGOffsets_03001730, sizeof(gBGOffsets_03001730));
     gUnknown_03000C70.unk8 = (u8 *)&gBGOffsets_03001730 + r4_ * 4;
     gUnknown_03000C70.unkC = (u8 *)&gBGOffsets_03001730 + r4_ * 4 + 2;
     gUnknown_03000C70.unk4 = 0x04000005;
@@ -260,7 +260,7 @@ void sub_0802BCA4(struct UnkStruct1_sub_child *arg0, int arg1 /*r6*/)
         gUnknown_03000C90.unk18(&gUnknown_03000C90, &gUnknown_03000C70, 0, 0);
 }
 
-int sub_0802BE18(struct UnkStruct1_sub_child *arg0)
+int sub_0802BE18(struct GraphicsConfig *arg0)
 {
     register u32 r3 asm("r3") = 0x68;
 
@@ -352,4 +352,138 @@ void sub_0802BFA4(void)
     gUnknown_03000CB0.unk6C = &gUnknown_03000CB0;
     gUnknown_03000CB0.unk8 = &gUnknown_03000CB0;
     gUnknown_03000CB0.unk64 = 1;
+}
+
+void sub_0802BFC0(void *arg0, void (*arg1)() /*r6*/, u32 arg2 /*r5*/)
+{
+    struct StructCB0_child *r3;
+    struct StructCB0_child *r2;
+    int r12 = 0;
+    struct StructCB0_child *r4;
+    struct StructCB0_child *r7;
+
+    if (arg2 > 159)
+        return;
+    r7 = NULL;
+    r3 = gUnknown_03000CB0.unk6C;
+    r2 = r3;
+    if (r3 != NULL)
+    {
+        do
+        {
+            if (r3->unk4 >= arg2)
+            {
+                if (r3->unk4 <= arg2 + 2)
+                {
+                    if (r3->unk0 == arg1)
+                        return;
+                    r12 = 1;
+                    break;
+                }
+                if (r3->unk4 > arg2)
+                    break;
+            }
+            r7 = r3;
+            r3 = r3->unk8;
+        } while (r3 != r2);
+    }
+    r4 = (struct StructCB0_child *)&gUnknown_03000CB0 + gUnknown_03000CB0.unk64;
+    gUnknown_03000CB0.unk64++;
+    r4->unk4 = arg2;
+    r4->unk0 = arg1;
+    r4->unk10 = arg0;
+    r4->unkC = 0;
+    if (r12)
+    {
+        while (r3->unkC != NULL)
+            r3 = r3->unkC;
+        r3->unkC = r4;
+        return;
+    }
+    else if (r7 == NULL)
+        gUnknown_03000CB0.unk6C = r4;
+    else
+        r7->unk8 = r4;
+    r4->unk8 = r3;
+}
+
+void sub_0802C058(void)
+{
+    gUnknown_03000CB0.unk68 = gUnknown_03000CB0.unk6C;
+    if (gUnknown_03000CB0.unk68 != NULL)
+        *(u8 *)(REG_ADDR_DISPSTAT + 1) = gUnknown_03000CB0.unk68->unk4;
+    else
+        *(u8 *)(REG_ADDR_DISPSTAT + 1) = 0;
+}
+
+void sub_0802C080(void)
+{
+    volatile u32 *dma0 = (u32 *)REG_ADDR_DMA0SAD;
+
+    REG_DMA0CNT_H = 0;
+    if (gUnknown_03000C90.unk8 <= 2)
+    {
+        dma0[0] = (u32)gUnknown_03000C90.unk4;
+        dma0[1] = (u32)gUnknown_03000C90.unk0;
+        dma0[2] = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | gUnknown_03000C90.unkA;
+    }
+}
+
+struct GraphicsConfig_6C
+{
+    u16 unk0;
+    u16 unk2;
+};
+
+void sub_0802C0B8(struct GraphicsConfig *arg0)
+{
+    struct StructD20 *r3 = &gUnknown_03000D20;
+
+    if (arg0 == NULL || arg0->unk0 >= 0 || (u32)(arg0->unk0 & 0x7FFFFFFF) <= 0x6C || arg0->unk6C == 0)
+        r3->unk10 = 0x400;
+    else
+    {
+        struct GraphicsConfig_6C *r1 = (void *)((u8 *)arg0 + arg0->unk6C);
+
+        r3->unk8 = (u8 *)r1 + 4;
+        r3->unkC = (u8 *)r1 + 0x204;
+        r3->unk10 = r1->unk0;
+        r3->unk12 = r1->unk2;
+    }
+}
+
+void sub_0802C104(int arg0, int arg1, void *arg2)
+{
+    gUnknown_03000D20.unk0[arg0][arg1] = arg2;
+}
+
+int sub_0802C118(struct GraphicsConfig *arg0)
+{
+    if (arg0 == NULL || arg0->unk0 >= 0 || (u32)(arg0->unk0 & 0x7FFFFFFF) <= 0x6C || arg0->unk6C == 0)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_0802C1C0();
+
+void sub_0802C144(int arg0)
+{
+    if (gUnknown_03000D20.unk10 != 0x400 && gUnknown_03000D20.unk0[0][0] != NULL && gUnknown_03000D20.unk0[0][1] != NULL)
+    {
+        DmaCopy16(3, gUnknown_03000D20.unk0[0][0], (void *)BG_PLTT, BG_PLTT_SIZE);
+        DmaCopy32(3, gUnknown_03000D20.unk0[0][1], (void *)OBJ_PLTT, OBJ_PLTT_SIZE);
+        arg0 = gUnknown_03000D20.unk10 - arg0;
+        if (arg0 < 160)
+        {
+            if (arg0 < 0)
+                arg0 = 0;
+            sub_0802BFC0(&gUnknown_03000D20, sub_0802C1C0, arg0);
+        }
+    }
+}
+
+void sub_0802C1B0(void)
+{
+    gUnknown_03000D20.unk10 = 0x400;
 }

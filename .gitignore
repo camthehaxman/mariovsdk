@@ -7,6 +7,10 @@ src/*.s
 *.dump
 ldscript.txt
 *.4bpp
+*.8bpp
+*.gbapal
+*.lz
+*.rle
 
 # Tools
 tools/agbcc

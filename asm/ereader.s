@@ -1064,7 +1064,7 @@ _0802DED8:
 	mov r4, #0
 	mov r0, #8
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	mov r2, #128
 	lsl r2, r2, #19
 	ldrh r0, [r2]
@@ -2846,7 +2846,7 @@ state24_init_callback: @ 0x0802EC34
 	bl sub_08038B18
 	ldr r4, _0802ECAC  @ =gUnknown_087DED6C
 	add r0, r4, #0
-	bl sub_08032EB8
+	bl load_graphics_config_bg2_08032EB8
 	mov r2, #128
 	lsl r2, r2, #19
 	ldr r1, _0802ECB0  @ =0x0000FEFF
@@ -2854,7 +2854,7 @@ state24_init_callback: @ 0x0802EC34
 	strh r1, [r2]
 	mov r0, #8
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	add r0, r4, #0
 	bl sub_08029C9C
 	ldr r5, _0802ECB4  @ =gUnknown_03000BB4

@@ -503,12 +503,6 @@ int sub_08034528(s32 a)
     return 0;
 }
 
-struct UnknownStruct1
-{
-    u32 unk0;
-    u8 unk4[1];  // unknown length
-};
-
 void decompress_something_0803455C(struct CmprHeader *hdr, u16 *dest)
 {
     u8 *src = (u8 *)hdr + 4;  // skip over header

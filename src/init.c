@@ -38,7 +38,7 @@ extern const struct UnknownStruct10 gUnknown_08B2AD88;
 extern struct UnknownStruct12 *gUnknown_080788FC;
 extern struct UnknownStruct13 gUnknown_0807DD1C[];
 extern void *const gUnknown_0807CA94;
-extern const u8 gPalettes[];
+extern const u8 gPredefinedPalettes[];
 
 void init_init_callback(void)
 {
@@ -170,26 +170,26 @@ void sub_08032784(void)
 {
 }
 
-void load_palette(u32 paletteNum, u32 flags)
+void load_predefined_palette(u32 paletteNum, u32 flags)
 {
     // I have to do this stupid cast for it to match.
     bool32 r4 = ((*(u8 *)gUnknown_080788FC & 24) != 0);
 
-    if (flags & 1)
+    if (flags & LOAD_BG_PALETTE)
     {
-        const void *src = gPalettes + paletteNum * 0x800 + r4 * 0x400;
+        const void *src = gPredefinedPalettes + paletteNum * 0x800 + r4 * 0x400;
 
         DmaCopy16(3, src, (void *)PLTT, 0x200);
-        sub_0802C104(0, 0);
+        sub_0802C104(0, 0, src);
     }
 
-    if (flags & 2)
+    if (flags & LOAD_OBJ_PALETTE)
     {
-        const void *src = gPalettes + paletteNum * 0x800 + r4 * 0x400 + 0x200;
+        const void *src = gPredefinedPalettes + paletteNum * 0x800 + r4 * 0x400 + 0x200;
 
         // Why is this one DmaCopy32 while the other one is DmaCopy16?
         DmaCopy32(3, src, (void *)(PLTT + 0x200), 0x200);
-        sub_0802C104(0, 1);
+        sub_0802C104(0, 1, src);
     }
 }
 

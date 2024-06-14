@@ -52,14 +52,14 @@ _0801BF64:
 	mov r1, #0
 	str r1, [sp, #16]
 	str r1, [r0, #4]
-	ldr r4, _0801BFDC  @ =gUnknown_08829B18
+	ldr r4, _0801BFDC  @ =gClearGameoverGfxConfig
 	str r4, [r0, #8]
 	str r4, [r0, #12]
 	mov r1, #3
 	bl something_with_loading_graphics_08032F24
 	mov r0, #6
 	mov r1, #3
-	bl load_palette
+	bl load_predefined_palette
 	mov r1, #128
 	lsl r1, r1, #19
 	mov r2, #194
@@ -98,7 +98,7 @@ _0801BFD4:
 _0801BFD8:
 	.4byte gUnknown_085DED1C
 _0801BFDC:
-	.4byte gUnknown_08829B18
+	.4byte gClearGameoverGfxConfig
 _0801BFE0:
 	mov r0, #10
 	mov r1, #128
@@ -301,7 +301,7 @@ _0801C140:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl load_palette
+	bl load_predefined_palette
 	b _0801C19C
 _0801C170:
 	.4byte gUnknown_08823B74
@@ -324,7 +324,7 @@ _0801C184:
 	add r0, r0, r1
 	ldr r0, [r0]
 	mov r1, #1
-	bl load_palette
+	bl load_predefined_palette
 _0801C19C:
 	mov r1, #128
 	lsl r1, r1, #19
@@ -9825,7 +9825,7 @@ sub_080209B8: @ 0x080209B8
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r6, _08020A58  @ =gUnknown_0885C4C4
+	ldr r6, _08020A58  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r6, #64]
 	add r0, sp, #8
 	mov r3, #5
@@ -9890,7 +9890,7 @@ _08020A46:
 _08020A54:
 	.4byte 0x030000CC
 _08020A58:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08020A5C:
 	.4byte 0x030000D4
 _08020A60:
@@ -9989,7 +9989,7 @@ _08020AE4:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08020BCC  @ =gUnknown_0885C4C4
+	ldr r0, _08020BCC  @ =gBonusStoparrowGfxConfig1
 	mov r8, r0
 	ldr r3, [r0, #64]
 	str r4, [sp]
@@ -10078,7 +10078,7 @@ _08020BC4:
 _08020BC8:
 	.4byte 0x030000CC
 _08020BCC:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08020BD0:
 	.4byte 0x00000634
 _08020BD4:
@@ -10148,7 +10148,7 @@ _08020C16:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r7, _08020CE8  @ =gUnknown_0885C4C4
+	ldr r7, _08020CE8  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r7, #64]
 	str r4, [sp]
 	str r5, [sp, #4]
@@ -10226,7 +10226,7 @@ _08020CE0:
 _08020CE4:
 	.4byte 0x030000CC
 _08020CE8:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08020CEC:
 	.4byte 0x030000D8
 _08020CF0:
@@ -10252,7 +10252,7 @@ _08020CF4:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r5, _08020D48  @ =gUnknown_0885C4C4
+	ldr r5, _08020D48  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r5, #64]
 	str r4, [sp]
 	str r7, [sp, #4]
@@ -10274,7 +10274,7 @@ _08020D40:
 _08020D44:
 	.4byte 0x030000CC
 _08020D48:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08020D4C:
 	cmp r0, #200
 	bne _08020DF8
@@ -10295,7 +10295,7 @@ _08020D4C:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08020D98  @ =gUnknown_0885C4C4
+	ldr r0, _08020D98  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	str r4, [sp]
 	str r7, [sp, #4]
@@ -10315,7 +10315,7 @@ _08020D90:
 _08020D94:
 	.4byte 0x030000CC
 _08020D98:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08020D9C:
 	cmp r0, #1
 	bne _08020DA6
@@ -10784,7 +10784,7 @@ _080210C6:
 	lsl r1, r1, #1
 	add r0, r0, r1
 	ldr r1, [r0]
-	ldr r0, _0802110C  @ =gUnknown_0885C4C4
+	ldr r0, _0802110C  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -10807,7 +10807,7 @@ _08021104:
 _08021108:
 	.4byte 0x030000CC
 _0802110C:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08021110:
 	ldrb r0, [r2, #4]
 	str r0, [sp, #12]
@@ -10819,7 +10819,7 @@ _08021110:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _080211BC  @ =gUnknown_0885C4C4
+	ldr r0, _080211BC  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -10874,7 +10874,7 @@ _08021176:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _080211BC  @ =gUnknown_0885C4C4
+	ldr r0, _080211BC  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	mov r0, #5
 	str r0, [sp]
@@ -10894,7 +10894,7 @@ _08021176:
 _080211B8:
 	.4byte 0x030000CC
 _080211BC:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _080211C0:
 	.4byte 0x030000D4
 _080211C4:
@@ -10916,7 +10916,7 @@ _080211D0:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	mov r0, #5
 	str r0, [sp]
@@ -10957,7 +10957,7 @@ _08021220:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -11007,7 +11007,7 @@ _08021280:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	mov r0, #5
 	str r0, [sp]
@@ -11052,7 +11052,7 @@ _080212C0:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -11098,7 +11098,7 @@ _0802131A:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	mov r0, #5
 	str r0, [sp]
@@ -11140,7 +11140,7 @@ _0802137A:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -11183,7 +11183,7 @@ _080213CE:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	str r4, [sp]
 	mov r0, #0
@@ -11224,7 +11224,7 @@ _08021426:
 	lsl r3, r3, #1
 	add r0, r0, r3
 	ldr r1, [r0]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r2, [r0, #64]
 	add r0, sp, #12
 	mov r3, #5
@@ -11267,7 +11267,7 @@ _0802147A:
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	ldrh r2, [r0, #2]
-	ldr r0, _08021510  @ =gUnknown_0885C4C4
+	ldr r0, _08021510  @ =gBonusStoparrowGfxConfig1
 	ldr r3, [r0, #64]
 	str r4, [sp]
 	mov r0, #0
@@ -11316,7 +11316,7 @@ _08021504:
 _0802150C:
 	.4byte 0x030000CC
 _08021510:
-	.4byte gUnknown_0885C4C4
+	.4byte gBonusStoparrowGfxConfig1
 _08021514:
 	.4byte 0x030000D4
 _08021518:

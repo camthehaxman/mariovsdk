@@ -14,7 +14,7 @@ enum
 
 void title_init_callback(void)
 {
-    const struct UnkStruct1_sub_child *arr[4];
+    const struct GraphicsConfig *arr[4];
     struct UnknownStruct15 *var;
 
     arena_restore_head(0);
@@ -24,12 +24,12 @@ void title_init_callback(void)
     gUnknown_030000B0 = -1;
     gUnknown_030012A0 = 0;
     gUnknown_03001710 = 0;
-    arr[0] = &gUnknown_08867560;
-    arr[1] = &gUnknown_0886A328;
-    arr[2] = &gUnknown_0886CFCC;
+    arr[0] = &gTitleGfxConfig0;
+    arr[1] = &gTitleGfxConfig1;
+    arr[2] = &gTitleGfxConfig2;
     arr[3] = NULL;
     something_with_loading_graphics_08032F24(arr, 0);
-    var = sub_08006968(&gUnknown_0886CFCC);
+    var = sub_08006968(&gTitleGfxConfig2);
     gUnknown_030000A4 = var;
     DmaFill16(3, 0xA0, (void *)OAM, 0x200);
     gUnknown_03000BE4 = 0;
@@ -38,8 +38,8 @@ void title_init_callback(void)
     if (sub_08071FE4() != 10)
         sub_0807204C(10, 128, 1);
     seed_rng_with_timer();
-    set_blend_regs_08029CDC(gUnknown_08867560.bldCnt, gUnknown_08867560.bldAlpha, gUnknown_08867560.bldY);
-    load_palette(0, 3);
+    set_blend_regs_08029CDC(gTitleGfxConfig0.bldCnt, gTitleGfxConfig0.bldAlpha, gTitleGfxConfig0.bldY);
+    load_predefined_palette(0, LOAD_BG_PALETTE|LOAD_OBJ_PALETTE);
     gPressStartFadeDir = FADE_UP;
     gTitleScreenFrameCounter = 3;
     gPressStartOpacity = 0;
@@ -54,15 +54,15 @@ void title_main_callback(void)
     process_input();
     sub_08029C20();
     if (gUnknown_030000AC == 0 && gUnknown_03000C28 == 0 && gUnknown_030000B0 == -1)
-        gUnknown_030000B0 = play_sound_effect_08071990(229, 8, 16, 64, 0, 128, 0);
+        gUnknown_030000B0 = play_sound_effect_08071990(SE_TITLE, 8, 16, 64, 0, 128, 0);
     if (gIntroTitleTimer_03000BE0 > 5)
         REG_DISPCNT = 0x1740;
     arr[0] = 0;
     arr[1] = 13;
-    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_0807956C[gUnknown_03000BE4]], gUnknown_0886CFCC.vramAddr40[2], 5);
+    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_0807956C[gUnknown_03000BE4]], gTitleGfxConfig2.bgVramMapAddrs[2], 5);
     arr[0] = 22;
     arr[1] = 0;
-    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_08079698[gUnknown_03000BE8] + 3], gUnknown_0886CFCC.vramAddr40[2], 5);
+    sub_080064D4(arr, gUnknown_030000A4->unk108[gUnknown_08079698[gUnknown_03000BE8] + 3], gTitleGfxConfig2.bgVramMapAddrs[2], 5);
     if (gUnknown_03000BE4 < 299)
         gUnknown_03000BE4++;
     else
@@ -97,18 +97,18 @@ void title_main_callback(void)
     {
         if (sub_08034004() != 0 && !(gSomeKeys_030012E8 & 2) && !(gHeldKeys & 2))
         {
-            play_sound_effect_08071990(35, 8, 16, 64, 0, 128, 0);
+            play_sound_effect_08071990(SE_START, 8, 16, 64, 0, 128, 0);
             goto_state_080070E8(3, 1);
             gUnknown_03000BD0 = 1;
         }
-        sub_0801B88C();
+        update_press_start_fade();
     }
     sub_08008238();
     gIntroTitleTimer_03000BE0++;
     gIntroTitleTimer_03000BE0 &= 0xFFFF;
 }
 
-void sub_0801B88C(void)
+void update_press_start_fade(void)
 {
     REG_BLDCNT = BLDCNT_BG0_FIRST | BLDCNT_OBJ_FIRST
                | BLDCNT_BG0_SECOND | BLDCNT_BG1_SECOND | BLDCNT_BG2_SECOND | BLDCNT_BG3_SECOND
