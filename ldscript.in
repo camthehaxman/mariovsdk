@@ -125,6 +125,11 @@ SECTIONS
 		. = 0xB4;		gUnknown_030000B4 = .;
 		. = 0xB6;		gUnknown_030000B6 = .;
 		. = 0x15A;		gUnknown_0300015A = .;
+		. = 0x15C;		gUnknown_0300015C = .;
+		. = 0x160;		gUnknown_03000160 = .;
+		. = 0x161;		gUnknown_03000161 = .;
+		. = 0x164;		gUnknown_03000164 = .;
+		. = 0x168;		gUnknown_03000168 = .;
 		. = 0x1A0;		gMovieState_030001A0 = .;
 		. = 0x1A8;		gUnknown_030001A8 = .;
 		. = 0x1AC;		gUnknown_030001AC = .;
@@ -157,6 +162,7 @@ SECTIONS
 		. = 0x9D4;		gUnknown_030009D4 = .;
 		. = 0x9D8;		gUnknown_030009D8 = .;
 		. = 0x9DC;		gUnknown_030009DC = .;
+		. = 0x9E0;		gUnknown_030009E0 = .;
 		. = 0x9E4;		gUnknown_030009E4 = .;
 		. = 0x9E8;		gUnknown_030009E8 = .;
 		. = 0x9EC;		gUnknown_030009EC = .;
@@ -201,6 +207,10 @@ SECTIONS
 		. = 0xC90;		gUnknown_03000C90 = .;
 		. = 0xCB0;		gUnknown_03000CB0 = .;
 		. = 0xD20;		gUnknown_03000D20 = .;
+		. = 0xD34;		gUnknown_03000D34 = .;
+		. = 0xD38;		gUnknown_03000D38 = .;
+		. = 0xD3C;		gUnknown_03000D3C = .;
+		. = 0xD40;		gUnknown_03000D40 = .;
 		. = 0xDCC;		gUnknown_03000DCC = .;
 		. = 0xE60;		gUnknown_03000E60 = .;
 		. = 0xE70;		gUnknown_03000E70 = .;

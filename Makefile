@@ -16,7 +16,7 @@ OBJCOPY  := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 GBAGFX   := tools/gbagfx/gbagfx
 RLE      := tools/rle/rle
 
-CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -g -O2 -fhex-asm
+CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I asminclude
 
@@ -52,6 +52,7 @@ clean:
 	find . -name '*.lz' -exec rm {} +
 	find . -name '*.rle' -exec rm {} +
 	$(MAKE) -C tools/gbagfx clean
+	$(MAKE) -C tools/rle clean
 
 #### Tools ####
 

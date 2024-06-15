@@ -487,3 +487,82 @@ void sub_0802C1B0(void)
 {
     gUnknown_03000D20.unk10 = 0x400;
 }
+
+struct Struct0802C1C0
+{
+    u8 filler0[8];
+    void *unk8;  // BG palette src
+    void *unkC;  // OBJ palette src
+    u8 filler10[2];
+    u16 unk12;
+};
+
+void sub_0802C1C0(struct Struct0802C1C0 *arg0)
+{
+    struct Struct0802C1C0 *r3 = arg0;
+
+    if (arg0->unk12 & 2)
+        DmaCopy32(3, arg0->unk8, (void *)BG_PLTT, BG_PLTT_SIZE);
+    if (r3->unk12 & 1)
+        DmaCopy32(3, r3->unkC, (void *)OBJ_PLTT, OBJ_PLTT_SIZE);
+}
+
+struct Struct168
+{
+    u8 filler0[2];
+    u16 unk2;
+    u8 filler4[4];
+};
+extern struct Struct168 *gUnknown_03000168;
+
+
+struct Struct0807C0E0
+{
+    struct Struct168 *unk0;
+    u16 unk4;
+    u8 filler6[2];
+};
+
+extern struct Struct0807C0E0 gUnknown_0807C0E0[];
+extern struct Struct0807C0E0 gUnknown_0807C098[];
+extern struct Struct0807C0E0 gUnknown_0807C028[];
+extern struct Struct0807C0E0 gUnknown_0807C0D0;
+extern struct Struct0807C0E0 gUnknown_0807C0D8;
+
+void sub_0802C20C(void)
+{
+    gUnknown_0300015C = 0;
+    gUnknown_03000D38 = 90;
+    gUnknown_03000D34 = 0;
+    gUnknown_03000D3C = 0;
+    gUnknown_03000160 = 0;
+    gUnknown_03000161 = 0;
+    if (gMainState == 5 || gMainState == 6)
+    {
+        gUnknown_03000164 = gUnknown_0807C0E0[gUnknown_03000B90.unk10].unk4;
+        gUnknown_03000168 = gUnknown_0807C0E0[gUnknown_03000B90.unk10].unk0;
+    }
+    else if (gUnknown_03000B80 == 1)
+    {
+        gUnknown_03000164 = gUnknown_0807C098[gUnknown_03000B90.unk10].unk4;
+        gUnknown_03000168 = gUnknown_0807C098[gUnknown_03000B90.unk10].unk0;
+    }
+    else if (gUnknown_03000B80 == 2)
+    {
+        gUnknown_03000164 = gUnknown_0807C0D0.unk4;
+        gUnknown_03000168 = gUnknown_0807C0D0.unk0;
+    }
+    else if (gUnknown_03000B80 == 3)
+    {
+        gUnknown_03000164 = gUnknown_0807C0D8.unk4;
+        gUnknown_03000168 = gUnknown_0807C0D8.unk0;
+    }
+    else
+    {
+        gUnknown_03000164 = gUnknown_0807C028[gUnknown_03000B90.unk10].unk4;
+        gUnknown_03000168 = gUnknown_0807C028[gUnknown_03000B90.unk10].unk0;
+    }
+    gUnknown_030009E0 = gUnknown_03000168[gUnknown_03000160].unk2;
+    gUnknown_03000D40 = gUnknown_030009E0 >> 3;
+    gUnknown_03000160++;
+}

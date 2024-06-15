@@ -29,7 +29,7 @@ unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSi
 
 		unsigned char flags = src[srcPos++];
 
-		printf("flags: 0x%02X\n", flags);
+		//printf("flags: 0x%02X\n", flags);
 		for (int i = 0; i < 8; i++) {
 			if (flags & 0x80) {
 				if (srcPos + 1 >= srcSize)
@@ -59,25 +59,25 @@ unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSi
 					goto fail;
 				}
 
-				printf("copying %i bytes at 0x%X to 0x%X (distance %i): ", blockSize, blockPos, destPos, blockDistance);
+				//printf("copying %i bytes at 0x%X to 0x%X (distance %i): ", blockSize, blockPos, destPos, blockDistance);
 
 				
 
 				for (int j = 0; j < blockSize; j++)
 				{
-					printf("%02X ", dest[blockPos + j]);
+					//printf("%02X ", dest[blockPos + j]);
 					dest[destPos++] = dest[blockPos + j];
 				}
-				puts("");
+				/*puts("");
 				if (blockSize > blockDistance)
-					printf("uh... what?\n");
+					printf("uh... what?\n");*/
 			} else {
 				if (srcPos >= srcSize || destPos >= destSize)
 				{
 					FATAL_ERROR("pos");
 					goto fail;
 				}
-				printf("writing %02X at 0x%X\n", src[srcPos], destPos);
+				//printf("writing %02X at 0x%X\n", src[srcPos], destPos);
 				dest[destPos++] = src[srcPos++];
 			}
 
