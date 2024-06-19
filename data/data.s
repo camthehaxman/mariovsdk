@@ -66,8 +66,8 @@ gUnknown_080769F4:
 gUnknown_08076AD8:
 	.INCBIN "baserom.gba", 0x76AD8, 0x76D58-0x76AD8
 
-	.GLOBAL gInterruptHandlers
-gInterruptHandlers:
+	.GLOBAL IntrTable
+IntrTable:
 	.4byte vblank_interrupt_handler
 	.4byte hblank_serial_interrupt_handler
 	.4byte dummy_interrupt_handler

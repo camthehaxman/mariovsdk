@@ -15,14 +15,14 @@ struct Struct08032D50
 };
 
 extern u32 gPaletteIndices_0807DD34[];
-extern u32 gUnknown_0807DD4C[];
-extern u32 gUnknown_0807DD64[];
-extern u32 gUnknown_0807DD7C[];
+extern u32 gPaletteIndices_0807DD4C[];
+extern u32 gPaletteIndices_0807DD64[];
+extern u32 gPaletteIndices_0807DD7C[];
 
 u32 load_bg_tilemap_08032E24(struct GraphicsConfig *arg0, int arg1, int arg2);
 void load_gfx_to_vram_08034790(void *, void *, int);
 void sub_0801B3DC(struct GraphicsConfig *, int, int);
-void sub_0802C0B8(struct GraphicsConfig *);
+void gfx_related_0802C0B8(struct GraphicsConfig *);
 void copy_some_palette_08032E80(struct GraphicsConfig *arg0);
 
 u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
@@ -132,7 +132,7 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
         else
             sub_08006388();
     }
-    sub_0802C0B8(arg0->unk0[arg0->unk30].unk0);
+    gfx_related_0802C0B8(arg0->unk0[arg0->unk30].unk0);
     sub_0802BCA4(arg0->unk0[arg0->unk2F].unk0, arg1);
     if (arg0->unk2E >= 0)
         copy_some_palette_08032E80(arg0->unk0[arg0->unk2E].unk0);
@@ -152,7 +152,7 @@ u16 setup_graphics_08032814(struct UnkStruct1 *arg0, int arg1)
     return dispcnt;
 }
 
-void sub_08032B30(s16 arg0, s16 arg1)
+void load_some_palette_08032B30(s16 arg0, s16 arg1)
 {
     if (gUnknown_03000B80 == 0)
     {
@@ -161,31 +161,31 @@ void sub_08032B30(s16 arg0, s16 arg1)
             if (arg0 <= 5)
                 load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
             else
-                load_predefined_palette(gUnknown_0807DD4C[arg1], 1);
+                load_predefined_palette(gPaletteIndices_0807DD4C[arg1], 1);
         }
         else
         {
             if (arg0 <= 11)
                 load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
             else if (arg0 == 12)
-                load_predefined_palette(gUnknown_0807DD4C[arg1], 1);
+                load_predefined_palette(gPaletteIndices_0807DD4C[arg1], 1);
             else if (arg0 == 13)
-                load_predefined_palette(gUnknown_0807DD64[arg1], 1);
+                load_predefined_palette(gPaletteIndices_0807DD64[arg1], 1);
         }
     }
     else if (gUnknown_03000B80 == 1)
     {
         if (arg0 <= 5)
-            load_predefined_palette(gUnknown_0807DD7C[arg1], 1);
+            load_predefined_palette(gPaletteIndices_0807DD7C[arg1], 1);
         else if (arg1 == 2)
             load_predefined_palette(58, 1);
         else
-            load_predefined_palette(gUnknown_0807DD64[arg1], 1);
+            load_predefined_palette(gPaletteIndices_0807DD64[arg1], 1);
     }
     else if (gUnknown_03000B80 == 2)
         load_predefined_palette(gPaletteIndices_0807DD34[arg1], 1);
     else if (gUnknown_03000B80 == 3)
-        load_predefined_palette(gUnknown_0807DD7C[arg1], 1);
+        load_predefined_palette(gPaletteIndices_0807DD7C[arg1], 1);
     else if (gUnknown_03000B80 == 4)
         load_predefined_palette(62, 1);
     else if (gUnknown_03000B80 == 5)
@@ -234,7 +234,7 @@ int sub_08032C44(struct UnknownStruct4 *arg0)
     sp0.unk2C = 1;
     sp0.unk2D = 1;
     REG_DISPCNT |= setup_graphics_08032814(&sp0, (gUnknown_03000B90.unk12 == 2) ? 1 : 0);
-    sub_08032B30(arg0->unk10, arg0->unk12);
+    load_some_palette_08032B30(arg0->unk10, arg0->unk12);
     return sub_080319BC(arg0->unk4, r6, arg0->unk12);
 }
 
@@ -304,7 +304,7 @@ void copy_some_palette_08032E80(struct GraphicsConfig *arg0)
     }
 }
 
-int sub_08032EB4(void)
+int dummy_return_0_08032EB4(void)
 {
     return 0;
 }
@@ -351,12 +351,12 @@ u16 something_with_loading_graphics_08032F24(const struct GraphicsConfig *arg0[4
 void sub_08032F68(void)
 {
     clear_graphics_memory();
-    sub_0802BCA4(0, 0);
+    sub_0802BCA4(NULL, 0);
     sub_0802C1B0();
     REG_IE = 1;
-    sub_0802BF28();
-    REG_DISPSTAT = 8;
-    REG_IE |= 4;
+    enable_vcount_interrupt_0802BF28();
+    REG_DISPSTAT = DISPSTAT_VBLANK_INTR;
+    REG_IE |= INTR_FLAG_VCOUNT;
     REG_DISPSTAT |= 0x20;
     REG_IME = 1;
 }

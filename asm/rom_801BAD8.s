@@ -18493,7 +18493,7 @@ sub_08029FD0: @ 0x08029FD0
 	ldr r0, _0802A010  @ =0x03000124
 	mov r1, #1
 	str r1, [r0]
-	ldr r1, _0802A014  @ =gInterruptHandlers+0x18
+	ldr r1, _0802A014  @ =IntrTable+0x18
 	mov r0, #2
 	bl SetFlashTimerIntr
 	mov r6, #0
@@ -18518,7 +18518,7 @@ _08029FF4:
 _0802A010:
 	.4byte 0x03000124
 _0802A014:
-	.4byte gInterruptHandlers+0x18
+	.4byte IntrTable+0x18
 _0802A018:
 	.4byte 0x0000FFFC
 _0802A01C:

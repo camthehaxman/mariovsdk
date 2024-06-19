@@ -102,6 +102,10 @@ SECTIONS
 		. = 0x48;		gUnknown_03000048 = .;
 		. = 0x4A;		gUnknown_0300004A = .;
 		. = 0x4C;		gUnknown_0300004C = .;
+		. = 0x4E;		gUnknown_0300004E = .;
+		. = 0x50;		gUnknown_03000050 = .;
+		. = 0x52;		gUnknown_03000052 = .;
+		. = 0x54;		gUnknown_03000054 = .;
 		. = 0x58;		gFileSelectMenuSel = .;
 		. = 0x59;		gUnknown_03000059 = .;
 		. = 0x5B;		gUnknown_0300005B = .;
@@ -128,6 +132,7 @@ SECTIONS
 		. = 0x15C;		gUnknown_0300015C = .;
 		. = 0x160;		gUnknown_03000160 = .;
 		. = 0x161;		gUnknown_03000161 = .;
+		. = 0x162;		gUnknown_03000162 = .;
 		. = 0x164;		gUnknown_03000164 = .;
 		. = 0x168;		gUnknown_03000168 = .;
 		. = 0x1A0;		gMovieState_030001A0 = .;
@@ -297,4 +302,6 @@ SECTIONS
         *(*);
     }
 	gUnknown_080763CC = 0x080763CC;
+	gUnknown_085FEFE4_ = gUnknown_085FEFE4;
+	gUnknown_08617030_ = gUnknown_08617030;
 }

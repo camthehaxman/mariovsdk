@@ -64,9 +64,9 @@ interrupt_main:
 	orr r1, r0, #PSR_SYS_MODE
 	msr cpsr, r1
 	push {r0,lr}
-	ldr r3, _0800022C  @ =REG_IE
+	ldr r3, _0800022C  @ =REG_IE  @ load both IE and IF
 	ldr r2, [r3]
-	and r1, r2, r2, lsr #16
+	and r1, r2, r2, lsr #16       @ r1 = REG_IE & REG_IF  (check which interrupts are both enabled and fired)
 	mov r2, #0
 	ands r0, r1, #INTR_FLAG_VBLANK
 	bne found_interrupt
@@ -109,11 +109,11 @@ interrupt_main:
 	add r2, r2, #4
 	ands r0, r1, #INTR_FLAG_GAMEPAK
   found_interrupt:
-	strh r0, [r3, #2]
-	ldr r1, _08000238  @ =gInterruptHandlers
+	strh r0, [r3, #2]  @ Clear the REG_IF bit
+	ldr r1, _08000238  @ =IntrTable
 	add r1, r1, r2
 	ldr r0, [r1]
-	mov lr, pc
+	mov lr, pc  @ Jump to interrupt handler
 	bx r0
 ARM_FUNC_END interrupt_main
 
@@ -137,4 +137,4 @@ _08000230:
 _08000234:
 	.4byte AgbMain
 _08000238:
-	.4byte gInterruptHandlers
+	.4byte IntrTable

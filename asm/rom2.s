@@ -885,7 +885,7 @@ sub_080091A8: @ 0x080091A8
 	lsr r0, r0, #16
 	mov r3, r12
 	str r0, [r3, #44]
-	ldr r0, _080095C0  @ =gUnknown_082E8A58
+	ldr r0, _080095C0  @ =gfxArrows
 	str r0, [r7]
 	ldrh r0, [r6]
 	ldr r1, _080095AC  @ =0x06010000
@@ -1294,7 +1294,7 @@ _080095B8:
 _080095BC:
 	.4byte gUnknown_082E84DC
 _080095C0:
-	.4byte gUnknown_082E8A58
+	.4byte gfxArrows
 _080095C4:
 	.4byte gUnknown_082F0CFC
 _080095C8:
@@ -12965,7 +12965,7 @@ sub_0800ED18: @ 0x0800ED18
 	lsr r2, r2, #16
 	mov r5, r12
 	str r2, [r5, #44]
-	ldr r2, _0800EE5C  @ =gUnknown_082E8A58
+	ldr r2, _0800EE5C  @ =gfxArrows
 	str r2, [r4]
 	ldrh r2, [r1]
 	ldr r5, _0800EE50  @ =0x06010000
@@ -13053,7 +13053,7 @@ _0800EE54:
 _0800EE58:
 	.4byte gUnknown_082E84DC
 _0800EE5C:
-	.4byte gUnknown_082E8A58
+	.4byte gfxArrows
 _0800EE60:
 	.4byte gUnknown_082F0CFC
 _0800EE64:

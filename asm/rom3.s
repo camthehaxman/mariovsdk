@@ -665,8 +665,8 @@ _0802BE14:
 	.4byte 0x04000005
 	THUMB_FUNC_END sub_0802BCA4
 
-	THUMB_FUNC_START sub_0802BE18
-sub_0802BE18: @ 0x0802BE18
+	THUMB_FUNC_START has_0x68_struct_0802BE18
+has_0x68_struct_0802BE18: @ 0x0802BE18
 	push {lr}
 	add r2, r0, #0
 	mov r3, #104
@@ -697,7 +697,7 @@ _0802BE48:
 _0802BE4A:
 	pop {r1}
 	bx r1
-	THUMB_FUNC_END sub_0802BE18
+	THUMB_FUNC_END has_0x68_struct_0802BE18
 
 	.byte 0x00
 	.byte 0x00
@@ -837,8 +837,8 @@ _0802BF24:
 	.4byte gUnknown_0300015A
 	THUMB_FUNC_END sub_0802BF1C
 
-	THUMB_FUNC_START sub_0802BF28
-sub_0802BF28: @ 0x0802BF28
+	THUMB_FUNC_START enable_vcount_interrupt_0802BF28
+enable_vcount_interrupt_0802BF28: @ 0x0802BF28
 	ldr r2, _0802BF58  @ =0x04000200
 	ldrh r0, [r2]
 	mov r1, #4
@@ -876,7 +876,7 @@ _0802BF68:
 	.4byte gUnknown_03000CB0
 _0802BF6C:
 	.4byte sub_0802C080
-	THUMB_FUNC_END sub_0802BF28
+	THUMB_FUNC_END enable_vcount_interrupt_0802BF28
 
 	THUMB_FUNC_START tm0over_interrupt_handler
 tm0over_interrupt_handler: @ 0x0802BF70
@@ -1079,8 +1079,8 @@ _0802C0B4:
 	.4byte 0xA2600000
 	THUMB_FUNC_END sub_0802C080
 
-	THUMB_FUNC_START sub_0802C0B8
-sub_0802C0B8: @ 0x0802C0B8
+	THUMB_FUNC_START gfx_related_0802C0B8
+gfx_related_0802C0B8: @ 0x0802C0B8
 	push {lr}
 	add r1, r0, #0
 	ldr r3, _0802C0E0  @ =gUnknown_03000D20
@@ -1122,7 +1122,7 @@ _0802C0E8:
 _0802C0FE:
 	pop {r0}
 	bx r0
-	THUMB_FUNC_END sub_0802C0B8
+	THUMB_FUNC_END gfx_related_0802C0B8
 
 	.byte 0x00
 	.byte 0x00
@@ -1141,8 +1141,8 @@ _0802C114:
 	.4byte gUnknown_03000D20
 	THUMB_FUNC_END sub_0802C104
 
-	THUMB_FUNC_START sub_0802C118
-sub_0802C118: @ 0x0802C118
+	THUMB_FUNC_START has_0x6C_struct_0802C118
+has_0x6C_struct_0802C118: @ 0x0802C118
 	push {lr}
 	add r2, r0, #0
 	cmp r2, #0
@@ -1167,7 +1167,7 @@ _0802C13C:
 _0802C13E:
 	pop {r1}
 	bx r1
-	THUMB_FUNC_END sub_0802C118
+	THUMB_FUNC_END has_0x6C_struct_0802C118
 
 	.byte 0x00
 	.byte 0x00
@@ -1228,7 +1228,7 @@ _0802C1A4:
 _0802C1A8:
 	.4byte 0x84000080
 _0802C1AC:
-	.4byte sub_0802C1C0
+	.4byte load_some_palettes_0802C1C0
 	THUMB_FUNC_END sub_0802C144
 
 	THUMB_FUNC_START sub_0802C1B0
@@ -1244,8 +1244,8 @@ _0802C1BC:
 	.4byte gUnknown_03000D20
 	THUMB_FUNC_END sub_0802C1B0
 
-	THUMB_FUNC_START sub_0802C1C0
-sub_0802C1C0: @ 0x0802C1C0
+	THUMB_FUNC_START load_some_palettes_0802C1C0
+load_some_palettes_0802C1C0: @ 0x0802C1C0
 	push {lr}
 	add r2, r0, #0
 	add r3, r2, #0
@@ -1286,7 +1286,7 @@ _0802C204:
 	.4byte 0x84000080
 _0802C208:
 	.4byte 0x05000200
-	THUMB_FUNC_END sub_0802C1C0
+	THUMB_FUNC_END load_some_palettes_0802C1C0
 
 	THUMB_FUNC_START sub_0802C20C
 sub_0802C20C: @ 0x0802C20C
@@ -1437,7 +1437,7 @@ _0802C314:
 _0802C318:
 	.4byte gUnknown_03000D40
 	THUMB_FUNC_END sub_0802C20C
-.endif
+
 	THUMB_FUNC_START sub_0802C31C
 sub_0802C31C: @ 0x0802C31C
 	push {r4-r7,lr}
@@ -1740,7 +1740,7 @@ _0802C558:
 	cmp r1, #1
 	bne _0802C590
 	ldr r2, _0802C57C  @ =gUnknown_030009E0
-	ldr r0, _0802C580  @ =0x03000162
+	ldr r0, _0802C580  @ =gUnknown_03000162
 	ldrh r1, [r2]
 	ldrh r0, [r0]
 	cmp r1, r0
@@ -1757,7 +1757,7 @@ _0802C578:
 _0802C57C:
 	.4byte gUnknown_030009E0
 _0802C580:
-	.4byte 0x03000162
+	.4byte gUnknown_03000162
 _0802C584:
 	mov r0, #0
 	ldr r2, _0802C58C  @ =gUnknown_03000161
@@ -1769,7 +1769,7 @@ _0802C590:
 	cmp r1, #2
 	bne _0802C5BC
 	ldr r2, _0802C5A8  @ =gUnknown_030009E0
-	ldr r0, _0802C5AC  @ =0x03000162
+	ldr r0, _0802C5AC  @ =gUnknown_03000162
 	ldrh r1, [r2]
 	ldrh r0, [r0]
 	cmp r1, r0
@@ -1782,7 +1782,7 @@ _0802C590:
 _0802C5A8:
 	.4byte gUnknown_030009E0
 _0802C5AC:
-	.4byte 0x03000162
+	.4byte gUnknown_03000162
 _0802C5B0:
 	mov r0, #0
 	ldr r3, _0802C5B8  @ =gUnknown_03000161
@@ -1874,7 +1874,7 @@ _0802C64A:
 	cmp r5, #2
 	bls _0802C6E8
 _0802C652:
-	ldr r2, _0802C698  @ =0x03000162
+	ldr r2, _0802C698  @ =gUnknown_03000162
 	ldr r3, _0802C680  @ =gUnknown_03000160
 	ldrb r0, [r3]
 	ldr r3, _0802C68C  @ =gUnknown_03000168
@@ -1911,7 +1911,7 @@ _0802C690:
 _0802C694:
 	.4byte gUnknown_03000D34
 _0802C698:
-	.4byte 0x03000162
+	.4byte gUnknown_03000162
 _0802C69C:
 	.4byte gUnknown_030009E0
 _0802C6A0:
@@ -2054,7 +2054,7 @@ _0802C79C:
 _0802C7A0:
 	.4byte gUnknown_03000D40
 	THUMB_FUNC_END sub_0802C71C
-
+.endif
 	THUMB_FUNC_START sub_0802C7A4
 sub_0802C7A4: @ 0x0802C7A4
 	push {r4-r7,lr}

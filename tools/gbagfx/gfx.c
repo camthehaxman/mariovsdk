@@ -585,10 +585,6 @@ void WriteGbaPalette(char *path, struct Palette *palette)
 		unsigned char blue = DOWNCONVERT_BIT_DEPTH(palette->colors[i].blue);
 
 		uint16_t paletteEntry = SET_GBA_PAL(red, green, blue);
-		// The most significant bit is ignored by the GBA, but it's set on some colors for whatever reason.
-		//if (paletteEntry == 0x0421)
-		//	paletteEntry |= (1 << 15);
-
 		// Some colors have the most significant bit set, which is ignored by the GBA.
 		// I have no idea why, but for matching purposes, I'm copying the least
 		// significant bit of the original green channel there.

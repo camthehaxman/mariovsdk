@@ -14,10 +14,29 @@ EXTRACTED_FILES := \
 	graphics/Title0.tilemap \
 	graphics/Title1.png \
 	graphics/Title1.tilemap \
+	graphics/FileSelect.png \
+	graphics/FileSelect0.tilemap \
 	graphics/Score.png \
 	graphics/PressStart.png \
 	graphics/BackToGame.png \
 	graphics/Unknown2EAE80.png \
+	graphics/Arrows.png \
+	graphics/Unknown2E8EA8.png \
+	graphics/Unknown5FB7E4.png \
+	graphics/Unknown5FF274.png \
+	graphics/Unknown601104.png \
+	graphics/Unknown602F94.png \
+	graphics/Unknown606A24.png \
+	graphics/Unknown60A4B4.png \
+	graphics/Unknown60C344.png \
+	graphics/Unknown60FDD4.png \
+	graphics/Expert.png \
+	graphics/Unknown615C04.png \
+	graphics/Unknown617080.png \
+	graphics/Unknown6172F0.png \
+	graphics/Unknown617830.png \
+	graphics/Unknown617B04.png \
+	graphics/Unknown6180B4.png \
 	graphics/palettes/000.pal \
 	graphics/palettes/001.pal \
 	graphics/palettes/002.pal \
@@ -324,7 +343,7 @@ EXTRACTED_FILES := \
 	graphics/palettes/303.pal
 
 all: $(EXTRACTED_FILES)
-	$(RM) -r $(TMPDIR)
+#	$(RM) -r $(TMPDIR)
 
 clean:
 	$(RM) -r graphics/*.png graphics/*.lz graphics/*.rle graphics/*.tilemap graphics/palettes
@@ -350,6 +369,12 @@ $(TMPDIR)/Title1.8bpp.lz:     baserom.gba ; $(call romextract,0x86A3A0,0x26B8)
 $(TMPDIR)/Title1.gbapal:      baserom.gba ; $(call romextract,0x86CDCC,0x200)
 $(TMPDIR)/Title1.tilemap.rle: baserom.gba ; $(call romextract,0x86CA80,0x346)
 
+$(TMPDIR)/FileSelect.png: $(TMPDIR)/FileSelect.4bpp $(TMPDIR)/FileSelect.gbapal
+$(TMPDIR)/FileSelect.4bpp.lz: baserom.gba ; $(call romextract,0x7B3070,0x2FFC)
+#$(TMPDIR)/FileSelect.gbapal:  baserom.gba ; $(call romextract,0x7B7B8C,0x200)
+$(TMPDIR)/FileSelect.gbapal:  baserom.gba ; $(call romextract,0x7B7B8C,0x20)
+$(TMPDIR)/FileSelect0.tilemap.rle: baserom.gba ; $(call romextract,0x7b6094,0x1000)
+
 $(TMPDIR)/PressStart.png: GBAGFX_FLAGS := -width 4
 $(TMPDIR)/PressStart.4bpp: baserom.gba ; $(call romextract,0x5F49D8,0x200)
 
@@ -361,6 +386,54 @@ $(TMPDIR)/BackToGame.4bpp: baserom.gba ; $(call romextract,0x2E8908,0x100)
 
 $(TMPDIR)/Unknown2EAE80.png: GBAGFX_FLAGS := -width 2
 $(TMPDIR)/Unknown2EAE80.4bpp: baserom.gba ; $(call romextract,0x2EAE80,0x80)
+
+$(TMPDIR)/Arrows.png: GBAGFX_FLAGS := -width 4
+$(TMPDIR)/Arrows.4bpp: baserom.gba ; $(call romextract,0x2E8A58,0x400)
+
+$(TMPDIR)/Unknown2E8EA8.png: GBAGFX_FLAGS := -width 2
+$(TMPDIR)/Unknown2E8EA8.8bpp: baserom.gba ; $(call romextract,0x2E8EA8,0x200)
+
+$(TMPDIR)/Unknown5FB7E4.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown5FB7E4.4bpp: baserom.gba ; $(call romextract,0x5FB7E4,0x3800)
+
+$(TMPDIR)/Unknown5FF274.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown5FF274.4bpp: baserom.gba ; $(call romextract,0x5FF274,0x1C00)
+
+$(TMPDIR)/Unknown601104.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown601104.4bpp: baserom.gba ; $(call romextract,0x601104,0x1C00)
+
+$(TMPDIR)/Unknown602F94.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown602F94.4bpp: baserom.gba ; $(call romextract,0x602F94,0x3800)
+
+$(TMPDIR)/Unknown606A24.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown606A24.4bpp: baserom.gba ; $(call romextract,0x606A24,0x3800)
+
+$(TMPDIR)/Unknown60A4B4.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown60A4B4.4bpp: baserom.gba ; $(call romextract,0x60A4B4,0x1C00)
+
+$(TMPDIR)/Unknown60C344.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown60C344.4bpp: baserom.gba ; $(call romextract,0x60C344,0x3800)
+
+$(TMPDIR)/Unknown60FDD4.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown60FDD4.4bpp: baserom.gba ; $(call romextract,0x60FDD4,0x1C00)
+
+$(TMPDIR)/Expert.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Expert.4bpp: baserom.gba ; $(call romextract,0x614764,0x400)
+
+$(TMPDIR)/Unknown615C04.png: GBAGFX_FLAGS := -width 8
+$(TMPDIR)/Unknown615C04.4bpp: baserom.gba ; $(call romextract,0x615C04,0xC00)
+
+$(TMPDIR)/Unknown617080.png: GBAGFX_FLAGS := -width 2
+$(TMPDIR)/Unknown617080.4bpp: baserom.gba ; $(call romextract,0x617080,0x100)
+
+$(TMPDIR)/Unknown6172F0.4bpp: baserom.gba ; $(call romextract,0x6172F0,0x280)
+
+$(TMPDIR)/Unknown617830.4bpp: baserom.gba ; $(call romextract,0x617830,0x140)
+
+$(TMPDIR)/Unknown617B04.4bpp: baserom.gba ; $(call romextract,0x617B04,0x140)
+
+$(TMPDIR)/Unknown6180B4.png: GBAGFX_FLAGS := -width 2
+$(TMPDIR)/Unknown6180B4.4bpp: baserom.gba ; $(call romextract,0x6180B4,0x100)
 
 $(TMPDIR)/palettes/000.gbapal: baserom.gba ; $(call romextract,0x81D98,0x200)
 $(TMPDIR)/palettes/001.gbapal: baserom.gba ; $(call romextract,0x81F98,0x200)

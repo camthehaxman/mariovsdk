@@ -309,8 +309,16 @@ struct UnkStruct1_sub_child_data68_sub
 struct UnkStruct1_sub_child_data68
 {
     u16 unk0;
-    u16 unk2;
+    u16 unk2;  // count of unk4 array
     struct UnkStruct1_sub_child_data68_sub unk4[1];
+};
+
+struct GraphicsConfig_6C
+{
+    u16 unk0;
+    u16 unk2;
+    u8 unk4[0x200];
+    u8 unk204[0];
 };
 
 struct GraphicsConfig
@@ -332,7 +340,7 @@ struct GraphicsConfig
     /*0x50*/ u8 *vramAddr50[4];  // VRAM addresses?
     u8 filler60[8];
     u32 unk68;  // some offset
-    u32 unk6C;  // some offset
+    u32 unk6C;  // offset to a GraphicsConfig_6C struct
 };
 
 struct UnkStruct1_sub
@@ -637,10 +645,20 @@ struct StructC40
     struct StructC40_child *unk20;
 };
 
+struct Struct807820C_sub
+{
+    u16 unk0;
+    u8 filler2[2];
+};
+
 struct Struct807820C
 {
-    u8 filler0[0x600C];
+    u8 filler0[0xC];
+    struct Struct807820C_sub unkC[1];
+    u8 filler10[0x600C-0x10];
     u16 unk600C[1];
+    u8 filler600E[0x800C-0x600E];
+    u8 unk800C[1];
 };
 
 struct StructC70
@@ -665,31 +683,37 @@ struct StructC90_child14
 
 struct StructC90
 {
-    void *unk0;  // DMA dest
-    void *unk4;  // DMA source
+    /*0x00*/ void *copyDest;
+    /*0x04*/ void *copySrc;
     u16 unk8;
-    u16 unkA;  // DMA transfer size (number of u16s)
+    /*0x0A*/ u16 copyLength;
     void *unkC[2];
     struct StructC90_child14 *unk14;
-    void (*unk18)(void *, void *, void *, int);
+    /*0x18*/ void (*armFunc)(struct StructC90 *, struct StructC70 *, void *, int);  // pointer to some ARM function loaded into RAM
+};
+
+struct Struct0802C1C0
+{
+    u8 filler0[8];
+    /*0x08*/ void *bgPalSrc;
+    /*0x0C*/ void *objPalSrc;
+    u8 filler10[2];
+    u16 unk12;
 };
 
 struct StructCB0_child
 {
-    void (*unk0)();
+    void (*unk0)(struct Struct0802C1C0 *);
     u8 unk4;
     struct StructCB0_child *unk8;
-    struct StructCB0_child *unkC;
-    void *unk10;
+    /*0x0C*/ struct StructCB0_child *next;
+    struct Struct0802C1C0 *unk10;
 };
 
-struct StructCB0  // possibly just an array of StructCB0_child rather than a struct
+struct StructCB0
 {
-    void (*unk0)();
-    u8 unk4;
-    void *unk8;
-    u8 fillerC[0x64-0xC];
-    u32 unk64;
+    struct StructCB0_child unk0[5];
+    u32 unk64;  // count of unk0 structs
     struct StructCB0_child *unk68;
     struct StructCB0_child *unk6C;
 };
@@ -702,6 +726,12 @@ struct StructD20
     void *unkC;
     u16 unk10;
     u16 unk12;
+};
+
+struct Struct802C31C
+{
+    u32 unk0;
+    u32 unk4;
 };
 
 //------------------------------------------------------------------------------
@@ -727,6 +757,9 @@ extern u16 gUnknown_03000046;
 extern u16 gUnknown_03000048;
 extern u16 gUnknown_0300004A;
 extern u16 gUnknown_0300004C;
+extern u16 gUnknown_0300004E;
+extern u16 gUnknown_03000050;
+extern u16 gUnknown_03000052;
 extern u8 gFileSelectMenuSel;
 extern u8 gUnknown_03000059;
 extern u8 gUnknown_0300005B;
@@ -753,6 +786,7 @@ extern s16 gUnknown_0300015A;
 extern u32 gUnknown_0300015C;
 extern u8 gUnknown_03000160;
 extern u8 gUnknown_03000161;
+extern u16 gUnknown_03000162;
 extern u16 gUnknown_03000164;
 extern struct Struct1A0 gMovieState_030001A0;
 extern u32 gUnknown_030001A8;
@@ -825,7 +859,7 @@ extern struct StructD20 gUnknown_03000D20;
 extern u32 gUnknown_03000D34;
 extern u16 gUnknown_03000D38;
 extern u8 gUnknown_03000D3C;
-extern u16 gUnknown_03000D40;
+extern s16 gUnknown_03000D40;
 extern u8 gUnknown_03000DCC;
 extern u16 gUnknown_03000E60;
 extern struct UnkStruct1_sub_child_data *gUnknown_03000E70[];
@@ -885,7 +919,7 @@ extern u8 gUnknown_03001C34;
 extern struct UnknownStruct7 *gUnknown_03001C78;
 extern void *gUnknown_03007FFC;
 
-extern struct Struct807820C *const gUnknown_0807820C;
+extern struct Struct807820C *gUnknown_0807820C;
 extern void (*gInitCallbacks[])(void);
 extern void (*gMainCallbacks[])(void);
 extern void (*gDisplayCallbacks[])(void);
@@ -1087,13 +1121,15 @@ void sub_0802BCA4(struct GraphicsConfig *, int);
 void sub_0802BE74(void);
 void set_bg_offset_regs_0802BEEC(struct BGOffsets *bgOffsets);
 void sub_0802BF1C(void);
-void sub_0802BF28(void);
+void enable_vcount_interrupt_0802BF28(void);
 void sub_0802BFA4(void);
 void sub_0802C20C(void);
 void sub_0802C058(void);
+void sub_0802C080(struct Struct0802C1C0 *);
 void sub_0802C104(int arg0, int arg1, void *arg2);
 void sub_0802C144();
 void sub_0802C1B0(void);
+void load_some_palettes_0802C1C0(struct Struct0802C1C0 *arg0);
 void sub_0802C7A4(void);
 void sub_0802C938(void);
 void sub_0802CF08(void);

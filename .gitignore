@@ -11,6 +11,7 @@ ldscript.txt
 *.gbapal
 *.lz
 *.rle
+.extract/
 
 # Tools
 tools/agbcc

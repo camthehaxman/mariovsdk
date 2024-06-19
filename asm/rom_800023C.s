@@ -1571,6 +1571,7 @@ ARM_FUNC_END sub_0800169C
 sub_0800169C_end:
 
 
+@ void sub_08001760(struct StructC90 *, struct StructC70 *, void *, int);
 	ARM_FUNC_START sub_08001760
 sub_08001760:
 	ldrh r12, [r0, #8]
